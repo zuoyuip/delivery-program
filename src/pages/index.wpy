@@ -1,0 +1,82 @@
+<style lang="less">
+  input {
+    border: 1px solid #ccc;
+    display: inline-block;
+    width: 200px;
+    border-radius: 5px;
+  }
+  .info {
+    padding-right: 10px;
+  }
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+  .slide {
+    width: 640px;
+    display: flex;
+    border: 1px solid #ccc;
+    font-size: 28px;
+    align-items: center;
+    box-sizing: border-box;
+    .left {
+      width: 750px;
+      padding: 20px;
+    }
+    .right {
+      display: flex;
+      .right-item {
+        padding: 20px 30px;
+        background-color: red;
+        color: #fff;
+      }
+    }
+  }
+</style>
+<wxs module="m1" lang="babel">
+const getTime = (time) => {
+  let date = getDate(time);
+  let hour = date.getHours();
+  let mins = date.getMinutes();
+  let sec = date.getSeconds();
+  let milli = date.getMilliseconds();
+  return `${hour}:${mins}:${sec}.${milli}`;
+}
+module.exports.getTime = getTime;
+</wxs>
+<template>
+  <div class="container">
+    <button size="default" type="primary">1</button>
+  </div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  import store from '../store';
+
+  wepy.page({
+    store,
+
+
+
+  });
+</script>
+<config>
+{
+    navigationBarTitleText: 'WePY 2.0 Feature Demo',
+    usingComponents: {
+
+    }
+}
+</config>
