@@ -36,9 +36,9 @@
         console.log(args)
       })
     },
+    你
 
     methods: {
-
       sleep(s) {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
@@ -54,10 +54,4 @@
     }
   })
 </script>
-<config>
-  {
-  pages: [
-  'pages/index'
-  ]
-  }
-</config>
+<p>123123</p>
