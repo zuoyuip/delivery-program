@@ -17,20 +17,13 @@
 
   wepy.app({
 
-    globalData: {
-
-    },
-
     // 小程序启动执行方法
     onLaunch(options) {
-    },
-
-    methods: {}
-
+    }
   })
 </script>
 <config>
-<!--  界面风格-->
+  <!--  界面风格-->
   window: {
   backgroundTextStyle: 'light',
   navigationBarBackgroundColor: '#fff',
@@ -38,31 +31,31 @@
   navigationBarTextStyle: 'black'
   },
 
-<!--  页面注册-->
+  <!--  页面注册-->
   pages: [
-<!--  主页-->
+  <!--  主页-->
   'pages/index.wpy',
-<!--  我的-->
+  <!--  我的-->
   'pages/me.wpy',
-<!--  包裹登记-->
+  <!--  包裹登记-->
   'pages/express/expressEnter.wpy',
-<!--  包裹列表-->
+  <!--  包裹列表-->
   'pages/express/expressList.wpy',
-<!--  关于我们-->
+  <!--  关于我们-->
   'pages/me/about.wpy',
-<!--  审核-->
+  <!--  审核-->
   'pages/me/criteria.wpy',
-<!--  我的代领-->
+  <!--  我的代领-->
   'pages/me/deliveryIndent.wpy',
-<!--  我的包裹-->
+  <!--  我的包裹-->
   'pages/me/expressIndent.wpy',
-<!--  建议反馈-->
+  <!--  建议反馈-->
   'pages/me/suggest.wpy',
-<!--  登录-->
+  <!--  登录-->
   'pages/user/login.wpy',
-<!--  修改信息-->
+  <!--  修改信息-->
   'pages/user/modifyUser.wpy',
-<!--  注册-->
+  <!--  注册-->
   'pages/user/register.wpy'
   ],
 </config>
