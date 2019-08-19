@@ -1,6 +1,6 @@
 const path = require('path')
-const DefinePlugin = require('@wepy/plugin-define');
 var prod = process.env.NODE_ENV === 'production'
+const DefinePlugin = require('@wepy/plugin-define')
 
 module.exports = {
   wpyExt: '.wpy',
@@ -31,7 +31,7 @@ module.exports = {
   },
   plugins: [
     DefinePlugin({
-      key: ""
+      key: ''
     })
   ],
   appConfig: {
@@ -41,5 +41,27 @@ module.exports = {
 
 if (prod) {
 
+  // 压缩sass
+  module.exports.compilers['less'] = { outputStyle: 'compressed' }
+
+  // 压缩js
+  module.exports.plugins = {
+    uglifyjs: {
+      filter: /\.js$/,
+      config: {}
+    },
+    imagemin: {
+      filter: /\.(jpg|png|jpeg)$/,
+      config: {
+        jpg: {
+          quality: 80
+        },
+        png: {
+          quality: 80
+        }
+      }
+    }
+  }
 }
+
 

@@ -3,7 +3,9 @@
 </style>
 
 <template>
-
+<div>
+  <p>测试</p>
+</div>
 </template>
 
 <script>
@@ -25,7 +27,7 @@
     },
     // 组件生命周期函数-在组件实例刚刚被创建时执行，注意此时不能调用 setData
     created() {
-
+      // this.$navigate({url:"content"})
     },
     // 组件生命周期函数-在组件实例进入页面节点树时执行
     attached() {
@@ -83,8 +85,8 @@
   navigationBarTitleText: '主页',
   navigationBarTextStyle: 'white',
   navigationBarBackgroundColor: '#049BFF'
-  usingComponents: {
+<!--  usingComponents: {-->
 
-  }
+<!--  }-->
   }
 </config>

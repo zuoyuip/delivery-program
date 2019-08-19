@@ -1,4 +1,4 @@
-<style lang="less">
+<style lang='less'>
   .container {
     height: 100%;
     display: flex;
@@ -23,6 +23,7 @@
   })
 </script>
 <config>
+  {
   <!--  界面风格-->
   window: {
   backgroundTextStyle: 'light',
@@ -34,28 +35,51 @@
   <!--  页面注册-->
   pages: [
   <!--  主页-->
-  'pages/index.wpy',
+  'pages/index',
   <!--  我的-->
-  'pages/me.wpy',
+  'pages/me',
   <!--  包裹登记-->
-  'pages/express/expressEnter.wpy',
+  'pages/express/expressEnter',
   <!--  包裹列表-->
-  'pages/express/expressList.wpy',
+  'pages/express/expressList',
   <!--  关于我们-->
-  'pages/me/about.wpy',
+  'pages/me/about',
   <!--  审核-->
-  'pages/me/criteria.wpy',
+  'pages/me/criteria',
   <!--  我的代领-->
-  'pages/me/deliveryIndent.wpy',
+  'pages/me/deliveryIndent',
   <!--  我的包裹-->
-  'pages/me/expressIndent.wpy',
+  'pages/me/expressIndent',
   <!--  建议反馈-->
-  'pages/me/suggest.wpy',
+  'pages/me/suggest',
   <!--  登录-->
-  'pages/user/login.wpy',
+  'pages/user/login',
   <!--  修改信息-->
-  'pages/user/modifyUser.wpy',
+  'pages/user/modifyUser',
   <!--  注册-->
-  'pages/user/register.wpy'
+  'pages/user/register'
   ],
+
+  <!--  导航栏-->
+  tabBar: {
+  color: '#7B7B7B',
+  selectedColor: '#fff',
+  borderStyle: 'white',
+  backgroundColor: '#1E1A19',
+  list: [
+  {
+  pagePath: 'pages/index',
+  iconPath: 'pages/images/bank.png',
+  selectedIconPath: 'pages/images/list.png',
+  text: '首页'
+  },
+  {
+  pagePath: 'pages/me',
+  iconPath: 'pages/images/user.png',
+  selectedIconPath: 'pages/images/security.png',
+  text: '我的'
+  }
+  ]
+  }
+  }
 </config>

@@ -83,8 +83,8 @@
   navigationBarTitleText: '我的',
   navigationBarTextStyle: 'white',
   navigationBarBackgroundColor: '#049BFF'
-  usingComponents: {
+<!--  usingComponents: {-->
 
-  }
+<!--  }-->
   }
 </config>
