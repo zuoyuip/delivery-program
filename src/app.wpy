@@ -30,10 +30,39 @@
   })
 </script>
 <config>
+<!--  界面风格-->
   window: {
   backgroundTextStyle: 'light',
   navigationBarBackgroundColor: '#fff',
   navigationBarTitleText: 'WeChat',
   navigationBarTextStyle: 'black'
-  }
+  },
+
+<!--  页面注册-->
+  pages: [
+<!--  主页-->
+  'pages/index.wpy',
+<!--  我的-->
+  'pages/me.wpy',
+<!--  包裹登记-->
+  'pages/express/expressEnter.wpy',
+<!--  包裹列表-->
+  'pages/express/expressList.wpy',
+<!--  关于我们-->
+  'pages/me/about.wpy',
+<!--  审核-->
+  'pages/me/criteria.wpy',
+<!--  我的代领-->
+  'pages/me/deliveryIndent.wpy',
+<!--  我的包裹-->
+  'pages/me/expressIndent.wpy',
+<!--  建议反馈-->
+  'pages/me/suggest.wpy',
+<!--  登录-->
+  'pages/user/login.wpy',
+<!--  修改信息-->
+  'pages/user/modifyUser.wpy',
+<!--  注册-->
+  'pages/user/register.wpy'
+  ],
 </config>

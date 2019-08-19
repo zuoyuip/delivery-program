@@ -8,8 +8,9 @@
 
 <script>
   import wepy from '@wepy/core'
-  import store from '../store'
-  import http from '../mixins/http'
+  import store from '../../store'
+  import http from '../../mixins/http'
+
 
   wepy.page({
     store,
@@ -80,7 +81,7 @@
 </script>
 <config>
   {
-  navigationBarTitleText: '主页',
+  navigationBarTitleText: '登录',
   navigationBarTextStyle: 'white',
   navigationBarBackgroundColor: '#049BFF'
   usingComponents: {

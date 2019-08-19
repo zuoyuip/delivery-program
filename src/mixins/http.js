@@ -11,8 +11,11 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 export default {
 
   data:{
-    http: instance
-  }
+    axios: instance
+  },
 
+  methods:{
+
+  }
 
 }
