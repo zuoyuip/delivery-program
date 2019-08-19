@@ -18,7 +18,8 @@
   "dependencies": {
     "@wepy/x": "^2.0.2",
     "@wepy/core": "^2.0.0-alpha.9",
-    "miniprogram-slide-view": "0.0.3"
+    "miniprogram-slide-view": "0.0.3",
+    "axios": "^0.19.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
