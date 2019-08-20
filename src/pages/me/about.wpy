@@ -75,12 +75,6 @@
 <config>
   {
   navigationBarTitleText: '关于我们',
-  <!--  导航栏标题颜色，仅支持 black / white-->
-  navigationBarTextStyle: 'white',
-  <!--  导航栏背景颜色，如 #000000-->
-  navigationBarBackgroundColor: '#049BFF',
-  <!--  窗口的背景色-->
-  backgroundColor: '#ffffff',
   <!--  是否开启当前页面下拉刷新。-->
   enablePullDownRefresh: false,
   <!--  设置为 true 则页面整体不能上下滚动。-->

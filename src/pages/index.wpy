@@ -3,28 +3,22 @@
 </style>
 
 <template>
-<div>
-  <p>测试</p>
-</div>
+  <div>
+    <p>测试</p>
+  </div>
 </template>
 
 <script>
-  import wepy from '@wepy/core'
-  import store from '../store'
-  import http from '../mixins/http'
+  import wepy from '@wepy/core';
+  import store from '../store';
+  import http from '../mixins/http';
 
   wepy.page({
     store,
     mixins: [http],
-    data: {
-
-    },
-    methods: {
-
-    },
-    computed: {
-
-    },
+    data: {},
+    methods: {},
+    computed: {},
     // 组件生命周期函数-在组件实例刚刚被创建时执行，注意此时不能调用 setData
     created() {
       // this.$navigate({url:"content"})
@@ -78,23 +72,17 @@
 
     }
 
-  })
+  });
 </script>
 <config>
   {
-<!--  导航栏标题文字内容-->
+  <!--  导航栏标题文字内容-->
   navigationBarTitleText: '主页',
-<!--  导航栏标题颜色，仅支持 black / white-->
-  navigationBarTextStyle: 'white',
-<!--  导航栏背景颜色，如 #000000-->
-  navigationBarBackgroundColor: '#049BFF',
-<!--  窗口的背景色-->
-  backgroundColor: '#ffffff',
-<!--  是否开启当前页面下拉刷新。-->
+  <!--  是否开启当前页面下拉刷新。-->
   enablePullDownRefresh: false,
-<!--  设置为 true 则页面整体不能上下滚动。-->
+  <!--  设置为 true 则页面整体不能上下滚动。-->
   disableScroll: false,
-<!--  禁止页面右滑手势返回-->
+  <!--  禁止页面右滑手势返回-->
   disableSwipeBack: false,
   usingComponents: {
 
