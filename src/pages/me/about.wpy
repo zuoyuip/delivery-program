@@ -7,23 +7,16 @@
 </template>
 
 <script>
-  import wepy from '@wepy/core'
-  import store from '../../store'
-  import http from '../../mixins/http'
-
+  import wepy from '@wepy/core';
+  import store from '../../store';
+  import http from '../../mixins/http';
 
   wepy.page({
     store,
     mixins: [http],
-    data: {
-
-    },
-    methods: {
-
-    },
-    computed: {
-
-    },
+    data: {},
+    methods: {},
+    computed: {},
     // 组件生命周期函数-在组件实例刚刚被创建时执行，注意此时不能调用 setData
     created() {
 
@@ -77,7 +70,7 @@
 
     }
 
-  })
+  });
 </script>
 <config>
   {
