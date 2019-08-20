@@ -1,12 +1,12 @@
-const path = require('path')
-var prod = process.env.NODE_ENV === 'production'
-const DefinePlugin = require('@wepy/plugin-define')
+const path = require('path');
+var prod = process.env.NODE_ENV === 'production';
 
 module.exports = {
   wpyExt: '.wpy',
-  eslint: false,
+  eslint: true,
   cliLogs: !prod,
-  build: {},
+  build: {
+  },
   resolve: {
     alias: {
       counter: path.join(__dirname, 'src/components/counter'),
@@ -29,39 +29,9 @@ module.exports = {
       ]
     }
   },
-  plugins: [
-    DefinePlugin({
-      key: ''
-    })
-  ],
+  plugins: [],
   appConfig: {
     noPromiseAPI: ['createSelectorQuery']
   }
 }
-
-if (prod) {
-
-  // 压缩sass
-  module.exports.compilers['less'] = { outputStyle: 'compressed' }
-
-  // 压缩js
-  module.exports.plugins = {
-    uglifyjs: {
-      filter: /\.js$/,
-      config: {}
-    },
-    imagemin: {
-      filter: /\.(jpg|png|jpeg)$/,
-      config: {
-        jpg: {
-          quality: 80
-        },
-        png: {
-          quality: 80
-        }
-      }
-    }
-  }
-}
-
 
