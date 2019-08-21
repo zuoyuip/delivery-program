@@ -4,9 +4,13 @@
     border: 1px solid #dadada;
     border-right: 0;
     border-bottom: 0;
-    width: 98%;
-    margin-left: 1%;
-    margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .head {
+    position: fixed;
+    top: 0;
   }
 
   .tr {
@@ -25,8 +29,8 @@
   }
 
   .th {
-    font-weight: 600;
-    background-color: #F7F7F7;
+    font-weight: 500;
+    background-color: #FDFDFD;
     font-size: 13px;
     color: #000000;
   }
@@ -36,119 +40,123 @@
     color: #303030;
   }
 
+  .space{
+    height: 36px;
+  }
+
 
 </style>
 
 <template>
   <view>
     <view class="table">
-      <view class="tr">
+      <view class="tr head">
         <view class="th">快递名称</view>
         <view class="th">送达地点</view>
         <view class="th">赏金</view>
       </view>
-      <scroll-view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-        <view class="tr">
-          <view class="td">圆通快递</view>
-          <view class="td">小学附近</view>
-          <view class="td">￥5.00</view>
-        </view>
-      </scroll-view>
+      <view class="space"></view>
+      <view class="tr body">
+        <view class="td">韵达快递</view>
+        <view class="td">小月亮</view>
+        <view class="td">￥6.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">圆通快递</view>
+        <view class="td">小学附近</view>
+        <view class="td">￥5.00</view>
+      </view>
+      <view class="tr">
+        <view class="td">邮政快递</view>
+        <view class="td">荷花池</view>
+        <view class="td">￥9.00</view>
+      </view>
+
     </view>
   </view>
 </template>
