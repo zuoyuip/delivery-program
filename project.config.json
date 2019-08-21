@@ -8,7 +8,7 @@
 		"checkSiteMap": false
 	},
 	"compileType": "miniprogram",
-	"appid": "wx4ea8c18a42414fad",
+	"appid": "touristappid",
 	"projectname": "minipro",
 	"miniprogramRoot": "weapp/",
 	"simulatorType": "wechat",
