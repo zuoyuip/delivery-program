@@ -1,17 +1,162 @@
 <style lang="less">
 
+  .table {
+    border: 1px solid #dadada;
+    border-right: 0;
+    border-bottom: 0;
+    width: 98%;
+    margin-left: 1%;
+    margin-bottom: 20px;
+  }
+
+  .tr {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .th, .td {
+    height: 36px;
+    line-height: 36px;
+    border-bottom: 1px solid #dadada;
+    border-right: 1px solid #dadada;
+    text-align: center;
+    width: 100%;
+  }
+
+  .th {
+    font-weight: 600;
+    background-color: #F7F7F7;
+    font-size: 13px;
+    color: #000000;
+  }
+
+  .td {
+    font-size: 14px;
+    color: #303030;
+  }
+
+
 </style>
 
 <template>
-  <div>
-    <p>测试</p>
-  </div>
+  <view>
+    <view class="table">
+      <view class="tr">
+        <view class="th">快递名称</view>
+        <view class="th">送达地点</view>
+        <view class="th">赏金</view>
+      </view>
+      <scroll-view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+        <view class="tr">
+          <view class="td">圆通快递</view>
+          <view class="td">小学附近</view>
+          <view class="td">￥5.00</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
 </template>
 
 <script>
-  import wepy from '@wepy/core';
-  import store from '../store';
-  import http from '../mixins/http';
+  import wepy from '@wepy/core'
+  import store from '../store'
+  import http from '../mixins/http'
 
   wepy.page({
     store,
@@ -72,7 +217,7 @@
 
     }
 
-  });
+  })
 </script>
 <config>
   {
