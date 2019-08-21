@@ -71,7 +71,7 @@
   <!--  导航栏-->
   tabBar: {
   <!--  tab 上的文字默认颜色，仅支持十六进制颜色-->
-  color: '#F3F3F3',
+  color: '#949494',
   <!--  tab 上的文字选中时的颜色，仅支持十六进制颜色-->
   selectedColor: '#03C365',
   <!--  tabbar 上边框的颜色， 仅支持 black / white-->
