@@ -21,8 +21,6 @@
         'pages/home/me',
          // 包裹登记
         'pages/express/expressEnter',
-         // 包裹列表
-        'pages/express/expressList',
          // 关于我们
         'pages/me/about',
          // 审核

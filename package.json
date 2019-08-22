@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "author": "zuoyu",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@minui/wxc-avatar": "^1.0.5"
+  },
   "devDependencies": {
     "babel-plugin-syntax-export-extensions": "^6.13.0",
     "babel-plugin-transform-class-properties": "^6.24.1",

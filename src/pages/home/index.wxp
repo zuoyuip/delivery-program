@@ -80,7 +80,6 @@
 
     },
     config: {
-      // window: {
         // 导航栏标题文字内容
         navigationBarTitleText: '主页',
         // 是否开启当前页面下拉刷新。
@@ -89,7 +88,6 @@
         disableScroll: false,
         // 禁止页面右滑手势返回
         disableSwipeBack: false
-      // }
     }
   }
 </script>
