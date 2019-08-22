@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "主页",
+    "enablePullDownRefresh": false,
+    "disableScroll": false,
+    "disableSwipeBack": false,
+    "component": true,
+    "usingComponents": {
+        "wxc-toast": "@minui/wxc-toast/dist/index"
+    }
+}

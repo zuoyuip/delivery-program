@@ -1,0 +1,17 @@
+
+<view>
+  <view class="table">
+    <view class="tr head">
+      <view class="th">快递名称</view>
+      <view class="th">送达地点</view>
+      <view class="th">赏金</view>
+    </view>
+    <view class="space"></view>
+    <view wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express" wx:key="index" key="{{ express.deliveryId }}" class="tr">
+      <view class="td">{{ express.deliveryName }}</view>
+      <view class="td">{{ express.deliveryAddress }}</view>
+      <view class="td">{{ express.deliveryReward }}</view>
+    </view>
+  </view>
+  <wxc-toast bind_init="_initComponent" text="Hello World" class="J_toast"></wxc-toast>
+</view>
