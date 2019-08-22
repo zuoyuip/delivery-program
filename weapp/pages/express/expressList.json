@@ -1,8 +1,0 @@
-{
-    "navigationBarTitleText": "包裹列表",
-    "enablePullDownRefresh": false,
-    "disableScroll": false,
-    "disableSwipeBack": false,
-    "component": true,
-    "usingComponents": {}
-}
