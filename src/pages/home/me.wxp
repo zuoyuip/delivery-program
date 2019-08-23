@@ -15,6 +15,13 @@
               src="https://imgsa.baidu.com/forum/w%3D580/sign=87e7b6e59d13b07ebdbd50003cd69113/17cf65380cd79123ebc8a5b0a3345982b3b7809d.jpg"
               title="我的发布"></wxc-list>
     </view>
+<!--    /packages/@minui/images/dog.png-->
+    <view class="list-item">
+      <wxc-list
+          class="item"
+          src="../../../../images/dog.png"
+          title="我的"></wxc-list>
+    </view>
     <view class="list-item">
       <wxc-list
           class="item"
@@ -47,9 +54,10 @@
 
 <script>
 
+
   export default {
-    data() {
-      return {}
+    data: {
+
     },
     methods: {
       demo() {
