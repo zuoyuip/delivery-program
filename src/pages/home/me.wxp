@@ -12,33 +12,27 @@
     <view class="list-item">
       <wxc-list
               class="item"
-              src="https://imgsa.baidu.com/forum/w%3D580/sign=87e7b6e59d13b07ebdbd50003cd69113/17cf65380cd79123ebc8a5b0a3345982b3b7809d.jpg"
+              src="../../../../images/fabu.png"
               title="我的发布"></wxc-list>
     </view>
 <!--    /packages/@minui/images/dog.png-->
     <view class="list-item">
       <wxc-list
           class="item"
-          src="../../../../images/dog.png"
-          title="我的"></wxc-list>
-    </view>
-    <view class="list-item">
-      <wxc-list
-          class="item"
-          src="https://imgsa.baidu.com/forum/w%3D580/sign=ae50bbfd6563f6241c5d390bb745eb32/9a06cef9d72a60597962d1de2634349b023bba89.jpg"
+          src="../../../../images/jieshou.png"
           title="我的接受">
       </wxc-list>
       <wxc-list
           class="item"
-          src="https://imgsa.baidu.com/forum/w%3D580/sign=5109f7ebb0096b6381195e583c328733/d145460fd9f9d72a3b1620d9da2a2834359bbb89.jpg"
+          src="../../../../images/xinxi.png"
           title="完善信息"></wxc-list>
       <wxc-list
           class="item"
-          src="https://imgsa.baidu.com/forum/w%3D580/sign=aea385fe17d8bc3ec60806c2b28aa6c8/36165634970a304ee73d903edfc8a786c8175ce4.jpg"
+          src="../../../../images/shezhi.png"
           title="设置"></wxc-list>
       <wxc-list
           class="item"
-          src="https://imgsa.baidu.com/forum/w%3D580/sign=ff3eaeec992bd40742c7d3f54b889e9c/c42d55a7d933c8952759a8bfdf1373f0830200dc.jpg"
+          src="../../../../images/women.png"
           title="关于我们"></wxc-list>
 
     </view>
@@ -46,7 +40,7 @@
     <view class="list-item">
       <wxc-list
           class="item"
-          src="https://imgsa.baidu.com/forum/w%3D580/sign=e3466e97f8246b607b0eb27cdbf91a35/12f0c02a6059252d89652dc03a9b033b5ab5b989.jpg"
+          src="../../../../images/jianyi.png"
           title="反馈建议"></wxc-list>
     </view>
   </view>
