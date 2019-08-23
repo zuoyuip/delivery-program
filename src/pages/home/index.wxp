@@ -1,4 +1,4 @@
-<template>
+<template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   <view>
     <view class="table">
       <view class="tr head">
@@ -7,23 +7,22 @@
         <view class="th">赏金</view>
       </view>
       <view class="space"></view>
-<!--      <block class="tr" wx:for="{{ expressList }}" wx:for-item="express"-->
-<!--            wx:key="deliveryId">-->
-<!--        <view class="td">{{ express.deliveryName }}</view>-->
-<!--        <view class="td">{{ express.deliveryAddress }}</view>-->
-<!--        <view class="td">{{ express.deliveryReward }}</view>-->
-<!--      </block>-->
-      <view wx:for="{{ expressList }}" wx:for-item="express"
-                    >{{ express }}</view>
-            </view>
-        <!--    <wxc-loadmore></wxc-loadmore>-->
+      <view class="tr" wx:for="{{ expressList }}" wx:for-item="express"
+            wx:key="deliveryId">
+        <view class="td">{{ express.deliveryName }}</view>
+        <view class="td">{{ express.deliveryAddress }}</view>
+        <view class="td">{{ express.deliveryReward }}</view>
+      </view>
+    </view>
+    <wxc-loadmore is-end="{{ isEnd }}"></wxc-loadmore>
   </view>
 </template>
 
 <script>
   export default {
     data: {
-        expressList: []
+      expressList: [],
+      isEnd: false
     },
     methods: {
 
@@ -35,10 +34,16 @@
         url: 'http://localhost:8080/delivery/delivery',
         method: 'GET',
         success: res => {
-          if (res.statusCode === 200){
-            var that = this
-
+          var that = this;
+          if (res.statusCode === 200) {
+            var expressList = res.data;
+            that.setData({
+              expressList: expressList
+            })
           }
+          that.setData({
+            isEnd: true
+          })
         },
         fail: error => {
 
@@ -137,6 +142,6 @@
   }
 
   .space {
-    height: ~'36rpx';
+    height: ~'66rpx';
   }
 </style>
