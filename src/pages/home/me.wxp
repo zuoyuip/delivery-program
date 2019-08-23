@@ -1,5 +1,68 @@
 <template>
-    <wxc-avatar class="avatar">zuoyu</wxc-avatar>
+  <wxc-panel bind:click="demo" class="content">
+    <wxc-cc class="cc">
+      <wxc-avatar class="avatar" src="../../images/dog.png" mode="aspectFit">
+      </wxc-avatar>
+      <wxc-avatar class="cc__text">13203902193</wxc-avatar>
+    </wxc-cc>
+  </wxc-panel>
+
+  <!--  菜单列表-->
+  <view class="list-wrap">
+    <view class="list-item">
+      <wxc-list
+          class="item"
+          icon="cart"
+          detail="这是detail示例"
+          icon-color="#69A0DD"
+          title="我的包裹"></wxc-list>
+      <wxc-list
+          class="item"
+          icon="cart"
+          desc="这是desc示例"
+          icon-color="#69A0DD"
+          title="我的包裹">
+        <view class="desc-highlight">这是detail示例</view>
+      </wxc-list>
+      <wxc-list
+          class="item"
+          icon="cart"
+          dot="true"
+          icon-color="#69A0DD"
+          title="我的包裹"></wxc-list>
+      <wxc-list
+          class="item"
+          icon="cart"
+          icon-color="#69A0DD"
+          title="我的包裹"></wxc-list>
+      <wxc-list
+          class="item"
+          icon="cart"
+          icon-color="#69A0DD"
+          title="我的包裹"></wxc-list>
+      <wxc-list
+          class="item"
+          icon="cart"
+          bind:click="demo"
+          icon-color="#69A0DD"
+          title="我的包裹"></wxc-list>
+
+    </view>
+
+    <view class="list-item">
+      <wxc-list
+          class="item"
+          icon="help"
+          icon-color="#69A0DD"
+          title="客服与帮助"></wxc-list>
+      <wxc-list
+          class="item"
+          icon="feedback"
+          icon-color="#69A0DD"
+          mode="none"
+          title="意见反馈"></wxc-list>
+    </view>
+  </view>
 </template>
 
 <script>
@@ -9,6 +72,9 @@
       return {}
     },
     methods: {
+      demo() {
+        console.log('hello')
+      }
       // this.$navigate({url:"content"})
     },
     computed: {},
@@ -75,16 +141,66 @@
       disableSwipeBack: false,
       // 引入插件
       usingComponents: {
-        'wxc-avatar': '@minui/wxc-avatar'
+        'wxc-avatar': '@minui/wxc-avatar',
+        'wxc-panel': '@minui/wxc-panel',
+        'wxc-cc': '@minui/wxc-cc',
+        'wxc-icon': '@minui/wxc-icon',
+        'wxc-list': '@minui/wxc-list'
       }
     }
   }
 </script>
 
 <style lang="less">
+  .cc {
+    display: block;
+    width: 100%;
+  }
+
+  .cc__text {
+    font-size: larger;
+    margin-right: ~'150rpx';
+  }
+
   .avatar {
     display: block;
-    width: ~'120 rpx';
-    height: ~'120 rpx';
+    margin: ~'15rpx';
+    margin-right: ~'50rpx';
+    width: ~'120rpx';
+    height: ~'120rpx';
+  }
+
+  .content {
+    padding: ~'30rpx';
+  }
+
+  .list-wrap {
+    width: 100%;
+    background: #efefef;
+    padding-bottom: ~'30rpx';
+    padding-top: ~'30rpx';
+  }
+
+  .list-item {
+    background: #fff;
+    margin-bottom: ~'30rpx';
+  }
+
+  .list-item:last-child {
+    margin: 0;
+  }
+
+  .item {
+    flex: 1;
+  }
+
+  .desc-highlight {
+    font-size: ~'24rpx';
+    height: ~'38rpx';
+    padding: 0 ~'22rpx';
+    border: 1px solid #f5342f;
+    border-radius: ~'20rpx';
+    color: #f5342f;
+    line-height: ~'38rpx';
   }
 </style>
