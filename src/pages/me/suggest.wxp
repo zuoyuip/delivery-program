@@ -1,7 +1,7 @@
 <template>
-  <view>
-    建议反馈
-  </view>
+    <view class="yangShi">
+    <wxc-input type="text" placeholder="说说您的问题"></wxc-input>
+    </view>
 </template>
 
 <script>
@@ -54,12 +54,16 @@ export default {
       // 设置为 true 则页面整体不能上下滚动。
       disableScroll: false,
       // 禁止页面右滑手势返回
-      disableSwipeBack: false
+      disableSwipeBack: false,
+      usingComponents: {
+          'wxc-input': '@minui/wxc-input'}
     // }
   }
 }
 </script>
 
 <style>
-
+   .yangShi{
+       height: 100%;
+   }
 </style>
