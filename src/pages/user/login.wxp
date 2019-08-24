@@ -6,13 +6,8 @@
 
 <script>
 export default {
-  data() {
-    return {
+  data: {
 
-    }
-  },
-  methods: {
-    // this.$navigate({url:"content"})
   },
   onLoad: function (options) {
     // 页面创建时执行

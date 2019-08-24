@@ -24,10 +24,6 @@
       expressList: [],
       isEnd: false
     },
-    methods: {
-
-      // this.$navigate({url:"content"})
-    },
     onLoad: function (options) {
       // 页面创建时执行
       wx.request({
