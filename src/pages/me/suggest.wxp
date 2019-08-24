@@ -1,7 +1,5 @@
 <template>
-    <view class="yangShi">
-    <wxc-input type="text" placeholder="说说您的问题"></wxc-input>
-    </view>
+
 </template>
 
 <script>
@@ -56,14 +54,13 @@ export default {
       // 禁止页面右滑手势返回
       disableSwipeBack: false,
       usingComponents: {
-          'wxc-input': '@minui/wxc-input'}
-    // }
+    }
   }
 }
 </script>
 
-<style>
-   .yangShi{
-       height: 100%;
+<style lang="less">
+   .suggest{
+       height: ~'1000rpx';
    }
 </style>

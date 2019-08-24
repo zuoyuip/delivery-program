@@ -5,6 +5,7 @@
   "author": "zuoyu",
   "license": "MIT",
   "dependencies": {
+    "@minui/wxc-abnor": "^1.0.7",
     "@minui/wxc-avatar": "^1.0.5",
     "@minui/wxc-cc": "^1.0.4",
     "@minui/wxc-icon": "^1.0.9",

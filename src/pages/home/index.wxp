@@ -1,4 +1,5 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <wxc-loadmore is-end="{{ false }}" wx:if="{{ isLoading }}"></wxc-loadmore>
   <view>
     <view class="table">
       <view class="tr head">
@@ -7,14 +8,24 @@
         <view class="th">赏金</view>
       </view>
       <view class="space"></view>
-      <view class="tr" wx:for="{{ expressList }}" wx:for-item="express"
-            wx:key="deliveryId">
-        <view class="td">{{ express.deliveryName }}</view>
-        <view class="td">{{ express.deliveryAddress }}</view>
-        <view class="td">{{ express.deliveryReward }}</view>
+      <view wx:if="{{ expressList.length > 0 }}">
+        <view class="tr" wx:for="{{ expressList }}" wx:for-item="express"
+              wx:key="deliveryId">
+          <view class="td">{{ express.deliveryName }}</view>
+          <view class="td">{{ express.deliveryAddress }}</view>
+          <view class="td">{{ express.deliveryReward }}</view>
+        </view>
+        <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
+      </view>
+      <view wx:else>
+        <wxc-abnor
+            bind:abnortap="onRetry"
+            type="{{ requestType }}"></wxc-abnor>
       </view>
     </view>
-    <wxc-loadmore is-end="{{ isEnd }}"></wxc-loadmore>
+    <view bindtap="">
+      <image src="../"></image>
+    </view>
   </view>
 </template>
 
@@ -22,30 +33,48 @@
   export default {
     data: {
       expressList: [],
-      isEnd: false
+      requestType: '',
+      isLoading: false
     },
-    onLoad: function (options) {
-      // 页面创建时执行
+    selectExpress() {
+      const that = this;
+      that.setData({
+        isLoading: true
+      });
       wx.request({
         url: 'http://localhost:8080/delivery/delivery',
         method: 'GET',
         success: res => {
-          var that = this;
           if (res.statusCode === 200) {
-            var expressList = res.data;
+            const expressList = res.data;
             that.setData({
-              expressList: expressList
-            })
+              expressList: expressList,
+              requestType: 'ORDER'
+            });
+            return
           }
           that.setData({
-            isEnd: true
+            requestType: 'SHOP'
           })
         },
         fail: error => {
-
+          that.setData({
+            requestType: 'REQUEST_ERROR'
+          })
+        },
+        complete: () => {
+          that.setData({
+            isLoading: false
+          });
         }
       });
-
+    },
+    onRetry() {
+      this.selectExpress()
+    },
+    onLoad: function (options) {
+      // 页面创建时执行
+      this.selectExpress()
     },
     onShow: function () {
       // 页面出现在前台时执行
@@ -61,6 +90,7 @@
     },
     onPullDownRefresh: function () {
       // 触发下拉刷新时执行
+      this.selectExpress()
     },
     onReachBottom: function () {
       // 页面触底时执行
@@ -84,13 +114,14 @@
       // 导航栏标题文字内容
       navigationBarTitleText: '主页',
       // 是否开启当前页面下拉刷新。
-      enablePullDownRefresh: false,
+      enablePullDownRefresh: true,
       // 设置为 true 则页面整体不能上下滚动
       disableScroll: false,
       // 禁止页面右滑手势返回
       disableSwipeBack: false,
       usingComponents: {
-        'wxc-loadmore': '@minui/wxc-loadmore'
+        'wxc-loadmore': '@minui/wxc-loadmore',
+        'wxc-abnor': '@minui/wxc-abnor'
       }
     }
   }
