@@ -3,17 +3,17 @@
   <view>
     <view class="table">
       <view class="tr head">
-        <view class="th">快递名称</view>
-        <view class="th">送达地点</view>
-        <view class="th">赏金</view>
+        <text class="th">快递名称</text>
+        <text class="th">送达地点</text>
+        <text class="th">赏金</text>
       </view>
       <view class="space"></view>
       <view wx:if="{{ expressList.length > 0 }}">
         <view class="tr" wx:for="{{ expressList }}" wx:for-item="express"
               wx:key="deliveryId">
-          <view class="td">{{ express.deliveryName }}</view>
-          <view class="td">{{ express.deliveryAddress }}</view>
-          <view class="td">{{ express.deliveryReward }}</view>
+          <text class="td">{{ express.deliveryName }}</text>
+          <text class="td">{{ express.deliveryAddress }}</text>
+          <text class="td">{{ express.deliveryReward }}</text>
         </view>
         <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
       </view>
@@ -23,8 +23,10 @@
             type="{{ requestType }}"></wxc-abnor>
       </view>
     </view>
-    <view bindtap="">
-      <image src="../"></image>
+    <view bindtap="toExpressEnter" class="add_button">
+      <text decode="true">&nbsp;&nbsp;</text>
+      <wxc-icon color="#949494" size="30" type="add"></wxc-icon>
+      <text decode="true">&nbsp;&nbsp;发布&nbsp;&nbsp;</text>
     </view>
   </view>
 </template>
@@ -68,6 +70,11 @@
           });
         }
       });
+    },
+    toExpressEnter(){
+      wx.navigateTo({
+        url: '../express/expressEnter'
+      })
     },
     onRetry() {
       this.selectExpress()
@@ -121,7 +128,8 @@
       disableSwipeBack: false,
       usingComponents: {
         'wxc-loadmore': '@minui/wxc-loadmore',
-        'wxc-abnor': '@minui/wxc-abnor'
+        'wxc-abnor': '@minui/wxc-abnor',
+        'wxc-icon': '@minui/wxc-icon'
       }
     }
   }
@@ -159,7 +167,7 @@
   .th {
     font-weight: 500;
     background-color: #FDFDFD;
-    font-size: ~'34rpx';
+    font-size: ~'36rpx';
     color: #000000;
   }
 
@@ -171,4 +179,22 @@
   .space {
     height: ~'66rpx';
   }
+
+
+  .add_button {
+    position: fixed;
+    width: ~'150rpx';
+    height: ~'60rpx';
+    line-height: ~'60rpx';
+    bottom: ~'44rpx';
+    right: ~'299rpx';
+    font-size: ~'35rpx';
+    vertical-align: center;
+    color: #949494;
+    background-color: #FFFFFF;
+    border-radius: ~'30rpx';
+    border-style: outset;
+  }
+
+
 </style>
