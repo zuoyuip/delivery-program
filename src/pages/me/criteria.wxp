@@ -1,7 +1,13 @@
 <template>
-  <view>
-    身份审核
-  </view>
+    <view class="container">
+      <view class="input-wrap">
+        <wxc-input type="text" title="姓名" placeholder="请输入真实姓名"></wxc-input>
+        <wxc-input type="number" title="手机号" placeholder="输入您的手机号"></wxc-input>
+        <wxc-input type="text" title="学院" placeholder="所在学院"></wxc-input>
+          <wxc-input type="text" title="专业" placeholder="所学专业"></wxc-input>
+          <wxc-input type="text" title="学号" placeholder="您的学号"></wxc-input>
+      </view>
+    </view>
 </template>
 
 <script>
@@ -54,12 +60,20 @@ export default {
       // 设置为 true 则页面整体不能上下滚动。
       disableScroll: false,
       // 禁止页面右滑手势返回
-      disableSwipeBack: false
+      disableSwipeBack: false,
+      usingComponents: {
+          'wxc-input': '@minui/wxc-input'
+      }
     // }
   }
 }
 </script>
 
 <style>
-
+    .container {
+        width: 100%;
+    }
+    .input-wrap {
+        background: #fff;
+    }
 </style>

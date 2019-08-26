@@ -26,7 +26,7 @@
     <view bindtap="toExpressEnter" class="add_button">
       <text decode="true">&nbsp;&nbsp;</text>
       <wxc-icon color="#949494" size="30" type="add"></wxc-icon>
-      <text decode="true">&nbsp;&nbsp;发布&nbsp;&nbsp;</text>
+      <text decode="true">&nbsp;发布&nbsp;</text>
     </view>
   </view>
 </template>

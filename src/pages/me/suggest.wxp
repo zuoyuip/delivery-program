@@ -1,4 +1,10 @@
 <template>
+    <view>
+        <view style="height: 30px">
+        <textarea bindblur="bindTextAreaBlur" auto-height auto-focus placeholder="说说您的问题" />
+        </view>
+        <button form-type="submit" class="btn-style"> 提交 </button>
+    </view>
 
 </template>
 
@@ -63,4 +69,14 @@ export default {
    .suggest{
        height: ~'1000rpx';
    }
+    .btn-style{
+        background-color: #f5342f;
+        width: 130px;
+        height: 60px;
+        margin-right:30px;
+        margin-top: 200px;
+        color: #FDFDFD;
+        font-size: 32px;
+        line-height: 60px;
+    }
 </style>
