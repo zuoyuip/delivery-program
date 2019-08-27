@@ -1,13 +1,14 @@
 <template>
     <view class="input-wrap">
-      <wxc-input icon="search" placeholder="请输入真实姓名" type="text"></wxc-input>
-      <wxc-input placeholder="输入您的手机号"
-                 src="https://s10.mogucdn.com/mlcdn/c45406/171025_7abllhkc011ka5kici7532af6202g_28x40.png"
-                 type="number"></wxc-input>
-      <wxc-input placeholder="所在学院" icon="home" type="text"></wxc-input>
-      <wxc-input placeholder="所学专业"  icon="yes" type="text"></wxc-input>
-      <wxc-input placeholder="您的学号" icon="more" type="number"></wxc-input>
+      <wxc-input src="../../../../images/xingming.png" placeholder="请输入真实姓名" type="text"></wxc-input>
+      <wxc-input placeholder="所在学院" src="../../../../images/school.png" type="text"></wxc-input>
+      <wxc-input placeholder="所学专业"  src="../../../../images/zhuanye.png" type="text"></wxc-input>
+      <wxc-input placeholder="您的学号" src="../../../../images/xuehao.png" type="number"></wxc-input>
+        <view>
+            <button form-type="submit" class="btn-style"> 下一步 </button>
+        </view>
     </view>
+
 </template>
 
 <script>
@@ -60,7 +61,8 @@
       // 禁止页面右滑手势返回
       disableSwipeBack: false,
       usingComponents: {
-        'wxc-input': '@minui/wxc-input'
+        'wxc-input': '@minui/wxc-input',
+          'wxc-input': '@minui/wxc-button'
       }
     }
   }
@@ -71,5 +73,15 @@
   .input-wrap {
     position: relative;
     margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+  }
+  .btn-style{
+      background-color:#259b24;
+      width: 130px;
+      height: 60px;
+      margin-right:30px;
+      margin-top: 500px;
+      color: #FDFDFD;
+      font-size: 28px;
+      line-height: 60px;
   }
 </style>

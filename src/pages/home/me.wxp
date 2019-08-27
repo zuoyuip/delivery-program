@@ -52,6 +52,11 @@
     <image src="../../images/women.png"></image>
     <image src="../../images/jianyi.png"></image>
     <image src="../../images/tkparcel.png"></image>
+    <image src="../../images/xingming.png"></image>
+    <image src="../../images/school.png"></image>
+    <image src="../../images/zhuanye.png"></image>
+    <image src="../../images/xuehao.png"></image>
+
   </view>
 </template>
 

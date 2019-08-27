@@ -1,6 +1,6 @@
 <template>
   <view>
-    <image src="../../images/tkparcel.png" mode="aspectFit"></image>
+    <image src="../../images/tkparcel.png" mode="scaleToFill"></image>
     <view class="container">
       <view class="divLine">
       </view>
