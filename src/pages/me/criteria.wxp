@@ -1,10 +1,12 @@
 <template>
-    <view class="input-wrap">
-      <wxc-input src="../../../../images/xingming.png" placeholder="请输入真实姓名" type="text"></wxc-input>
-      <wxc-input placeholder="所在学院" src="../../../../images/school.png" type="text"></wxc-input>
-      <wxc-input placeholder="所学专业"  src="../../../../images/zhuanye.png" type="text"></wxc-input>
-      <wxc-input placeholder="您的学号" src="../../../../images/xuehao.png" type="number"></wxc-input>
-    </view>
+  <view class="input-wrap">
+    <wxc-input placeholder="请输入真实姓名" src="../../../../images/xingming.png" type="text"></wxc-input>
+    <wxc-input placeholder="所在学院" src="../../../../images/school.png" type="text"></wxc-input>
+    <wxc-input placeholder="所学专业" src="../../../../images/zhuanye.png" type="text"></wxc-input>
+    <wxc-input placeholder="您的学号" src="../../../../images/xuehao.png" type="number"></wxc-input>
+  </view>
+
+  <image class="addStyle" src="../../images/add.png"></image>
 
 </template>
 
@@ -59,7 +61,8 @@
       disableSwipeBack: false,
       usingComponents: {
         'wxc-input': '@minui/wxc-input',
-          'wxc-input': '@minui/wxc-button'
+        'wxc-button': '@minui/wxc-button',
+        'wxc-icon': '@minui/wxc-icon'
       }
     }
   }
@@ -71,14 +74,21 @@
     position: relative;
     margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
   }
-  .btn-style{
-      background-color:#259b24;
-      width: 130px;
-      height: 60px;
-      margin-right:30px;
-      margin-top: 500px;
-      color: #FDFDFD;
-      font-size: 28px;
-      line-height: 60px;
+
+  .btn-style {
+    background-color: #259b24;
+    width: 130px;
+    height: 60px;
+    margin-right: 30px;
+    margin-top: 500px;
+    color: #FDFDFD;
+    font-size: 28px;
+    line-height: 60px;
+  }
+
+  .addStyle {
+    border: #dadada solid;
+    height: ~'300rpx';
+    width: ~'300rpx';
   }
 </style>

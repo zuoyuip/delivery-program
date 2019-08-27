@@ -56,7 +56,6 @@
     <image src="../../images/school.png"></image>
     <image src="../../images/zhuanye.png"></image>
     <image src="../../images/xuehao.png"></image>
-
   </view>
 </template>
 
