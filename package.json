@@ -7,6 +7,7 @@
   "dependencies": {
     "@minui/wxc-abnor": "^1.0.7",
     "@minui/wxc-avatar": "^1.0.5",
+    "@minui/wxc-button": "^1.0.2",
     "@minui/wxc-cc": "^1.0.4",
     "@minui/wxc-icon": "^1.0.9",
     "@minui/wxc-input": "^1.0.2",

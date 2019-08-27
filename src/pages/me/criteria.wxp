@@ -4,9 +4,6 @@
       <wxc-input placeholder="所在学院" src="../../../../images/school.png" type="text"></wxc-input>
       <wxc-input placeholder="所学专业"  src="../../../../images/zhuanye.png" type="text"></wxc-input>
       <wxc-input placeholder="您的学号" src="../../../../images/xuehao.png" type="number"></wxc-input>
-        <view>
-            <button form-type="submit" class="btn-style"> 下一步 </button>
-        </view>
     </view>
 
 </template>
