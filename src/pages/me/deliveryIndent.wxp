@@ -1,7 +1,17 @@
 <template>
-  <view>
-    我的代领
-  </view>
+  <wxc-panel border="{{false}}" >
+    <view class="bgc">
+    <view class="content">悬赏</view>
+      <view class="container"><view class="divLine"></view></view>
+    <view class="content">取件地址</view>
+      <view class="container"><view class="divLine"></view></view>
+    <view class="content">送达地址</view>
+      <view class="container"><view class="divLine"></view></view>
+    <view class="content">接受时间</view>
+      <view class="container"><view class="divLine"></view></view>
+      <view class="content" style="color: #259b24;text-align: center">查看详情</view>
+    </view>
+  </wxc-panel>
 </template>
 
 <script>
@@ -48,18 +58,38 @@ export default {
   config: {
     // window:{
       // 导航栏标题文字内容
-      navigationBarTitleText: '我的代领',
+      navigationBarTitleText: '我接受的',
       // 是否开启当前页面下拉刷新。
       enablePullDownRefresh: false,
       // 设置为 true 则页面整体不能上下滚动。
       disableScroll: false,
       // 禁止页面右滑手势返回
-      disableSwipeBack: false
+      disableSwipeBack: false,
+      backgroundColor: '#259d24',
+      usingComponents: {
+      'wxc-panel': '@minui/wxc-panel'
+    }
     // }
   }
 }
 </script>
 
 <style>
-
+  .content {
+    padding: 10rpx;
+    font-size: 30rpx;
+  }
+  .bgc{
+    background-color:#ededed;
+    border-radius:30rpx;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .divLine{
+    background-color:#dadada;
+    width: 100%;
+    height: 2px;
+    float: left;
+  }
 </style>
