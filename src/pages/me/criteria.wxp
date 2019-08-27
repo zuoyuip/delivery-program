@@ -1,58 +1,56 @@
 <template>
-    <view class="container">
-      <view class="input-wrap">
-        <wxc-input type="text" title="姓名" placeholder="请输入真实姓名"></wxc-input>
-        <wxc-input type="number" title="手机号" placeholder="输入您的手机号"></wxc-input>
-        <wxc-input type="text" title="学院" placeholder="所在学院"></wxc-input>
-          <wxc-input type="text" title="专业" placeholder="所学专业"></wxc-input>
-          <wxc-input type="text" title="学号" placeholder="您的学号"></wxc-input>
-      </view>
+    <view class="input-wrap">
+      <wxc-input icon="search" placeholder="请输入真实姓名" type="text"></wxc-input>
+      <wxc-input placeholder="输入您的手机号"
+                 src="https://s10.mogucdn.com/mlcdn/c45406/171025_7abllhkc011ka5kici7532af6202g_28x40.png"
+                 type="number"></wxc-input>
+      <wxc-input placeholder="所在学院" icon="home" type="text"></wxc-input>
+      <wxc-input placeholder="所学专业"  icon="yes" type="text"></wxc-input>
+      <wxc-input placeholder="您的学号" icon="more" type="number"></wxc-input>
     </view>
 </template>
 
 <script>
-export default {
-  data: {
-  },
-  onLoad: function (options) {
-    // 页面创建时执行
+  export default {
+    data: {},
+    onLoad: function (options) {
+      // 页面创建时执行
 
-  },
-  onShow: function () {
-    // 页面出现在前台时执行
-  },
-  onReady: function () {
-    // 页面首次渲染完毕时执行
-  },
-  onHide: function () {
-    // 页面从前台变为后台时执行
-  },
-  onUnload: function () {
-    // 页面销毁时执行
-  },
-  onPullDownRefresh: function () {
-    // 触发下拉刷新时执行
-  },
-  onReachBottom: function () {
-    // 页面触底时执行
-  },
-  onShareAppMessage: function () {
-    // 页面被用户分享时执行
-  },
-  onPageScroll: function () {
-    // 页面滚动时执行
-  },
-  onResize: function () {
-    // 页面尺寸变化时执行
-  },
-  onTabItemTap(item) {
-    // tab 点击时执行
-    console.log(item.index);
-    console.log(item.pagePath);
-    console.log(item.text)
-  },
-  config: {
-    // window:{
+    },
+    onShow: function () {
+      // 页面出现在前台时执行
+    },
+    onReady: function () {
+      // 页面首次渲染完毕时执行
+    },
+    onHide: function () {
+      // 页面从前台变为后台时执行
+    },
+    onUnload: function () {
+      // 页面销毁时执行
+    },
+    onPullDownRefresh: function () {
+      // 触发下拉刷新时执行
+    },
+    onReachBottom: function () {
+      // 页面触底时执行
+    },
+    onShareAppMessage: function () {
+      // 页面被用户分享时执行
+    },
+    onPageScroll: function () {
+      // 页面滚动时执行
+    },
+    onResize: function () {
+      // 页面尺寸变化时执行
+    },
+    onTabItemTap(item) {
+      // tab 点击时执行
+      console.log(item.index);
+      console.log(item.pagePath);
+      console.log(item.text)
+    },
+    config: {
       // 导航栏标题文字内容
       navigationBarTitleText: '身份审核',
       // 是否开启当前页面下拉刷新。
@@ -62,18 +60,16 @@ export default {
       // 禁止页面右滑手势返回
       disableSwipeBack: false,
       usingComponents: {
-          'wxc-input': '@minui/wxc-input'
+        'wxc-input': '@minui/wxc-input'
       }
-    // }
+    }
   }
-}
 </script>
 
-<style>
-    .container {
-        width: 100%;
-    }
-    .input-wrap {
-        background: #fff;
-    }
+<style lang="less">
+
+  .input-wrap {
+    position: relative;
+    margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+  }
 </style>
