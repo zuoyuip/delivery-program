@@ -7,7 +7,8 @@
     </label>
     <view class="weui-textarea-counter">{{contentCount}}/500</view>
     <view class="space"></view>
-    <wxc-button size="beauty" btnStyle="width: 636rpx;border-radius: 26rpx;" class="weui-btn" type="selection" value="提交"></wxc-button>
+    <wxc-button btnStyle="width: 636rpx;border-radius: 26rpx;color: #ffffff;"
+                size="beauty" type="selection" value="提交"></wxc-button>
   </view>
 
 </template>
@@ -98,6 +99,7 @@
     font-size: ~'36rpx';
     color: #888888;
   }
+
   .space {
     height: ~'66rpx';
   }

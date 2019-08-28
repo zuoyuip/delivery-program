@@ -1,4 +1,4 @@
-<template>
+<template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   <view class="input-wrap">
     <wxc-input placeholder="请输入真实姓名" src="../../../../images/xingming.png" type="text"></wxc-input>
     <wxc-input placeholder="所在学院" src="../../../../images/school.png" type="text"></wxc-input>
@@ -6,13 +6,73 @@
     <wxc-input placeholder="您的学号" src="../../../../images/xuehao.png" type="number"></wxc-input>
   </view>
 
-  <image class="addStyle" src="../../images/add.png"></image>
+  <view class="space"></view>
+
+  <wxc-panel title="请上传您的校园卡正面照：">
+    <!--    <wxc-loadmore-->
+    <!--        icon="{{true}}"-->
+    <!--        text="正在努力上传中..."-->
+    <!--    >-->
+    <!--    </wxc-loadmore>-->
+    <wxc-cc>
+      <view wx:if="{{ image === ''}}">
+        <image bindtap="chooseImage" class="addStyle" src="../../images/add.png"></image>
+      </view>
+      <view wx:else>
+        <image bindtap="handleImagePreview" mode="aspectFit" src="{{ image }}"></image>
+        <view style="height: 1px;"></view>
+        <wxc-button bind:click="removeImage" class="btn-style" size="normal" type="danger"
+                    value="删除"></wxc-button>
+      </view>
+    </wxc-cc>
+  </wxc-panel>
+
+  <view class="space"></view>
+
+  <wxc-cc>
+    <wxc-button bind:click="" size="large" type="selection"
+                value="提交" btnStyle="border-radius: 26rpx;color: #ffffff;"></wxc-button>
+  </wxc-cc>
 
 </template>
 
 <script>
   export default {
-    data: {},
+    data: {
+      image: ''
+    },
+    chooseImage(e) {
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'],  //可选择原图或压缩后的图片
+        sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
+        success: res => {
+          const image = res.tempFilePaths;
+          const that = this;
+          that.setData({
+            image: image[0]
+          });
+        },
+        fail: error => {
+
+        },
+        complete: () => {
+
+        }
+      })
+    },
+    removeImage(e) {
+      const that = this;
+      that.setData({
+        image: ''
+      });
+    },
+    handleImagePreview(e) {
+      const image = this.data.image;
+      wx.previewImage({
+        urls: [image] //所有要预览的图片
+      })
+    },
     onLoad: function (options) {
       // 页面创建时执行
 
@@ -62,7 +122,10 @@
       usingComponents: {
         'wxc-input': '@minui/wxc-input',
         'wxc-button': '@minui/wxc-button',
-        'wxc-icon': '@minui/wxc-icon'
+        'wxc-icon': '@minui/wxc-icon',
+        'wxc-cc': '@minui/wxc-cc',
+        'wxc-panel': '@minui/wxc-panel',
+        'wxc-loadmore': '@minui/wxc-loadmore'
       }
     }
   }
@@ -76,19 +139,16 @@
   }
 
   .btn-style {
-    background-color: #259b24;
-    width: 130px;
-    height: 60px;
-    margin-right: 30px;
-    margin-top: 500px;
-    color: #FDFDFD;
-    font-size: 28px;
-    line-height: 60px;
+    margin-left: ~'220rpx';
   }
 
   .addStyle {
-    border: #dadada solid;
-    height: ~'300rpx';
-    width: ~'300rpx';
+    border: #dadada dashed;
+    height: ~'200rpx';
+    width: ~'200rpx';
+  }
+
+  .space {
+    height: ~'66rpx';
   }
 </style>

@@ -49,7 +49,7 @@
          // 导航栏标题颜色，仅支持 black / white
         navigationBarTextStyle: 'black',
          // 窗口的背景色
-        backgroundColor: '#ffffff',
+        backgroundColor: '#EFEFEF',
          // 是否开启全局的下拉刷新。
         enablePullDownRefresh: false
       },
