@@ -9,11 +9,6 @@
   <view class="space"></view>
 
   <wxc-panel title="请上传您的校园卡正面照：">
-    <!--    <wxc-loadmore-->
-    <!--        icon="{{true}}"-->
-    <!--        text="正在努力上传中..."-->
-    <!--    >-->
-    <!--    </wxc-loadmore>-->
     <wxc-cc>
       <view wx:if="{{ image === ''}}">
         <image bindtap="chooseImage" class="addStyle" src="../../images/add.png"></image>
@@ -30,8 +25,8 @@
   <view class="space"></view>
 
   <wxc-cc>
-    <wxc-button bind:click="" size="large" type="selection"
-                value="提交" btnStyle="border-radius: 26rpx;color: #ffffff;"></wxc-button>
+    <wxc-button bind:click="" btnStyle="border-radius: 26rpx;color: #ffffff;" size="large"
+                type="selection" value="提交"></wxc-button>
   </wxc-cc>
 
 </template>
