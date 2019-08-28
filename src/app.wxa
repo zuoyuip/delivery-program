@@ -50,6 +50,8 @@
         navigationBarTextStyle: 'black',
          // 窗口的背景色
         backgroundColor: '#EFEFEF',
+        backgroundColorTop: '#EFEFEF',
+        backgroundColorBottom: '#EFEFEF',
          // 是否开启全局的下拉刷新。
         enablePullDownRefresh: false
       },
