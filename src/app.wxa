@@ -1,18 +1,11 @@
 <template>
-  <view style="background-color: #FDFDFD">
-
-    <page style="background-color: #FDFDFD"></page>
-
-  </view>
+  <page></page>
 </template>
 
 <script>
   export default {
     config: {
-      usingComponents: {
-        'layout-head': 'layout/head',
-        'layout-foot': 'layout/foot'
-      },
+      usingComponents: {},
       // 页面注册
       pages: [
         // 主页
@@ -80,13 +73,25 @@
         ]
       }
     },
-    globalData: {},
-    onLaunch() {
+    globalData: {
+      user: {}
     },
-    onShow() {
+    onLaunch(options) {
+      this.globalData.user = {
+        'userId': '1',
+        'userPhone': '15838271463'
+      }
+      // Do something initial when launch.
+    },
+    onShow(options) {
+      // Do something when show.
     },
     onHide() {
-    }
+      // Do something when hide.
+    },
+    onError(msg) {
+      console.log(msg)
+    },
   }
 </script>
 

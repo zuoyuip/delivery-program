@@ -1,7 +1,7 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-  <wxc-panel class="content">
+  <wxc-panel bind:click="jump" class="content">
     <wxc-cc class="cc">
-      <wxc-avatar class="avatar" src="../../images/dog.png" mode="aspectFit">
+      <wxc-avatar class="avatar" mode="aspectFit" src="../../images/dog.png">
       </wxc-avatar>
       <wxc-avatar class="cc__text">13203902193</wxc-avatar>
     </wxc-cc>
@@ -61,38 +61,64 @@
 
 <script>
 
-
+  const appInstance = getApp();
   export default {
-    data: {},
+    data: {
+      userPhone: '',
+      isLogin: false
+    },
     // 页面跳转
     toExpressIndent() {
       wx.navigateTo({
         url: '../me/expressIndent'
       })
     },
-    toDeliveryIndent(){
+    toDeliveryIndent() {
       wx.navigateTo({
         url: '../me/deliveryIndent'
       })
     },
-    toCriteria(){
+    toCriteria() {
       wx.navigateTo({
         url: '../me/criteria'
       })
     },
-    toAbout(){
+    toAbout() {
       wx.navigateTo({
         url: '../me/about'
       })
     },
-    toSuggest(){
+    toSuggest() {
       wx.navigateTo({
         url: '../me/suggest'
       })
     },
+    jump() {
+      if (this.data.isLogin) {
+        wx.navigateTo({
+          url: '../user/modifyUser'
+        });
+        return
+      }
+      wx.navigateTo({
+        url: '../user/login'
+      })
+    },
     onLoad: function (options) {
       // 页面创建时执行
-
+      const that = this;
+      const user = appInstance.globalData.user;
+      const userString = JSON.stringify(user);
+      if (userString === '{}') {
+        that.setData({
+          userPhone: '未登录'
+        });
+        return
+      }
+      that.setData({
+        userPhone: user.userPhone,
+        isLogin: true
+      });
     },
     onShow: function () {
       // 页面出现在前台时执行
@@ -123,9 +149,7 @@
     },
     onTabItemTap(item) {
       // tab 点击时执行
-      console.log(item.index);
-      console.log(item.pagePath);
-      console.log(item.text)
+
     },
     config: {
       // 导航栏标题文字内容

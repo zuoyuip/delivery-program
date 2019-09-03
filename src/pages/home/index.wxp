@@ -113,9 +113,7 @@
     },
     onTabItemTap(item) {
       // tab 点击时执行
-      console.log(item.index);
-      console.log(item.pagePath);
-      console.log(item.text)
+
     },
     config: {
       // 导航栏标题文字内容
