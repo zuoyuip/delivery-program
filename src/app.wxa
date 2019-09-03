@@ -1,7 +1,7 @@
 <template>
-  <view>
+  <view style="background-color: #FDFDFD">
 
-    <page></page>
+    <page style="background-color: #FDFDFD"></page>
 
   </view>
 </template>
@@ -13,71 +13,62 @@
         'layout-head': 'layout/head',
         'layout-foot': 'layout/foot'
       },
-       // 页面注册
+      // 页面注册
       pages: [
-         // 主页
+        // 主页
         'pages/home/index',
-         // 我的
+        // 我的
         'pages/home/me',
-         // 包裹登记
+        // 包裹登记
         'pages/express/expressEnter',
-         // 关于我们
+        // 关于我们
         'pages/me/about',
-         // 审核
+        // 审核
         'pages/me/criteria',
-         // 我的代领
+        // 我的代领
         'pages/me/deliveryIndent',
-         // 我的包裹
+        // 我的包裹
         'pages/me/expressIndent',
-         // 建议反馈
+        // 建议反馈
         'pages/me/suggest',
-         // 登录
+        // 登录
         'pages/user/login',
-         // 修改信息
+        // 修改信息
         'pages/user/modifyUser',
-         // 注册
+        // 注册
         'pages/user/register'
       ],
-       // 界面风格
+      // 界面风格
       window: {
-         // 下拉 loading 的样式，仅支持 dark / light
+        // 下拉 loading 的样式，仅支持 dark / light
         backgroundTextStyle: 'light',
-         // 导航栏背景颜色
+        // 导航栏背景颜色
         navigationBarBackgroundColor: '#FDFDFD',
-         // 导航栏标题文字内容
+        // 导航栏标题文字内容
         navigationBarTitleText: 'WeChat',
-         // 导航栏标题颜色，仅支持 black / white
+        // 导航栏标题颜色，仅支持 black / white
         navigationBarTextStyle: 'black',
-         // 窗口的背景色
-        backgroundColor: '#EFEFEF',
-        backgroundColorTop: '#EFEFEF',
-        backgroundColorBottom: '#EFEFEF',
-         // 是否开启全局的下拉刷新。
-        enablePullDownRefresh: false
       },
-      networkTimeout: {
-        request: 10000
-      },
-       // 导航栏
+      // 导航栏
       tabBar: {
-         // tab 上的文字默认颜色，仅支持十六进制颜色
+        // tab 上的文字默认颜色，仅支持十六进制颜色
         color: '#949494',
-         // tab 上的文字选中时的颜色，仅支持十六进制颜色
+        // tab 上的文字选中时的颜色，仅支持十六进制颜色
         selectedColor: '#03C365',
-         // tabbar 上边框的颜色， 仅支持 black / white
+        // tabbar 上边框的颜色， 仅支持 black / white
         borderStyle: 'white',
-         // tab 的背景色，仅支持十六进制颜色
+        // tab 的背景色，仅支持十六进制颜色
         backgroundColor: '#F7F7F7',
-         // tab 的列表，最少 2 个、最多 5 个 tab
+        // tab 的列表，最少 2 个、最多 5 个 tab
         list: [
           {
-             // 页面路径，必须在 pages 中先定义
+            // 页面路径，必须在 pages 中先定义
             pagePath: 'pages/home/index',
-               // 图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px，不支持网络图片。
+            // 图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px，不支持网络图片。
             iconPath: 'images/express.png',
-               // 选中时的图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px，不支持网络图片。
+            // 选中时的图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px，不支持网络图片。
             selectedIconPath: 'images/selectedExpress.png',
-             // tab 上按钮文字
+            // tab 上按钮文字
             text: '主页'
           },
           {
@@ -89,10 +80,13 @@
         ]
       }
     },
-    globalData: { },
-    onLaunch () { },
-    onShow () { },
-    onHide () { }
+    globalData: {},
+    onLaunch() {
+    },
+    onShow() {
+    },
+    onHide() {
+    }
   }
 </script>
 

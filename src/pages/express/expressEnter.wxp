@@ -46,7 +46,6 @@ export default {
     console.log(item.text)
   },
   config: {
-    // window:{
       // 导航栏标题文字内容
       navigationBarTitleText: '包裹信息登记',
       // 是否开启当前页面下拉刷新。
