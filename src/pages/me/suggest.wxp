@@ -1,10 +1,12 @@
 <template>
   <view class="question-form">
+    <view class="weui-textarea">
     <label>
-                <textarea bindinput="handleContentInput" class="weui-textarea" maxlength="500"
+                <textarea bindinput="handleContentInput" class="textarea" maxlength="500"
                           placeholder="请输入您的建议"
                           placeholder-style="color:#b3b3b3;font-size:36rpx;"></textarea>
     </label>
+    </view>
     <view class="weui-textarea-counter">{{contentCount}}/500</view>
     <view class="space"></view>
     <wxc-button btnStyle="width: 636rpx;border-radius: 26rpx;color: #ffffff;"
@@ -93,11 +95,17 @@
   }
 
   .weui-textarea {
-    border: #d2d2d2 solid;
+    border: #d2d2d2 solid thin;
     width: ~'636rpx';
     height: ~'600rpx';
-    font-size: ~'36rpx';
     color: #888888;
+  }
+
+  .textarea{
+    padding: ~'20rpx';
+    font-size: ~'36rpx';
+    width: ~'596rpx';
+    height: ~'560rpx';
   }
 
   .space {

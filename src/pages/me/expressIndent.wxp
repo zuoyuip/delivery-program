@@ -3,7 +3,8 @@
       text="点击面板即可查看详情"></wxc-loadmore>
   <view>
     <wxc-cc>
-      <wxc-panel border="{{ false }}" class="panel" title="{{ time }}" bind:click="select">
+      <wxc-panel bind:click="select" border="{{ false }}" class="panel"
+                 title="{{ time }}（未被接受）'">
         <view class="content head">
           <text class="title">快递名称：</text>
           <text class="message">{{ expressName }}</text>
@@ -13,8 +14,10 @@
           <text class="message">{{ expressRank }}</text>
         </view>
         <view class="content foot">
-          <text class="title">代领姓名：</text>
-          <text class="message">{{ deliveryName }}</text>
+<!--          <wxc-button-->
+<!--              btnStyle="margin-left: 136rpx;width: 360rpx;height: 40rpx;line-height: 40rpx;border-radius: 20rpx;font-size: smaller;"-->
+<!--              plain="{{true}}" size="normal" type="danger" value="取消"></wxc-button>-->
+          <text class="prompt">点击执行修改或取消操作</text>
         </view>
       </wxc-panel>
     </wxc-cc>
@@ -24,7 +27,8 @@
   </view>
   <view>
     <wxc-cc>
-      <wxc-panel border="{{ false }}" class="panel" title="{{ time }}" bind:click="select">
+      <wxc-panel bind:click="select" border="{{ false }}" class="panel"
+                 title="{{ time }}（已被接受）">
         <view class="content head">
           <text class="title">快递名称：</text>
           <text class="message">{{ expressName }}</text>
@@ -54,8 +58,8 @@
       time: '2019-09-02 06:57:55 PM'
     },
 
-    select(value){
-      console.log('触发',value)
+    select(value) {
+      console.log('触发', value)
     },
     onLoad: function (options) {
       // 页面创建时执行
@@ -107,7 +111,8 @@
       usingComponents: {
         'wxc-panel': '@minui/wxc-panel',
         'wxc-cc': '@minui/wxc-cc',
-        'wxc-loadmore': '@minui/wxc-loadmore'
+        'wxc-loadmore': '@minui/wxc-loadmore',
+        'wxc-button': '@minui/wxc-button'
       }
     }
   }
@@ -149,7 +154,14 @@
     margin-left: ~'60rpx';
   }
 
-  .space{
+  .prompt{
+    font-weight: lighter;
+    font-size: smaller;
+    color: #888888;
+    margin-left: ~'120rpx';
+  }
+
+  .space {
     height: ~'60rpx';
   }
 </style>
