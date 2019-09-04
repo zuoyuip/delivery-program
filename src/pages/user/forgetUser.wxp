@@ -5,37 +5,40 @@
                type="number"></wxc-input>
   </view>
 
+
+  <wxc-cc>
+    <view class="input-wrap">
+      <wxc-input class="verification" mode="wrapped" placeholder="请输入验证码" type="number"></wxc-input>
+    </view>
+    <view class="input-wrap">
+      <wxc-button bind:click=""
+                  btnStyle="font-size: 28rpx;width: 260rpx;color: #ffffff;height: 90rpx;line-height: 90rpx;"
+                  size="normal"
+                  type="selection" value="发送验证码"></wxc-button>
+    </view>
+  </wxc-cc>
+
   <view class="input-wrap">
-    <wxc-input mode="wrapped" placeholder="输入您的密码" right="{{true}}" title="密码"
+    <wxc-input mode="wrapped" placeholder="输入您要设定的密码" right="{{true}}" title="密码"
                type="number"></wxc-input>
   </view>
-  <view class="forget-space"></view>
-  <wxc-cc>
-    <text class="register" bindtap="registerUser">注册帐号</text>
-    <text class="forget" bindtap="forgetUser">忘记密码</text>
-  </wxc-cc>
+
+  <view class="input-wrap">
+    <wxc-input mode="wrapped" placeholder="再次输入您要设定的密码" right="{{true}}" title="重复密码"
+               type="number"></wxc-input>
+  </view>
   <view class="forget-space"></view>
   <view class="forget-space"></view>
   <wxc-cc>
     <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
                 size="large"
-                type="selection" value="登录"></wxc-button>
+                type="selection" value="确认修改"></wxc-button>
   </wxc-cc>
 </template>
 
 <script>
   export default {
     data: {},
-    forgetUser(){
-      wx.navigateTo({
-        url: '../user/forgetUser'
-      })
-    },
-    registerUser(){
-      wx.navigateTo({
-        url: '../user/register'
-      })
-    },
     onLoad: function (options) {
       // 页面创建时执行
 
@@ -73,7 +76,7 @@
     },
     config: {
       // 导航栏标题文字内容
-      navigationBarTitleText: '登录',
+      navigationBarTitleText: '忘记密码',
       // 是否开启当前页面下拉刷新。
       enablePullDownRefresh: false,
       // 设置为 true 则页面整体不能上下滚动。
@@ -107,12 +110,7 @@
     color: #888888;
     font-size: smaller;
     text-decoration: #888888 underline;
-    margin-left: ~'440rpx';
+    margin-left: ~'60rpx';
   }
 
-  .register{
-    color: #888888;
-    font-size: smaller;
-    text-decoration: #888888 underline;
-  }
 </style>

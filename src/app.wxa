@@ -29,7 +29,9 @@
         // 修改信息
         'pages/user/modifyUser',
         // 注册
-        'pages/user/register'
+        'pages/user/register',
+          // 忘记密码
+        'pages/user/forgetUser'
       ],
       // 界面风格
       window: {
@@ -77,10 +79,10 @@
       user: {}
     },
     onLaunch(options) {
-      this.globalData.user = {
-        'userId': '1',
-        'userPhone': '15838271463'
-      }
+      // this.globalData.user = {
+      //   'userId': '1',
+      //   'userPhone': '15838271463'
+      // }
       // Do something initial when launch.
     },
     onShow(options) {

@@ -166,12 +166,12 @@
     font-weight: 500;
     background-color: #FDFDFD;
     font-size: ~'36rpx';
-    color: #000000;
+    color: #666666;
   }
 
   .td {
     font-size: ~'34rpx';
-    color: #303030;
+    color: #888888;
   }
 
   .space {
