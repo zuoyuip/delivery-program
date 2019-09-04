@@ -1,6 +1,18 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   <view class="input-wrap">
     <wxc-input placeholder="请输入真实姓名" src="../../../../images/xingming.png" type="text"></wxc-input>
+
+    <view class="radio-space"></view>
+
+    <radio-group>
+      <label class="radio">
+        <radio checked="{{ true }}" value="male">男</radio>
+        <radio class="female" value="female">女</radio>
+      </label>
+    </radio-group>
+
+    <view class="radio-space"></view>
+
     <wxc-input placeholder="所在学院" src="../../../../images/school.png" type="text"></wxc-input>
     <wxc-input placeholder="所学专业" src="../../../../images/zhuanye.png" type="text"></wxc-input>
     <wxc-input placeholder="您的学号" src="../../../../images/xuehao.png" type="number"></wxc-input>
@@ -25,7 +37,8 @@
   <view class="space"></view>
 
   <wxc-cc>
-    <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;" size="large"
+    <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+                size="large"
                 type="selection" value="提交"></wxc-button>
   </wxc-cc>
 
@@ -143,7 +156,21 @@
     width: ~'200rpx';
   }
 
+  .radio-space {
+    height: ~'30rpx';
+  }
+
   .space {
     height: ~'66rpx';
+  }
+
+  .radio {
+    font-size: ~'32rpx';
+    color: #888888;
+    margin-left: ~'180rpx';
+  }
+
+  .female {
+    margin-left: ~'180rpx';
   }
 </style>

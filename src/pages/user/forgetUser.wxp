@@ -19,7 +19,7 @@
   </wxc-cc>
 
   <view class="input-wrap">
-    <wxc-input mode="wrapped" placeholder="输入您要设定的密码" right="{{true}}" title="密码"
+    <wxc-input mode="wrapped" placeholder="输入您要重新设定的密码" right="{{true}}" title="密码"
                type="number"></wxc-input>
   </view>
 
@@ -32,8 +32,11 @@
   <wxc-cc>
     <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
                 size="large"
-                type="selection" value="确认修改"></wxc-button>
+                type="selection" value="确认更改密码"></wxc-button>
   </wxc-cc>
+  <view class="space"></view>
+  <wxc-loadmore
+      text="更改后请使用新密码进行登录"></wxc-loadmore>
 </template>
 
 <script>
@@ -86,7 +89,8 @@
       usingComponents: {
         'wxc-input': '@minui/wxc-input',
         'wxc-cc': '@minui/wxc-cc',
-        'wxc-button': '@minui/wxc-button'
+        'wxc-button': '@minui/wxc-button',
+        'wxc-loadmore': '@minui/wxc-loadmore'
       }
     }
   }
@@ -106,11 +110,5 @@
     height: ~'30rpx';
   }
 
-  .forget {
-    color: #888888;
-    font-size: smaller;
-    text-decoration: #888888 underline;
-    margin-left: ~'60rpx';
-  }
 
 </style>

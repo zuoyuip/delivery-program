@@ -1,52 +1,81 @@
 <template>
-  <view>
-    账户修改
+  <view class="space"></view>
+  <view class="input-wrap">
+    <wxc-input mode="wrapped" placeholder="输入您要更换的手机号码" right="{{true}}" title="更换帐号"
+               type="number"></wxc-input>
   </view>
+
+
+  <wxc-cc>
+    <view class="input-wrap">
+      <wxc-input class="verification" mode="wrapped" placeholder="请输入验证码" type="number"></wxc-input>
+    </view>
+    <view class="input-wrap">
+      <wxc-button bind:click=""
+                  btnStyle="font-size: 28rpx;width: 260rpx;color: #ffffff;height: 90rpx;line-height: 90rpx;"
+                  size="normal"
+                  type="selection" value="发送验证码"></wxc-button>
+    </view>
+  </wxc-cc>
+
+  <view class="input-wrap">
+    <wxc-input mode="wrapped" placeholder="输入该账户的登录密码" right="{{true}}" title="密码"
+               type="number"></wxc-input>
+  </view>
+
+  <view class="forget-space"></view>
+  <view class="forget-space"></view>
+  <wxc-cc>
+    <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+                size="large"
+                type="selection" value="确认修改账户"></wxc-button>
+  </wxc-cc>
+  <view class="space"></view>
+  <wxc-loadmore
+      text="更改后请使用新的手机号码和原密码进行登录"></wxc-loadmore>
 </template>
 
 <script>
-export default {
-  data: {
-  },
-  onLoad: function (options) {
-    // 页面创建时执行
+  export default {
+    data: {},
+    onLoad: function (options) {
+      // 页面创建时执行
 
-  },
-  onShow: function () {
-    // 页面出现在前台时执行
-  },
-  onReady: function () {
-    // 页面首次渲染完毕时执行
-  },
-  onHide: function () {
-    // 页面从前台变为后台时执行
-  },
-  onUnload: function () {
-    // 页面销毁时执行
-  },
-  onPullDownRefresh: function () {
-    // 触发下拉刷新时执行
-  },
-  onReachBottom: function () {
-    // 页面触底时执行
-  },
-  onShareAppMessage: function () {
-    // 页面被用户分享时执行
-  },
-  onPageScroll: function () {
-    // 页面滚动时执行
-  },
-  onResize: function () {
-    // 页面尺寸变化时执行
-  },
-  onTabItemTap(item) {
-    // tab 点击时执行
-    console.log(item.index);
-    console.log(item.pagePath);
-    console.log(item.text)
-  },
-  config: {
-    // window:{
+    },
+    onShow: function () {
+      // 页面出现在前台时执行
+    },
+    onReady: function () {
+      // 页面首次渲染完毕时执行
+    },
+    onHide: function () {
+      // 页面从前台变为后台时执行
+    },
+    onUnload: function () {
+      // 页面销毁时执行
+    },
+    onPullDownRefresh: function () {
+      // 触发下拉刷新时执行
+    },
+    onReachBottom: function () {
+      // 页面触底时执行
+    },
+    onShareAppMessage: function () {
+      // 页面被用户分享时执行
+    },
+    onPageScroll: function () {
+      // 页面滚动时执行
+    },
+    onResize: function () {
+      // 页面尺寸变化时执行
+    },
+    onTabItemTap(item) {
+      // tab 点击时执行
+      console.log(item.index);
+      console.log(item.pagePath);
+      console.log(item.text)
+    },
+    config: {
       // 导航栏标题文字内容
       navigationBarTitleText: '账户修改',
       // 是否开启当前页面下拉刷新。
@@ -54,12 +83,28 @@ export default {
       // 设置为 true 则页面整体不能上下滚动。
       disableScroll: false,
       // 禁止页面右滑手势返回
-      disableSwipeBack: false
-    // }
+      disableSwipeBack: false,
+      usingComponents: {
+        'wxc-input': '@minui/wxc-input',
+        'wxc-cc': '@minui/wxc-cc',
+        'wxc-button': '@minui/wxc-button',
+        'wxc-loadmore': '@minui/wxc-loadmore'
+      }
+    }
   }
-}
 </script>
 
-<style>
+<style lang="less">
+  .space {
+    height: ~'200rpx';
+  }
 
+  .input-wrap {
+    position: relative;
+    margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+  }
+
+  .forget-space {
+    height: ~'30rpx';
+  }
 </style>

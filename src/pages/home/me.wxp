@@ -3,7 +3,7 @@
     <wxc-cc class="cc">
       <wxc-avatar class="avatar" mode="aspectFit" src="../../images/dog.png">
       </wxc-avatar>
-      <wxc-avatar class="cc__text">13203902193</wxc-avatar>
+      <wxc-avatar class="cc__text">{{ userPhone }}</wxc-avatar>
     </wxc-cc>
   </wxc-panel>
 
