@@ -1,51 +1,115 @@
 <template>
-  <view>
-    包裹信息登记
+  <view class="input-wrap">
+    <wxc-panel bind:click="expressNamePickerChange" border="{{ false }}" class="panel">
+      <wxc-cc>
+        <text class="title-style">快递名称</text>
+        <picker bindchange="expressNamePickerChange" range="{{ expressNameList }}"
+                value="{{ expressNameIndex }}">
+          <view class="picker-message">
+            {{ expressNameList[expressNameIndex] }}
+          </view>
+        </picker>
+      </wxc-cc>
+    </wxc-panel>
+    <wxc-input placeholder="请输入取件地址" right="{{true}}" title="取件地址" type="text"></wxc-input>
+    <wxc-panel bind:click="floorPickerChange" border="{{ false }}" class="panel">
+      <wxc-cc>
+        <text class="title-style">收货楼号</text>
+        <picker bindchange="floorPickerChange" range="{{ floorNumberList }}"
+                value="{{ floorNumberIndex }}">
+          <view class="picker-message">
+            {{ floorNumberList[floorNumberIndex] }}
+          </view>
+        </picker>
+      </wxc-cc>
+    </wxc-panel>
+    <wxc-input placeholder="收货的详细地址（您的位置）" right="{{true}}" title="收货详细地址" type="text"></wxc-input>
+    <wxc-input maxlength="11" placeholder="（放心填写，仅接单人可见）" right="{{true}}" title="手机号码"
+               type="number"></wxc-input>
+    <wxc-input placeholder="（放心填写，仅接单人可见）" right="{{true}}" title="取货码" type="text"></wxc-input>
+    <wxc-input placeholder="请输入快递重量" right="{{true}}" title="快递体积" type="text"></wxc-input>
+    <wxc-input placeholder="请输入酬金（建议3元起）" right="{{true}}" title="酬金（元）" type="number"></wxc-input>
+    <wxc-panel border="{{ false }}" class="panel">
+      <wxc-cc>
+      <text class="title-style">性别限制</text>
+      <radio-group>
+        <label class="radio">
+          <radio checked="{{ true }}" value="all">不限</radio>
+          <radio  class="female" value="male">男</radio>
+          <radio class="female" value="female">女</radio>
+        </label>
+      </radio-group>
+      </wxc-cc>
+    </wxc-panel>
+    <wxc-input placeholder="请输入注意事项" right="{{true}}" title="备注" type="text"></wxc-input>
+    <view class="forget-space"></view>
+    <wxc-panel border="{{ false }}" class="agree">
+      <checkbox class="agree-text" value="agree">我同意货到后支付佣金</checkbox>
+    </wxc-panel>
+    <view class="forget-space"></view>
+    <wxc-cc>
+      <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+                  size="normal"
+                  type="selection" value="提交"></wxc-button>
+    </wxc-cc>
   </view>
 </template>
 
 <script>
-export default {
-  data: {
-  },
-  onLoad: function (options) {
-    // 页面创建时执行
+  import data from '../../common/data.json'
 
-  },
-  onShow: function () {
-    // 页面出现在前台时执行
-  },
-  onReady: function () {
-    // 页面首次渲染完毕时执行
-  },
-  onHide: function () {
-    // 页面从前台变为后台时执行
-  },
-  onUnload: function () {
-    // 页面销毁时执行
-  },
-  onPullDownRefresh: function () {
-    // 触发下拉刷新时执行
-  },
-  onReachBottom: function () {
-    // 页面触底时执行
-  },
-  onShareAppMessage: function () {
-    // 页面被用户分享时执行
-  },
-  onPageScroll: function () {
-    // 页面滚动时执行
-  },
-  onResize: function () {
-    // 页面尺寸变化时执行
-  },
-  onTabItemTap(item) {
-    // tab 点击时执行
-    console.log(item.index);
-    console.log(item.pagePath);
-    console.log(item.text)
-  },
-  config: {
+  export default {
+    data: {
+      expressNameList: data.checkerExpressNameList,
+      expressNameIndex: 0,
+      floorNumberList: data.mathList,
+      floorNumberIndex: 0
+    },
+    expressNamePickerChange(e) {
+      this.setData({
+        expressNameIndex: e.detail.value
+      })
+    },
+    floorPickerChange(e) {
+      this.setData({
+        floorNumberIndex: e.detail.value
+      })
+    },
+    onLoad: function (options) {
+      // 页面创建时执行
+
+    },
+    onShow: function () {
+      // 页面出现在前台时执行
+    },
+    onReady: function () {
+      // 页面首次渲染完毕时执行
+    },
+    onHide: function () {
+      // 页面从前台变为后台时执行
+    },
+    onUnload: function () {
+      // 页面销毁时执行
+    },
+    onPullDownRefresh: function () {
+      // 触发下拉刷新时执行
+    },
+    onReachBottom: function () {
+      // 页面触底时执行
+    },
+    onShareAppMessage: function () {
+      // 页面被用户分享时执行
+    },
+    onPageScroll: function () {
+      // 页面滚动时执行
+    },
+    onResize: function () {
+      // 页面尺寸变化时执行
+    },
+    onTabItemTap(item) {
+      // tab 点击时执行
+    },
+    config: {
       // 导航栏标题文字内容
       navigationBarTitleText: '包裹信息登记',
       // 是否开启当前页面下拉刷新。
@@ -53,12 +117,77 @@ export default {
       // 设置为 true 则页面整体不能上下滚动。
       disableScroll: false,
       // 禁止页面右滑手势返回
-      disableSwipeBack: false
-    // }
+      disableSwipeBack: false,
+      usingComponents: {
+        'wxc-panel': '@minui/wxc-panel',
+        'wxc-input': '@minui/wxc-input',
+        'wxc-cc': '@minui/wxc-cc',
+        'wxc-button': '@minui/wxc-button'
+      }
+    }
   }
-}
 </script>
 
-<style>
+<style lang="less">
 
+  .input-wrap {
+    position: relative;
+    margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+  }
+
+  .panel {
+    min-width: ~'163rpx';
+    line-height: ~'44rpx';
+    height: ~'44rpx';
+    display: flex;
+    align-items: center;
+    padding: ~'20rpx' ~'30rpx' ~'26rpx' ~'30rpx';
+    font-size: ~'28rpx';
+    color: #333;
+    border: 0 solid #f0f0f0;
+    border-bottom-width: ~'1rpx';
+  }
+
+  .title-style {
+    flex: 1;
+    height: ~'44rpx';
+    min-height: ~'44rpx';
+    line-height: ~'44rpx';
+  }
+
+  .picker-message {
+    margin-left: ~'433rpx';
+    color: #959595;
+  }
+
+  .radio {
+    font-size: ~'28rpx';
+    size:  ~'28rpx';
+    color: #888888;
+    margin-left: ~'90rpx';
+  }
+
+  .female {
+    margin-left: ~'88rpx';
+  }
+
+  .agree{
+    min-width: ~'163rpx';
+    line-height: ~'44rpx';
+    height: ~'44rpx';
+    display: flex;
+    align-items: center;
+    padding: ~'20rpx' ~'30rpx' ~'26rpx' ~'30rpx';
+    color: #333;
+  }
+
+  .agree-text{
+    margin-left: ~'170rpx';
+    font-size: ~'28rpx';
+    size:  ~'28rpx';
+  }
+
+  .forget-space {
+    height: ~'30rpx';
+  }
 </style>
