@@ -1,42 +1,113 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   <wxc-loadmore is-end="{{ false }}" wx:if="{{ isLoading }}"></wxc-loadmore>
-  <view>
-    <view class="table">
-      <view class="tr head">
-        <text class="th">快递名称</text>
-        <text class="th">送达地点</text>
-        <text class="th">赏金</text>
-      </view>
-      <view class="space"></view>
-      <view wx:if="{{ expressList.length > 0 }}">
-        <view class="tr" wx:for="{{ expressList }}" wx:for-item="express"
-              wx:key="deliveryId">
-          <text class="td">{{ express.deliveryName }}</text>
-          <text class="td">{{ express.deliveryAddress }}</text>
-          <text class="td">{{ express.deliveryReward }}</text>
-        </view>
-        <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
-      </view>
-      <view wx:else>
-        <wxc-abnor
-            bind:abnortap="onRetry"
-            type="{{ requestType }}"></wxc-abnor>
-      </view>
+  <!--  <view>-->
+  <view class="table">
+    <view class="tr head">
+      <text class="th">快递名称</text>
+      <text class="th">送达地点</text>
+      <text class="th">赏金</text>
     </view>
-    <view bindtap="toExpressEnter" class="add_button">
-      <text decode="true">&nbsp;&nbsp;</text>
-      <wxc-icon color="#949494" size="30" type="add"></wxc-icon>
-      <text decode="true">&nbsp;发布&nbsp;</text>
+    <view class="space"></view>
+    <view wx:if="{{ expressList.length > 0 }}">
+      <view bindtap="chooseExpress" class="tr" id="{{ index }}"
+            wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
+            wx:key="deliveryId">
+        <text class="td">{{ express.deliveryName }}</text>
+        <text class="td">{{ express.deliveryAddress }}</text>
+        <text class="td">{{ express.deliveryReward }}</text>
+      </view>
+      <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
+    </view>
+    <view wx:else>
+      <wxc-abnor
+          bind:abnortap="onRetry"
+          type="{{ requestType }}"></wxc-abnor>
     </view>
   </view>
+  <view bindtap="toExpressEnter" class="add_button">
+    <text decode="true">&nbsp;&nbsp;</text>
+    <wxc-icon color="#949494" size="30" type="add"></wxc-icon>
+    <text decode="true">&nbsp;发布&nbsp;</text>
+  </view>
+  <wxc-popup align="bottom" animation-mode="bottom" class="J_Popup" locked="hide">
+    <view class="popup__content">
+      <view class="input-wrap">
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">快递名称</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryName }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">性别限制</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">快递地址</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryAddress }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">送达地址</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryGoalAddress }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">快递体积</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryWeight }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">报酬金额</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryReward }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">发布时间</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryDate }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">备注信息</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <view class="space"></view>
+        <button class="sure_button" type="{{ 'primary' }}">接受</button>
+      </view>
+    </view>
+  </wxc-popup>
 </template>
 
 <script>
   export default {
     data: {
       expressList: [],
+      expressIndex: 0,
       requestType: '',
       isLoading: false
+    },
+    chooseExpress(e) {
+      this.setData({
+        expressIndex: e.currentTarget.id
+      });
+      this.showPopup()
+    },
+    showPopup() {
+      let popupComponent = this.selectComponent('.J_Popup');
+      popupComponent && popupComponent.show();
+    },
+    hidePopup() {
+      let popupComponent = this.selectComponent('.J_Popup');
+      popupComponent && popupComponent.hide();
     },
     selectExpress() {
       const that = this;
@@ -71,7 +142,7 @@
         }
       });
     },
-    toExpressEnter(){
+    toExpressEnter() {
       wx.navigateTo({
         url: '../express/expressEnter'
       })
@@ -125,9 +196,12 @@
       // 禁止页面右滑手势返回
       disableSwipeBack: false,
       usingComponents: {
+        'wxc-panel': '@minui/wxc-panel',
+        'wxc-cc': '@minui/wxc-cc',
         'wxc-loadmore': '@minui/wxc-loadmore',
         'wxc-abnor': '@minui/wxc-abnor',
-        'wxc-icon': '@minui/wxc-icon'
+        'wxc-icon': '@minui/wxc-icon',
+        'wxc-popup': '@minui/wxc-popup'
       }
     }
   }
@@ -194,5 +268,46 @@
     border-style: outset;
   }
 
+  .popup__content {
+    width: 100%;
+    height: ~'900rpx';
+    line-height: ~'500rpx';
+    background: #ffffff;
+    text-align: center;
+  }
 
+  .input-wrap {
+    position: relative;
+    margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+  }
+
+  .panel {
+    min-width: ~'163rpx';
+    line-height: ~'44rpx';
+    height: ~'44rpx';
+    display: flex;
+    align-items: center;
+    padding: ~'20rpx' ~'30rpx' ~'26rpx' ~'30rpx';
+    font-size: ~'28rpx';
+    color: #333;
+    border: 0 solid #f0f0f0;
+    border-bottom-width: ~'1rpx';
+  }
+
+  .title-style {
+    flex: 1;
+    height: ~'44rpx';
+    min-height: ~'44rpx';
+    line-height: ~'44rpx';
+  }
+
+  .picker-message {
+    margin-left: ~'44rpx';
+    color: #959595;
+  }
+
+  .sure_button {
+    border-radius: ~'36rpx';
+    width: ~'600rpx';
+  }
 </style>
