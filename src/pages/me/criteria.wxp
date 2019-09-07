@@ -1,6 +1,6 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   <view class="input-wrap">
-    <wxc-input placeholder="请输入真实姓名" src="../../../../images/xingming.png" type="text"></wxc-input>
+    <wxc-input placeholder="请输入真实姓名" right="{{true}}" title="姓名" type="text"></wxc-input>
 
     <view class="radio-space"></view>
 
@@ -13,9 +13,19 @@
 
     <view class="radio-space"></view>
 
-    <wxc-input placeholder="所在学院" src="../../../../images/school.png" type="text"></wxc-input>
-    <wxc-input placeholder="所学专业" src="../../../../images/zhuanye.png" type="text"></wxc-input>
-    <wxc-input placeholder="您的学号" src="../../../../images/xuehao.png" type="number"></wxc-input>
+    <wxc-panel bind:click="userCollegePickerChange" border="{{ false }}" class="panel">
+      <wxc-cc>
+        <text class="title-style">学院</text>
+        <picker bindchange="userCollegePickerChange" range="{{ userCollegeList }}"
+                value="{{ userCollegeIndex }}">
+          <view class="picker-message">
+            {{ userCollegeList[userCollegeIndex] }}
+          </view>
+        </picker>
+      </wxc-cc>
+    </wxc-panel>
+    <wxc-input placeholder="请输入所学专业" right="{{true}}" title="专业" type="text"></wxc-input>
+    <wxc-input placeholder="请输入您的学号" right="{{true}}" title="学号" type="number"></wxc-input>
   </view>
 
   <view class="space"></view>
@@ -45,9 +55,18 @@
 </template>
 
 <script>
+  import data from '../../common/data.json'
+
   export default {
     data: {
-      image: ''
+      image: '',
+      userCollegeList: data.userCollegeList,
+      userCollegeIndex: 0
+    },
+    userCollegePickerChange(e) {
+      this.setData({
+        userCollegeIndex: e.detail.value
+      })
     },
     chooseImage(e) {
       wx.chooseImage({
@@ -144,6 +163,38 @@
   .input-wrap {
     position: relative;
     margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+  }
+
+  .panel {
+    min-width: ~'163rpx';
+    line-height: ~'44rpx';
+    height: ~'44rpx';
+    display: flex;
+    align-items: center;
+    padding: ~'20rpx' ~'30rpx' ~'26rpx' ~'30rpx';
+    font-size: ~'28rpx';
+    color: #333;
+    border: 0 solid #f0f0f0;
+    border-bottom-width: ~'1rpx';
+  }
+
+  .title-style {
+    flex: 1;
+    height: ~'44rpx';
+    min-height: ~'44rpx';
+    line-height: ~'44rpx';
+  }
+
+  .picker-message {
+    margin-left: ~'433rpx';
+    color: #959595;
+    padding-bottom: ~'10rpx';
+  }
+
+  .counter-message {
+    margin-left: ~'233rpx';
+    color: #959595;
+    padding-bottom: ~'16rpx';
   }
 
   .btn-style {

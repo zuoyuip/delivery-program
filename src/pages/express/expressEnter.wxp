@@ -22,7 +22,6 @@
         </picker>
       </wxc-cc>
     </wxc-panel>
-<!--    <wxc-input placeholder="请输入取件地址" right="{{true}}" title="取件地址" type="text"></wxc-input>-->
     <wxc-panel bind:click="floorPickerChange" border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">收货楼号</text>
