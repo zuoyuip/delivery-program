@@ -9,14 +9,16 @@
 
   <!--  菜单列表-->
   <view class="list-wrap">
+
     <view class="list-item">
       <wxc-list
-          bind:click="toExpressIndent"
-          class="item"
-          src="../../../../images/fabu.png"
-          title="我的发布"></wxc-list>
-    </view>
-    <view class="list-item">
+              bind:click="toExpressIndent"
+              class="item"
+              mode="none"
+              src="../../../../images/fabu.png"
+              title="我的发布">
+      </wxc-list>
+      <view class="space"></view>
       <wxc-list
           bind:click="toDeliveryIndent"
           class="item"
@@ -33,15 +35,13 @@
           class="item"
           src="../../../../images/women.png"
           title="关于我们"></wxc-list>
-
-    </view>
-
-    <view class="list-item">
+      <view class="space"></view>
       <wxc-list
-          bind:click="toSuggest"
-          class="item"
-          src="../../../../images/jianyi.png"
-          title="反馈建议"></wxc-list>
+              bind:click="toSuggest"
+              class="item"
+              src="../../../../images/jianyi.png"
+              title="反馈建议"></wxc-list>
+
     </view>
   </view>
   <!--  以下代码永远不会显示，作用：借助框架的静态资源的加载机制，将图片加载进去-->
@@ -197,10 +197,10 @@
   }
 
   .list-wrap {
-    width: 500%;
+    width: 100%;
     background: #efefef;
-    padding-bottom: ~'300rpx';
-    padding-top: ~'300rpx';
+    padding-bottom: ~'3000rpx';
+    padding-top: ~'30rpx';
   }
 
   .list-item {
@@ -225,5 +225,9 @@
     border-radius: ~'20rpx';
     color: #f5342f;
     line-height: ~'38rpx';
+  }
+  .space{
+    height: ~'30rpx';
+    background: #efefef;
   }
 </style>
