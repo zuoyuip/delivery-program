@@ -11,7 +11,18 @@
         </picker>
       </wxc-cc>
     </wxc-panel>
-    <wxc-input placeholder="请输入取件地址" right="{{true}}" title="取件地址" type="text"></wxc-input>
+    <wxc-panel bind:click="deliveryAddressPickerChange" border="{{ false }}" class="panel">
+      <wxc-cc>
+        <text class="title-style">取件地址</text>
+        <picker bindchange="deliveryAddressPickerChange" range="{{ deliveryAddressList }}"
+                value="{{ deliveryAddressIndex }}">
+          <view class="picker-message">
+            {{ deliveryAddressList[deliveryAddressIndex] }}
+          </view>
+        </picker>
+      </wxc-cc>
+    </wxc-panel>
+<!--    <wxc-input placeholder="请输入取件地址" right="{{true}}" title="取件地址" type="text"></wxc-input>-->
     <wxc-panel bind:click="floorPickerChange" border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">收货楼号</text>
@@ -40,8 +51,8 @@
     </wxc-panel>
     <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
-        <text class="title-style">酬金（建议2元）</text>
-        <wxc-counter bind:changenumber="onChangeNumber" class="counter-message" max="{{100}}" min="1"
+        <text class="title-style">酬金（建议2元起）</text>
+        <wxc-counter bind:changenumber="onChangeNumber" class="counter-message" max="{{100}}" min="2"
                      number="2" color="#959595"></wxc-counter>
       </wxc-cc>
     </wxc-panel>
@@ -78,6 +89,8 @@
     data: {
       expressNameList: data.checkerExpressNameList,
       expressNameIndex: 0,
+      deliveryAddressList: data.deliveryAddressList,
+      deliveryAddressIndex: 0,
       floorNumberList: data.mathList,
       floorNumberIndex: 0,
       expressWeightList: data.expressWeightList,
@@ -86,6 +99,11 @@
     expressNamePickerChange(e) {
       this.setData({
         expressNameIndex: e.detail.value
+      })
+    },
+    deliveryAddressPickerChange(e) {
+      this.setData({
+        deliveryAddressIndex: e.detail.value
       })
     },
     floorPickerChange(e) {

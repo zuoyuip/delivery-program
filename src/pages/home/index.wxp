@@ -3,18 +3,20 @@
   <!--  <view>-->
   <view class="table">
     <view class="tr head">
-      <text class="th">快递名称</text>
-      <text class="th">送达地点</text>
-      <text class="th">赏金</text>
+      <text class="th deliveryAddress">取件地址</text>
+      <text class="th deliveryGoalFloor">送达地点</text>
+      <text class="th deliveryUserSex">限制</text>
+      <text class="th deliveryReward">赏金</text>
     </view>
     <view class="space"></view>
     <view wx:if="{{ expressList.length > 0 }}">
       <view bindtap="chooseExpress" class="tr" id="{{ index }}"
             wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
             wx:key="deliveryId">
-        <text class="td">{{ express.deliveryName }}</text>
-        <text class="td">{{ express.deliveryAddress }}</text>
-        <text class="td">{{ express.deliveryReward }}</text>
+        <text class="td deliveryAddress">{{ express.deliveryAddress }}</text>
+        <text class="td deliveryGoalFloor">{{ express.deliveryGoalFloor }}</text>
+        <text class="td deliveryUserSex">{{ express.deliveryUserSex }}</text>
+        <text class="td deliveryReward">{{ express.deliveryReward }}</text>
       </view>
       <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
     </view>
@@ -32,56 +34,56 @@
   <wxc-mask content-align="bl" status="{{ maskStatus }}">
     <view class="popup__content">
       <view class="input-wrap">
-              <wxc-panel border="{{ false }}" class="panel">
-                <wxc-cc>
-                  <text class="title-style">快递名称</text>
-                  <text class="picker-message">{{ expressList[expressIndex].deliveryName }}</text>
-                </wxc-cc>
-              </wxc-panel>
-                <wxc-panel border="{{ false }}" class="panel">
-                  <wxc-cc>
-                    <text class="title-style">性别限制</text>
-                    <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>
-                  </wxc-cc>
-                </wxc-panel>
-                <wxc-panel border="{{ false }}" class="panel">
-                  <wxc-cc>
-                    <text class="title-style">快递地址</text>
-                    <text class="picker-message">{{ expressList[expressIndex].deliveryAddress }}</text>
-                  </wxc-cc>
-                </wxc-panel>
-                <wxc-panel border="{{ false }}" class="panel">
-                  <wxc-cc>
-                    <text class="title-style">送达地址</text>
-                    <text class="picker-message">{{ expressList[expressIndex].deliveryGoalAddress }}</text>
-                  </wxc-cc>
-                </wxc-panel>
-                <wxc-panel border="{{ false }}" class="panel">
-                  <wxc-cc>
-                    <text class="title-style">快递体积</text>
-                    <text class="picker-message">{{ expressList[expressIndex].deliveryWeight }}</text>
-                  </wxc-cc>
-                </wxc-panel>
-                <wxc-panel border="{{ false }}" class="panel">
-                  <wxc-cc>
-                    <text class="title-style">报酬金额</text>
-                    <text class="picker-message">{{ expressList[expressIndex].deliveryReward }}</text>
-                  </wxc-cc>
-                </wxc-panel>
-                <wxc-panel border="{{ false }}" class="panel">
-                  <wxc-cc>
-                    <text class="title-style">发布时间</text>
-                    <text class="picker-message">{{ expressList[expressIndex].deliveryDate }}</text>
-                  </wxc-cc>
-                </wxc-panel>
-                <wxc-panel border="{{ false }}" class="panel">
-                  <wxc-cc>
-                    <text class="title-style">备注信息</text>
-                    <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
-                  </wxc-cc>
-                </wxc-panel>
-                <view class="space"></view>
-                <button class="sure_button" type="{{ 'primary' }}">接受</button>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">快递名称</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryName }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">性别限制</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">快递地址</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryAddress }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">送达地址</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryGoalAddress }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">快递体积</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryWeight }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">报酬金额</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryReward }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">发布时间</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryDate }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">备注信息</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <view class="space"></view>
+        <button class="sure_button" type="{{ 'primary' }}">接受</button>
       </view>
     </view>
   </wxc-mask>
@@ -246,6 +248,14 @@
     color: #888888;
   }
 
+  .deliveryAddress {
+    width: ~'1200rpx';
+  }
+
+  .deliveryGoalFloor {
+    width: ~'1000rpx';
+  }
+
   .space {
     height: ~'66rpx';
   }
@@ -307,9 +317,9 @@
   .sure_button {
     border-radius: ~'26rpx';
     width: ~'500rpx';
-    height:~'70rpx';
+    height: ~'70rpx';
     font-size: ~'30rpx';
-    line-height:~'70rpx';
+    line-height: ~'70rpx';
     margin-left: 15%;
   }
 
