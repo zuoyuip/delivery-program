@@ -103,7 +103,7 @@
       disableScroll: false,
       // 禁止页面右滑手势返回
       disableSwipeBack: false,
-      backgroundColor: '#EFEFEF',
+      backgroundColor: '#000000',
       usingComponents: {
         'wxc-panel': '@minui/wxc-panel',
         'wxc-cc': '@minui/wxc-cc',

@@ -305,8 +305,12 @@
   }
 
   .sure_button {
-    border-radius: ~'36rpx';
-    width: ~'600rpx';
+    border-radius: ~'26rpx';
+    width: ~'500rpx';
+    height:~'70rpx';
+    font-size: ~'30rpx';
+    line-height:~'70rpx';
+    margin-left: 15%;
   }
 
   .mask-demo_content {

@@ -23,7 +23,7 @@
         </picker>
       </wxc-cc>
     </wxc-panel>
-    <wxc-input placeholder="收货的详细地址（您的位置）" right="{{true}}" title="收货详细地址" type="text"></wxc-input>
+    <wxc-input placeholder="收货的详细地址（你的位置）" right="{{true}}" title="收货详细地址" type="text"></wxc-input>
     <wxc-input maxlength="11" placeholder="（放心填写，仅接单人可见）" right="{{true}}" title="手机号码"
                type="number"></wxc-input>
     <wxc-input placeholder="（放心填写，仅接单人可见）" right="{{true}}" title="取货码" type="text"></wxc-input>
@@ -40,9 +40,9 @@
     </wxc-panel>
     <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
-        <text class="title-style">酬金（最低3元）</text>
-        <wxc-counter bind:changenumber="onChangeNumber" class="counter-message" max="{{100}}" min="3"
-                     number="3" color="#959595"></wxc-counter>
+        <text class="title-style">酬金（建议2元）</text>
+        <wxc-counter bind:changenumber="onChangeNumber" class="counter-message" max="{{100}}" min="1"
+                     number="2" color="#959595"></wxc-counter>
       </wxc-cc>
     </wxc-panel>
     <wxc-panel border="{{ false }}" class="panel">

@@ -38,7 +38,7 @@
 
   <wxc-cc>
     <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
-                size="large"
+                size="normal"
                 type="selection" value="提交"></wxc-button>
   </wxc-cc>
 

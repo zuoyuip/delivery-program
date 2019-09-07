@@ -197,16 +197,16 @@
   }
 
   .list-wrap {
-    width: 100%;
+    width: 500%;
     background: #efefef;
     padding-bottom: ~'300rpx';
-    padding-top: ~'30rpx';
+    padding-top: ~'300rpx';
   }
 
   .list-item {
     background: #fff;
     color: #959595;
-    margin-bottom: ~'30rpx';
+    margin-bottom: ~'20rpx';
   }
 
   .list-item:last-child {
