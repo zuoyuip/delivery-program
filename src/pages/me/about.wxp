@@ -1,13 +1,47 @@
 <template>
-  <view>
-    <image mode="scaleToFill" src="../../images/tkparcel.png"></image>
-    <view class="container">
-      <view class="divLine">
-      </view>
-    </view>
-    <text style="margin-left: 20px">《隐私政策》\n</text>
-    <text style="margin-left: 20px">《用户协议》\n</text>
-  </view>
+    <wxc-panel border="{{false}}" >
+        <view class="content">
+            <view class="yangShi">1.Q：我怎么付款?</view>
+            <view class="space"></view>
+            A：包裹送达后，扫描对方的收款二维码进行付款。
+            <view class="space"></view>
+            <view class="yangShi">2.Q：快递送不送到宿舍?</view>
+            <view class="space"></view>
+            A：如需送到宿舍需另外备注，同时需适当增加赏金金额，
+                在发布备注中说明。
+            <view class="space"></view>
+            <view class="yangShi">3.Q：怎么保证我发布的代取物品的安全?</view>
+            <view class="space"></view>
+                <view>A：</view>
+                ①如果您选择不限制取件人，顺便取的用户均是通过校园卡
+                认证的本校学生，可通过学号电话等信息直接追踪到个人。
+                ②贵重物品建议取件人限制选为官方团队。
+            <view class="space"></view>
+            <view class="yangShi">4.Q：我的信息会泄露吗?</view>
+            <view class="space"></view>
+            A:不会。顺便取存取您的信息，不存在泄露问题。
+            <view class="space"></view>
+            <view class="yangShi"> 5.Q：如果发生交易纠纷怎么办?</view>
+            <view class="space"></view>
+            A：可在小程序内通过反馈建议进行提交举报，顺便取官方
+                团队介入审核。若未选择限制官方团队接单而发生快递丢失
+                情况，顺便取团队不承担赔偿责任。
+            <view class="space"></view>
+            <view class="yangShi">6.Q：交易完成对方不付款怎么办?</view>
+            <view class="space"></view>
+            A：可在小程序内进行举报，顺便取官方核实后会提醒对方支
+                付，情节严重者会进行封号处理。
+            <view class="space"></view>
+            <view class="yangShi">7.Q：订单没人接单会怎么样?</view>
+            <view class="space"></view>
+             A：每晚0点前一天所有订单自动过期多，第二天需重新发布。
+            <view class="space"></view>
+            <view class="yangShi">8.Q：如何联系官方团队?</view>
+            <view class="space"></view>
+            A：点击小程序内“联系我们”可以和我们取得联系。
+
+        </view>
+    </wxc-panel>
 </template>
 
 <script>
@@ -58,23 +92,31 @@
     config: {
       // window:{
       // 导航栏标题文字内容
-      navigationBarTitleText: '关于我们',
+      navigationBarTitleText: '常见问题',
       // 是否开启当前页面下拉刷新。
       enablePullDownRefresh: false,
       // 设置为 true 则页面整体不能上下滚动。
       disableScroll: false,
       // 禁止页面右滑手势返回
-      disableSwipeBack: false
+      disableSwipeBack: false,
       // }
+      usingComponents: {
+            'wxc-panel': '@minui/wxc-panel'
+        }
     }
   }
 </script>
 
-<style>
-  .divLine {
-    background-color: #dadada;
-    width: 100%;
-    height: 2px;
-    float: left;
+<style lang="less">
+  .content {
+    padding: ~'30rpx';
+      font-size: ~'27rpx';
+      color:#747474
+  }
+    .yangShi{
+        font-weight: bold;
+    }
+  .space{
+      height: ~'30rpx';
   }
 </style>

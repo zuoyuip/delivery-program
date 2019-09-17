@@ -6,11 +6,10 @@
       <wxc-avatar class="cc__text">{{ userPhone }}</wxc-avatar>
     </wxc-cc>
   </wxc-panel>
-
   <!--  菜单列表-->
   <view class="list-wrap">
-
     <view class="list-item">
+      <view class="space"></view>
       <wxc-list
               bind:click="toExpressIndent"
               class="item"
@@ -26,6 +25,7 @@
           title="我的接受">
       </wxc-list>
       <wxc-list
+          desc="点击认证" dot="{{true}}"
           bind:click="toCriteria"
           class="item"
           src="../../../../images/xinxi.png"
@@ -33,15 +33,16 @@
       <wxc-list
           bind:click="toAbout"
           class="item"
-          src="../../../../images/women.png"
-          title="关于我们"></wxc-list>
+          mode="none"
+          src="../../../../images/wenti.png"
+          title="常见问题"></wxc-list>
       <view class="space"></view>
       <wxc-list
               bind:click="toSuggest"
               class="item"
+              mode="none"
               src="../../../../images/jianyi.png"
               title="反馈建议"></wxc-list>
-
     </view>
   </view>
   <!--  以下代码永远不会显示，作用：借助框架的静态资源的加载机制，将图片加载进去-->
@@ -56,6 +57,7 @@
     <image src="../../images/school.png"></image>
     <image src="../../images/zhuanye.png"></image>
     <image src="../../images/xuehao.png"></image>
+    <image src="../../images/wenti.png"></image>
   </view>
 </template>
 
@@ -198,9 +200,10 @@
 
   .list-wrap {
     width: 100%;
-    background: #efefef;
-    padding-bottom: ~'3000rpx';
-    padding-top: ~'30rpx';
+    /*background-color: #EFEFEF;*/
+    background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
+    padding-bottom: 55%;
+    margin-top: ~'30rpx';
   }
 
   .list-item {

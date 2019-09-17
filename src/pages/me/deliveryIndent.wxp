@@ -1,48 +1,41 @@
 <template>
-  <wxc-loadmore
-      text="点击面板即可查看详情"></wxc-loadmore>
-  <view>
-    <wxc-cc>
-      <wxc-panel border="{{ false }}" class="panel" title="{{ time }}" bind:click="select">
-        <view class="content head">
-          <text class="title">快递名称：</text>
-          <text class="message">{{ expressName }}</text>
+    <wxc-panel border="{{false}}" >
+      <view class="list-wrap">
+      <view class="bgc">
+        <view class="content">悬赏</view>
+        <view class="container"><view class="divLine"></view></view>
+        <view>
+        <view class="content">取件地址:{{ reachAddress }}</view>
         </view>
-        <view class="content">
-          <text class="title">赏金金额：</text>
-          <text class="message">{{ expressRank }}</text>
-        </view>
-        <view class="content foot">
-          <text class="title">送达地址：</text>
-          <text class="message">{{ expressAddress }}</text>
-        </view>
-      </wxc-panel>
-    </wxc-cc>
-
+        <view class="content">送达地址</view>
+        <view class="content">接受时间</view>
+        <view class="container"><view class="divLine"></view></view>
+        <view class="content" style="color: #259b24;text-align: center">查看详情</view>
+      </view>
+      </view>
+    </wxc-panel>
     <view class="space"></view>
+<!--  <view>-->
+<!--    <wxc-cc>-->
+<!--      <wxc-panel border="{{ false }}" class="panel" title="{{ time }}" bind:click="select">-->
+<!--        <view class="content head">-->
+<!--          <text class="title">快递名称：</text>-->
+<!--          <text class="message">{{ expressName }}</text>-->
+<!--        </view>-->
+<!--        <view class="content">-->
+<!--          <text class="title">赏金金额：</text>-->
+<!--          <text class="message">{{ expressRank }}</text>-->
+<!--        </view>-->
+<!--        <view class="content foot">-->
+<!--          <text class="title">送达地址：</text>-->
+<!--          <text class="message">{{ expressAddress }}</text>-->
+<!--        </view>-->
+<!--      </wxc-panel>-->
+<!--    </wxc-cc>-->
 
-  </view>
-  <view>
-    <wxc-cc>
-      <wxc-panel border="{{ false }}" class="panel" title="{{ time }}" bind:click="select">
-        <view class="content head">
-          <text class="title">快递名称：</text>
-          <text class="message">{{ expressName }}</text>
-        </view>
-        <view class="content">
-          <text class="title">赏金金额：</text>
-          <text class="message">{{ expressRank }}</text>
-        </view>
-        <view class="content foot">
-          <text class="title">送达地址：</text>
-          <text class="message">{{ expressAddress }}</text>
-        </view>
-      </wxc-panel>
-    </wxc-cc>
+<!--    <view class="space"></view>-->
 
-    <view class="space"></view>
-
-  </view>
+<!--  </view>-->
 </template>
 
 <script>
@@ -50,7 +43,8 @@
     data: {
       expressName: '韵达快递',
       expressRank: '12.00RMB',
-      expressAddress: '5号宿舍楼314宿舍',
+      expressAddress: '31号楼',
+      reachAddress:'5号宿舍楼314宿舍',
       time: '2019-09-02 06:57:55 PM'
     },
 
@@ -114,39 +108,37 @@
 </script>
 
 <style lang="less">
-
-  .panel {
-    width: ~'660rpx';
+  .list-wrap {
+    width: 100%;
+    /*background: #efefef;*/
+    background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
+    padding-bottom: 55%;
+    padding-top: ~'30rpx';
   }
-
   .content {
-    margin-top: ~'2rpx';
-    padding: ~'16rpx';
-    background-color: #EFEFEF;
+    padding: ~'10rpx';
+    font-size: ~'30rpx';
+    margin-left: 6%;
+  }
+  .bgc{
+    background-color:#ffffff;
+    border-radius:~'30rpx';
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .divLine{
+    background-color:#dadada;
+    width: 90%;
+    height: 2px;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 
-  .head {
-    border-top-left-radius: ~'20rpx';
-    border-top-right-radius: ~'20rpx';
-  }
-
-  .foot {
-    border-bottom-left-radius: ~'20rpx';
-    border-bottom-right-radius: ~'20rpx';
-  }
-
-  .title {
-    font-weight: bolder;
-    font-size: smaller;
-    color: #666666;
-    margin-left: ~'20rpx';
-  }
-
-  .message {
-    font-weight: lighter;
-    font-size: smaller;
-    color: #888888;
-    margin-left: ~'60rpx';
+  .wrap {
+    width: 100%;
+    padding-bottom: 55%;
+    background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
   }
 
   .space{

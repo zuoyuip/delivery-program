@@ -115,7 +115,7 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://localhost:8080/delivery/delivery',
+        url: 'http://39.107.244.193:8080/delivery/delivery',
         method: 'GET',
         success: res => {
           if (res.statusCode === 200) {
