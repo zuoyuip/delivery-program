@@ -1,4 +1,16 @@
 <template>
+  <wxc-toast
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}"
+  ></wxc-toast>
+  <view class="space"></view>
+  <wxc-cc>
+    <wxc-button bind:click="logout" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+                size="large"
+                type="danger" value="退出该帐号"></wxc-button>
+  </wxc-cc>
   <view class="space"></view>
   <view class="input-wrap">
     <wxc-input mode="wrapped" placeholder="输入您要更换的手机号码" right="{{true}}" title="更换帐号"
@@ -19,7 +31,7 @@
   </wxc-cc>
 
   <view class="input-wrap">
-    <wxc-input mode="wrapped" placeholder="输入该账户的登录密码" right="{{true}}" title="密码"
+    <wxc-input mode="wrapped" placeholder="输入该账户的原登录密码" right="{{true}}" title="密码"
                type="number"></wxc-input>
   </view>
 
@@ -33,11 +45,68 @@
   <view class="space"></view>
   <wxc-loadmore
       text="更改后请使用新的手机号码和原密码进行登录"></wxc-loadmore>
+  <view class="space"></view>
 </template>
 
 <script>
+  const appInstance = getApp();
   export default {
-    data: {},
+    data: {
+      $toast: {
+        text: '',
+        show: false,
+        color: '',
+        icon: ''
+      },
+    },
+    showToast(text, color, icon) {
+      this.setData({
+        $toast: {
+          text: text,
+          color: color,
+          icon: icon,
+          show: true
+        }
+      });
+      setTimeout(() => {
+        this.setData({
+          $toast: {
+            show: false
+          },
+          contentCount: 0,
+          content: ''
+        })
+      }, 1500)
+    },
+    logout() {
+      wx.request({
+        url: 'http://39.107.244.193:8080/delivery/logout',
+        method: 'GET',
+        header: {
+          'Cookie': appInstance.globalData.authenticatedCode
+        },
+        success: res => {
+          wx.clearStorage({
+            success: res => {
+              this.showToast('注销成功，正在跳转...', '#5ac777', 'yes');
+              appInstance.globalData.authenticatedCode = '';
+              appInstance.globalData.user = {};
+              setTimeout(() => {
+                wx.reLaunch({
+                  url: '../home/me'
+                })
+              }, 1000);
+            },
+            fail: error => {
+              this.showToast('小程序出错，请联系管理员', '#c70009', 'no');
+            }
+          })
+        },
+        fail: error => {
+          this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
+        }
+      });
+    },
     onLoad: function (options) {
       // 页面创建时执行
 
@@ -88,7 +157,8 @@
         'wxc-input': '@minui/wxc-input',
         'wxc-cc': '@minui/wxc-cc',
         'wxc-button': '@minui/wxc-button',
-        'wxc-loadmore': '@minui/wxc-loadmore'
+        'wxc-loadmore': '@minui/wxc-loadmore',
+        'wxc-toast': '@minui/wxc-toast'
       }
     }
   }
@@ -96,7 +166,7 @@
 
 <style lang="less">
   .space {
-    height: ~'200rpx';
+    height: ~'100rpx';
   }
 
   .input-wrap {

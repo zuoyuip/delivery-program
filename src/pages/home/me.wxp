@@ -4,6 +4,7 @@
       <wxc-avatar class="avatar" mode="aspectFit" src="../../images/dog.png">
       </wxc-avatar>
       <wxc-avatar class="cc__text">{{ userPhone }}</wxc-avatar>
+      <wxc-icon size="26" type="arrow-right" color="#959595"></wxc-icon>
     </wxc-cc>
   </wxc-panel>
   <!--  菜单列表-->
@@ -118,9 +119,13 @@
         return
       }
       that.setData({
-        userPhone: user.userPhone,
+        userPhone: this.hideTel(user.userPhone),
         isLogin: true
       });
+    },
+    hideTel(tel){
+      const reg = /^(\d{3})\d{4}(\d{4})$/;
+      return tel.replace(reg, "$1****$2");
     },
     onShow: function () {
       // 页面出现在前台时执行
@@ -182,14 +187,15 @@
 
   .cc__text {
     font-size: xx-large;
-    margin-right: ~'60rpx';
+    margin-right: ~'126rpx';
     color: #959595;
+    width: ~'352rpx';
   }
 
   .avatar {
     display: block;
     margin: ~'15rpx';
-    margin-right: ~'50rpx';
+    margin-right: ~'20rpx';
     width: ~'120rpx';
     height: ~'120rpx';
   }

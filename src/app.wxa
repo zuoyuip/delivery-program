@@ -76,14 +76,10 @@
       }
     },
     globalData: {
-      user: {}
+      user: {},
+      authenticatedCode: ''
     },
     onLaunch(options) {
-      // this.globalData.user = {
-      //   'userId': '1',
-      //   'userPhone': '15838271463'
-      // }
-      // Do something initial when launch.
     },
     onShow(options) {
       // Do something when show.

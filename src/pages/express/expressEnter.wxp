@@ -83,7 +83,7 @@
 
 <script>
   import data from '../../common/data.json'
-
+  const appInstance = getApp();
   export default {
     data: {
       expressNameList: data.checkerExpressNameList,

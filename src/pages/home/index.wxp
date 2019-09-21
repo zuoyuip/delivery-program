@@ -91,6 +91,7 @@
 </template>
 
 <script>
+  const appInstance = getApp();
   export default {
     data: {
       expressList: [],
@@ -148,8 +149,27 @@
         url: '../express/expressEnter'
       })
     },
-    onRetry() {
-      this.selectExpress()
+    verifyUser() {
+      wx.getStorage({
+        key: 'authenticatedCode',
+        success: res => {
+          appInstance.globalData.authenticatedCode = res.data;
+          wx.request({
+            url: 'http://39.107.244.193:8080/delivery/user/authentication',
+            method: 'GET',
+            header: {
+              'Cookie': appInstance.globalData.authenticatedCode
+            },
+            success: res => {
+              appInstance.globalData.user = res.data.principal;
+            },
+            fail: error => {
+            },
+            complete: () => {
+            }
+          });
+        }
+      });
     },
     onLoad: function (options) {
       // 页面创建时执行
@@ -159,6 +179,7 @@
       // 页面出现在前台时执行
     },
     onReady: function () {
+      this.verifyUser();
       // 页面首次渲染完毕时执行
     },
     onHide: function () {
@@ -216,6 +237,7 @@
     width: 100%;
     margin-bottom: ~'6rpx'
   }
+
   .head {
     position: fixed;
     top: 0;
@@ -244,7 +266,7 @@
     background-color: #ffffff;
     font-size: ~'36rpx';
     color: #666666;
-    box-shadow:0px 7px 8px -8px #333333;
+    box-shadow: 0px 7px 8px -8px #333333;
     height: ~'66rpx';
     line-height: ~'66rpx';
     border-bottom: ~'1rpx' solid #dadada;
@@ -252,6 +274,7 @@
     text-align: center;
     width: 100%;
   }
+
   .deliveryAddress {
     width: ~'1200rpx';
   }

@@ -34,6 +34,7 @@
 </template>
 
 <script>
+    const appInstance = getApp();
     export default {
         data: {
             expressName:'顺丰快递',

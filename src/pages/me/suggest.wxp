@@ -23,6 +23,7 @@
 </template>
 
 <script>
+    const appInstance = getApp();
     export default {
         data: {
             $toast: {
@@ -51,7 +52,7 @@
                     contentCount: 0,
                     content: ''
                 })
-            }, 1000)
+            }, 1500)
         },
         submitSuggest() {
             if (this.data.content.trim() === '') {
@@ -65,17 +66,24 @@
                     suggestContent: this.data.content
                 },
                 header: {
-                    'content-type': 'application/x-www-form-urlencoded'
+                    'content-type': 'application/x-www-form-urlencoded',
+                    'Cookie': appInstance.globalData.authenticatedCode
                 },
                 success: res => {
                     if (res.statusCode===200) {
                         this.showToast(res.data.message, '#5ac777', 'yes');
+                        setTimeout(() => {
+                            wx.reLaunch({
+                                url: '../home/me'
+                            })
+                        }, 1000);
                         return
                     }
+                    this.showToast(res.data.message, '#c70009', 'no');
                 },
                 fail: error => {
-                        this.showToast('提交失败', '#c70009', 'no');
-                        return
+                        this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
+
                 },
                 complete: () => {
 

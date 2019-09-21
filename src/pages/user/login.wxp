@@ -1,40 +1,149 @@
 <template>
+  <wxc-toast
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}"
+  ></wxc-toast>
   <view class="space"></view>
   <view class="input-wrap">
-    <wxc-input mode="wrapped" placeholder="输入您的手机号码" right="{{true}}" title="帐号"
-               type="number"></wxc-input>
+    <wxc-input bind:input="userNameInput" mode="wrapped" placeholder="输入您的手机号码" right="{{true}}"
+               title="帐号" type="number"
+               value="{{ userName }}"></wxc-input>
   </view>
 
   <view class="input-wrap">
-    <wxc-input mode="wrapped" placeholder="输入您的密码" right="{{true}}" title="密码"
-               type="number"></wxc-input>
+    <wxc-input bind:input="passWordInput" mode="wrapped" password="true" placeholder="输入您的密码"
+               right="{{true}}" title="密码" type="text" value="{{ passWord }}"></wxc-input>
   </view>
   <view class="forget-space"></view>
   <wxc-cc>
-    <text class="register" bindtap="registerUser">注册帐号</text>
-    <text class="forget" bindtap="forgetUser">忘记密码</text>
+    <text bindtap="registerUser" class="register">注册帐号</text>
+    <text bindtap="forgetUser" class="forget">忘记密码</text>
   </wxc-cc>
   <view class="forget-space"></view>
   <view class="forget-space"></view>
   <wxc-cc>
-    <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
-                size="large"
-                type="selection" value="登录"></wxc-button>
+    <wxc-button bind:click="login" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+                size="large" type="selection" value="登录"></wxc-button>
   </wxc-cc>
 </template>
 
 <script>
+  const appInstance = getApp();
   export default {
-    data: {},
-    forgetUser(){
+    data: {
+      userName: '',
+      passWord: '',
+      $toast: {
+        text: '',
+        show: false,
+        color: '',
+        icon: ''
+      },
+    },
+    showToast(text, color, icon) {
+      this.setData({
+        $toast: {
+          text: text,
+          color: color,
+          icon: icon,
+          show: true
+        }
+      });
+      setTimeout(() => {
+        this.setData({
+          $toast: {
+            show: false
+          },
+          contentCount: 0,
+          content: ''
+        })
+      }, 1500)
+    },
+    forgetUser() {
       wx.navigateTo({
         url: '../user/forgetUser'
       })
     },
-    registerUser(){
+    registerUser() {
       wx.navigateTo({
         url: '../user/register'
       })
+    },
+    userNameInput: function userNameInput(e) {
+      this.setData({
+        userName: e.detail.value
+      });
+    },
+    passWordInput: function passWordInput(e) {
+      this.setData({
+        passWord: e.detail.value
+      });
+    },
+    login() {
+      wx.request({
+        url: 'http://39.107.244.193:8080/delivery/login',
+        method: 'POST',
+        data: {
+          userName: this.data.userName,
+          passWord: this.data.passWord
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: res => {
+          if (res.data.status === 200) {
+            const rememberMe = res.cookies[0];
+            const sessionId = res.cookies[1];
+            const rememberMeIndex = rememberMe.indexOf(';');
+            const sessionIdIndex = sessionId.indexOf(';');
+            const rememberMeCookie = rememberMe.slice(0, rememberMeIndex);
+            const sessionIdCookie = sessionId.slice(0, sessionIdIndex);
+            const authenticatedCode = rememberMeCookie + '; ' + sessionIdCookie;
+            wx.setStorage({
+              key: 'authenticatedCode',
+              data: authenticatedCode,
+              success: res => {
+                appInstance.globalData.authenticatedCode = authenticatedCode;
+                this.verifyUser(authenticatedCode);
+                this.showToast('登录成功，正在跳转...', '#5ac777', 'yes');
+                setTimeout(() => {
+                  wx.reLaunch({
+                    url: '../home/me'
+                  })
+                }, 1000);
+              },
+              fail: error => {
+                this.showToast('小程序出错，请联系管理员', '#c70009', 'no');
+              }
+            });
+            return;
+          }
+          this.showToast(res.data.message, '#c70009', 'no');
+        },
+        fail: error => {
+          this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
+        },
+        complete: () => {
+        }
+      });
+    },
+    verifyUser(authenticatedCode) {
+      wx.request({
+        url: 'http://39.107.244.193:8080/delivery/user/authentication',
+        method: 'GET',
+        header: {
+          'Cookie': authenticatedCode
+        },
+        success: function success(res) {
+          appInstance.globalData.user = res.data.principal;
+        },
+        fail: error => {
+        },
+        complete: () => {
+        }
+      });
     },
     onLoad: function (options) {
       // 页面创建时执行
@@ -83,7 +192,8 @@
       usingComponents: {
         'wxc-input': '@minui/wxc-input',
         'wxc-cc': '@minui/wxc-cc',
-        'wxc-button': '@minui/wxc-button'
+        'wxc-button': '@minui/wxc-button',
+        'wxc-toast': '@minui/wxc-toast'
       }
     }
   }
@@ -110,7 +220,7 @@
     margin-left: ~'440rpx';
   }
 
-  .register{
+  .register {
     color: #888888;
     font-size: smaller;
     text-decoration: #888888 underline;
