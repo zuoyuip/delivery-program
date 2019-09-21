@@ -214,9 +214,8 @@
     border-right: 0;
     border-bottom: 0;
     width: 100%;
-    margin-bottom: ~'6rpx';
+    margin-bottom: ~'6rpx'
   }
-
   .head {
     position: fixed;
     top: 0;
