@@ -1,114 +1,176 @@
 <template>
-  <view class="question-form">
-    <view class="weui-textarea">
-    <label>
-                <textarea bindinput="handleContentInput" class="textarea" maxlength="500"
+    <wxc-toast
+            icon="{{ $toast.icon }}"
+            icon-color="{{ $toast.color }}"
+            is-show="{{$toast.show}}"
+            text="{{ $toast.text }}"
+    ></wxc-toast>
+    <view class="question-form">
+        <view class="weui-textarea">
+            <label>
+                <textarea bindinput="handleContentInput" value="{{ content }}" class="textarea" maxlength="500"
                           placeholder="请输入您的建议"
                           placeholder-style="color:#b3b3b3;font-size:36rpx;"></textarea>
-    </label>
+            </label>
+        </view>
+        <view class="weui-textarea-counter">{{contentCount}}/500</view>
+        <view class="space"></view>
+        <wxc-button bind:click="submitSuggest"
+                    btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff; margin-right:10%;margin-left:10%"
+                    size="normal" type="selection" value="提交"></wxc-button>
     </view>
-    <view class="weui-textarea-counter">{{contentCount}}/500</view>
-    <view class="space"></view>
-    <wxc-button btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff; margin-right:10%;margin-left:10%"
-                size="normal" type="selection" value="提交"></wxc-button>
-  </view>
 
 </template>
 
 <script>
-  export default {
-    data: {
-      contentCount: 0,
-      content: ''
-    },
+    export default {
+        data: {
+            $toast: {
+                text: '',
+                show: false,
+                color: '',
+                icon: ''
+            },
+            contentCount: 0,
+            content: ''
+        },
+        showToast(text, color, icon) {
+            this.setData({
+                $toast: {
+                    text: text,
+                    color: color,
+                    icon: icon,
+                    show: true
+                }
+            });
+            setTimeout(() => {
+                this.setData({
+                    $toast: {
+                        show: false
+                    },
+                    contentCount: 0,
+                    content: ''
+                })
+            }, 1000)
+        },
+        submitSuggest() {
+            if (this.data.content.trim() === '') {
+                this.showToast('请输入内容', '#a2675a', 'warning');
+                return
+            }
+            wx.request({
+                url: 'http://39.107.244.193:8080/delivery/me/suggest',
+                method: 'POST',
+                data: {
+                    suggestContent: this.data.content
+                },
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                success: res => {
+                    if (res.statusCode===200) {
+                        this.showToast(res.data.message, '#5ac777', 'yes');
+                        return
+                    }
+                },
+                fail: error => {
+                        this.showToast('提交失败', '#c70009', 'no');
+                        return
+                },
+                complete: () => {
 
-    handleContentInput(e) {
-      const value = e.detail.value;
-      const that = this;
-      that.setData({
-        contentCount: value.length,
-        content: value
-      });
-    },
-    onLoad: function (options) {
-      // 页面创建时执行
+                }
+            })
+        },
+        handleContentInput(e) {
+            const value = e.detail.value;
+            const that = this;
+            that.setData({
+                contentCount: value.length,
+                content: value
+            });
+        },
+        onLoad: function (options) {
+            // 页面创建时执行
 
-    },
-    onShow: function () {
-      // 页面出现在前台时执行
-    },
-    onReady: function () {
-      // 页面首次渲染完毕时执行
-    },
-    onHide: function () {
-      // 页面从前台变为后台时执行
-    },
-    onUnload: function () {
-      // 页面销毁时执行
-    },
-    onPullDownRefresh: function () {
-      // 触发下拉刷新时执行
-    },
-    onReachBottom: function () {
-      // 页面触底时执行
-    },
-    onShareAppMessage: function () {
-      // 页面被用户分享时执行
-    },
-    onPageScroll: function () {
-      // 页面滚动时执行
-    },
-    onResize: function () {
-      // 页面尺寸变化时执行
-    },
-    onTabItemTap(item) {
-      // tab 点击时执行
-      console.log(item.index);
-      console.log(item.pagePath);
-      console.log(item.text)
-    },
-    config: {
-      // 导航栏标题文字内容
-      navigationBarTitleText: '建议反馈',
-      // 是否开启当前页面下拉刷新。
-      enablePullDownRefresh: false,
-      // 设置为 true 则页面整体不能上下滚动。
-      disableScroll: false,
-      // 禁止页面右滑手势返回
-      disableSwipeBack: false,
-      usingComponents: {
-        'wxc-button': '@minui/wxc-button'
-      }
+        },
+        onShow: function () {
+            // 页面出现在前台时执行
+        },
+        onReady: function () {
+            // 页面首次渲染完毕时执行
+        },
+        onHide: function () {
+            // 页面从前台变为后台时执行
+        },
+        onUnload: function () {
+            // 页面销毁时执行
+        },
+        onPullDownRefresh: function () {
+            // 触发下拉刷新时执行
+        },
+        onReachBottom: function () {
+            // 页面触底时执行
+        },
+        onShareAppMessage: function () {
+            // 页面被用户分享时执行
+        },
+        onPageScroll: function () {
+            // 页面滚动时执行
+        },
+        onResize: function () {
+            // 页面尺寸变化时执行
+        },
+        onTabItemTap(item) {
+            // tab 点击时执行
+            console.log(item.index);
+            console.log(item.pagePath);
+            console.log(item.text)
+        },
+        config: {
+            // 导航栏标题文字内容
+            navigationBarTitleText: '建议反馈',
+            // 是否开启当前页面下拉刷新。
+            enablePullDownRefresh: false,
+            // 设置为 true 则页面整体不能上下滚动。
+            disableScroll: false,
+            // 禁止页面右滑手势返回
+            disableSwipeBack: false,
+            usingComponents: {
+                'wxc-button': '@minui/wxc-button',
+                'wxc-toast': '@minui/wxc-toast'
+
+            }
+        }
     }
-  }
 </script>
 
 <style lang="less">
-  .question-form {
-    margin: ~'50rpx';
-  }
+    .question-form {
+        margin: ~'50rpx';
+    }
 
-  .weui-textarea-counter {
-    color: #b3b3b3;
-    font-size: ~'36rpx';
-    padding-left: ~'10rpx';
-  }
+    .weui-textarea-counter {
+        color: #b3b3b3;
+        font-size: ~'36rpx';
+        padding-left: ~'10rpx';
+    }
 
-  .weui-textarea {
-    border: #d2d2d2 solid thin;
-    width: ~'636rpx';
-    height: ~'600rpx';
-    color: #888888;
-  }
+    .weui-textarea {
+        border: #d2d2d2 solid thin;
+        width: ~'636rpx';
+        height: ~'600rpx';
+        color: #888888;
+    }
 
-  .textarea{
-    padding: ~'20rpx';
-    font-size: ~'36rpx';
-    width: ~'596rpx';
-    height: ~'560rpx';
-  }
+    .textarea {
+        padding: ~'20rpx';
+        font-size: ~'36rpx';
+        width: ~'596rpx';
+        height: ~'560rpx';
+    }
 
-  .space {
-    height: ~'66rpx';
-  }
+    .space {
+        height: ~'66rpx';
+    }
 </style>

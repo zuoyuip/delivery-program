@@ -1,51 +1,47 @@
 <template>
-    <wxc-panel border="{{false}}" >
+    <wxc-panel border="{{false}}"  margin="{{false}}">
       <view class="list-wrap">
+        <view class="space"></view>
+        <text class="message2">{{ time }}</text>
+        <view class="space"></view>
       <view class="bgc">
-        <view class="content">悬赏</view>
-        <view class="container"><view class="divLine"></view></view>
-        <view>
-        <view class="content">取件地址:{{ reachAddress }}</view>
-        </view>
-        <view class="content">送达地址</view>
-        <view class="content">接受时间</view>
-        <view class="container"><view class="divLine"></view></view>
-        <view class="content" style="color: #259b24;text-align: center">查看详情</view>
+        <view class="space2"></view>
+        <view class="content"><text decode="true">悬&emsp;&emsp;赏:</text><text class="message1">{{ expressRank }}</text></view>
+        <view class="divLine"></view>
+        <view class="content">快递名称:<text class="message">{{ expressName }}</text></view>
+        <view class="content">取件地址:<text class="message">{{ expressAddress }}</text></view>
+        <view class="content">送达地址:<text class="message">{{ reachAddress }}</text></view>
+        <view class="content">性别限制:<text class="message">{{ sexLimit }}</text></view>
+       <view class="divLine"></view>
+        <view class="content" style="color: #259b24;text-align: center;padding: 1%">查看详情</view>
       </view>
+        <view class="space"></view>
+        <text class="message2">{{ time }}</text>
+        <view class="space"></view>
+        <view class="bgc">
+          <view class="space2"></view>
+          <view class="content"><text decode="true">悬&emsp;&emsp;赏:</text><text class="message1">{{ expressRank }}</text></view>
+          <view class="divLine"></view>
+          <view class="content">快递名称:<text class="message">{{ expressName }}</text></view>
+          <view class="content">取件地址:<text class="message">{{ expressAddress }}</text></view>
+          <view class="content">送达地址:<text class="message">{{ reachAddress }}</text></view>
+          <view class="content">性别限制:<text class="message">{{ sexLimit }}</text></view>
+          <view class="divLine"></view>
+          <view class="content" style="color: #259b24;text-align: center; padding: 1%">查看详情</view>
+        </view>
       </view>
     </wxc-panel>
-    <view class="space"></view>
-<!--  <view>-->
-<!--    <wxc-cc>-->
-<!--      <wxc-panel border="{{ false }}" class="panel" title="{{ time }}" bind:click="select">-->
-<!--        <view class="content head">-->
-<!--          <text class="title">快递名称：</text>-->
-<!--          <text class="message">{{ expressName }}</text>-->
-<!--        </view>-->
-<!--        <view class="content">-->
-<!--          <text class="title">赏金金额：</text>-->
-<!--          <text class="message">{{ expressRank }}</text>-->
-<!--        </view>-->
-<!--        <view class="content foot">-->
-<!--          <text class="title">送达地址：</text>-->
-<!--          <text class="message">{{ expressAddress }}</text>-->
-<!--        </view>-->
-<!--      </wxc-panel>-->
-<!--    </wxc-cc>-->
-
-<!--    <view class="space"></view>-->
-
-<!--  </view>-->
 </template>
 
 <script>
   export default {
     data: {
-      expressName: '韵达快递',
-      expressRank: '12.00RMB',
+      expressName:'顺丰快递',
+      expressRank: '2.00RMB',
       expressAddress: '31号楼',
-      reachAddress:'5号宿舍楼314宿舍',
-      time: '2019-09-02 06:57:55 PM'
+      reachAddress:'3a203',
+      time: '09-02 18:57:55',
+      sexLimit:'男'
     },
 
     select(value){
@@ -108,40 +104,66 @@
 </script>
 
 <style lang="less">
+  //大背景style
   .list-wrap {
     width: 100%;
     /*background: #efefef;*/
     background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
     padding-bottom: 55%;
-    padding-top: ~'30rpx';
   }
+  //内容标题行style
   .content {
-    padding: ~'10rpx';
-    font-size: ~'30rpx';
-    margin-left: 6%;
+    margin-top: ~'2rpx';
+    margin: ~'5rpx';
+    margin-left: 10%;
+    font-weight: bolder;
+    font-family: "微软雅黑";
+    font-size: smaller;
+    color: #4d4d4d;
   }
+  //块背景
   .bgc{
     background-color:#ffffff;
     border-radius:~'30rpx';
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+    box-shadow:0px 7px 8px -8px #333333;
   }
+  //水平线
   .divLine{
     background-color:#dadada;
     width: 90%;
-    height: 2px;
+    /*height: 1px;*/
     margin-left: 5%;
     margin-right: 5%;
+    padding: ~'1rpx';
   }
-
-  .wrap {
-    width: 100%;
-    padding-bottom: 55%;
-    background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
-  }
-
+  //空格
   .space{
-    height: ~'60rpx';
+    height: ~'37rpx';
+  }
+  .space2{
+    height: ~'20rpx';
+  }
+  //内容行style
+  .message{
+    margin-left:50%;
+    font-weight: lighter;
+    font-size: smaller;
+    color: #888888;
+  }
+  //悬赏行style
+  .message1{
+    margin-left: 50%;
+    font-weight: lighter;
+    font-size: ~'30rpx';
+    color: #888888;
+  }
+  //时间行style
+  .message2{
+    font-size:~'25rpx';
+    color: #454648;
+    margin-left: 40%;
   }
 </style>

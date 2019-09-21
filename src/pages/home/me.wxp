@@ -1,5 +1,5 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-  <wxc-panel bind:click="jump" class="content">
+  <wxc-panel bind:click="jump" class="content" border="{{false}}">
     <wxc-cc class="cc">
       <wxc-avatar class="avatar" mode="aspectFit" src="../../images/dog.png">
       </wxc-avatar>

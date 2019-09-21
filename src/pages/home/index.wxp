@@ -26,6 +26,7 @@
           type="{{ requestType }}"></wxc-abnor>
     </view>
   </view>
+
   <view bindtap="toExpressEnter" class="add_button">
     <text decode="true">&nbsp;&nbsp;</text>
     <wxc-icon color="#949494" size="30" type="add"></wxc-icon>
@@ -227,27 +228,31 @@
     justify-content: space-between;
   }
 
-  .th, .td {
+  .td {
     height: ~'66rpx';
     line-height: ~'66rpx';
     border-bottom: ~'1rpx' solid #dadada;
     border-right: ~'1rpx' solid #dadada;
     text-align: center;
     width: 100%;
-  }
-
-  .th {
-    font-weight: 500;
-    background-color: #FDFDFD;
-    font-size: ~'36rpx';
-    color: #666666;
-  }
-
-  .td {
-    font-size: ~'34rpx';
+    font-size: ~'30rpx';
     color: #888888;
   }
 
+
+  .th {
+    font-weight: 500;
+    background-color: #ffffff;
+    font-size: ~'36rpx';
+    color: #666666;
+    box-shadow:0px 7px 8px -8px #333333;
+    height: ~'66rpx';
+    line-height: ~'66rpx';
+    border-bottom: ~'1rpx' solid #dadada;
+    /*border-right: ~'1rpx' solid #dadada;*/
+    text-align: center;
+    width: 100%;
+  }
   .deliveryAddress {
     width: ~'1200rpx';
   }
@@ -266,14 +271,15 @@
     width: ~'150rpx';
     height: ~'60rpx';
     line-height: ~'60rpx';
-    bottom: ~'44rpx';
+    bottom: ~'64rpx';
     right: ~'299rpx';
     font-size: ~'35rpx';
-    vertical-align: center;
+    /*vertical-align: center;*/
     color: #949494;
     background-color: #FFFFFF;
     border-radius: ~'30rpx';
     border-style: outset;
+    /*box-shadow:0px 3px 8px #949494;*/
   }
 
   .popup__content {
@@ -317,9 +323,9 @@
   .sure_button {
     border-radius: ~'26rpx';
     width: ~'500rpx';
-    height: ~'70rpx';
+    height: ~'60rpx';
     font-size: ~'30rpx';
-    line-height: ~'70rpx';
+    line-height: ~'60rpx';
     margin-left: 15%;
   }
 
