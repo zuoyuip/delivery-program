@@ -67,7 +67,7 @@
         </radio-group>
       </wxc-cc>
     </wxc-panel>
-    <wxc-input placeholder="请输入注意事项" right="{{true}}" title="备注" type="text"></wxc-input>
+    <wxc-input placeholder="请输入注意事项" right="{{true}}" title="备注" type="text" maxlength="20"></wxc-input>
     <view class="forget-space"></view>
     <wxc-panel border="{{ false }}" class="agree">
       <checkbox class="agree-text" value="agree">我同意货到后支付佣金</checkbox>

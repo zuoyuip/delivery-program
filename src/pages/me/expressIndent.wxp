@@ -1,170 +1,231 @@
-<template>
-    <wxc-panel border="{{false}}"  margin="{{false}}">
-        <view class="list-wrap">
-            <view class="space"></view>
-            <text class="message2">{{ time }}</text>
-            <view class="space"></view>
-            <view class="bgc">
-                <view class="space2"></view>
-                <view class="content"><text decode="true">悬&emsp;&emsp;赏:</text><text class="message1">{{ expressRank }}</text></view>
-                <view class="divLine"></view>
-                <view class="content">快递名称:<text class="message">{{ expressName }}</text></view>
-                <view class="content">取件地址:<text class="message">{{ expressAddress }}</text></view>
-                <view class="content">送达地址:<text class="message">{{ reachAddress }}</text></view>
-                <view class="content">包裹状态:<text class="message">{{ status }}</text></view>
-                <view class="divLine"></view>
-                <view class="content" style="color: #259b24;text-align: center;padding: 1%">查看详情</view>
-            </view>
-            <view class="space"></view>
-            <text class="message2">{{ time }}</text>
-            <view class="space"></view>
-            <view class="bgc">
-                <view class="space2"></view>
-                <view class="content"><text decode="true">悬&emsp;&emsp;赏:</text><text class="message1">{{ expressRank }}</text></view>
-                <view class="divLine"></view>
-                <view class="content">快递名称:<text class="message">{{ expressName }}</text></view>
-                <view class="content">取件地址:<text class="message">{{ expressAddress }}</text></view>
-                <view class="content">送达地址:<text class="message">{{ reachAddress }}</text></view>
-                <view class="content">包裹状态:<text class="message">{{ status }}</text></view>
-                <view class="divLine"></view>
-                <view class="content" style="color: #259b24;text-align: center;padding: 1%">查看详情</view>
-            </view>
+<template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <view class="list-wrap">
+    <view wx:if="{{ expressList.length > 0 }}">
+      <view wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
+            wx:key="deliveryId">
+
+        <view class="space"></view>
+        <wxc-cc><text class="message2">{{ express.deliveryDate }}</text></wxc-cc>
+        <view class="space"></view>
+        <view bindtap="chooseExpress" class="bgc" id="{{ index }}">
+          <view class="space2"></view>
+          <view class="content">
+            <text decode="true">悬&emsp;&emsp;赏:</text>
+            <text class="message1">{{ express.deliveryReward }}</text>
+          </view>
+          <view class="divLine"></view>
+          <view class="content">快递名称:
+            <text class="message">{{ express.deliveryName }}</text>
+          </view>
+          <view class="content">取件地址:
+            <text class="message">{{ express.deliveryAddress }}</text>
+          </view>
+          <view class="content">送达地址:
+            <text class="message">{{ express.deliveryGoalAddress.length > 8 ?  express.deliveryGoalAddress.slice(0, 7) : express.deliveryGoalAddress}}</text>
+          </view>
+          <view class="content">包裹状态:
+            <text class="message">{{ express.deliveryStatus ? '已完成' : '未完成' }}</text>
+          </view>
+          <view class="divLine"></view>
+          <view class="content" style="color: #259b24;text-align: center;padding: 1%">查看详情</view>
+
         </view>
-    </wxc-panel>
+      </view>
+      <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
+    </view>
+    <view wx:else>
+      <wxc-abnor
+          bind:abnortap="onRetry"
+          type="{{ requestType }}"></wxc-abnor>
+    </view>
+  </view>
 </template>
 
 <script>
-    const appInstance = getApp();
-    export default {
-        data: {
-            expressName:'顺丰快递',
-            expressRank: '2.00RMB',
-            expressAddress: '31号楼',
-            reachAddress:'3a203',
-            time: '09-02 18:57:55',
-            status:'已被接受'
-        },
+  const appInstance = getApp();
+  export default {
+    data: {
+      expressList: [],
+      expressIndex: 0,
+      requestType: '',
+      isLoading: false,
+      maskStatus: 'hide'
+    },
 
-        select(value){
-            console.log('触发',value)
+    chooseExpress(e) {
+      this.setData({
+        expressIndex: e.currentTarget.id
+      });
+      this.showMask()
+    },
+    showMask() {
+      this.setData({
+        maskStatus: 'show'
+      })
+    },
+    selectExpress() {
+      const that = this;
+      that.setData({
+        isLoading: true
+      });
+      wx.request({
+        url: 'http://39.107.244.193:8080/delivery/me/deliveryUser/dbcd2e5bfc424360a825e211202dfc83',
+        method: 'GET',
+        success: res => {
+          if (res.statusCode === 200) {
+            const expressList = res.data;
+            that.setData({
+              expressList: expressList,
+              requestType: 'ORDER'
+            });
+            return
+          }
+          that.setData({
+            requestType: 'SHOP'
+          })
         },
-        onLoad: function (options) {
-            // 页面创建时执行
-
+        fail: error => {
+          that.setData({
+            requestType: 'REQUEST_ERROR'
+          })
         },
-        onShow: function () {
-            // 页面出现在前台时执行
-        },
-        onReady: function () {
-            // 页面首次渲染完毕时执行
-        },
-        onHide: function () {
-            // 页面从前台变为后台时执行
-        },
-        onUnload: function () {
-            // 页面销毁时执行
-        },
-        onPullDownRefresh: function () {
-            // 触发下拉刷新时执行
-        },
-        onReachBottom: function () {
-            // 页面触底时执行
-        },
-        onShareAppMessage: function () {
-            // 页面被用户分享时执行
-        },
-        onPageScroll: function () {
-            // 页面滚动时执行
-        },
-        onResize: function () {
-            // 页面尺寸变化时执行
-        },
-        onTabItemTap(item) {
-            // tab 点击时执行
-            console.log(item.index);
-            console.log(item.pagePath);
-            console.log(item.text)
-        },
-        config: {
-            // 导航栏标题文字内容
-            navigationBarTitleText: '我发布的',
-            // 是否开启当前页面下拉刷新。
-            enablePullDownRefresh: false,
-            // 设置为 true 则页面整体不能上下滚动。
-            disableScroll: false,
-            // 禁止页面右滑手势返回
-            disableSwipeBack: false,
-            backgroundColor: '#000000',
-            usingComponents: {
-                'wxc-panel': '@minui/wxc-panel',
-                'wxc-cc': '@minui/wxc-cc',
-                'wxc-loadmore': '@minui/wxc-loadmore'
-            }
+        complete: () => {
+          that.setData({
+            isLoading: false
+          });
         }
+      });
+    },
+    onLoad: function (options) {
+      // 页面创建时执行
+      this.selectExpress()
+    },
+    onShow: function () {
+      // 页面出现在前台时执行
+    },
+    onReady: function () {
+      // 页面首次渲染完毕时执行
+    },
+    onHide: function () {
+      // 页面从前台变为后台时执行
+    },
+    onUnload: function () {
+      // 页面销毁时执行
+    },
+    onPullDownRefresh: function () {
+      // 触发下拉刷新时执行
+    },
+    onReachBottom: function () {
+      // 页面触底时执行
+    },
+    onShareAppMessage: function () {
+      // 页面被用户分享时执行
+    },
+    onPageScroll: function () {
+      // 页面滚动时执行
+    },
+    onResize: function () {
+      // 页面尺寸变化时执行
+    },
+    onTabItemTap(item) {
+      // tab 点击时执行
+      console.log(item.index);
+      console.log(item.pagePath);
+      console.log(item.text)
+    },
+    config: {
+      // 导航栏标题文字内容
+      navigationBarTitleText: '我发布的',
+      // 是否开启当前页面下拉刷新。
+      enablePullDownRefresh: false,
+      // 设置为 true 则页面整体不能上下滚动。
+      disableScroll: false,
+      // 禁止页面右滑手势返回
+      disableSwipeBack: false,
+      backgroundColor: '#000000',
+      usingComponents: {
+        'wxc-panel': '@minui/wxc-panel',
+        'wxc-cc': '@minui/wxc-cc',
+        'wxc-loadmore': '@minui/wxc-loadmore',
+        'wxc-mask': '@minui/wxc-mask',
+        'wxc-abnor': '@minui/wxc-abnor',
+        'wxc-elip': '@minui/wxc-elip'
+      }
     }
+  }
 </script>
 
 <style lang="less">
-    //大背景style
-    .list-wrap {
-        width: 100%;
-        /*background: #efefef;*/
-        background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
-        padding-bottom: 55%;
-    }
-    //内容标题行style
-    .content {
-        margin-top: ~'2rpx';
-        margin: ~'5rpx';
-        margin-left: 10%;
-        font-weight: bolder;
-        font-size: smaller;
-        color: #4d4d4d;
-    }
-    //块背景
-    .bgc{
-        background-color:#ffffff;
-        border-radius:~'30rpx';
-        width: 90%;
-        margin-left: 5%;
-        margin-right: 5%;
-        box-shadow:0px 7px 8px -8px #333333;
-    }
-    //水平线
-    .divLine{
-        background-color:#dadada;
-        width: 90%;
-        /*height: 1px;*/
-        margin-left: 5%;
-        margin-right: 5%;
-        padding: ~'1rpx';
-    }
-    //空格
-    .space{
-        height: ~'37rpx';
-    }
-    //悬赏空格
-    .space2{
-        height: ~'20rpx';
-    }
-    //内容行style
-    .message{
-        margin-left:50%;
-        font-weight: lighter;
-        font-size: smaller;
-        color: #888888;
-    }
-    //悬赏行style
-    .message1{
-        margin-left: 50%;
-        font-weight: lighter;
-        font-size: ~'30rpx';
-        color: #888888;
-    }
-    //时间行style
-    .message2{
-        font-size:~'25rpx';
-        color: #454648;
-        margin-left: 40%;
-    }
+  //大背景style
+  .list-wrap {
+    width: 100%;
+    /*background: #efefef;*/
+    background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
+    padding-bottom: 55%;
+  }
+
+  //内容标题行style
+  .content {
+    margin-top: ~'2rpx';
+    margin: ~'5rpx';
+    margin-left: 10%;
+    font-weight: bolder;
+    font-size: smaller;
+    color: #4d4d4d;
+    text-align: left;
+  }
+
+  //块背景
+  .bgc {
+    background-color: #ffffff;
+    border-radius: ~'30rpx';
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    box-shadow: ~'0rpx' ~'7rpx' ~'8rpx' ~'-8rpx' #333333;
+  }
+
+  //水平线
+  .divLine {
+    background-color: #dadada;
+    width: 90%;
+    /*height: 1px;*/
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: ~'1rpx';
+  }
+
+  //空格
+  .space {
+    height: ~'37rpx';
+  }
+
+  //悬赏空格
+  .space2 {
+    height: ~'20rpx';
+  }
+
+  //内容行style
+  .message {
+    margin-left: 40%;
+    font-weight: lighter;
+    font-size: smaller;
+    color: #888888;
+    text-align: left;
+  }
+
+  //悬赏行style
+  .message1 {
+    margin-left: 40%;
+    font-weight: lighter;
+    font-size: ~'30rpx';
+    color: #888888;
+    text-align: left;
+  }
+
+  //时间行style
+  .message2 {
+    font-size: ~'25rpx';
+    color: #454648;
+  }
 </style>

@@ -31,6 +31,62 @@
         </view>
       </view>
     </wxc-panel>
+<!--  <wxc-mask content-align="bl" status="{{ maskStatus }}">-->
+<!--    <view class="popup__content">-->
+<!--      <view class="input-wrap">-->
+<!--        <wxc-panel border="{{ false }}" class="panel">-->
+<!--          <wxc-cc>-->
+<!--            <text class="title-style">快递名称</text>-->
+<!--            <text class="picker-message">{{ expressList[expressIndex].deliveryName }}</text>-->
+<!--          </wxc-cc>-->
+<!--        </wxc-panel>-->
+<!--        <wxc-panel border="{{ false }}" class="panel">-->
+<!--          <wxc-cc>-->
+<!--            <text class="title-style">性别限制</text>-->
+<!--            <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>-->
+<!--          </wxc-cc>-->
+<!--        </wxc-panel>-->
+<!--        <wxc-panel border="{{ false }}" class="panel">-->
+<!--          <wxc-cc>-->
+<!--            <text class="title-style">快递地址</text>-->
+<!--            <text class="picker-message">{{ expressList[expressIndex].deliveryAddress }}</text>-->
+<!--          </wxc-cc>-->
+<!--        </wxc-panel>-->
+<!--        <wxc-panel border="{{ false }}" class="panel">-->
+<!--          <wxc-cc>-->
+<!--            <text class="title-style">送达地址</text>-->
+<!--            <text class="picker-message">{{ expressList[expressIndex].deliveryGoalAddress }}</text>-->
+<!--          </wxc-cc>-->
+<!--        </wxc-panel>-->
+<!--        <wxc-panel border="{{ false }}" class="panel">-->
+<!--          <wxc-cc>-->
+<!--            <text class="title-style">快递体积</text>-->
+<!--            <text class="picker-message">{{ expressList[expressIndex].deliveryWeight }}</text>-->
+<!--          </wxc-cc>-->
+<!--        </wxc-panel>-->
+<!--        <wxc-panel border="{{ false }}" class="panel">-->
+<!--          <wxc-cc>-->
+<!--            <text class="title-style">报酬金额</text>-->
+<!--            <text class="picker-message">{{ expressList[expressIndex].deliveryReward }}</text>-->
+<!--          </wxc-cc>-->
+<!--        </wxc-panel>-->
+<!--        <wxc-panel border="{{ false }}" class="panel">-->
+<!--          <wxc-cc>-->
+<!--            <text class="title-style">发布时间</text>-->
+<!--            <text class="picker-message">{{ expressList[expressIndex].deliveryDate }}</text>-->
+<!--          </wxc-cc>-->
+<!--        </wxc-panel>-->
+<!--        <wxc-panel border="{{ false }}" class="panel">-->
+<!--          <wxc-cc>-->
+<!--            <text class="title-style">备注信息</text>-->
+<!--            <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>-->
+<!--          </wxc-cc>-->
+<!--        </wxc-panel>-->
+<!--        <view class="space"></view>-->
+<!--        <button class="sure_button" type="{{ 'primary' }}">接受</button>-->
+<!--      </view>-->
+<!--    </view>-->
+<!--  </wxc-mask>-->
 </template>
 
 <script>
@@ -118,7 +174,7 @@
     margin: ~'5rpx';
     margin-left: 10%;
     font-weight: bolder;
-    font-family: "微软雅黑";
+    font-family: "微软雅黑",serif;
     font-size: smaller;
     color: #4d4d4d;
   }
@@ -129,7 +185,7 @@
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
-    box-shadow:0px 7px 8px -8px #333333;
+    box-shadow:~'0rpx' ~'7rpx' ~'8rpx' ~'-8rpx' #333333;
   }
   //水平线
   .divLine{
