@@ -3,7 +3,6 @@
     <view wx:if="{{ expressList.length > 0 }}">
       <view wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
             wx:key="deliveryId">
-
         <view class="space"></view>
         <wxc-cc><text class="message2">{{ express.deliveryDate }}</text></wxc-cc>
         <view class="space"></view>
@@ -39,6 +38,70 @@
           type="{{ requestType }}"></wxc-abnor>
     </view>
   </view>
+  <wxc-mask content-align="bl" status="{{ maskStatus }}">
+    <view class="popup__content">
+      <view class="input-wrap">
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">快递名称</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryName }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">性别限制</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">快递地址</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryAddress }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">送达地址</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryGoalAddress }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">快递体积</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryWeight }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">报酬金额</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryReward }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">发布时间</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryDate }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style">备注信息</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <view class="sure_button">
+          <view>
+            <button class="sure_button1" type="{{ 'default' }}">取消</button>
+          </view>
+          <view>
+            <button class="sure_button2"type="{{ 'primary' }}">完成</button>
+          </view>
+        </view>
+
+
+      </view>
+    </view>
+  </wxc-mask>
 </template>
 
 <script>
@@ -156,6 +219,28 @@
 </script>
 
 <style lang="less">
+
+  .sure_button1 {
+    border-radius: ~'26rpx';
+    width: ~'200rpx';
+    height: ~'60rpx';
+    font-size: ~'30rpx';
+    line-height: ~'60rpx';
+    margin-left: 10%;
+      float:left;
+    margin-top: 2%;
+  }
+  .sure_button2 {
+    border-radius: ~'26rpx';
+    width: ~'200rpx';
+    height: ~'60rpx';
+    font-size: ~'30rpx';
+    line-height: ~'60rpx';
+    /*margin-left: 60%;*/
+    margin-right: 15%;
+    float:right;
+    margin-top: 2%;
+  }
   //大背景style
   .list-wrap {
     width: 100%;
@@ -227,5 +312,54 @@
   .message2 {
     font-size: ~'25rpx';
     color: #454648;
+  }
+  .title-style {
+    flex: 1;
+    height: ~'44rpx';
+    min-height: ~'44rpx';
+    line-height: ~'44rpx';
+  }
+  .popup__content {
+    width: ~'800rpx';
+    height: ~'800rpx';
+    line-height: ~'500rpx';
+    background: #ffffff;
+    text-align: center;
+  }
+  /*.add_button {*/
+  /*  position: fixed;*/
+  /*  width: ~'150rpx';*/
+  /*  height: ~'60rpx';*/
+  /*  line-height: ~'60rpx';*/
+  /*  bottom: ~'64rpx';*/
+  /*  right: ~'299rpx';*/
+  /*  font-size: ~'35rpx';*/
+  /*  !*vertical-align: center;*!*/
+  /*  color: #949494;*/
+  /*  background-color: #FFFFFF;*/
+  /*  border-radius: ~'30rpx';*/
+  /*  border-style: outset;*/
+  /*  !*box-shadow:0px 3px 8px #949494;*!*/
+  /*}*/
+  .picker-message {
+    margin-left: ~'44rpx';
+    color: #959595;
+  }
+  .input-wrap {
+    position: relative;
+    margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+  }
+
+  .panel {
+    min-width: ~'163rpx';
+    line-height: ~'44rpx';
+    height: ~'44rpx';
+    display: flex;
+    align-items: center;
+    padding: ~'20rpx' ~'30rpx' ~'26rpx' ~'30rpx';
+    font-size: ~'28rpx';
+    color: #333;
+    border: 0 solid #f0f0f0;
+    border-bottom-width: ~'1rpx';
   }
 </style>
