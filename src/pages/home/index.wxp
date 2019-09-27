@@ -84,7 +84,7 @@
           </wxc-cc>
         </wxc-panel>
         <view class="space"></view>
-        <button class="sure_button" type="{{ 'primary' }}">接受</button>
+        <button bindtap="acceptExpress" id="{{ expressList[expressIndex].deliveryId }}" class="sure_button" type="{{ 'primary' }}">接受</button>
       </view>
     </view>
   </wxc-mask>
@@ -170,6 +170,16 @@
           });
         }
       });
+    },
+    acceptExpress(e){
+      console.log(e.currentTarget.id);
+      const user = appInstance.globalData.user;
+      const userString = JSON.stringify(user);
+      if (userString === '{}') {
+        console.log('未登录');
+        return
+      }
+      console.log('已登录')
     },
     onLoad: function (options) {
       // 页面创建时执行
