@@ -69,15 +69,13 @@
       userCollegeList: data.userCollegeList,
       userCollegeIndex: 0,
       userInfoName: '',
-      userInfoSex: '',
-      userInfoCollege: '',
+      userInfoSex: '男',
       userInfoSubject: '',
       userInfoStudentNumber: ''
     },
     userCollegePickerChange(e) {
       this.setData({
         userCollegeIndex: e.detail.value,
-        userInfoCollege: this.data.userCollegeList[this.data.userCollegeIndex]
       })
     },
     checkboxChange(e) {
@@ -97,7 +95,7 @@
     },
     userInfoStudentNumberInput(e) {
       this.setData({
-        userInfoSex: e.detail.value
+        userInfoStudentNumber: e.detail.value
       })
     },
     chooseImage(e) {
@@ -133,29 +131,32 @@
       })
     },
     submitUserInfo() {
-      // const uploadTask = wx.uploadFile({
-      //   url: 'http://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
-      //   filePath: this.data.image,
-      //   name: 'file',
-      //   formData: {
-      //     'userInfoName': 'test'
-      //   },
-      //   success(res) {
-      //     const data = res.data
-      //     //do something
-      //   }
-      // });
-      //
-      // uploadTask.onProgressUpdate((res) => {
-      //   console.log('上传进度', res.progress);
-      //   console.log('已经上传的数据长度', res.totalBytesSent);
-      //   console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-      // });
-      console.log(this.data.userInfoName);
-      console.log(this.data.userInfoSex);
-      console.log(this.data.userInfoCollege);
-      console.log(this.data.userInfoSubject);
-      console.log(this.data.userInfoStudentNumber)
+      const uploadTask = wx.uploadFile({
+        url: 'http://39.107.244.193:8080/delivery/me/submitCriteria', //仅为示例，非真实的接口地址
+        filePath: this.data.image,
+        name: 'file',
+        formData: {
+          'userInfoName': this.data.userInfoName,
+          'userInfoSex': this.data.userInfoSex,
+          'userInfoCollege': this.data.userCollegeList[this.data.userCollegeIndex],
+          'userInfoSubject': this.data.userInfoSubject,
+          'userInfoStudentNumber': this.data.userInfoStudentNumber
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'Cookie': appInstance.globalData.authenticatedCode
+        },
+        success(res) {
+          console.log(res)
+
+        }
+      });
+
+      uploadTask.onProgressUpdate((res) => {
+        console.log('上传进度', res.progress);
+        console.log('已经上传的数据长度', res.totalBytesSent);
+        console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+      });
     },
     onLoad: function (options) {
       // 页面创建时执行
