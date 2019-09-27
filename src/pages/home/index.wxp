@@ -162,7 +162,7 @@
           if (res.statusCode === 200) {
             const expressList = res.data;
             that.setData({
-              expressList: expressList,
+              expressList: expressList.reverse(),
               requestType: 'ORDER'
             });
             return

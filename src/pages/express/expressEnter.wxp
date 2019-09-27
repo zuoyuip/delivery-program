@@ -1,4 +1,10 @@
 <template>
+  <wxc-toast
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}"
+  ></wxc-toast>
   <view class="input-wrap">
     <wxc-panel bind:click="expressNamePickerChange" border="{{ false }}" class="panel">
       <wxc-cc>
@@ -33,10 +39,15 @@
         </picker>
       </wxc-cc>
     </wxc-panel>
-    <wxc-input bind:input="deliveryAddressInput" placeholder="收货的详细地址（你的位置）" right="{{true}}" title="收货详细地址" type="text" value="{{ deliveryAddress }}"></wxc-input>
-    <wxc-input bind:input="deliveryUserNameInput" placeholder="快递登记的名字" right="{{true}}" title="收件人" type="text" value="{{ deliveryUserName }}"></wxc-input>
-    <wxc-input bind:input="deliveryUserPhoneInput" maxlength="11" placeholder="（放心填写，仅接单人可见）" right="{{true}}" title="手机号码" type="number" value="{{ deliveryUserPhone }}"></wxc-input>
-    <wxc-input bind:input="deliveryCodeInput" placeholder="（放心填写，仅接单人可见）" right="{{true}}" title="取货码" type="text" value="{{ deliveryCode }}"></wxc-input>
+    <wxc-input bind:input="deliveryGoalAddressInput" placeholder="收货的详细地址（你的位置）" right="{{true}}"
+               title="收货详细地址" type="text" value="{{ deliveryGoalAddress }}"></wxc-input>
+    <wxc-input bind:input="deliveryUserNameInput" placeholder="快递登记的名字" right="{{true}}" title="收件人"
+               type="text" value="{{ deliveryUserName }}"></wxc-input>
+    <wxc-input bind:input="deliveryUserPhoneInput" maxlength="11" placeholder="（放心填写，仅接单人可见）"
+               right="{{true}}" title="手机号码" type="number"
+               value="{{ deliveryUserPhone }}"></wxc-input>
+    <wxc-input bind:input="deliveryCodeInput" placeholder="（放心填写，仅接单人可见）" right="{{true}}"
+               title="取货码" type="text" value="{{ deliveryCode }}"></wxc-input>
     <wxc-panel bind:click="expressWeightPickerChange" border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">快递体积</text>
@@ -51,45 +62,56 @@
     <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">酬金（建议2元起）</text>
-        <wxc-counter bind:changenumber="onChangeNumber" class="counter-message" max="{{100}}" min="2"
-                     number="2" color="#959595"></wxc-counter>
+        <wxc-counter bind:changenumber="onChangeNumber" class="counter-message" color="#959595"
+                     max="{{100}}"
+                     min="2" number="2"></wxc-counter>
       </wxc-cc>
     </wxc-panel>
     <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">性别限制</text>
-        <radio-group>
+        <radio-group bindchange="checkboxChange">
           <label class="radio">
-            <radio checked="{{ true }}" value="all">不限</radio>
-            <radio class="female" value="male">男</radio>
-            <radio class="female" value="female">女</radio>
+            <radio checked="{{ true }}" value="不限">不限</radio>
+            <radio class="female" value="仅限男">男</radio>
+            <radio class="female" value="仅限女">女</radio>
           </label>
         </radio-group>
       </wxc-cc>
     </wxc-panel>
-    <wxc-input placeholder="请输入注意事项" right="{{true}}" title="备注" type="text" maxlength="20"></wxc-input>
+    <wxc-input bind:input="deliverySuggestInput" maxlength="20" placeholder="请输入注意事项"
+               right="{{true}}" title="备注"
+               type="text"></wxc-input>
     <view class="forget-space"></view>
     <wxc-panel border="{{ false }}" class="agree">
-      <checkbox class="agree-text" value="agree">我同意货到后支付佣金</checkbox>
+      <radio-group bindchange="agreeCheckBox">
+        <checkbox class="agree-text" value="agree">我同意货到后支付佣金</checkbox>
+      </radio-group>
     </wxc-panel>
     <view class="forget-space"></view>
     <wxc-cc>
-      <wxc-button bind:click="submitExpress" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
-                  size="normal"
-                  type="selection" value="提交"></wxc-button>
+      <button bindtap="submitExpress" class="submitButton"
+              disabled="{{ isAgree }}"
+              type="primary">提交
+      </button>
     </wxc-cc>
+    <view class="forget-space"></view>
   </view>
 </template>
 
 <script>
   import data from '../../common/data.json'
+
   const appInstance = getApp();
   export default {
     data: {
-      deliveryAddress:'',
-      deliveryUserName:'',
-      deliveryUserPhone:'',
-      deliveryCode:'',
+      deliveryGoalAddress: '',
+      deliveryUserName: '',
+      deliveryUserPhone: '',
+      deliveryCode: '',
+      deliverySex: '不限',
+      deliveryReward: '￥' + '2',
+      deliverySuggest: '',
       expressNameList: data.checkerExpressNameList,
       expressNameIndex: 0,
       deliveryAddressList: data.deliveryAddressList,
@@ -97,11 +119,37 @@
       floorNumberList: data.mathList,
       floorNumberIndex: 0,
       expressWeightList: data.expressWeightList,
-      expressWeightIndex: 3
+      expressWeightIndex: 3,
+      isAgree: true,
+      $toast: {
+        text: '',
+        show: false,
+        color: '',
+        icon: ''
+      }
     },
-    deliveryAddressInput: function deliveryAddressInput(e) {
+    showToast(text, color, icon) {
       this.setData({
-        deliveryAddress: e.detail.value
+        $toast: {
+          text: text,
+          color: color,
+          icon: icon,
+          show: true
+        }
+      });
+      setTimeout(() => {
+        this.setData({
+          $toast: {
+            show: false
+          },
+          contentCount: 0,
+          content: ''
+        })
+      }, 1500)
+    },
+    deliveryGoalAddressInput: function deliveryGoalAddressInput(e) {
+      this.setData({
+        deliveryGoalAddress: e.detail.value
       });
     },
     deliveryUserNameInput: function deliveryUserNameInput(e) {
@@ -119,24 +167,56 @@
         deliveryCode: e.detail.value
       });
     },
-    submitExpress(){
+    deliverySuggestInput(e) {
+      this.setData({
+        deliverySuggest: e.detail.value
+      });
+    },
+    checkboxChange(e) {
+      this.setData({
+        deliverySex: e.detail.value
+      })
+    },
+    submitExpress() {
       wx.request({
         url: 'http://39.107.244.193:8080/delivery/delivery',
         method: 'POST',
         data: {
           deliveryName: this.data.expressNameList[this.data.expressNameIndex],
-          deliveryAddress:this.data.deliveryAddressList[this.data.deliveryAddressIndex],
-          floorNumber:this.data.floorNumberList[this.data.floorNumberIndex],
-          expressWeight:this.data.expressWeightList[this.data.expressWeightIndex],
-          deliveryGoalAddress: this.data.deliveryAddress,
+          deliveryAddress: this.data.deliveryAddressList[this.data.deliveryAddressIndex],
+          deliveryGoalFloor: this.data.floorNumberList[this.data.floorNumberIndex],
+          deliveryWeight: this.data.expressWeightList[this.data.expressWeightIndex],
+          deliveryGoalAddress: this.data.deliveryGoalAddress,
           deliveryUserName: this.data.deliveryUserName,
           deliveryUserPhone: this.data.deliveryUserPhone,
           deliveryCode: this.data.deliveryCode,
+          deliveryReward: this.data.deliveryReward,
+          deliveryUserSex: this.data.deliverySex,
+          deliveryRemark: this.data.deliverySuggest
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded',
           'Cookie': appInstance.globalData.authenticatedCode
         },
+        success: res => {
+          if (res.statusCode===200) {
+            this.showToast(res.data.message, '#5ac777', 'yes');
+            setTimeout(() => {
+              wx.reLaunch({
+                url: '../home/index'
+              })
+            }, 1000);
+            return
+          }
+          this.showToast(res.data.message, '#c70009', 'no');
+        },
+        fail: error => {
+          this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
+
+        },
+        complete: () => {
+
+        }
       });
     },
     expressNamePickerChange(e) {
@@ -160,7 +240,14 @@
       })
     },
     onChangeNumber(e) {
-      console.log(e.detail);
+      this.setData({
+        deliveryReward: '￥' + e.detail.number
+      })
+    },
+    agreeCheckBox(e) {
+      this.setData({
+        isAgree: e.detail.value !== 'agree'
+      })
     },
     onLoad: function (options) {
       // 页面创建时执行
@@ -210,7 +297,8 @@
         'wxc-input': '@minui/wxc-input',
         'wxc-cc': '@minui/wxc-cc',
         'wxc-button': '@minui/wxc-button',
-        'wxc-counter': '@minui/wxc-counter'
+        'wxc-counter': '@minui/wxc-counter',
+        'wxc-toast': '@minui/wxc-toast'
       }
     }
   }
@@ -249,11 +337,12 @@
     padding-bottom: ~'10rpx';
   }
 
-  .counter-message{
+  .counter-message {
     margin-left: ~'233rpx';
     color: #959595;
     padding-bottom: ~'16rpx';
   }
+
   .radio {
     font-size: ~'28rpx';
     size: ~'28rpx';
@@ -283,5 +372,10 @@
 
   .forget-space {
     height: ~'30rpx';
+  }
+
+  .submitButton {
+    width: ~'500rpx';
+    color: #ffffff;
   }
 </style>
