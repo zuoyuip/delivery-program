@@ -26,7 +26,7 @@
             <text class="message">{{ express.deliveryStatus ? '已完成' : '未完成' }}</text>
           </view>
           <view class="divLine"></view>
-          <view class="content" style="color: #259b24;text-align: center;padding: 1%">查看详情</view>
+          <view class="content" style="color: #259b24;padding: 1%;margin-left:40%">查看详情</view>
 
         </view>
       </view>
@@ -43,26 +43,26 @@
       <view class="input-wrap">
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
-            <text class="title-style">快递名称</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryName }}</text>
+            <text class="title-style" decode="true">取&nbsp;&nbsp;货&nbsp;&nbsp;码</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryCode }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style" decode="true">手&nbsp;&nbsp;机&nbsp;&nbsp;号</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryUserPhone }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
+            <text class="title-style" decode="true">收&nbsp;&nbsp;件&nbsp;&nbsp;人</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryUserName }}</text>
           </wxc-cc>
         </wxc-panel>
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
             <text class="title-style">性别限制</text>
             <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>
-          </wxc-cc>
-        </wxc-panel>
-        <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">快递地址</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryAddress }}</text>
-          </wxc-cc>
-        </wxc-panel>
-        <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">送达地址</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryGoalAddress }}</text>
           </wxc-cc>
         </wxc-panel>
         <wxc-panel border="{{ false }}" class="panel">
@@ -89,16 +89,7 @@
             <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
           </wxc-cc>
         </wxc-panel>
-        <view class="sure_button">
-          <view>
-            <button class="sure_button1" type="{{ 'default' }}">取消</button>
-          </view>
-          <view>
-            <button class="sure_button2" type="{{ 'primary' }}">完成</button>
-          </view>
-        </view>
-
-
+            <button class="sure_button" warnSize="default" type="{{ 'warn' }}">取消发布</button>
       </view>
     </view>
   </wxc-mask>
@@ -219,26 +210,16 @@
 
 <style lang="less">
 
-  .sure_button1 {
+  .sure_button {
     border-radius: ~'26rpx';
-    width: ~'200rpx';
+    width: ~'600rpx';
     height: ~'60rpx';
     font-size: ~'30rpx';
     line-height: ~'60rpx';
-    margin-left: 10%;
-      float:left;
-    margin-top: 2%;
-  }
-  .sure_button2 {
-    border-radius: ~'26rpx';
-    width: ~'200rpx';
-    height: ~'60rpx';
-    font-size: ~'30rpx';
-    line-height: ~'60rpx';
-    /*margin-left: 60%;*/
-    margin-right: 15%;
-    float:right;
-    margin-top: 2%;
+    /*margin-left: 20%;*/
+    /*text-align: center;*/
+    margin-top: 4%;
+    margin-left: 8%;
   }
   //大背景style
   .list-wrap {
@@ -320,7 +301,7 @@
   }
   .popup__content {
     width: ~'800rpx';
-    height: ~'800rpx';
+    height: ~'850rpx';
     line-height: ~'500rpx';
     background: #ffffff;
     text-align: center;
