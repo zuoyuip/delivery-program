@@ -40,7 +40,7 @@
       </wxc-cc>
     </wxc-panel>
     <wxc-input bind:input="deliveryGoalAddressInput" placeholder="收货的详细地址（你的位置）" right="{{true}}"
-               title="收货详细地址" type="text" value="{{ deliveryGoalAddress }}"></wxc-input>
+               title="收货地址" type="text" value="{{ deliveryGoalAddress }}"></wxc-input>
     <wxc-input bind:input="deliveryUserNameInput" placeholder="快递登记的名字" right="{{true}}" title="收件人"
                type="text" value="{{ deliveryUserName }}"></wxc-input>
     <wxc-input bind:input="deliveryUserPhoneInput" maxlength="11" placeholder="（放心填写，仅接单人可见）"
@@ -79,7 +79,7 @@
         </radio-group>
       </wxc-cc>
     </wxc-panel>
-    <wxc-input bind:input="deliverySuggestInput" maxlength="20" placeholder="请输入注意事项"
+    <wxc-input bind:input="deliverySuggestInput" maxlength="20" placeholder="送达时间、注意事项等问题"
                right="{{true}}" title="备注"
                type="text"></wxc-input>
     <view class="forget-space"></view>
