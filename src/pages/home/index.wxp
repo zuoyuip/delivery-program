@@ -1,6 +1,18 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   <wxc-loadmore is-end="{{ false }}" wx:if="{{ isLoading }}"></wxc-loadmore>
-  <!--  <view>-->
+  <wxc-toast
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}"
+  ></wxc-toast>
+  <wxc-dialog bindcancel="noLoginOnCancel" bindconfirm="noLoginOnConfirm" cancel-text="取消"
+              class="noLogin-dialog"
+              confirm-text="现在登录" content="您还未登录" title="提示"></wxc-dialog>
+  <wxc-dialog bindcancel="acceptOnCancel" bindconfirm="acceptOnConfirm" cancel-text="取消"
+              class="accept-dialog"
+              confirm-text="接受" content="确定接受该订单" title="提示"></wxc-dialog>
+
   <view class="table">
     <view class="tr head">
       <text class="th deliveryAddress">取件地址</text>
@@ -84,7 +96,9 @@
           </wxc-cc>
         </wxc-panel>
         <view class="space"></view>
-        <button bindtap="acceptExpress" id="{{ expressList[expressIndex].deliveryId }}" class="sure_button" type="{{ 'primary' }}">接受</button>
+        <button bindtap="acceptExpress" class="sure_button"
+                id="{{ expressList[expressIndex].deliveryId }}" type="{{ 'primary' }}">接受
+        </button>
       </view>
     </view>
   </wxc-mask>
@@ -98,7 +112,32 @@
       expressIndex: 0,
       requestType: '',
       isLoading: false,
-      maskStatus: 'hide'
+      maskStatus: 'hide',
+      $toast: {
+        text: '',
+        show: false,
+        color: '',
+        icon: ''
+      },
+    },
+    showToast(text, color, icon) {
+      this.setData({
+        $toast: {
+          text: text,
+          color: color,
+          icon: icon,
+          show: true
+        }
+      });
+      setTimeout(() => {
+        this.setData({
+          $toast: {
+            show: false
+          },
+          contentCount: 0,
+          content: ''
+        })
+      }, 1500)
     },
     chooseExpress(e) {
       this.setData({
@@ -145,6 +184,12 @@
       });
     },
     toExpressEnter() {
+      const user = appInstance.globalData.user;
+      const userString = JSON.stringify(user);
+      if (userString === '{}') {
+        this.showDialog('.noLogin-dialog');
+        return;
+      }
       wx.navigateTo({
         url: '../express/expressEnter'
       })
@@ -171,15 +216,40 @@
         }
       });
     },
-    acceptExpress(e){
+    acceptExpress(e) {
       console.log(e.currentTarget.id);
       const user = appInstance.globalData.user;
       const userString = JSON.stringify(user);
       if (userString === '{}') {
-        console.log('未登录');
-        return
+        this.showDialog('.noLogin-dialog');
+        return;
       }
-      console.log('已登录')
+      this.showDialog('.accept-dialog');
+    },
+    showDialog(dialog) {
+      let dialogComponent = this.selectComponent(dialog);
+      dialogComponent && dialogComponent.show();
+    },
+    hideDialog(dialog) {
+      let dialogComponent = this.selectComponent(dialog);
+      dialogComponent && dialogComponent.hide();
+    },
+    noLoginOnConfirm() {
+      wx.navigateTo({
+        url: '../user/login'
+      });
+      this.hideDialog('.noLogin-dialog')
+    },
+    noLoginOnCancel() {
+      this.hideDialog('.noLogin-dialog')
+    },
+    acceptOnConfirm() {
+      console.log('点击了确认按钮');
+      this.hideDialog('.accept-dialog')
+    },
+    acceptOnCancel() {
+      console.log('点击了取消按钮');
+      this.hideDialog('.accept-dialog')
     },
     onLoad: function (options) {
       // 页面创建时执行
@@ -233,7 +303,9 @@
         'wxc-loadmore': '@minui/wxc-loadmore',
         'wxc-abnor': '@minui/wxc-abnor',
         'wxc-icon': '@minui/wxc-icon',
-        'wxc-mask': '@minui/wxc-mask'
+        'wxc-mask': '@minui/wxc-mask',
+        'wxc-dialog': '@minui/wxc-dialog',
+        'wxc-toast': '@minui/wxc-toast'
       }
     }
   }

@@ -74,7 +74,7 @@
     </wxc-panel>
     <view class="forget-space"></view>
     <wxc-cc>
-      <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+      <wxc-button bind:click="submitExpress" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
                   size="normal"
                   type="selection" value="提交"></wxc-button>
     </wxc-cc>
