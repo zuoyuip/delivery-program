@@ -20,7 +20,7 @@
             <text class="message">{{ express.deliveryAddress }}</text>
           </view>
           <view class="content">送达地址:
-            <text class="message">{{ express.deliveryGoalAddress.length > 8 ?  express.deliveryGoalAddress.slice(0, 7) : express.deliveryGoalAddress}}</text>
+            <text class="message">{{ express.deliveryGoalFloor }}</text>
           </view>
           <view class="content">包裹状态:
             <text class="message">{{ express.deliveryStatus ? '已完成' : '未完成' }}</text>
@@ -94,7 +94,7 @@
             <button class="sure_button1" type="{{ 'default' }}">取消</button>
           </view>
           <view>
-            <button class="sure_button2"type="{{ 'primary' }}">完成</button>
+            <button class="sure_button2" type="{{ 'primary' }}">完成</button>
           </view>
         </view>
 
@@ -114,7 +114,6 @@
       isLoading: false,
       maskStatus: 'hide'
     },
-
     chooseExpress(e) {
       this.setData({
         expressIndex: e.currentTarget.id
