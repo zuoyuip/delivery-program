@@ -1,13 +1,14 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   <view class="input-wrap">
-    <wxc-input placeholder="请输入真实姓名" right="{{true}}" title="姓名" type="text"></wxc-input>
+    <wxc-input bind:input="userInfoNameInput" placeholder="请输入真实姓名" right="{{true}}" title="姓名"
+               type="text" value="{{ userInfoName }}"></wxc-input>
 
     <view class="radio-space"></view>
 
-    <radio-group>
+    <radio-group bindchange="checkboxChange">
       <label class="radio">
-        <radio checked="{{ true }}" value="male">男</radio>
-        <radio class="female" value="female">女</radio>
+        <radio checked="{{ true }}" value="男">男</radio>
+        <radio class="female" value="女">女</radio>
       </label>
     </radio-group>
 
@@ -24,8 +25,11 @@
         </picker>
       </wxc-cc>
     </wxc-panel>
-    <wxc-input placeholder="请输入所学专业" right="{{true}}" title="专业" type="text"></wxc-input>
-    <wxc-input placeholder="请输入您的学号" right="{{true}}" title="学号" type="number"></wxc-input>
+    <wxc-input bind:input="userInfoSubjectInput" placeholder="请输入所学专业" right="{{true}}" title="专业"
+               type="text"></wxc-input>
+    <wxc-input bind:input="userInfoStudentNumberInput" placeholder="请输入您的学号" right="{{true}}"
+               title="学号"
+               type="number"></wxc-input>
   </view>
 
   <view class="space"></view>
@@ -47,7 +51,8 @@
   <view class="space"></view>
 
   <wxc-cc>
-    <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+    <wxc-button bind:click="submitUserInfo"
+                btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
                 size="normal"
                 type="selection" value="提交"></wxc-button>
   </wxc-cc>
@@ -56,16 +61,43 @@
 
 <script>
   import data from '../../common/data.json'
+
   const appInstance = getApp();
   export default {
     data: {
       image: '',
       userCollegeList: data.userCollegeList,
-      userCollegeIndex: 0
+      userCollegeIndex: 0,
+      userInfoName: '',
+      userInfoSex: '',
+      userInfoCollege: '',
+      userInfoSubject: '',
+      userInfoStudentNumber: ''
     },
     userCollegePickerChange(e) {
       this.setData({
-        userCollegeIndex: e.detail.value
+        userCollegeIndex: e.detail.value,
+        userInfoCollege: this.data.userCollegeList[this.data.userCollegeIndex]
+      })
+    },
+    checkboxChange(e) {
+      this.setData({
+        userInfoSex: e.detail.value
+      })
+    },
+    userInfoNameInput(e) {
+      this.setData({
+        userInfoName: e.detail.value
+      })
+    },
+    userInfoSubjectInput(e) {
+      this.setData({
+        userInfoSubject: e.detail.value
+      })
+    },
+    userInfoStudentNumberInput(e) {
+      this.setData({
+        userInfoSex: e.detail.value
       })
     },
     chooseImage(e) {
@@ -99,6 +131,13 @@
       wx.previewImage({
         urls: [image] //所有要预览的图片
       })
+    },
+    submitUserInfo() {
+      console.log(this.data.userName);
+      console.log(this.data.userInfoSex);
+      console.log(this.data.userInfoCollege);
+      console.log(this.data.userInfoSubject);
+      console.log(this.data.userInfoStudentNumber)
     },
     onLoad: function (options) {
       // 页面创建时执行
