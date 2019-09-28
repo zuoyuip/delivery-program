@@ -153,7 +153,7 @@
     selectExpress() {
       const that = this;
       that.setData({
-        isLoading: true
+        isLoading: true:
       });
       wx.request({
         url: 'http://39.107.244.193:8080/delivery/delivery',
