@@ -1,4 +1,10 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <wxc-toast
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}"
+  ></wxc-toast>
   <view class="input-wrap">
     <wxc-input bind:input="userInfoNameInput" placeholder="请输入真实姓名" right="{{true}}" title="姓名"
                type="text" value="{{ userInfoName }}"></wxc-input>
@@ -55,6 +61,7 @@
                 btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
                 size="normal"
                 type="selection" value="提交"></wxc-button>
+    <wxc-progress percent="{{ percent }}"></wxc-progress>
   </wxc-cc>
 
 </template>
@@ -71,7 +78,33 @@
       userInfoName: '',
       userInfoSex: '男',
       userInfoSubject: '',
-      userInfoStudentNumber: ''
+      userInfoStudentNumber: '',
+      percent: 0,
+      $toast: {
+        text: '',
+        show: false,
+        color: '',
+        icon: ''
+      }
+    },
+    showToast(text, color, icon) {
+      this.setData({
+        $toast: {
+          text: text,
+          color: color,
+          icon: icon,
+          show: true
+        }
+      });
+      setTimeout(() => {
+        this.setData({
+          $toast: {
+            show: false
+          },
+          contentCount: 0,
+          content: ''
+        })
+      }, 1500)
     },
     userCollegePickerChange(e) {
       this.setData({
@@ -146,16 +179,31 @@
           'content-type': 'application/x-www-form-urlencoded',
           'Cookie': appInstance.globalData.authenticatedCode
         },
-        success(res) {
-          console.log(res)
+        success: res => {
+          if (res.statusCode===200) {
+            this.showToast(res.data.message, '#5ac777', 'yes');
+            setTimeout(() => {
+              wx.reLaunch({
+                url: '../home/me'
+              })
+            }, 1000);
+            return
+          }
+          this.showToast('服务器出错，请联系管理员', '#c70009', 'no');
+        },
+        fail: error => {
+          this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
+
+        },
+        complete: () => {
 
         }
       });
 
       uploadTask.onProgressUpdate((res) => {
-        console.log('上传进度', res.progress);
-        console.log('已经上传的数据长度', res.totalBytesSent);
-        console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+        this.setData({
+          percent: res.progress
+        })
       });
     },
     onLoad: function (options) {
@@ -210,7 +258,9 @@
         'wxc-icon': '@minui/wxc-icon',
         'wxc-cc': '@minui/wxc-cc',
         'wxc-panel': '@minui/wxc-panel',
-        'wxc-loadmore': '@minui/wxc-loadmore'
+        'wxc-loadmore': '@minui/wxc-loadmore',
+        'wxc-progress': '@minui/wxc-progress',
+        'wxc-toast': '@minui/wxc-toast'
       }
     }
   }
