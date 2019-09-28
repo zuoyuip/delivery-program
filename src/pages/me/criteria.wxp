@@ -61,8 +61,8 @@
                 btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
                 size="normal"
                 type="selection" value="提交"></wxc-button>
-    <wxc-progress percent="{{ percent }}"></wxc-progress>
   </wxc-cc>
+
 
 </template>
 
@@ -79,7 +79,6 @@
       userInfoSex: '男',
       userInfoSubject: '',
       userInfoStudentNumber: '',
-      percent: 0,
       $toast: {
         text: '',
         show: false,
@@ -101,8 +100,6 @@
           $toast: {
             show: false
           },
-          contentCount: 0,
-          content: ''
         })
       }, 1500)
     },
@@ -164,6 +161,14 @@
       })
     },
     submitUserInfo() {
+      this.setData({
+        $toast: {
+          text: '正在上传信息，请稍候',
+          color: '#c6c8bd',
+          icon: 'more',
+          show: true
+        }
+      });
       const uploadTask = wx.uploadFile({
         url: 'http://39.107.244.193:8080/delivery/me/submitCriteria', //仅为示例，非真实的接口地址
         filePath: this.data.image,
@@ -180,30 +185,31 @@
           'Cookie': appInstance.globalData.authenticatedCode
         },
         success: res => {
-          if (res.statusCode===200) {
-            this.showToast(res.data.message, '#5ac777', 'yes');
-            setTimeout(() => {
-              wx.reLaunch({
-                url: '../home/me'
-              })
-            }, 1000);
-            return
-          }
-          this.showToast('服务器出错，请联系管理员', '#c70009', 'no');
+          setTimeout(() =>{
+            if (res.statusCode === 200) {
+              this.showToast('信息上传成功', '#5ac777', 'yes');
+              setTimeout(() => {
+                wx.reLaunch({
+                  url: '../home/me'
+                })
+              }, 1000);
+              return
+            }
+            this.showToast('服务器出错，请联系管理员', '#c70009', 'no');
+          }, 1000);
         },
         fail: error => {
-          this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
-
+          setTimeout(() =>{
+            this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
+          }, 1000);
         },
         complete: () => {
-
+          this.setData({
+            $toast: {
+              show: false
+            },
+          })
         }
-      });
-
-      uploadTask.onProgressUpdate((res) => {
-        this.setData({
-          percent: res.progress
-        })
       });
     },
     onLoad: function (options) {

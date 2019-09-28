@@ -1,10 +1,16 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-  <wxc-panel bind:click="jump" class="content" border="{{false}}">
+  <wxc-toast
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}"
+  ></wxc-toast>
+  <wxc-panel bind:click="jump" border="{{false}}" class="content">
     <wxc-cc class="cc">
       <wxc-avatar class="avatar" mode="aspectFit" src="../../images/dog.png">
       </wxc-avatar>
       <wxc-avatar class="cc__text">{{ userPhone }}</wxc-avatar>
-      <wxc-icon size="26" type="arrow-right" color="#959595"></wxc-icon>
+      <wxc-icon color="#959595" size="26" type="arrow-right"></wxc-icon>
     </wxc-cc>
   </wxc-panel>
   <!--  菜单列表-->
@@ -12,11 +18,11 @@
     <view class="list-item">
       <view class="space"></view>
       <wxc-list
-              bind:click="toExpressIndent"
-              class="item"
-              mode="none"
-              src="../../../../images/fabu.png"
-              title="我的发布">
+          bind:click="toExpressIndent"
+          class="item"
+          mode="none"
+          src="../../../../images/fabu.png"
+          title="我的发布">
       </wxc-list>
       <view class="space"></view>
       <wxc-list
@@ -26,9 +32,9 @@
           title="我的接受">
       </wxc-list>
       <wxc-list
-          desc="点击认证" dot="{{true}}"
-          bind:click="toCriteria"
-          class="item"
+          bind:click="toCriteria" class="item"
+          desc="{{ desc }}"
+          dot="{{true}}"
           src="../../../../images/xinxi.png"
           title="完善信息"></wxc-list>
       <wxc-list
@@ -39,11 +45,11 @@
           title="常见问题"></wxc-list>
       <view class="space"></view>
       <wxc-list
-              bind:click="toSuggest"
-              class="item"
-              mode="none"
-              src="../../../../images/jianyi.png"
-              title="反馈建议"></wxc-list>
+          bind:click="toSuggest"
+          class="item"
+          mode="none"
+          src="../../../../images/jianyi.png"
+          title="反馈建议"></wxc-list>
     </view>
   </view>
   <!--  以下代码永远不会显示，作用：借助框架的静态资源的加载机制，将图片加载进去-->
@@ -68,7 +74,31 @@
   export default {
     data: {
       userPhone: '',
-      isLogin: false
+      isLogin: false,
+      desc: '',
+      $toast: {
+        text: '',
+        show: false,
+        color: '',
+        icon: ''
+      }
+    },
+    showToast(text, color, icon) {
+      this.setData({
+        $toast: {
+          text: text,
+          color: color,
+          icon: icon,
+          show: true
+        }
+      });
+      setTimeout(() => {
+        this.setData({
+          $toast: {
+            show: false
+          }
+        })
+      }, 1500)
     },
     // 页面跳转
     toExpressIndent() {
@@ -82,6 +112,14 @@
       })
     },
     toCriteria() {
+      if (this.data.desc === '请等待管理员处理') {
+        this.showToast('请耐心等待管理员审核', '#888888', 'close');
+        return
+      }
+      if (this.data.desc === '您已通过认证') {
+        this.showToast('您已通过认证，快去体验吧', '#888888', 'yes');
+        return
+      }
       wx.navigateTo({
         url: '../me/criteria'
       })
@@ -111,19 +149,48 @@
       // 页面创建时执行
       const that = this;
       const user = appInstance.globalData.user;
+      console.log(user);
       const userString = JSON.stringify(user);
       if (userString === '{}') {
         that.setData({
-          userPhone: '未登录'
+          userPhone: '未登录',
+          desc: '请您先登录'
         });
         return
       }
       that.setData({
         userPhone: this.hideTel(user.userPhone),
-        isLogin: true
+        isLogin: true,
       });
+      if (user.userInfoId === null && user.userIsByReview === false && user.userIsSubmitReview
+          === false) {
+        that.setData({
+          desc: '请您进行身份认证'
+        });
+        return
+      }
+      if (user.userInfoId !== null && user.userIsByReview === false && user.userIsSubmitReview
+          === true) {
+        that.setData({
+          desc: '请等待管理员处理'
+        });
+        return
+      }
+      if (user.userInfoId !== null && user.userIsByReview === false && user.userIsSubmitReview
+          === false) {
+        that.setData({
+          desc: '您的审核未通过'
+        });
+        return
+      }
+      if (user.userInfoId !== null && user.userIsByReview === true && user.userIsSubmitReview
+          === true) {
+        that.setData({
+          desc: '您已通过认证'
+        });
+      }
     },
-    hideTel(tel){
+    hideTel(tel) {
       const reg = /^(\d{3})\d{4}(\d{4})$/;
       return tel.replace(reg, "$1****$2");
     },
@@ -173,7 +240,8 @@
         'wxc-panel': '@minui/wxc-panel',
         'wxc-cc': '@minui/wxc-cc',
         'wxc-icon': '@minui/wxc-icon',
-        'wxc-list': '@minui/wxc-list'
+        'wxc-list': '@minui/wxc-list',
+        'wxc-toast': '@minui/wxc-toast'
       }
     }
   }
@@ -235,7 +303,8 @@
     color: #f5342f;
     line-height: ~'38rpx';
   }
-  .space{
+
+  .space {
     height: ~'30rpx';
     background: #efefef;
   }
