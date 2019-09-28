@@ -1,22 +1,22 @@
 <template>
   <view class="space"></view>
   <view class="input-wrap">
-    <wxc-input mode="wrapped" placeholder="输入您的手机号码" right="{{true}}" title="帐号"
-               type="number"></wxc-input>
+    <wxc-input bind:input="userPhoneInput" mode="wrapped" placeholder="输入您的手机号码" right="{{true}}" title="帐号"
+               type="number" value="{{userPhone}}"></wxc-input>
   </view>
 
   <view class="input-wrap">
-    <wxc-input mode="wrapped" placeholder="输入您要重新设定的密码" right="{{true}}" title="密码"
-               type="number"></wxc-input>
+    <wxc-input bind:input="repeatPasswordInput" mode="wrapped" placeholder="输入您要重新设定的密码" right="{{true}}" title="密码"
+               type="number" value="{{repeatPassword}}"></wxc-input>
   </view>
 
   <view class="input-wrap">
-    <wxc-input mode="wrapped" placeholder="再次输入您要设定的密码" right="{{true}}" title="重复密码"
-               type="number"></wxc-input>
+    <wxc-input bind:input="againPasswordInput" mode="wrapped" placeholder="再次输入您要设定的密码" right="{{true}}" title="重复密码"
+               type="number" value="{{againPassword}}"></wxc-input>
   </view>
   <wxc-cc>
     <view class="input-wrap">
-      <wxc-input class="verification" mode="wrapped" placeholder="请输入验证码" type="number"></wxc-input>
+      <wxc-input bind:input="verificationCodeInput" class="verification" mode="wrapped" placeholder="请输入验证码" type="number" value="{{verificationCode}}"/wxc-input>
     </view>
     <view class="input-wrap">
       <wxc-button bind:click=""
@@ -28,7 +28,7 @@
   <view class="forget-space"></view>
   <view class="forget-space"></view>
   <wxc-cc>
-    <wxc-button bind:click="" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+    <wxc-button bind:click="settingPassword" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
                 size="large"
                 type="selection" value="注册"></wxc-button>
   </wxc-cc>
@@ -36,7 +36,38 @@
 
 <script>
   export default {
-    data: {},
+    data: {
+      userPhone:'',
+      verificationCode:'',
+      repeatPassword:'',
+      againPassword:''
+    },
+    userPhoneInput(e) {
+      this.setData({
+        userPhone: e.detail.value
+      });
+    },
+    verificationCodeInput(e) {
+      this.setData({
+        verificationCode: e.detail.value
+      });
+    },
+    repeatPasswordInput(e) {
+      this.setData({
+        repeatPassword: e.detail.value
+      });
+    },
+    againPasswordInput(e) {
+      this.setData({
+        againPassword: e.detail.value
+      });
+    },
+    settingPassword(){
+      console.log(this.data.userPhone);
+      console.log(this.data.verificationCode);
+      console.log(this.data.repeatPassword);
+      console.log(this.data.againPassword);
+    },
     onLoad: function (options) {
       // 页面创建时执行
 
