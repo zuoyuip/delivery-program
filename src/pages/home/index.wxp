@@ -133,9 +133,7 @@
         this.setData({
           $toast: {
             show: false
-          },
-          contentCount: 0,
-          content: ''
+          }
         })
       }, 1500)
     },
