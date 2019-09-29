@@ -111,7 +111,7 @@
                 setTimeout(() => {
                   wx.reLaunch({
                     url: '../home/me'
-                  })
+                  });
                 }, 1000);
               },
               fail: error => {

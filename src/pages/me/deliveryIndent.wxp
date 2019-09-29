@@ -118,16 +118,25 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/me/deliveryUser/dbcd2e5bfc424360a825e211202dfc83',
+        url: 'http://39.107.244.193:8080/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
         method: 'GET',
+        header: {
+          'Cookie': appInstance.globalData.authenticatedCode
+        },
         success: res => {
           if (res.statusCode === 200) {
             const expressList = res.data;
             that.setData({
-              expressList: expressList,
+              expressList: expressList.reverse(),
               requestType: 'ORDER'
             });
             return
+          }
+          if (res.statusCode === 204){
+            that.setData({
+              requestType: 'ORDER'
+            });
+            return;
           }
           that.setData({
             requestType: 'SHOP'
@@ -184,7 +193,7 @@
     },
     config: {
       // 导航栏标题文字内容
-      navigationBarTitleText: '我发布的',
+      navigationBarTitleText: '我接受的',
       // 是否开启当前页面下拉刷新。
       enablePullDownRefresh: false,
       // 设置为 true 则页面整体不能上下滚动。
@@ -297,7 +306,7 @@
   }
   .popup__content {
     width: ~'800rpx';
-    height: ~'850rpx';
+    /*height: ~'850rpx';*/
     line-height: ~'500rpx';
     background: #ffffff;
     text-align: center;

@@ -165,6 +165,12 @@
             });
             return
           }
+          if (res.statusCode === 204){
+            that.setData({
+              requestType: 'ORDER'
+            });
+            return;
+          }
           that.setData({
             requestType: 'SHOP'
           })

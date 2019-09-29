@@ -4,7 +4,9 @@
       <view wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
             wx:key="deliveryId">
         <view class="space"></view>
-        <wxc-cc><text class="message2">{{ express.deliveryDate }}</text></wxc-cc>
+        <wxc-cc>
+          <text class="message2">{{ express.deliveryDate }}</text>
+        </wxc-cc>
         <view class="space"></view>
         <view bindtap="chooseExpress" class="bgc" id="{{ index }}">
           <view class="space2"></view>
@@ -89,7 +91,10 @@
             <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
           </wxc-cc>
         </wxc-panel>
-            <button class="sure_button" warnSize="default" type="{{ 'warn' }}">取消发布</button>
+        <button class="sure_button" type="{{ 'warn' }}"
+                warnSize="default" wx:if="{{ !expressList[expressIndex].deliveryStatus }}">取消发布
+        </button>
+        <view class="space"></view>
       </view>
     </view>
   </wxc-mask>
@@ -122,16 +127,25 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/me/deliveryUser/dbcd2e5bfc424360a825e211202dfc83',
+        url: 'http://39.107.244.193:8080/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
         method: 'GET',
+        header: {
+          'Cookie': appInstance.globalData.authenticatedCode
+        },
         success: res => {
           if (res.statusCode === 200) {
             const expressList = res.data;
             that.setData({
-              expressList: expressList,
+              expressList: expressList.reverse(),
               requestType: 'ORDER'
             });
             return
+          }
+          if (res.statusCode === 204){
+            that.setData({
+              requestType: 'ORDER'
+            });
+            return;
           }
           that.setData({
             requestType: 'SHOP'
@@ -221,6 +235,7 @@
     margin-top: 4%;
     margin-left: 8%;
   }
+
   //大背景style
   .list-wrap {
     width: 100%;
@@ -293,19 +308,22 @@
     font-size: ~'25rpx';
     color: #454648;
   }
+
   .title-style {
     flex: 1;
     height: ~'44rpx';
     min-height: ~'44rpx';
     line-height: ~'44rpx';
   }
+
   .popup__content {
     width: ~'800rpx';
-    height: ~'850rpx';
+    /*height: ~'850rpx';*/
     line-height: ~'500rpx';
     background: #ffffff;
     text-align: center;
   }
+
   /*.add_button {*/
   /*  position: fixed;*/
   /*  width: ~'150rpx';*/
@@ -325,6 +343,7 @@
     margin-left: ~'44rpx';
     color: #959595;
   }
+
   .input-wrap {
     position: relative;
     margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';

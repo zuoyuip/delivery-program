@@ -102,11 +102,19 @@
     },
     // 页面跳转
     toExpressIndent() {
+      if (!this.data.isLogin){
+        this.showToast('您还没有登录，请您先登录', '#888888', 'close');
+        return
+      }
       wx.navigateTo({
         url: '../me/expressIndent'
       })
     },
     toDeliveryIndent() {
+      if (!this.data.isLogin){
+        this.showToast('您还没有登录，请您先登录', '#888888', 'close');
+        return
+      }
       wx.navigateTo({
         url: '../me/deliveryIndent'
       })
@@ -118,6 +126,10 @@
       }
       if (this.data.desc === '您已通过认证') {
         this.showToast('您已通过认证，快去体验吧', '#888888', 'yes');
+        return
+      }
+      if (this.data.desc === '请您先登录') {
+        this.showToast('您还没有登录，请您先登录', '#888888', 'close');
         return
       }
       wx.navigateTo({
@@ -149,7 +161,6 @@
       // 页面创建时执行
       const that = this;
       const user = appInstance.globalData.user;
-      console.log(user);
       const userString = JSON.stringify(user);
       if (userString === '{}') {
         that.setData({
