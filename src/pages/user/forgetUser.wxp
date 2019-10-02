@@ -1,14 +1,22 @@
 <template>
+  <wxc-toast
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}"
+  ></wxc-toast>
   <view class="space"></view>
   <view class="input-wrap">
-    <wxc-input bind:input="userPhoneInput" mode="wrapped" placeholder="输入您的手机号码" right="{{true}}" title="帐号"
+    <wxc-input bind:input="userPhoneInput" mode="wrapped" placeholder="输入您的手机号码" right="{{true}}"
+               title="帐号"
                type="number" value="{{userPhone}}"></wxc-input>
   </view>
 
 
   <wxc-cc>
     <view class="input-wrap">
-      <wxc-input bind:input="verificationCodeInput" class="verification" mode="wrapped" placeholder="请输入验证码" type="number" value="{{verificationCode}}"></wxc-input>
+      <wxc-input bind:input="verificationCodeInput" class="verification" mode="wrapped"
+                 placeholder="请输入验证码" type="number" value="{{verificationCode}}"></wxc-input>
     </view>
     <view class="input-wrap">
       <wxc-button bind:click=""
@@ -19,18 +27,21 @@
   </wxc-cc>
 
   <view class="input-wrap">
-    <wxc-input bind:input="repeatPasswordInput" mode="wrapped" placeholder="输入您要重新设定的密码" right="{{true}}" title="密码"
+    <wxc-input bind:input="repeatPasswordInput" mode="wrapped" placeholder="输入您要重新设定的密码"
+               right="{{true}}" title="密码" password="true"
                type="number" value="{{repeatPassword}}"></wxc-input>
   </view>
 
   <view class="input-wrap">
-    <wxc-input bind:input="againPasswordInput" mode="wrapped" placeholder="再次输入您要设定的密码" right="{{true}}" title="重复密码"
+    <wxc-input bind:input="againPasswordInput" mode="wrapped" placeholder="再次输入您要设定的密码"
+               right="{{true}}" title="重复密码" password="true"
                type="number" value="{{againPassword}}"></wxc-input>
   </view>
   <view class="forget-space"></view>
   <view class="forget-space"></view>
   <wxc-cc>
-    <wxc-button bind:click="changePassword" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+    <wxc-button bind:click="changePassword"
+                btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
                 size="large"
                 type="selection" value="确认更改密码"></wxc-button>
   </wxc-cc>
@@ -42,10 +53,35 @@
 <script>
   export default {
     data: {
-      userPhone:'',
-      verificationCode:'',
-      repeatPassword:'',
-      againPassword:''
+      userPhone: '',
+      verificationCode: '',
+      repeatPassword: '',
+      againPassword: '',
+      $toast: {
+        text: '',
+        show: false,
+        color: '',
+        icon: ''
+      }
+    },
+    showToast(text, color, icon) {
+      this.setData({
+        $toast: {
+          text: text,
+          color: color,
+          icon: icon,
+          show: true
+        }
+      });
+      setTimeout(() => {
+        this.setData({
+          $toast: {
+            show: false
+          },
+          contentCount: 0,
+          content: ''
+        })
+      }, 1500)
     },
     userPhoneInput(e) {
       this.setData({
@@ -57,7 +93,7 @@
         verificationCode: e.detail.value
       });
     },
-   repeatPasswordInput(e) {
+    repeatPasswordInput(e) {
       this.setData({
         repeatPassword: e.detail.value
       });
@@ -67,11 +103,41 @@
         againPassword: e.detail.value
       });
     },
-    changePassword(){
-      console.log(this.data.userPhone);
-      console.log(this.data.verificationCode);
-      console.log(this.data.repeatPassword);
-      console.log(this.data.againPassword);
+    changePassword() {
+      if (this.data.repeatPassword.trim() !== this.data.againPassword.trim()) {
+        this.showToast('密码设置不一致', '#c70009', 'no');
+        return
+      }
+        wx.request({
+          url: 'http://localhost:8080/delivery/user/forgetUser/',
+          method: 'POST',
+          data: {
+            userPhone: this.data.userPhone.trim(),
+            verifyCode: this.data.verificationCode.trim(),
+            passWord: this.data.repeatPassword.trim()
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: res => {
+            if (res.statusCode === 200) {
+              this.showToast(res.data.message, '#5ac777', 'yes');
+              setTimeout(() => {
+                wx.reLaunch({
+                  url: '../user/login'
+                })
+              }, 1000);
+              return
+            }
+            this.showToast(res.data.message, '#c70009', 'no');
+          },
+          fail: error => {
+            this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
+          },
+          complete: () => {
+
+          }
+        });
     },
     onLoad: function (options) {
       // 页面创建时执行
@@ -121,7 +187,8 @@
         'wxc-input': '@minui/wxc-input',
         'wxc-cc': '@minui/wxc-cc',
         'wxc-button': '@minui/wxc-button',
-        'wxc-loadmore': '@minui/wxc-loadmore'
+        'wxc-loadmore': '@minui/wxc-loadmore',
+        'wxc-toast': '@minui/wxc-toast'
       }
     }
   }

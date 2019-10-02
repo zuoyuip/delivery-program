@@ -118,7 +118,7 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
+        url: 'http://localhost:8080/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode

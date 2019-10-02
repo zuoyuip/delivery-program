@@ -60,7 +60,7 @@
                 return
             }
             wx.request({
-                url: 'http://39.107.244.193:8080/delivery/me/suggest',
+                url: 'http://localhost:8080/delivery/me/suggest',
                 method: 'POST',
                 data: {
                     suggestContent: this.data.content

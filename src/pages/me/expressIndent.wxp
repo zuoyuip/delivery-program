@@ -1,4 +1,10 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <wxc-toast
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}"
+  ></wxc-toast>
   <view class="list-wrap">
     <view wx:if="{{ expressList.length > 0 }}">
       <view wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
@@ -91,7 +97,8 @@
             <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
           </wxc-cc>
         </wxc-panel>
-        <button class="sure_button" type="{{ 'warn' }}"
+        <button bindtap="cancelExpress" class="sure_button" id="{{ expressList[expressIndex].deliveryId }}"
+                type="{{ 'warn' }}"
                 warnSize="default" wx:if="{{ !expressList[expressIndex].deliveryStatus }}">取消发布
         </button>
         <view class="space"></view>
@@ -108,7 +115,32 @@
       expressIndex: 0,
       requestType: '',
       isLoading: false,
-      maskStatus: 'hide'
+      maskStatus: 'hide',
+      $toast: {
+        text: '',
+        show: false,
+        color: '',
+        icon: ''
+      }
+    },
+    showToast(text, color, icon) {
+      this.setData({
+        $toast: {
+          text: text,
+          color: color,
+          icon: icon,
+          show: true
+        }
+      });
+      setTimeout(() => {
+        this.setData({
+          $toast: {
+            show: false
+          },
+          contentCount: 0,
+          content: ''
+        })
+      }, 1500)
     },
     chooseExpress(e) {
       this.setData({
@@ -127,7 +159,7 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
+        url: 'http://localhost:8080/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
@@ -141,7 +173,7 @@
             });
             return
           }
-          if (res.statusCode === 204){
+          if (res.statusCode === 204) {
             that.setData({
               requestType: 'ORDER'
             });
@@ -160,6 +192,30 @@
           that.setData({
             isLoading: false
           });
+        }
+      });
+    },
+    cancelExpress(e){
+      wx.request({
+        url: 'http://localhost:8080/delivery/delivery/' + e.currentTarget.id,
+        method: 'DELETE',
+        header: {
+          'Cookie': appInstance.globalData.authenticatedCode
+        },
+        success: res => {
+          if (res.statusCode === 200) {
+            this.showToast(res.data.message, '#5ac777', 'yes');
+            setTimeout(() => {
+              this.selectExpress()
+            }, 1000);
+            return
+          }
+          this.showToast(res.data.message, '#c70009', 'no');
+        },
+        fail: error => {
+          this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
+        },
+        complete: () => {
         }
       });
     },
@@ -216,7 +272,8 @@
         'wxc-loadmore': '@minui/wxc-loadmore',
         'wxc-mask': '@minui/wxc-mask',
         'wxc-abnor': '@minui/wxc-abnor',
-        'wxc-elip': '@minui/wxc-elip'
+        'wxc-elip': '@minui/wxc-elip',
+        'wxc-toast': '@minui/wxc-toast'
       }
     }
   }

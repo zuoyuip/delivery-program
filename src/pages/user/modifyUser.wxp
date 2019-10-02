@@ -13,14 +13,16 @@
   </wxc-cc>
   <view class="space"></view>
   <view class="input-wrap">
-    <wxc-input bind:input="changePhoneInput" mode="wrapped" placeholder="输入您要更换的手机号码" right="{{true}}" title="更换帐号"
+    <wxc-input bind:input="changePhoneInput" mode="wrapped" placeholder="输入您要更换的手机号码"
+               right="{{true}}" title="更换帐号"
                type="number" value="{{changePhone}}"></wxc-input>
   </view>
 
 
   <wxc-cc>
     <view class="input-wrap">
-      <wxc-input bind:input="verificationCodeInput" class="verification" mode="wrapped" placeholder="请输入验证码"
+      <wxc-input bind:input="verificationCodeInput" class="verification" mode="wrapped"
+                 placeholder="请输入验证码"
                  type="number" value="{{verificationCode}}"></wxc-input>
     </view>
     <view class="input-wrap">
@@ -32,14 +34,16 @@
   </wxc-cc>
 
   <view class="input-wrap">
-    <wxc-input bind:input="pastPasswordInput" mode="wrapped" placeholder="输入该账户的原登录密码" right="{{true}}" title="密码"
-               type="number" value="{{pastPassword}}"></wxc-input>
+    <wxc-input bind:input="pastPasswordInput" mode="wrapped" password="true"
+               placeholder="输入该账户的原登录密码" right="{{true}}"
+               title="密码" type="number" value="{{pastPassword}}"></wxc-input>
   </view>
 
   <view class="forget-space"></view>
   <view class="forget-space"></view>
   <wxc-cc>
-    <wxc-button bind:click="changeCount" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+    <wxc-button bind:click="changeCount"
+                btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
                 size="large"
                 type="selection" value="确认修改账户"></wxc-button>
   </wxc-cc>
@@ -59,29 +63,54 @@
         color: '',
         icon: ''
       },
-      changePhone:'',
-      verificationCode:'',
-      pastPassword:''
+      changePhone: '',
+      verificationCode: '',
+      pastPassword: ''
     },
-    changePhoneInput(e){
-    this.setData({
-        changePhone:e.detail.value
-      });
-    },
-    verificationCodeInput(e){
+    changePhoneInput(e) {
       this.setData({
-        verificationCode:e.detail.value
+        changePhone: e.detail.value
       });
     },
-    pastPasswordInput(e){
+    verificationCodeInput(e) {
       this.setData({
-        pastPassword:e.detail.value
+        verificationCode: e.detail.value
       });
     },
-    changeCount(){
-      console.log(this.data.changePhone);
-      console.log(this.data.verificationCode);
-      console.log(this.data.pastPassword);
+    pastPasswordInput(e) {
+      this.setData({
+        pastPassword: e.detail.value
+      });
+    },
+    changeCount() {
+      wx.request({
+        url: 'http://localhost:8080/delivery/user/modifyUser',
+        method: 'POST',
+        data: {
+          newUserPhone: this.data.changePhone,
+          verifyCode: this.data.verificationCode,
+          passWord: this.data.pastPassword
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'Cookie': appInstance.globalData.authenticatedCode
+        },
+        success: res => {
+          if (res.statusCode === 200) {
+            this.showToast('帐号修改成功', '#5ac777', 'yes');
+            setTimeout(() => {
+              this.logout()
+            }, 1000);
+            return
+          }
+          this.showToast(res.data.message, '#c70009', 'no');
+        },
+        fail: error => {
+          this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
+        },
+        complete: () => {
+        }
+      });
     },
     showToast(text, color, icon) {
       this.setData({
@@ -104,7 +133,7 @@
     },
     logout() {
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/logout',
+        url: 'http://localhost:8080/delivery/logout',
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode

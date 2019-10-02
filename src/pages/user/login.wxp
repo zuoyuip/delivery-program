@@ -83,7 +83,7 @@
     },
     login() {
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/login',
+        url: 'http://localhost:8080/delivery/login',
         method: 'POST',
         data: {
           userName: this.data.userName,
@@ -131,7 +131,7 @@
     },
     verifyUser(authenticatedCode) {
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/user/authentication',
+        url: 'http://localhost:8080/delivery/user/authentication',
         method: 'GET',
         header: {
           'Cookie': authenticatedCode

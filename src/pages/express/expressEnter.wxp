@@ -179,7 +179,7 @@
     },
     submitExpress() {
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/delivery',
+        url: 'http://localhost:8080/delivery/delivery',
         method: 'POST',
         data: {
           deliveryName: this.data.expressNameList[this.data.expressNameIndex],
