@@ -5,6 +5,18 @@
       is-show="{{$toast.show}}"
       text="{{ $toast.text }}"
   ></wxc-toast>
+  <view class="space"></view>
+  <view wx:if="{{ userIsRefuse }}">
+    <wxc-cc>
+      <text class="time">审核未通过，审核日期：{{ review.reviewDate }}</text>
+    </wxc-cc>
+    <wxc-panel margin="{{false}}" title="未通过原因：">
+      <view class="content">{{ review.reviewMessage }}。请按照要求重新填写您的信息
+      </view>
+    </wxc-panel>
+    <view class="space"></view>
+  </view>
+
   <view class="input-wrap">
     <wxc-input bind:input="userInfoNameInput" placeholder="请输入真实姓名" right="{{true}}" title="姓名"
                type="text" value="{{ userInfoName }}"></wxc-input>
@@ -13,8 +25,8 @@
 
     <radio-group bindchange="checkboxChange">
       <label class="radio">
-        <radio checked="{{ true }}" value="男">男</radio>
-        <radio class="female" value="女">女</radio>
+        <radio checked="{{ isMan }}" value="男">男</radio>
+        <radio checked="{{ !isMan }}" class="female" value="女">女</radio>
       </label>
     </radio-group>
 
@@ -32,9 +44,9 @@
       </wxc-cc>
     </wxc-panel>
     <wxc-input bind:input="userInfoSubjectInput" placeholder="请输入所学专业" right="{{true}}" title="专业"
-               type="text"></wxc-input>
+               type="text" value="{{ userInfoSubject }}"></wxc-input>
     <wxc-input bind:input="userInfoStudentNumberInput" placeholder="请输入您的学号" right="{{true}}"
-               title="学号"
+               title="学号" value="{{ userInfoStudentNumber }}"
                type="number"></wxc-input>
   </view>
 
@@ -77,6 +89,7 @@
       userCollegeIndex: 0,
       userInfoName: '',
       userInfoSex: '男',
+      isMan: true,
       userInfoSubject: '',
       userInfoStudentNumber: '',
       $toast: {
@@ -84,7 +97,15 @@
         show: false,
         color: '',
         icon: ''
-      }
+      },
+      userIsRefuse: false,
+      review: {},
+      userInfo: {}
+    },
+    userIsRefuse() {
+      return appInstance.globalData.user.userInfoId !== null
+          && appInstance.globalData.user.userIsByReview === false
+          && appInstance.globalData.user.userIsSubmitReview === false
     },
     showToast(text, color, icon) {
       this.setData({
@@ -185,9 +206,25 @@
           'Cookie': appInstance.globalData.authenticatedCode
         },
         success: res => {
-          setTimeout(() =>{
+          setTimeout(() => {
             if (res.statusCode === 200) {
               this.showToast('信息上传成功', '#5ac777', 'yes');
+              setTimeout(() => {
+                wx.request({
+                  url: 'http://localhost:8080/delivery/user/authentication',
+                  method: 'GET',
+                  header: {
+                    'Cookie': appInstance.globalData.authenticatedCode
+                  },
+                  success: res => {
+                    appInstance.globalData.user = res.data.principal;
+                  },
+                  fail: error => {
+                  },
+                  complete: () => {
+                  }
+                });
+              }, 1000);
               setTimeout(() => {
                 wx.reLaunch({
                   url: '../home/me'
@@ -199,7 +236,7 @@
           }, 1000);
         },
         fail: error => {
-          setTimeout(() =>{
+          setTimeout(() => {
             this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
           }, 1000);
         },
@@ -212,8 +249,35 @@
         }
       });
     },
+    selectReview() {
+      wx.request({
+        url: 'http://localhost:8080/delivery/me/review/' + appInstance.globalData.user.reviewId,
+        method: 'GET',
+        header: {
+          'Cookie': appInstance.globalData.authenticatedCode
+        },
+        success: res => {
+          this.setData({
+            review: res.data
+          });
+        },
+        fail: error => {
+          setTimeout(() => {
+            this.showToast('审核内容请求失败，可能是网络原因', '#c70009', 'no');
+          }, 1000);
+        },
+        complete: () => {
+        }
+      });
+    },
     onLoad: function (options) {
       // 页面创建时执行
+      if (this.userIsRefuse()) {
+        this.selectReview();
+        this.setData({
+          userIsRefuse: true
+        });
+      }
 
     },
     onShow: function () {
@@ -244,10 +308,7 @@
       // 页面尺寸变化时执行
     },
     onTabItemTap(item) {
-      // tab 点击时执行
-      console.log(item.index);
-      console.log(item.pagePath);
-      console.log(item.text)
+
     },
     config: {
       // 导航栏标题文字内容
@@ -273,6 +334,17 @@
 </script>
 
 <style lang="less">
+
+  .content {
+    padding: ~'30rpx';
+    color: #ff0000;
+    background-color: #F0F0F0;
+  }
+
+  .time {
+    font-size: ~'30rpx';
+    color: #454648;
+  }
 
   .input-wrap {
     position: relative;

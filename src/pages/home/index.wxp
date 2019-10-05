@@ -34,7 +34,7 @@
     </view>
     <view wx:else>
       <wxc-abnor
-          bind:abnortap="onRetry"
+          bind:abnortap="selectExpress"
           type="{{ requestType }}"></wxc-abnor>
     </view>
   </view>
@@ -97,7 +97,7 @@
         </wxc-panel>
         <view class="space"></view>
         <button bindtap="acceptExpress" class="sure_button"
-                id="{{ expressList[expressIndex].deliveryId }}" type="{{ 'primary' }}">接受
+                id="{{ expressIndex }}" type="{{ 'primary' }}">接受
         </button>
       </view>
     </view>
@@ -165,7 +165,7 @@
             });
             return
           }
-          if (res.statusCode === 204){
+          if (res.statusCode === 204) {
             that.setData({
               requestType: 'ORDER'
             });
@@ -194,6 +194,11 @@
         this.showDialog('.noLogin-dialog');
         return;
       }
+      const review = user.userIsByReview;
+      if (!review) {
+        this.showToast('请先通过审核', '#c70009', 'no');
+        return
+      }
       wx.navigateTo({
         url: '../express/expressEnter'
       })
@@ -210,7 +215,13 @@
               'Cookie': appInstance.globalData.authenticatedCode
             },
             success: res => {
-              appInstance.globalData.user = res.data.principal;
+              new Promise((resolve) => {
+                appInstance.globalData.user = res.data.principal;
+                resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
+              }).then(() => {
+                this.selectUserInfo()
+              });
+
             },
             fail: error => {
             },
@@ -221,12 +232,23 @@
       });
     },
     acceptExpress(e) {
-      console.log(e.currentTarget.id);
+      const id = e.currentTarget.id;
+      const express = this.data.expressList[id];
       const user = appInstance.globalData.user;
       const userString = JSON.stringify(user);
       if (userString === '{}') {
         this.showDialog('.noLogin-dialog');
         return;
+      }
+      if (express.deliveryUserId === user.userId) {
+        this.showToast('这是您自己发布的包裹', '#c70009', 'no');
+        return;
+      }
+      if (express.deliveryUserSex !== '不限') {
+        if (!express.deliveryUserSex.endsWith(appInstance.globalData.userInfo.userInfoSex)) {
+          this.showToast('您的性别不符合包裹性别要求', '#c70009', 'no');
+          return;
+        }
       }
       this.showDialog('.accept-dialog');
     },
@@ -248,6 +270,12 @@
       this.hideDialog('.noLogin-dialog')
     },
     acceptOnConfirm() {
+      const user = appInstance.globalData.user;
+      const review = user.userIsByReview;
+      if (!review) {
+        this.showToast('请先通过审核', '#c70009', 'no');
+        return
+      }
       console.log('点击了确认按钮');
       this.hideDialog('.accept-dialog')
     },
@@ -255,15 +283,51 @@
       console.log('点击了取消按钮');
       this.hideDialog('.accept-dialog')
     },
+    selectUserInfo() {
+      console.log("执行");
+      const user = appInstance.globalData.user;
+      const userString = JSON.stringify(user);
+      if (userString === '{}') {
+        console.log("user");
+        return;
+      }
+      if (user.userInfoId === null || user.userInfoId.trim().length === 0) {
+        console.log("userInfoId");
+        return;
+      }
+      wx.request({
+        url: 'http://localhost:8080/delivery/admin/criteria/userInfo/' + user.userInfoId,
+        method: 'GET',
+        header: {
+          'Cookie': appInstance.globalData.authenticatedCode
+        },
+        success: res => {
+          appInstance.globalData.userInfo = res.data
+        },
+        fail: error => {
+          setTimeout(() => {
+            this.showToast('账户详情请求失败，可能是网络原因', '#c70009', 'no');
+          }, 1000);
+        },
+        complete: () => {
+        }
+      });
+    },
     onLoad: function (options) {
       // 页面创建时执行
-      this.selectExpress()
+      this.selectExpress();
     },
     onShow: function () {
       // 页面出现在前台时执行
     },
     onReady: function () {
+      // new Promise((resolve)=> {
       this.verifyUser();
+      // resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
+      // }).then(()=> {
+      //   this.selectUserInfo()
+      // });
+
       // 页面首次渲染完毕时执行
     },
     onHide: function () {
