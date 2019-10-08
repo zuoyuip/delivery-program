@@ -154,7 +154,7 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://localhost:8080/delivery/delivery',
+        url: 'http://39.107.244.193:8080/delivery/delivery',
         method: 'GET',
         success: res => {
           if (res.statusCode === 200) {
@@ -209,7 +209,7 @@
         success: res => {
           appInstance.globalData.authenticatedCode = res.data;
           wx.request({
-            url: 'http://localhost:8080/delivery/user/authentication',
+            url: 'http://39.107.244.193:8080/delivery/user/authentication',
             method: 'GET',
             header: {
               'Cookie': appInstance.globalData.authenticatedCode
@@ -239,6 +239,11 @@
       if (userString === '{}') {
         this.showDialog('.noLogin-dialog');
         return;
+      }
+      const review = user.userIsByReview;
+      if (!review) {
+        this.showToast('请先通过审核', '#c70009', 'no');
+        return
       }
       if (express.deliveryUserId === user.userId) {
         this.showToast('这是您自己发布的包裹', '#c70009', 'no');
@@ -270,33 +275,49 @@
       this.hideDialog('.noLogin-dialog')
     },
     acceptOnConfirm() {
-      const user = appInstance.globalData.user;
-      const review = user.userIsByReview;
-      if (!review) {
-        this.showToast('请先通过审核', '#c70009', 'no');
-        return
+      const deliveryId = this.data.expressList[this.data.expressIndex].deliveryId;
+      if (deliveryId.length === 0) {
+        this.showToast('小程序出错，请刷新重试', '#c70009', 'no')
       }
-      console.log('点击了确认按钮');
+      wx.request({
+        url: 'http://39.107.244.193:8080/delivery/delivery/transaction/' + deliveryId,
+        method: 'PUT',
+        header: {
+          'Cookie': appInstance.globalData.authenticatedCode
+        },
+        success: res => {
+          if (res.statusCode === 200) {
+            this.showToast(res.data.message, '#5ac777', 'yes');
+            return
+          }
+          this.showToast(res.data.message, '#c70009', 'no');
+        },
+        fail: error => {
+          this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
+        },
+        complete: () => {
+          this.setData({
+            maskStatus: 'hide'
+          });
+          this.selectExpress()
+        }
+      });
       this.hideDialog('.accept-dialog')
     },
     acceptOnCancel() {
-      console.log('点击了取消按钮');
       this.hideDialog('.accept-dialog')
     },
     selectUserInfo() {
-      console.log("执行");
       const user = appInstance.globalData.user;
       const userString = JSON.stringify(user);
       if (userString === '{}') {
-        console.log("user");
         return;
       }
       if (user.userInfoId === null || user.userInfoId.trim().length === 0) {
-        console.log("userInfoId");
         return;
       }
       wx.request({
-        url: 'http://localhost:8080/delivery/admin/criteria/userInfo/' + user.userInfoId,
+        url: 'http://39.107.244.193:8080/delivery/user/userInfo/' + user.userInfoId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
@@ -318,16 +339,11 @@
       this.selectExpress();
     },
     onShow: function () {
+      this.selectExpress()
       // 页面出现在前台时执行
     },
     onReady: function () {
-      // new Promise((resolve)=> {
       this.verifyUser();
-      // resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
-      // }).then(()=> {
-      //   this.selectUserInfo()
-      // });
-
       // 页面首次渲染完毕时执行
     },
     onHide: function () {

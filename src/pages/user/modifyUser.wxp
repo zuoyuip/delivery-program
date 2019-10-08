@@ -84,7 +84,7 @@
     },
     changeCount() {
       wx.request({
-        url: 'http://localhost:8080/delivery/user/modifyUser',
+        url: 'http://39.107.244.193:8080/delivery/user/modifyUser',
         method: 'POST',
         data: {
           newUserPhone: this.data.changePhone,
@@ -133,7 +133,7 @@
     },
     logout() {
       wx.request({
-        url: 'http://localhost:8080/delivery/logout',
+        url: 'http://39.107.244.193:8080/delivery/logout',
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode

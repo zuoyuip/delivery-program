@@ -182,6 +182,10 @@
       })
     },
     submitUserInfo() {
+      if (this.data.image === ''){
+        this.showToast('请选择上传的照片', '#c70009', 'no');
+        return
+      }
       this.setData({
         $toast: {
           text: '正在上传信息，请稍候',
@@ -190,8 +194,8 @@
           show: true
         }
       });
-      const uploadTask = wx.uploadFile({
-        url: 'http://localhost:8080/delivery/me/submitCriteria', //仅为示例，非真实的接口地址
+      wx.uploadFile({
+        url: 'http://39.107.244.193:8080/delivery/me/submitCriteria', //仅为示例，非真实的接口地址
         filePath: this.data.image,
         name: 'file',
         formData: {
@@ -206,12 +210,13 @@
           'Cookie': appInstance.globalData.authenticatedCode
         },
         success: res => {
-          setTimeout(() => {
             if (res.statusCode === 200) {
-              this.showToast('信息上传成功', '#5ac777', 'yes');
               setTimeout(() => {
+              this.showToast('信息上传成功', '#5ac777', 'yes');
+              }, 1000);
+              new Promise((resolve) => {
                 wx.request({
-                  url: 'http://localhost:8080/delivery/user/authentication',
+                  url: 'http://39.107.244.193:8080/delivery/user/authentication',
                   method: 'GET',
                   header: {
                     'Cookie': appInstance.globalData.authenticatedCode
@@ -224,16 +229,17 @@
                   complete: () => {
                   }
                 });
-              }, 1000);
-              setTimeout(() => {
-                wx.reLaunch({
-                  url: '../home/me'
-                })
-              }, 1000);
+                resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
+              }).then(() => {
+                setTimeout(() => {
+                  wx.reLaunch({
+                    url: '../home/me'
+                  })
+                }, 1000);
+              });
               return
             }
             this.showToast('服务器出错，请联系管理员', '#c70009', 'no');
-          }, 1000);
         },
         fail: error => {
           setTimeout(() => {
@@ -251,7 +257,7 @@
     },
     selectReview() {
       wx.request({
-        url: 'http://localhost:8080/delivery/me/review/' + appInstance.globalData.user.reviewId,
+        url: 'http://39.107.244.193:8080/delivery/me/review/' + appInstance.globalData.user.reviewId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode

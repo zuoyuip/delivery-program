@@ -103,7 +103,7 @@
         return
       }
       wx.request({
-        url: 'http://localhost:8080/delivery/user',
+        url: 'http://39.107.244.193:8080/delivery/user',
         method: 'POST',
         data: {
           userPhone: this.data.userPhone,
