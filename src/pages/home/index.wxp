@@ -336,7 +336,7 @@
     },
     onLoad: function (options) {
       // 页面创建时执行
-      this.selectExpress();
+      // this.selectExpress();
     },
     onShow: function () {
       this.selectExpress()

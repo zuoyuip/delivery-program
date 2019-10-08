@@ -29,10 +29,11 @@
                  placeholder="请输入验证码" type="number" value="{{verificationCode}}"></wxc-input>
     </view>
     <view class="input-wrap">
-      <wxc-button bind:click=""
-                  btnStyle="font-size: 28rpx;width: 260rpx;color: #ffffff;height: 90rpx;line-height: 90rpx;"
-                  size="normal"
-                  type="selection" value="发送验证码"></wxc-button>
+      <button bindtap="sendVerificationCode" class="sendButton"
+              disabled="{{ isSending }}"
+              type="primary">{{ buttonText }}
+      </button>
+
     </view>
   </wxc-cc>
   <view class="forget-space"></view>
@@ -51,6 +52,8 @@
       verificationCode: '',
       repeatPassword: '',
       againPassword: '',
+      isSending: false,
+      buttonText: '发送验证码',
       $toast: {
         text: '',
         show: false,
@@ -96,6 +99,26 @@
       this.setData({
         againPassword: e.detail.value
       });
+    },
+    sendVerificationCode() {
+      const _this = this;
+      _this.setData({
+        isSending: true
+      });
+      let time = 60;
+      const timer = setInterval(() => {
+        _this.setData({
+          buttonText : time + '\ts'
+        });
+        time--;
+        if (time < 0) {
+          _this.setData({
+            buttonText : '发送验证码',
+            isSending: false
+          });
+          clearInterval(timer)
+        }
+      }, 1000)
     },
     register() {
       if (this.data.repeatPassword.trim() !== this.data.againPassword.trim()) {
@@ -200,6 +223,14 @@
 
   .forget-space {
     height: ~'30rpx';
+  }
+
+  .sendButton {
+    font-size: ~'36rpx';
+    width: ~'260rpx';
+    color: #ffffff;
+    height: ~'90rpx';
+    line-height: ~'90rpx';
   }
 
 </style>
