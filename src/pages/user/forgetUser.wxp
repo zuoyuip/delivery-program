@@ -106,6 +106,21 @@
       });
     },
     sendVerificationCode() {
+      wx.request({
+        url: 'http://39.107.244.193:8080/delivery/user/sendVerificationCode/forget/'
+            + this.data.userPhone,
+        method: 'GET',
+        success: res => {
+          if (res.statusCode === 200) {
+            this.showToast(res.data.message, '#5ac777', 'yes');
+            return
+          }
+          this.showToast(res.data.message, '#c70009', 'no');
+        },
+        fail: error => {
+          this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
+        }
+      });
       const _this = this;
       _this.setData({
         isSending: true
