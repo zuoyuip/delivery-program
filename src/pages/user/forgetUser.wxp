@@ -27,14 +27,14 @@
   </wxc-cc>
 
   <view class="input-wrap">
-    <wxc-input bind:input="repeatPasswordInput" mode="wrapped" placeholder="输入您要重新设定的密码"
-               right="{{true}}" title="密码" password="true"
+    <wxc-input bind:input="repeatPasswordInput" mode="wrapped" password="true"
+               placeholder="输入您要重新设定的密码" right="{{true}}" title="密码"
                type="number" value="{{repeatPassword}}"></wxc-input>
   </view>
 
   <view class="input-wrap">
-    <wxc-input bind:input="againPasswordInput" mode="wrapped" placeholder="再次输入您要设定的密码"
-               right="{{true}}" title="重复密码" password="true"
+    <wxc-input bind:input="againPasswordInput" mode="wrapped" password="true"
+               placeholder="再次输入您要设定的密码" right="{{true}}" title="重复密码"
                type="number" value="{{againPassword}}"></wxc-input>
   </view>
   <view class="forget-space"></view>
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+  const appInstance = getApp();
   export default {
     data: {
       userPhone: '',
@@ -110,6 +111,9 @@
         url: 'http://39.107.244.193:8080/delivery/user/sendVerificationCode/forget/'
             + this.data.userPhone,
         method: 'GET',
+        header: {
+          'Cookie': appInstance.globalData.cookie
+        },
         success: res => {
           if (res.statusCode === 200) {
             this.showToast(res.data.message, '#5ac777', 'yes');
@@ -119,6 +123,9 @@
         },
         fail: error => {
           this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
+        },
+        complete: result => {
+          appInstance.globalData.cookie = result.cookies[0]
         }
       });
       const _this = this;
@@ -128,12 +135,12 @@
       let time = 60;
       const timer = setInterval(() => {
         _this.setData({
-          buttonText : time + '\ts'
+          buttonText: time + '\ts'
         });
         time--;
         if (time < 0) {
           _this.setData({
-            buttonText : '发送验证码',
+            buttonText: '发送验证码',
             isSending: false
           });
           clearInterval(timer)
@@ -145,36 +152,34 @@
         this.showToast('密码设置不一致', '#c70009', 'no');
         return
       }
-        wx.request({
-          url: 'http://39.107.244.193:8080/delivery/user/forgetUser/',
-          method: 'POST',
-          data: {
-            userPhone: this.data.userPhone.trim(),
-            verifyCode: this.data.verificationCode.trim(),
-            passWord: this.data.repeatPassword.trim()
-          },
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success: res => {
-            if (res.statusCode === 200) {
-              this.showToast(res.data.message, '#5ac777', 'yes');
-              setTimeout(() => {
-                wx.reLaunch({
-                  url: '../user/login'
-                })
-              }, 1000);
-              return
-            }
-            this.showToast(res.data.message, '#c70009', 'no');
-          },
-          fail: error => {
-            this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
-          },
-          complete: () => {
-
+      wx.request({
+        url: 'http://39.107.244.193:8080/delivery/user/forgetUser/',
+        method: 'POST',
+        data: {
+          userPhone: this.data.userPhone.trim(),
+          verifyCode: this.data.verificationCode.trim(),
+          passWord: this.data.repeatPassword.trim()
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'Cookie': appInstance.globalData.cookie
+        },
+        success: res => {
+          if (res.statusCode === 200) {
+            this.showToast(res.data.message, '#5ac777', 'yes');
+            setTimeout(() => {
+              wx.reLaunch({
+                url: '../user/login'
+              })
+            }, 1000);
+            return
           }
-        });
+          this.showToast(res.data.message, '#c70009', 'no');
+        },
+        fail: error => {
+          this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
+        }
+      });
     },
     onLoad: function (options) {
       // 页面创建时执行

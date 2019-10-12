@@ -49,6 +49,12 @@
       <view class="input-wrap">
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
+            <text class="title-style">唯一标识</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryOrderCode }}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
             <text class="title-style">快递名称</text>
             <text class="picker-message">{{ expressList[expressIndex].deliveryName }}</text>
           </wxc-cc>
@@ -472,7 +478,7 @@
 
   .popup__content {
     width: ~'800rpx';
-    height: ~'900rpx';
+    height: ~'1000rpx';
     line-height: ~'500rpx';
     background: #ffffff;
     text-align: center;

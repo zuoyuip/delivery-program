@@ -102,7 +102,7 @@
     },
     // 页面跳转
     toExpressIndent() {
-      if (!this.data.isLogin){
+      if (!this.data.isLogin) {
         this.showToast('您还没有登录，请您先登录', '#888888', 'close');
         return
       }
@@ -111,7 +111,7 @@
       })
     },
     toDeliveryIndent() {
-      if (!this.data.isLogin){
+      if (!this.data.isLogin) {
         this.showToast('您还没有登录，请您先登录', '#888888', 'close');
         return
       }
@@ -157,21 +157,16 @@
         url: '../user/login'
       })
     },
-    onLoad: function (options) {
-      // 页面创建时执行
+    hideTel(tel) {
+      const reg = /^(\d{3})\d{4}(\d{4})$/;
+      return tel.replace(reg, "$1****$2");
+    },
+    loadingUser(user) {
       const that = this;
-      const user = appInstance.globalData.user;
-      const userString = JSON.stringify(user);
-      if (userString === '{}') {
-        that.setData({
-          userPhone: '未登录',
-          desc: '请您先登录'
-        });
-        return
-      }
+      const userPhone = user.userPhone;
       that.setData({
-        userPhone: this.hideTel(user.userPhone),
         isLogin: true,
+        userPhone: this.hideTel(userPhone),
       });
       if (user.userInfoId === null && user.userIsByReview === false && user.userIsSubmitReview
           === false) {
@@ -201,15 +196,32 @@
         });
       }
     },
-    hideTel(tel) {
-      const reg = /^(\d{3})\d{4}(\d{4})$/;
-      return tel.replace(reg, "$1****$2");
-    },
     onShow: function () {
       // 页面出现在前台时执行
     },
     onReady: function () {
       // 页面首次渲染完毕时执行
+      const that = this;
+      const user = appInstance.globalData.user;
+      const userString = JSON.stringify(user);
+      if (userString === '{}') {
+        that.setData({
+          userPhone: '未登录',
+          desc: '请您先登录'
+        });
+        return
+      }
+      if (userString === undefined) {
+          wx.reLaunch({
+            url: '../home/index'
+          });
+        return
+      }
+      this.loadingUser(user);
+    },
+    onLoad: function (options) {
+      // 页面创建时执行
+
     },
     onHide: function () {
       // 页面从前台变为后台时执行
