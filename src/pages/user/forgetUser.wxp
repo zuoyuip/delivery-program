@@ -125,7 +125,9 @@
           this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
         },
         complete: result => {
-          appInstance.globalData.cookie = result.cookies[0]
+          if (appInstance.globalData.cookie === '') {
+            appInstance.globalData.cookie = result.cookies[0]
+          }
         }
       });
       const _this = this;
@@ -178,6 +180,11 @@
         },
         fail: error => {
           this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
+        },
+        complete: result => {
+          if (appInstance.globalData.cookie === '') {
+            appInstance.globalData.cookie = result.cookies[0]
+          }
         }
       });
     },

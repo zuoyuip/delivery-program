@@ -30,7 +30,7 @@
         'pages/user/modifyUser',
         // 注册
         'pages/user/register',
-          // 忘记密码
+        // 忘记密码
         'pages/user/forgetUser'
       ],
       // 界面风格
@@ -82,6 +82,7 @@
       cookie: ''
     },
     onLaunch(options) {
+
     },
     onShow(options) {
       // Do something when show.
