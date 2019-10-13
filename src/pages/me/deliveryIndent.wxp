@@ -4,7 +4,9 @@
       <view wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
             wx:key="deliveryId">
         <view class="space"></view>
-        <wxc-cc><text class="message2">{{ express.deliveryDate }}</text></wxc-cc>
+        <wxc-cc>
+          <text class="message2">{{ express.deliveryDate }}</text>
+        </wxc-cc>
         <view class="space"></view>
         <view bindtap="chooseExpress" class="bgc" id="{{ index }}">
           <view class="space2"></view>
@@ -35,8 +37,8 @@
     </view>
     <view wx:else>
       <wxc-abnor
-              bind:abnortap="onRetry"
-              type="{{ requestType }}"></wxc-abnor>
+          bind:abnortap="onRetry"
+          type="{{ requestType }}"></wxc-abnor>
     </view>
   </view>
   <wxc-mask content-align="bl" status="{{ maskStatus }}">
@@ -122,7 +124,8 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/me/deliveryWorker/' + appInstance.globalData.user.userId,
+        url: 'http://39.107.244.193:8080/delivery/me/deliveryWorker/'
+            + appInstance.globalData.user.userId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
@@ -136,8 +139,9 @@
             });
             return
           }
-          if (res.statusCode === 204){
+          if (res.statusCode === 204) {
             that.setData({
+              expressList: {},
               requestType: 'ORDER'
             });
             return;
@@ -230,6 +234,7 @@
     margin-top: 4%;
     margin-left: 8%;
   }
+
   //大背景style
   .list-wrap {
     width: 100%;
@@ -302,12 +307,14 @@
     font-size: ~'25rpx';
     color: #454648;
   }
+
   .title-style {
     flex: 1;
     height: ~'44rpx';
     min-height: ~'44rpx';
     line-height: ~'44rpx';
   }
+
   .popup__content {
     width: ~'800rpx';
     /*height: ~'850rpx';*/
@@ -315,6 +322,7 @@
     background: #ffffff;
     text-align: center;
   }
+
   /*.add_button {*/
   /*  position: fixed;*/
   /*  width: ~'150rpx';*/
@@ -334,6 +342,7 @@
     margin-left: ~'44rpx';
     color: #959595;
   }
+
   .input-wrap {
     position: relative;
     margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
