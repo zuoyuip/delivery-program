@@ -141,7 +141,7 @@
           }
           if (res.statusCode === 204) {
             that.setData({
-              expressList: {},
+              expressList: [],
               requestType: 'ORDER'
             });
             return;
