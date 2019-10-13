@@ -7,7 +7,7 @@
   ></wxc-toast>
   <wxc-panel bind:click="jump" border="{{false}}" class="content">
     <wxc-cc class="cc">
-      <wxc-avatar class="avatar" mode="aspectFit" src="../../images/dog.png">
+      <wxc-avatar class="avatar" mode="aspectFit" src="{{ heardImage }}">
       </wxc-avatar>
       <wxc-avatar class="cc__text">{{ userPhone }}</wxc-avatar>
       <wxc-icon color="#959595" size="26" type="arrow-right"></wxc-icon>
@@ -34,7 +34,7 @@
       <wxc-list
           bind:click="toCriteria" class="item"
           desc="{{ desc }}"
-          dot="{{true}}"
+          dot="{{ desc !== '您已通过认证' }}"
           src="../../../../images/xinxi.png"
           title="完善信息"></wxc-list>
       <wxc-list
@@ -65,6 +65,9 @@
     <image src="../../images/zhuanye.png"></image>
     <image src="../../images/xuehao.png"></image>
     <image src="../../images/wenti.png"></image>
+    <image src="../../images/boy.png"></image>
+    <image src="../../images/girl.png"></image>
+    <image src="../../images/dog.png"></image>
   </view>
 </template>
 
@@ -76,6 +79,7 @@
       userPhone: '',
       isLogin: false,
       desc: '',
+      heardImage: '../../images/dog.png',
       $toast: {
         text: '',
         show: false,
@@ -191,8 +195,10 @@
       }
       if (user.userInfoId !== null && user.userIsByReview === true && user.userIsSubmitReview
           === true) {
+        let userInfoSex = appInstance.globalData.userInfo.userInfoSex;
         that.setData({
-          desc: '您已通过认证'
+          desc: '您已通过认证',
+          heardImage: userInfoSex === '男' ? '../../images/boy.png' : '../../images/girl.png'
         });
       }
     },

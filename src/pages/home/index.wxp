@@ -101,10 +101,10 @@
             <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
           </wxc-cc>
         </wxc-panel>
-        <view class="space"></view>
+        <view class="space1"></view>
         <button bindtap="acceptExpress" class="sure_button"
-                id="{{ expressIndex }}" type="{{ 'primary' }}">接受
-        </button>
+                        id="{{ expressIndex }}" type="{{ 'primary' }}">接受
+                </button>
       </view>
     </view>
   </wxc-mask>
@@ -470,7 +470,9 @@
   .space {
     height: ~'66rpx';
   }
-
+  .space1 {
+    height: ~'27rpx';
+  }
 
   .add_button {
     position: fixed;
@@ -490,8 +492,8 @@
 
   .popup__content {
     width: ~'800rpx';
-    height: ~'1000rpx';
-    line-height: ~'500rpx';
+    height: ~'930rpx';
+    line-height: ~'465rpx';
     background: #ffffff;
     text-align: center;
   }

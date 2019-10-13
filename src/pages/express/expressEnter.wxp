@@ -41,13 +41,13 @@
     </wxc-panel>
     <wxc-input bind:input="deliveryGoalAddressInput" placeholder="收货的详细地址（你的位置）" right="{{true}}"
                title="收货地址" type="text" value="{{ deliveryGoalAddress }}"></wxc-input>
-    <wxc-input bind:input="deliveryUserNameInput" placeholder="快递登记的名字" right="{{true}}" title="收件人"
+    <wxc-input bind:input="deliveryUserNameInput" placeholder="快递登记的名字" right="{{true}}" title="收 件 人"
                type="text" value="{{ deliveryUserName }}"></wxc-input>
     <wxc-input bind:input="deliveryUserPhoneInput" maxlength="11" placeholder="（放心填写，仅接单人可见）"
                right="{{true}}" title="手机号码" type="number"
                value="{{ deliveryUserPhone }}"></wxc-input>
     <wxc-input bind:input="deliveryCodeInput" placeholder="（放心填写，仅接单人可见）" right="{{true}}"
-               title="取货码" type="text" value="{{ deliveryCode }}"></wxc-input>
+               title="取 货 码" type="text" value="{{ deliveryCode }}"></wxc-input>
     <wxc-panel bind:click="expressWeightPickerChange" border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">快递体积</text>
@@ -80,7 +80,7 @@
       </wxc-cc>
     </wxc-panel>
     <wxc-input bind:input="deliverySuggestInput" maxlength="20" placeholder="送达时间、注意事项等问题"
-               right="{{true}}" title="备注"
+               right="{{true}}" title="备 _ 注"
                type="text"></wxc-input>
     <view class="forget-space"></view>
     <wxc-panel border="{{ false }}" class="agree">
@@ -90,9 +90,9 @@
     </wxc-panel>
     <view class="forget-space"></view>
     <wxc-cc>
-      <button bindtap="submitExpress" class="submitButton"
-              disabled="{{ isAgree }}"
-              type="primary">提交
+      <button bindtap="submitExpress" class="sure_button"
+              id="{{ expressIndex }}" type="{{ 'primary' }}"
+              disabled="{{ isAgree }}"> 发布
       </button>
     </wxc-cc>
     <view class="forget-space"></view>
@@ -374,8 +374,12 @@
     height: ~'30rpx';
   }
 
-  .submitButton {
+  .sure_button {
+    border-radius: ~'26rpx';
     width: ~'500rpx';
-    color: #ffffff;
+    height: ~'60rpx';
+    font-size: ~'30rpx';
+    line-height: ~'60rpx';
+    margin-left: 15%;
   }
 </style>

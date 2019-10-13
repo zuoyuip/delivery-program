@@ -102,6 +102,10 @@
       });
     },
     sendVerificationCode() {
+      if (this.data.userPhone.length < 11){
+        this.showToast('请输入正确的手机号', '#a2675a', 'warning');
+        return
+      }
       wx.request({
         url: 'http://39.107.244.193:8080/delivery/user/sendVerificationCode/register/'
             + this.data.userPhone,

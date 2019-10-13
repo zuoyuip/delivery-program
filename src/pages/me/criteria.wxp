@@ -67,7 +67,6 @@
   </wxc-panel>
 
   <view class="space"></view>
-
   <wxc-cc>
     <wxc-button bind:click="submitUserInfo"
                 btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
@@ -388,7 +387,6 @@
     color: #959595;
     padding-bottom: ~'16rpx';
   }
-
   .btn-style {
     margin-left: ~'220rpx';
   }

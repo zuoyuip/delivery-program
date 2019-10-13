@@ -1,15 +1,13 @@
 <template>
   <wxc-toast
-      icon="{{ $toast.icon }}"
-      icon-color="{{ $toast.color }}"
-      is-show="{{$toast.show}}"
-      text="{{ $toast.text }}"
+          icon="{{ $toast.icon }}"
+          icon-color="{{ $toast.color }}"
+          is-show="{{$toast.show}}"
+          text="{{ $toast.text }}"
   ></wxc-toast>
   <view class="space"></view>
   <wxc-cc>
-    <wxc-button bind:click="logout" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
-                size="large"
-                type="danger" value="退出该帐号"></wxc-button>
+    <text bindtap="logout" style="color: #888888; text-decoration: underline #888888">退出账号</text>
   </wxc-cc>
   <view class="space"></view>
   <view class="input-wrap">
@@ -43,13 +41,13 @@
   <view class="forget-space"></view>
   <wxc-cc>
     <wxc-button bind:click="changeCount"
-                btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+                btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;background-color: #1aad19;"
                 size="large"
                 type="selection" value="确认修改账户"></wxc-button>
   </wxc-cc>
   <view class="space"></view>
   <wxc-loadmore
-      text="更改后请使用新的手机号码和原密码进行登录"></wxc-loadmore>
+          text="更改后请使用新的手机号码和原密码进行登录"></wxc-loadmore>
   <view class="space"></view>
 </template>
 
@@ -86,9 +84,13 @@
     },
     sendVerificationCode() {
       // 39.107.244.193
+      if (this.data.changePhone.length < 11){
+        this.showToast('请输入正确的手机号', '#a2675a', 'warning');
+        return
+      }
       wx.request({
         url: 'http://39.107.244.193:8080/delivery/user/sendVerificationCode/modify/'
-            + this.data.changePhone,
+                + this.data.changePhone,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
