@@ -69,7 +69,7 @@
   <view class="space"></view>
   <wxc-cc>
     <wxc-button bind:click="submitUserInfo"
-                btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
+                btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;background-color:#1aad19"
                 size="normal"
                 type="selection" value="提交"></wxc-button>
   </wxc-cc>

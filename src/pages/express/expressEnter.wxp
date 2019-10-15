@@ -8,7 +8,7 @@
   <view class="input-wrap">
     <wxc-panel bind:click="expressNamePickerChange" border="{{ false }}" class="panel">
       <wxc-cc>
-        <text class="title-style">快递名称</text>
+        <text class="title-style">快递名称：</text>
         <picker bindchange="expressNamePickerChange" range="{{ expressNameList }}"
                 value="{{ expressNameIndex }}">
           <view class="picker-message">
@@ -17,9 +17,20 @@
         </picker>
       </wxc-cc>
     </wxc-panel>
+    <wxc-panel bind:click="expressWeightPickerChange" border="{{ false }}" class="panel">
+      <wxc-cc>
+        <text class="title-style">快递体积：</text>
+        <picker bindchange="expressWeightPickerChange" range="{{ expressWeightList }}"
+                value="{{ expressWeightIndex }}">
+          <view class="picker-message">
+            {{ expressWeightList[expressWeightIndex] }}
+          </view>
+        </picker>
+      </wxc-cc>
+    </wxc-panel>
     <wxc-panel bind:click="deliveryAddressPickerChange" border="{{ false }}" class="panel">
       <wxc-cc>
-        <text class="title-style">取件地址</text>
+        <text class="title-style">取件地址：</text>
         <picker bindchange="deliveryAddressPickerChange" range="{{ deliveryAddressList }}"
                 value="{{ deliveryAddressIndex }}">
           <view class="picker-message">
@@ -30,7 +41,7 @@
     </wxc-panel>
     <wxc-panel bind:click="floorPickerChange" border="{{ false }}" class="panel">
       <wxc-cc>
-        <text class="title-style">收货楼号</text>
+        <text class="title-style">收货楼号：</text>
         <picker bindchange="floorPickerChange" range="{{ floorNumberList }}"
                 value="{{ floorNumberIndex }}">
           <view class="picker-message">
@@ -39,29 +50,18 @@
         </picker>
       </wxc-cc>
     </wxc-panel>
-    <wxc-input bind:input="deliveryGoalAddressInput" placeholder="收货的详细地址（你的位置）" right="{{true}}"
-               title="收货地址" type="text" value="{{ deliveryGoalAddress }}"></wxc-input>
-    <wxc-input bind:input="deliveryUserNameInput" placeholder="快递登记的名字" right="{{true}}" title="收 件 人"
+    <wxc-input bind:input="deliveryGoalAddressInput" placeholder="具体位置" right="{{true}}"
+               title="收货地址：" type="text" value="{{ deliveryGoalAddress }}"></wxc-input>
+    <wxc-input bind:input="deliveryUserNameInput" placeholder="快递上的名字" right="{{true}}" title="收件人："
                type="text" value="{{ deliveryUserName }}"></wxc-input>
-    <wxc-input bind:input="deliveryUserPhoneInput" maxlength="11" placeholder="（放心填写，仅接单人可见）"
-               right="{{true}}" title="手机号码" type="number"
+    <wxc-input bind:input="deliveryUserPhoneInput" maxlength="11" placeholder="放心填写，仅接单人可见"
+               right="{{true}}" title="联系方式：" type="number"
                value="{{ deliveryUserPhone }}"></wxc-input>
-    <wxc-input bind:input="deliveryCodeInput" placeholder="（放心填写，仅接单人可见）" right="{{true}}"
-               title="取 货 码" type="text" value="{{ deliveryCode }}"></wxc-input>
-    <wxc-panel bind:click="expressWeightPickerChange" border="{{ false }}" class="panel">
-      <wxc-cc>
-        <text class="title-style">快递体积</text>
-        <picker bindchange="expressWeightPickerChange" range="{{ expressWeightList }}"
-                value="{{ expressWeightIndex }}">
-          <view class="picker-message">
-            {{ expressWeightList[expressWeightIndex] }}
-          </view>
-        </picker>
-      </wxc-cc>
-    </wxc-panel>
+    <wxc-input bind:input="deliveryCodeInput" placeholder="仅接单人可见" right="{{true}}"
+               title="取货码：" type="text" value="{{ deliveryCode }}"></wxc-input>
     <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
-        <text class="title-style">酬金（建议2元起）</text>
+        <text class="title-style" decode="true">酬&nbsp;&nbsp;&nbsp;&nbsp;金：</text>
         <wxc-counter bind:changenumber="onChangeNumber" class="counter-message" color="#959595"
                      max="{{100}}"
                      min="2" number="2"></wxc-counter>
@@ -69,7 +69,7 @@
     </wxc-panel>
     <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
-        <text class="title-style">性别限制</text>
+        <text class="title-style">领取人：</text>
         <radio-group bindchange="checkboxChange">
           <label class="radio">
             <radio checked="{{ true }}" value="不限">不限</radio>
@@ -80,7 +80,7 @@
       </wxc-cc>
     </wxc-panel>
     <wxc-input bind:input="deliverySuggestInput" maxlength="20" placeholder="送达时间、注意事项等问题"
-               right="{{true}}" title="备 _ 注"
+               right="{{true}}" title="备注："
                type="text"></wxc-input>
     <view class="forget-space"></view>
     <wxc-panel border="{{ false }}" class="agree">
@@ -88,7 +88,7 @@
         <checkbox class="agree-text" value="agree">我同意货到后支付佣金</checkbox>
       </radio-group>
     </wxc-panel>
-    <view class="forget-space"></view>
+    <view class="forget-space1"></view>
     <wxc-cc>
       <button bindtap="submitExpress" class="sure_button"
               id="{{ expressIndex }}" type="{{ 'primary' }}"
@@ -119,7 +119,7 @@
       floorNumberList: data.mathList,
       floorNumberIndex: 0,
       expressWeightList: data.expressWeightList,
-      expressWeightIndex: 3,
+      expressWeightIndex: 0,
       isAgree: true,
       $toast: {
         text: '',
@@ -338,7 +338,7 @@
   }
 
   .counter-message {
-    margin-left: ~'233rpx';
+    margin-left: ~'370rpx';
     color: #959595;
     padding-bottom: ~'16rpx';
   }
@@ -371,7 +371,10 @@
   }
 
   .forget-space {
-    height: ~'30rpx';
+    height: ~'5rpx';
+  }
+  .forget-space1 {
+    height: ~'25rpx';
   }
 
   .sure_button {

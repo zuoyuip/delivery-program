@@ -16,8 +16,8 @@
         <view class="weui-textarea-counter">{{contentCount}}/500</view>
         <view class="space"></view>
         <wxc-button bind:click="submitSuggest"
-                    btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff; margin-right:10%;margin-left:10%"
-                    size="normal" type="selection" value="提交"></wxc-button>
+                    btnStyle="background-color:#1aad19; width: 500rpx;border-radius: 26rpx;color: #frgin-right:10%;margin-left:10%"
+                    size="normal" type="selection" value="提交"></wxc-button>fffff; ma
     </view>
 
 </template>

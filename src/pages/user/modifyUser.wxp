@@ -42,7 +42,7 @@
   <wxc-cc>
     <wxc-button bind:click="changeCount"
                 btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;background-color: #1aad19;"
-                size="large"
+                size="normal"
                 type="selection" value="确认修改账户"></wxc-button>
   </wxc-cc>
   <view class="space"></view>
@@ -268,6 +268,7 @@
   .input-wrap {
     position: relative;
     margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+    width:120%;
   }
 
   .forget-space {
@@ -275,10 +276,10 @@
   }
 
   .sendButton {
-    font-size: ~'36rpx';
-    width: ~'260rpx';
+    font-size: ~'32rpx';
+    width: 70%;
     color: #ffffff;
-    height: ~'90rpx';
-    line-height: ~'90rpx';
+    height: ~'60rpx';
+    line-height: ~'60rpx';
   }
 </style>
