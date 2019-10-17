@@ -185,6 +185,22 @@
         this.showToast('请选择上传的照片', '#c70009', 'no');
         return
       }
+      if (this.data.userCollegeIndex === 0){
+        this.showToast('请选择学院', '#c70009', 'no');
+        return
+      }
+      if (this.data.userInfoName === ''){
+        this.showToast('请输入姓名', '#c70009', 'no');
+        return
+      }
+      if (this.data.userInfoSubject === ''){
+        this.showToast('请输入专业', '#c70009', 'no');
+        return
+      }
+      if (this.data.userInfoStudentNumber === ''){
+        this.showToast('请输入学号', '#c70009', 'no');
+        return
+      }
       this.setData({
         $toast: {
           text: '正在上传信息，请稍候',
