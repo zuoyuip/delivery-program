@@ -401,7 +401,7 @@
       // 是否开启当前页面下拉刷新。
       enablePullDownRefresh: true,
       // 设置为 true 则页面整体不能上下滚动
-      disableScroll: false,
+      disableScroll: true,
       // 禁止页面右滑手势返回
       disableSwipeBack: false,
       usingComponents: {
