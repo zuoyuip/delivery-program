@@ -42,6 +42,8 @@
     <radio-group bindchange="agreement">
       <checkbox class="agree-text" value="receive"></checkbox>
       <text style="font-size: 10px;color: #888888" bindtap="toUserAgreement">我已阅读并同意<text style="font-size: 10px;color: #fd8000" >《用户协议》</text></text>
+        <text style="font-size: 10px;color: #888888">和</text>
+        <text style="font-size: 10px;color: #fd8000" bindtap="toPrivacyPolicy">《隐私政策》</text>
     </radio-group>
   </view>
   <view class="forget-space"></view>
@@ -206,6 +208,11 @@
         url: '../user/userAgreement'
       })
     },
+      toPrivacyPolicy() {
+          wx.navigateTo({
+              url: '../user/privacyPolicy'
+          })
+      },
     onLoad: function (options) {
       // 页面创建时执行
 
@@ -298,7 +305,7 @@
     height: ~'60rpx';
     font-size: ~'30rpx';
     line-height: ~'60rpx';
-    margin-left: 15%;
+    margin-left: 17%;
   }
   .radio {
     font-size: ~'32rpx';

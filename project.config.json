@@ -3,7 +3,7 @@
 	"description": "项目配置文件。",
 	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
-	"appid": "touristappid",
+	"appid": "wx0559a1363e6fb362",
 	"projectname": "delivery-program",
 	"setting": {
 		"urlCheck": true,

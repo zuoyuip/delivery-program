@@ -33,7 +33,9 @@
         // 忘记密码
         'pages/user/forgetUser',
         //用户协议
-        'pages/user/userAgreement'
+        'pages/user/userAgreement',
+        //隐私政策
+        'pages/user/privacyPolicy'
       ],
       // 界面风格
       window: {

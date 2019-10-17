@@ -12,7 +12,7 @@
             <view class="yangShi">3.Q：怎么保证我发布的代取物品的安全?</view>
             <view class="space"></view>
                 <view>A：</view>
-                ①如果您选择不限制取件人，顺便取的用户均是通过校园卡
+                ①如果您选择不限制取件人，相互取的用户均是通过校园卡
                 认证的本校学生，可通过学号电话等信息直接追踪到个人。
                 ②贵重物品建议取件人限制选为官方团队。
             <view>③情节严重者，信息提交保卫处。</view>
@@ -28,9 +28,9 @@
             <view class="space"></view>
             <view class="yangShi"> 5.Q：如果发生交易纠纷怎么办?</view>
             <view class="space"></view>
-            A：可在小程序内通过反馈建议进行提交举报，顺便取官方
+            A：可在小程序内通过反馈建议进行提交举报，相互取官方
                 团队介入审核。若未选择限制官方团队接单而发生快递丢失
-                情况，顺便取团队不承担赔偿责任。
+                情况，相互取团队不承担赔偿责任。
             <view class="space"></view>
             <view class="yangShi">6.Q：交易完成对方不付款怎么办?</view>
             <view class="space"></view>
@@ -45,7 +45,7 @@
             A：点击小程序内“联系我们”可以和我们取得联系，或发送邮件至
             wordpressp1@163.com
             <view class="space"></view>
-            <view class="yangShi"><text style="font-size: 10px;color: #fd8000" bindtap="toUserAgreement">《用户协议》</text></view>
+            <view class="yangShi"><text style="font-size: 10px;color: #fd8000" bindtap="toUserAgreement">《用户协议》</text><text style="font-size: 10px;color: #fd8000" bindtap="toPrivacyPolicy">《隐私政策》</text></view>
             <view class="space"></view>
         </view>
     </wxc-panel>
@@ -60,6 +60,11 @@
       toUserAgreement() {
           wx.navigateTo({
               url: '../user/userAgreement'
+          })
+      },
+      toPrivacyPolicy() {
+          wx.navigateTo({
+              url: '../user/privacyPolicy'
           })
       },
     onLoad: function (options) {

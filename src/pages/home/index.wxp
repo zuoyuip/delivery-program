@@ -457,7 +457,7 @@
 
   .th {
     font-weight: 500;
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     font-size: ~'36rpx';
     color: #666666;
     height: ~'66rpx';
