@@ -348,10 +348,10 @@
     },
     onLoad: function (options) {
       // 页面创建时执行
-      // this.selectExpress();
+      this.selectExpress();
     },
     onShow: function () {
-      this.selectExpress()
+      // this.selectExpress()
       // 页面出现在前台时执行
     },
     onReady: function () {
@@ -382,7 +382,7 @@
     },
     onTabItemTap(item) {
       // tab 点击时执行
-
+      this.selectExpress()
     },
     uuid() {
       const s = [];
@@ -399,9 +399,9 @@
       // 导航栏标题文字内容
       navigationBarTitleText: '主页',
       // 是否开启当前页面下拉刷新。
-      enablePullDownRefresh: true,
+      enablePullDownRefresh: false,
       // 设置为 true 则页面整体不能上下滚动
-      disableScroll: true,
+      disableScroll: false,
       // 禁止页面右滑手势返回
       disableSwipeBack: false,
       usingComponents: {

@@ -66,7 +66,7 @@
             // 图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px，不支持网络图片。
             iconPath: 'images/express.png',
             // 选中时的图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px，不支持网络图片。
-            selectedIconPath: 'images/selectedExpress.png',
+            selectedIconPath: 'images/refresh.png',
             // tab 上按钮文字
             text: '主页'
           },
