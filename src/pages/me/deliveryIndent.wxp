@@ -69,6 +69,12 @@
         </wxc-panel>
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
+            <text class="title-style">送达地址</text>
+            <text class="picker-message">{{ express.deliveryGoalFloor}}</text>
+          </wxc-cc>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
+          <wxc-cc>
             <text class="title-style">性别限制</text>
             <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>
           </wxc-cc>
