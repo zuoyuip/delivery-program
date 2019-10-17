@@ -12,7 +12,7 @@
           <view class="space2"></view>
           <view class="content">
             <text decode="true">订单号:</text>
-            <text class="message1">{{ express.deliveryOrderCode }}</text>
+            <text class="message3">{{ express.deliveryOrderCode }}</text>
           </view>
           <view class="divLine"></view>
           <view class="content">
@@ -37,8 +37,8 @@
     </view>
     <view wx:else>
       <wxc-abnor
-          bind:abnortap="onRetry"
-          type="{{ requestType }}"></wxc-abnor>
+              bind:abnortap="onRetry"
+              type="{{ requestType }}"></wxc-abnor>
     </view>
   </view>
   <wxc-mask content-align="bl" status="{{ maskStatus }}">
@@ -137,7 +137,7 @@
       });
       wx.request({
         url: 'http://zuoyu.top:8080/delivery/me/deliveryWorker/'
-            + appInstance.globalData.user.userId,
+                + appInstance.globalData.user.userId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
@@ -270,20 +270,20 @@
   .bgc {
     background-color: #ffffff;
     border-radius: ~'30rpx';
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    box-shadow: ~'0rpx' ~'7rpx' ~'8rpx' ~'-8rpx' #333333;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    box-shadow: 0px 7px 24px -17px #333333;
   }
 
   //水平线
   .divLine {
     background-color: #dadada;
-    width: 90%;
+    width: 80%;
     /*height: 1px;*/
-    margin-left: 5%;
-    margin-right: 5%;
-    padding: ~'1rpx';
+    margin-left: 10%;
+    margin-right: 10%;
+    height: ~'0.02rpx';
   }
 
   //空格
@@ -308,6 +308,13 @@
   //悬赏行style
   .message1 {
     margin-left: 40%;
+    font-weight: lighter;
+    font-size: ~'30rpx';
+    color: #888888;
+    text-align: left;
+  }
+  .message3 {
+    margin-left: 35%;
     font-weight: lighter;
     font-size: ~'30rpx';
     color: #888888;

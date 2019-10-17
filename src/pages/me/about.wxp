@@ -42,7 +42,7 @@
             <view class="space"></view>
             <view class="yangShi">8.Q：如何联系官方团队?</view>
             <view class="space"></view>
-            A：点击小程序内“联系我们”可以和我们取得联系，或发送邮件至
+            A：点击小程序内“联系我们”或者“反馈建议”可以和我们取得联系，你也可以发送邮件至
             wordpressp1@163.com
             <view class="space"></view>
             <view class="yangShi"><text style="font-size: 10px;color: #fd8000" bindtap="toUserAgreement">《用户协议》</text><text style="font-size: 10px;color: #fd8000" bindtap="toPrivacyPolicy">《隐私政策》</text></view>
