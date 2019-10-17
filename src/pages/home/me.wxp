@@ -68,6 +68,7 @@
     <image src="../../images/boy.png"></image>
     <image src="../../images/girl.png"></image>
     <image src="../../images/dog.png"></image>
+    <image src="../../images/refresh.png"></image>
   </view>
 </template>
 
