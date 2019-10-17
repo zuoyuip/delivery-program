@@ -70,7 +70,7 @@
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
             <text class="title-style">送达地址</text>
-            <text class="picker-message">{{ express.deliveryGoalFloor}}</text>
+            <text class="picker-message"  decode="true">{{ expressList[expressIndex].deliveryGoalFloor }} &nbsp; {{ expressList[expressIndex].deliveryGoalAddress }}</text>
           </wxc-cc>
         </wxc-panel>
         <wxc-panel border="{{ false }}" class="panel">
@@ -103,6 +103,7 @@
             <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
           </wxc-cc>
         </wxc-panel>
+        <view class="space"></view>
       </view>
     </view>
   </wxc-mask>
