@@ -51,6 +51,11 @@
     <view class="popup__content">
       <view class="input-wrap">
         <wxc-panel border="{{ false }}" class="panel">
+          <view class='recommend'>
+            <text class='recommend-title'>快递详情</text>
+          </view>
+        </wxc-panel>
+        <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
             <text class="title-style" decode="true">取&nbsp;&nbsp;货&nbsp;&nbsp;码</text>
             <text class="picker-message">{{ expressList[expressIndex].deliveryCode }}</text>
@@ -369,9 +374,9 @@
 
   .title-style {
     flex: 1;
-    height: ~'44rpx';
-    min-height: ~'44rpx';
-    line-height: ~'44rpx';
+    height: ~'40rpx';
+    min-height: ~'40rpx';
+    line-height: ~'40rpx';
   }
 
   .popup__content {
@@ -398,7 +403,7 @@
   /*  !*box-shadow:0px 3px 8px #949494;*!*/
   /*}*/
   .picker-message {
-    margin-left: ~'44rpx';
+    margin-left: ~'80rpx';
     color: #959595;
   }
 
@@ -409,8 +414,8 @@
 
   .panel {
     min-width: ~'163rpx';
-    line-height: ~'44rpx';
-    height: ~'44rpx';
+    line-height: ~'40rpx';
+    height: ~'40rpx';
     display: flex;
     align-items: center;
     padding: ~'20rpx' ~'30rpx' ~'26rpx' ~'30rpx';
@@ -418,5 +423,16 @@
     color: #333;
     border: 0 solid #f0f0f0;
     border-bottom-width: ~'1rpx';
+  }
+  .recommend-title {
+    display: table;
+    width: 100%;
+    line-height: ~'35rpx';
+    white-space: nowrap;
+    border-spacing: 2.5rem 0;
+    font-size: ~'28rpx';
+    color: black;
+    margin-left: -40.5%;
+    font-weight: bold;
   }
 </style>

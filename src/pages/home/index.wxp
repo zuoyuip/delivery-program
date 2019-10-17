@@ -14,7 +14,7 @@
               confirm-text="接受" content="确定接受该订单" title="提示"></wxc-dialog>
 
   <view class="table">
-    <view class="tr head">
+    <view class="tr1 head">
       <text class="th deliveryAddress">取件地址</text>
       <text class="th deliveryGoalFloor">送达地点</text>
       <text class="th deliveryUserSex">限制</text>
@@ -48,11 +48,16 @@
     <view class="popup__content">
       <view class="input-wrap">
         <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">唯一标识</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryOrderCode }}</text>
-          </wxc-cc>
+          <view class='recommend'>
+          <text class='recommend-title'>快递详情</text>
+          </view>
         </wxc-panel>
+<!--        <wxc-panel border="{{ false }}" class="panel">-->
+<!--          <wxc-cc>-->
+<!--            <text class="title-style">唯一标识</text>-->
+<!--            <text class="picker-message">{{ expressList[expressIndex].deliveryOrderCode }}</text>-->
+<!--          </wxc-cc>-->
+<!--        </wxc-panel>-->
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
             <text class="title-style">快递名称</text>
@@ -415,18 +420,23 @@
 
 <style lang="less">
   .table {
-    border: ~'1rpx' solid #dadada;
-    border-right: 0;
-    border-bottom: 0;
-    width: 100%;
-    margin-bottom: ~'6rpx'
-  }
+       border: ~'1rpx' solid #dadada;
+       border-bottom: 0;
+       width: 100%;
+       margin-bottom: ~'6rpx'
+     }
 
   .head {
     position: fixed;
     top: 0;
   }
 
+  .tr1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 7px 8px -8px #333333;
+  }
   .tr {
     width: 100%;
     display: flex;
@@ -447,13 +457,13 @@
 
   .th {
     font-weight: 500;
-    background-color: #ffffff;
+    background-color: #f7f7f7;
     font-size: ~'36rpx';
     color: #666666;
-    box-shadow: 0px 7px 8px -8px #333333;
     height: ~'66rpx';
     line-height: ~'66rpx';
-    border-bottom: ~'1rpx' solid #dadada;
+
+    /*border-bottom: ~'1rpx' solid #dadada;*/
     /*border-right: ~'1rpx' solid #dadada;*/
     text-align: center;
     width: 100%;
@@ -492,8 +502,8 @@
 
   .popup__content {
     width: ~'800rpx';
-    height: ~'930rpx';
-    line-height: ~'465rpx';
+    height: ~'900rpx';
+    line-height: ~'450rpx';
     background: #ffffff;
     text-align: center;
   }
@@ -505,8 +515,8 @@
 
   .panel {
     min-width: ~'163rpx';
-    line-height: ~'44rpx';
-    height: ~'44rpx';
+    line-height: ~'40rpx';
+    height: ~'40rpx';
     display: flex;
     align-items: center;
     padding: ~'20rpx' ~'30rpx' ~'26rpx' ~'30rpx';
@@ -518,13 +528,13 @@
 
   .title-style {
     flex: 1;
-    height: ~'44rpx';
-    min-height: ~'44rpx';
-    line-height: ~'44rpx';
+    height: ~'40rpx';
+    min-height: ~'40px';
+    line-height: ~'40rpx';
   }
 
   .picker-message {
-    margin-left: ~'44rpx';
+    margin-left: ~'80rpx';
     color: #959595;
   }
 
@@ -543,4 +553,29 @@
     background: #FFF;
     color: #000;
   }
+  /*.recommend {*/
+  /*  text-align: center;*/
+  /*  height: ~'50rpx';*/
+  /*  margin-top: ~'10rpx';*/
+  /*}*/
+
+  .recommend-title {
+    display: table;
+    width: 100%;
+    line-height: ~'35rpx';
+    white-space: nowrap;
+    border-spacing: 2.5rem 0;
+    font-size: ~'28rpx';
+    color: black;
+    margin-left: -40.5%;
+    font-weight: bold;
+  }
+
+  /*.recommend-title::before, .recommend-title::after {*/
+  /*  display: table-cell;*/
+  /*  content: "";*/
+  /*  width: 50%;*/
+  /*  background: linear-gradient(#eee, #eee) repeat-x center;*/
+  /*  background-size: 0.1rem 0.1rem;*/
+  /*}*/
 </style>

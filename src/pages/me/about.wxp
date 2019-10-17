@@ -34,7 +34,7 @@
             <view class="space"></view>
             <view class="yangShi">6.Q：交易完成对方不付款怎么办?</view>
             <view class="space"></view>
-            A：可在小程序内进行举报，严重者进行封号处理。
+            A：可在小程序内通过反馈建议进行举报，严重者进行封号处理。
             <view class="space"></view>
             <view class="yangShi">7.Q：订单没人接单会怎么样?</view>
             <view class="space"></view>
@@ -42,8 +42,11 @@
             <view class="space"></view>
             <view class="yangShi">8.Q：如何联系官方团队?</view>
             <view class="space"></view>
-            A：点击小程序内“联系我们”可以和我们取得联系。
-
+            A：点击小程序内“联系我们”可以和我们取得联系，或发送邮件至
+            wordpressp1@163.com
+            <view class="space"></view>
+            <view class="yangShi"><text style="font-size: 10px;color: #fd8000" bindtap="toUserAgreement">《用户协议》</text></view>
+            <view class="space"></view>
         </view>
     </wxc-panel>
 </template>
@@ -54,6 +57,11 @@
     data: {
 
     },
+      toUserAgreement() {
+          wx.navigateTo({
+              url: '../user/userAgreement'
+          })
+      },
     onLoad: function (options) {
       // 页面创建时执行
 

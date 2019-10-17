@@ -31,7 +31,9 @@
         // 注册
         'pages/user/register',
         // 忘记密码
-        'pages/user/forgetUser'
+        'pages/user/forgetUser',
+        //用户协议
+        'pages/user/userAgreement'
       ],
       // 界面风格
       window: {

@@ -1,19 +1,20 @@
 <template>
+  <view class="space"></view>
   <wxc-toast
       icon="{{ $toast.icon }}"
       icon-color="{{ $toast.color }}"
       is-show="{{$toast.show}}"
       text="{{ $toast.text }}"
   ></wxc-toast>
-  <view class="space"></view>
+  <view class="space1"></view>
   <view class="input-wrap">
-    <wxc-input bind:input="userNameInput" mode="wrapped" placeholder="输入您的手机号码" right="{{true}}"
+    <wxc-input bind:input="userNameInput" mode="normal" placeholder="输入您的手机号码" right="{{true}}"
                title="帐号" type="number"
                value="{{ userName }}"></wxc-input>
   </view>
 
   <view class="input-wrap">
-    <wxc-input bind:input="passWordInput" mode="wrapped" password="true" placeholder="输入您的密码"
+    <wxc-input bind:input="passWordInput" mode="normal" password="true" placeholder="输入您的密码"
                right="{{true}}" title="密码" type="text" value="{{ passWord }}"></wxc-input>
   </view>
   <view class="forget-space"></view>
@@ -24,8 +25,8 @@
   <view class="forget-space"></view>
   <view class="forget-space"></view>
   <wxc-cc>
-    <wxc-button bind:click="login" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
-                size="large" type="selection" value="登录"></wxc-button>
+    <wxc-button bind:click="login" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;background-color: #1aad19;"
+                size="normal" type="selection" value="登录"></wxc-button>
   </wxc-cc>
 </template>
 
@@ -221,7 +222,8 @@
         'wxc-input': '@minui/wxc-input',
         'wxc-cc': '@minui/wxc-cc',
         'wxc-button': '@minui/wxc-button',
-        'wxc-toast': '@minui/wxc-toast'
+        'wxc-toast': '@minui/wxc-toast',
+        'wxc-avatar': '@minui/wxc-avatar'
       }
     }
   }
@@ -229,7 +231,10 @@
 
 <style lang="less">
   .space {
-    height: ~'200rpx';
+    height: ~'150rpx';
+  }
+  .space1 {
+    height: ~'100rpx';
   }
 
   .input-wrap {
@@ -253,4 +258,13 @@
     font-size: smaller;
     text-decoration: #888888 underline;
   }
+  .avatar {
+      display: block;
+      width: ~'500rpx';
+      height: ~'100rpx';
+      background: #31b0d5;
+      color: #FFF;
+      margin-left: 17%;
+  }
+
 </style>

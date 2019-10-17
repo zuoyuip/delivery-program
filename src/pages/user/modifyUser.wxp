@@ -1,4 +1,5 @@
 <template>
+  <view class="space1"></view>
   <wxc-toast
           icon="{{ $toast.icon }}"
           icon-color="{{ $toast.color }}"
@@ -6,12 +7,8 @@
           text="{{ $toast.text }}"
   ></wxc-toast>
   <view class="space"></view>
-  <wxc-cc>
-    <text bindtap="logout" style="color: #888888; text-decoration: underline #888888">退出账号</text>
-  </wxc-cc>
-  <view class="space"></view>
-  <view class="input-wrap">
-    <wxc-input bind:input="changePhoneInput" mode="wrapped" placeholder="输入您要更换的手机号码"
+  <view class="input-wrap1">
+    <wxc-input bind:input="changePhoneInput" mode="normal" placeholder="输入您要更换的手机号码"
                right="{{true}}" title="更换帐号"
                type="number" value="{{changePhone}}"></wxc-input>
   </view>
@@ -19,11 +16,11 @@
 
   <wxc-cc>
     <view class="input-wrap">
-      <wxc-input bind:input="verificationCodeInput" class="verification" mode="wrapped"
+      <wxc-input bind:input="verificationCodeInput" class="verification" mode="normal"
                  placeholder="请输入验证码"
                  type="number" value="{{verificationCode}}"></wxc-input>
     </view>
-    <view class="input-wrap">
+    <view class="input-wrap1">
       <button bindtap="sendVerificationCode" class="sendButton"
               disabled="{{ isSending }}"
               type="primary">{{ buttonText }}
@@ -31,8 +28,8 @@
     </view>
   </wxc-cc>
 
-  <view class="input-wrap">
-    <wxc-input bind:input="pastPasswordInput" mode="wrapped" password="true"
+  <view class="input-wrap1">
+    <wxc-input bind:input="pastPasswordInput" mode="normal" password="true"
                placeholder="输入该账户的原登录密码" right="{{true}}"
                title="密码" type="number" value="{{pastPassword}}"></wxc-input>
   </view>
@@ -46,9 +43,11 @@
                 type="selection" value="确认修改账户"></wxc-button>
   </wxc-cc>
   <view class="space"></view>
-  <wxc-loadmore
-          text="更改后请使用新的手机号码和原密码进行登录"></wxc-loadmore>
+
   <view class="space"></view>
+  <wxc-cc>
+    <text bindtap="logout" style="color: #888888;">退出账号</text>
+  </wxc-cc>
 </template>
 
 <script>
@@ -264,11 +263,17 @@
   .space {
     height: ~'100rpx';
   }
-
-  .input-wrap {
+  .space1 {
+    height: ~'100rpx';
+  }
+  .input-wrap1 {
     position: relative;
     margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
-    width:120%;
+  }
+  .input-wrap {
+    position: relative;
+    margin: ~'20rpx' 0 0 ~'10rpx';
+    width: 100%;
   }
 
   .forget-space {
@@ -276,10 +281,11 @@
   }
 
   .sendButton {
-    font-size: ~'32rpx';
-    width: 70%;
+    font-size: ~'28rpx';
+    width: ~'260rpx';
     color: #ffffff;
-    height: ~'60rpx';
-    line-height: ~'60rpx';
+    height: ~'75rpx';
+    line-height: ~'75rpx';
+    border-radius: ~'10rpx';
   }
 </style>

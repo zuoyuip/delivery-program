@@ -1,10 +1,11 @@
 <template>
+  <view class="space1"></view>
   <wxc-toast
       icon="{{ $toast.icon }}"
       icon-color="{{ $toast.color }}"
       is-show="{{$toast.show}}"
-      text="{{ $toast.text }}"
-  ></wxc-toast>
+      text="{{ $toast.text }}">
+      </wxc-toast>
   <view class="space"></view>
   <view class="input-wrap">
     <wxc-input bind:input="userPhoneInput" mode="wrapped" placeholder="输入您的手机号码" right="{{true}}"
@@ -24,7 +25,7 @@
                title="重复密码" type="number" value="{{againPassword}}"></wxc-input>
   </view>
   <wxc-cc>
-    <view class="input-wrap">
+    <view class="input-wrap1">
       <wxc-input bind:input="verificationCodeInput" class="verification" mode="wrapped"
                  placeholder="请输入验证码" type="number" value="{{verificationCode}}"></wxc-input>
     </view>
@@ -37,11 +38,18 @@
     </view>
   </wxc-cc>
   <view class="forget-space"></view>
+  <view class="agree">
+    <radio-group bindchange="agreement">
+      <checkbox class="agree-text" value="receive"></checkbox>
+      <text style="font-size: 10px;color: #888888" bindtap="toUserAgreement">我已阅读并同意<text style="font-size: 10px;color: #fd8000" >《用户协议》</text></text>
+    </radio-group>
+  </view>
   <view class="forget-space"></view>
   <wxc-cc>
-    <wxc-button bind:click="register" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;"
-                size="large"
-                type="selection" value="注册"></wxc-button>
+    <button bindtap="register" class="sure_button"
+            type="{{ 'primary' }}"
+            disabled="{{ isReceive }}"> 注册
+    </button>
   </wxc-cc>
 </template>
 
@@ -60,7 +68,8 @@
         show: false,
         color: '',
         icon: ''
-      }
+      },
+      isReceive:'true'
     },
     showToast(text, color, icon) {
       this.setData({
@@ -187,6 +196,16 @@
         }
       });
     },
+    agreement(e) {
+      this.setData({
+        isReceive: e.detail.value !== 'receive'
+      })
+    },
+    toUserAgreement() {
+      wx.navigateTo({
+        url: '../user/userAgreement'
+      })
+    },
     onLoad: function (options) {
       // 页面创建时执行
 
@@ -247,10 +266,18 @@
   .space {
     height: ~'200rpx';
   }
+  .space1 {
+    height: ~'50rpx';
+  }
 
   .input-wrap {
     position: relative;
     margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+  }
+  .input-wrap1 {
+    position: relative;
+    margin: ~'20rpx' 0 0 ~'10rpx';
+    width: 90%;
   }
 
   .forget-space {
@@ -258,11 +285,36 @@
   }
 
   .sendButton {
-    font-size: ~'36rpx';
+    font-size: ~'28rpx';
     width: ~'260rpx';
     color: #ffffff;
-    height: ~'90rpx';
-    line-height: ~'90rpx';
+    height: ~'75rpx';
+    line-height: ~'75rpx';
+    border-radius: ~'10rpx';
+  }
+  .sure_button {
+    border-radius: ~'26rpx';
+    width: ~'500rpx';
+    height: ~'60rpx';
+    font-size: ~'30rpx';
+    line-height: ~'60rpx';
+    margin-left: 15%;
+  }
+  .radio {
+    font-size: ~'32rpx';
+    color: #888888;
+    /*margin-left: ~'180rpx';*/
+    text-align: center;
+  }
+  .female {
+    /*margin-left: ~'80rpx';*/
+    text-align: center;
+  }
+  .agree{
+    text-align: center;
+  }
+  .agree-text{
+    transform: scale(0.6,0.6);
   }
 
 </style>
