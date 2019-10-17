@@ -90,7 +90,7 @@
         </wxc-panel>
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
-            <text class="title-style">快递体积</text>
+            <text class="title-style">快递重量</text>
             <text class="picker-message">{{ expressList[expressIndex].deliveryWeight }}</text>
           </wxc-cc>
         </wxc-panel>

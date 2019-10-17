@@ -19,7 +19,7 @@
     </wxc-panel>
     <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
-        <text class="title-style">快递体积：</text>
+        <text class="title-style">快递重量：</text>
         <picker bindchange="expressWeightPickerChange" range="{{ expressWeightList }}"
                 value="{{ expressWeightIndex }}">
           <view class="picker-message">
@@ -70,13 +70,12 @@
     <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">领取人：</text>
-        <radio-group bindchange="checkboxChange">
-          <label class="radio">
-            <radio checked="{{ true }}" value="不限">不限</radio>
-            <radio class="female" value="仅限男">男</radio>
-            <radio class="female" value="仅限女">女</radio>
-          </label>
-        </radio-group>
+          <picker bindchange="checkboxChange" range="{{ sexList }}"
+                  value="{{ sexIndex }}">
+            <view class="picker-message">
+              {{ sexList[sexIndex] }}
+            </view>
+          </picker>
       </wxc-cc>
     </wxc-panel>
     <wxc-input bind:input="deliverySuggestInput" maxlength="20" placeholder="送达时间、注意事项等问题"
@@ -120,6 +119,8 @@
       floorNumberIndex: 0,
       expressWeightList: data.expressWeightList,
       expressWeightIndex: 0,
+      sexList:data.sex,
+      sexIndex:0,
       isAgree: true,
       $toast: {
         text: '',
@@ -204,7 +205,7 @@
     },
     checkboxChange: function checkboxChange(e) {
       this.setData({
-        deliverySex: e.detail.value
+        sexIndex: e.detail.value
       })
     },
     submitExpress() {
@@ -217,7 +218,7 @@
         return
       }
       if (this.data.expressWeightIndex === 0) {
-        this.showToast('请选择快递体积', '#a2675a', 'warning');
+        this.showToast('请选择快递重量', '#a2675a', 'warning');
         return
       }
       if (this.data.deliveryAddressIndex === 0) {
@@ -240,6 +241,10 @@
         this.showToast('请填写取货码', '#a2675a', 'warning');
         return
       }
+      if (this.data.sexIndex === 0) {
+        this.showToast('请选择领取人', '#a2675a', 'warning');
+        return
+      }
       wx.request({
         url: 'http://zuoyu.top:8080/delivery/delivery',
         method: 'POST',
@@ -253,7 +258,7 @@
           deliveryUserPhone: this.data.deliveryUserPhone,
           deliveryCode: this.data.deliveryCode,
           deliveryReward: this.data.deliveryReward,
-          deliveryUserSex: this.data.deliverySex,
+          deliveryUserSex: this.data.sexList[this.data.sexIndex],
           deliveryRemark: this.data.deliverySuggest
         },
         header: {
@@ -374,18 +379,6 @@
     color: #959595;
     padding-bottom: ~'16rpx';
   }
-
-  .radio {
-    font-size: ~'28rpx';
-    size: ~'28rpx';
-    color: #888888;
-    margin-left: ~'90rpx';
-  }
-
-  .female {
-    margin-left: ~'88rpx';
-  }
-
   .agree {
     min-width: ~'163rpx';
     line-height: ~'44rpx';

@@ -1,15 +1,27 @@
 <template>
     <wxc-panel border="{{false}}" >
         <view class="content">
-            <view class="yangShi">1.Q：我怎么付款?</view>
+            <view class="yangShi">1.Q：关于领取人</view>
+            <view class="space"></view>
+            A：领取人包括，官方团队、男同学、女同学、不限等四种选择，你可以选择一种作为你的快递领取人，下面逐一介绍：
+            <view class="space"></view>
+            ①官方团队：即相互取团队人员代取，相互取官方团队承诺，由团队成员接受的订单，当日订单当日19：00前必取，送达时间另行约定~快快发布吧！
+            <view class="space"></view>
+            ②男同学：即你快递包裹只能男生领取。
+            <view class="space"></view>
+            ③女同学：即你快递包裹只能女生领取。
+            <view class="space"></view>
+            ④不限：快递包裹不限领取人性别。
+            <view class="space"></view>
+            <view class="yangShi">2.Q：我怎么付款?</view>
             <view class="space"></view>
             A：包裹送达后，扫描对方的收款二维码进行收付款。
             <view class="space"></view>
-            <view class="yangShi">2.Q：快递送不送到宿舍?</view>
+            <view class="yangShi">3.Q：快递送不送到宿舍?</view>
             <view class="space"></view>
             A：如需送到宿舍需另外备注，是否增加赏金自行协商。
             <view class="space"></view>
-            <view class="yangShi">3.Q：怎么保证我发布的代取物品的安全?</view>
+            <view class="yangShi">4.Q：怎么保证我发布的代取物品的安全?</view>
             <view class="space"></view>
                 <view>A：</view>
                 ①如果您选择不限制取件人，相互取的用户均是通过校园卡
@@ -17,30 +29,30 @@
                 ②贵重物品建议取件人限制选为官方团队。
             <view>③情节严重者，信息提交保卫处。</view>
             <view class="space"></view>
-            <view class="yangShi">4.Q：快递体积如何让划分？</view>
+            <view class="yangShi">5.Q：快递重量如何让划分？</view>
             <view class="space"></view>
             <view>A:</view>
-            <view>①小件：一般是1kg以下，比如鞋子、袜子、洗护用品、小电子产
+            <view>①小件：一般是0.5kg以下，比如鞋子、袜子、洗护用品、小电子产
                 品等等。</view>
-            <view>②中件：一般是1-2kg之间，比如电脑等中型电子设备以及其他较
+            <view>②中件：一般是0.5-1.5kg之间，比如电脑等中型电子设备以及其他较
                 大的物品。</view>
-            <view>③大件：一般是2kg以上，比如自行车、桌子等较大较重的物品。</view>
+            <view>③大件：一般是1.5kg以上，比如自行车、桌子等较大较重的物品。</view>
             <view class="space"></view>
-            <view class="yangShi"> 5.Q：如果发生交易纠纷怎么办?</view>
+            <view class="yangShi"> 6.Q：如果发生交易纠纷怎么办?</view>
             <view class="space"></view>
             A：可在小程序内通过反馈建议进行提交举报，相互取官方
                 团队介入审核。若未选择限制官方团队接单而发生快递丢失
                 情况，相互取团队不承担赔偿责任。
             <view class="space"></view>
-            <view class="yangShi">6.Q：交易完成对方不付款怎么办?</view>
+            <view class="yangShi">7.Q：交易完成对方不付款怎么办?</view>
             <view class="space"></view>
             A：可在小程序内通过反馈建议进行举报，严重者进行封号处理。
             <view class="space"></view>
-            <view class="yangShi">7.Q：订单没人接单会怎么样?</view>
+            <view class="yangShi">8.Q：订单没人接单会怎么样?</view>
             <view class="space"></view>
              A：每晚0点，前一天所有订单自动过期，第二天需重新发布。
             <view class="space"></view>
-            <view class="yangShi">8.Q：如何联系官方团队?</view>
+            <view class="yangShi">9.Q：如何联系官方团队?</view>
             <view class="space"></view>
             A：点击小程序内“联系我们”或者“反馈建议”可以和我们取得联系，你也可以发送邮件至
             wordpressp1@163.com
@@ -126,9 +138,11 @@
 
 <style lang="less">
   .content {
-    padding: ~'30rpx';
-      font-size: ~'27rpx';
-      color:#747474
+      padding: ~'30rpx';
+      font-size: ~'28rpx';
+      color:#747474;
+      width:90%;
+      margin-left:2.5%;
   }
     .yangShi{
         font-weight: bold;
