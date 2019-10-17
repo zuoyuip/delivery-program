@@ -32,7 +32,7 @@
 
     <view class="radio-space"></view>
 
-    <wxc-panel bind:click="userCollegePickerChange" border="{{ false }}" class="panel">
+    <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">学院</text>
         <picker bindchange="userCollegePickerChange" range="{{ userCollegeList }}"
