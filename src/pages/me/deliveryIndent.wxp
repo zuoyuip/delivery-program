@@ -129,7 +129,7 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/me/deliveryWorker/'
+        url: 'http://zuoyu.top:8080/delivery/me/deliveryWorker/'
             + appInstance.globalData.user.userId,
         method: 'GET',
         header: {

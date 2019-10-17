@@ -165,7 +165,7 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/delivery',
+        url: 'http://zuoyu.top:8080/delivery/delivery',
         method: 'GET',
         success: res => {
           if (res.statusCode === 200) {
@@ -221,7 +221,7 @@
         success: res => {
           appInstance.globalData.authenticatedCode = res.data;
           wx.request({
-            url: 'http://39.107.244.193:8080/delivery/user/authentication',
+            url: 'http://zuoyu.top:8080/delivery/user/authentication',
             method: 'GET',
             header: {
               'Cookie': appInstance.globalData.authenticatedCode
@@ -292,7 +292,7 @@
         this.showToast('小程序出错，请刷新重试', '#c70009', 'no')
       }
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/delivery/transaction/' + deliveryId,
+        url: 'http://zuoyu.top:8080/delivery/delivery/transaction/' + deliveryId,
         method: 'PUT',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
@@ -329,7 +329,7 @@
         return;
       }
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/user/userInfo/' + user.userInfoId,
+        url: 'http://zuoyu.top:8080/delivery/user/userInfo/' + user.userInfoId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode

@@ -165,7 +165,7 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
+        url: 'http://zuoyu.top:8080/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
@@ -203,7 +203,7 @@
     },
     cancelExpress(e){
       wx.request({
-        url: 'http://39.107.244.193:8080/delivery/delivery/' + e.currentTarget.id,
+        url: 'http://zuoyu.top:8080/delivery/delivery/' + e.currentTarget.id,
         method: 'DELETE',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
