@@ -6,7 +6,7 @@
       text="{{ $toast.text }}"
   ></wxc-toast>
   <view class="input-wrap">
-    <wxc-panel bind:click="expressNamePickerChange" border="{{ false }}" class="panel">
+    <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">快递名称：</text>
         <picker bindchange="expressNamePickerChange" range="{{ expressNameList }}"
@@ -17,7 +17,7 @@
         </picker>
       </wxc-cc>
     </wxc-panel>
-    <wxc-panel bind:click="expressWeightPickerChange" border="{{ false }}" class="panel">
+    <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">快递体积：</text>
         <picker bindchange="expressWeightPickerChange" range="{{ expressWeightList }}"
@@ -28,7 +28,7 @@
         </picker>
       </wxc-cc>
     </wxc-panel>
-    <wxc-panel bind:click="deliveryAddressPickerChange" border="{{ false }}" class="panel">
+    <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">取件地址：</text>
         <picker bindchange="deliveryAddressPickerChange" range="{{ deliveryAddressList }}"
@@ -39,7 +39,7 @@
         </picker>
       </wxc-cc>
     </wxc-panel>
-    <wxc-panel bind:click="floorPickerChange" border="{{ false }}" class="panel">
+    <wxc-panel border="{{ false }}" class="panel">
       <wxc-cc>
         <text class="title-style">收货楼号：</text>
         <picker bindchange="floorPickerChange" range="{{ floorNumberList }}"
@@ -91,8 +91,8 @@
     <view class="forget-space1"></view>
     <wxc-cc>
       <button bindtap="submitExpress" class="sure_button"
-              id="{{ expressIndex }}" type="{{ 'primary' }}"
-              disabled="{{ isAgree }}"> 发布
+              disabled="{{ isAgree }}" id="{{ expressIndex }}"
+              type="{{ 'primary' }}"> 发布
       </button>
     </wxc-cc>
     <view class="forget-space"></view>
@@ -147,6 +147,36 @@
         })
       }, 1500)
     },
+    expressNamePickerChange: function expressNamePickerChange(e) {
+      this.setData({
+        expressNameIndex: e.detail.value
+      })
+    },
+    deliveryAddressPickerChange: function deliveryAddressPickerChange(e) {
+      this.setData({
+        deliveryAddressIndex: e.detail.value
+      })
+    },
+    floorPickerChange: function floorPickerChange(e) {
+      this.setData({
+        floorNumberIndex: e.detail.value
+      })
+    },
+    expressWeightPickerChange: function expressWeightPickerChange(e) {
+      this.setData({
+        expressWeightIndex: e.detail.value
+      })
+    },
+    onChangeNumber: function onChangeNumber(e) {
+      this.setData({
+        deliveryReward: '￥' + e.detail.number
+      })
+    },
+    agreeCheckBox: function agreeCheckBox(e) {
+      this.setData({
+        isAgree: e.detail.value !== 'agree'
+      })
+    },
     deliveryGoalAddressInput: function deliveryGoalAddressInput(e) {
       this.setData({
         deliveryGoalAddress: e.detail.value
@@ -167,46 +197,46 @@
         deliveryCode: e.detail.value
       });
     },
-    deliverySuggestInput(e) {
+    deliverySuggestInput: function deliverySuggestInput(e) {
       this.setData({
         deliverySuggest: e.detail.value
       });
     },
-    checkboxChange(e) {
+    checkboxChange: function checkboxChange(e) {
       this.setData({
         deliverySex: e.detail.value
       })
     },
     submitExpress() {
-        if (this.data.deliveryUserPhone.length < 11){
-            this.showToast('请输入正确的手机号', '#a2675a', 'warning');
-            return
-        }
-      if (this.data.expressNameIndex === 0){
+      if (this.data.deliveryUserPhone.length < 11) {
+        this.showToast('请输入正确的手机号', '#a2675a', 'warning');
+        return
+      }
+      if (this.data.expressNameIndex === 0) {
         this.showToast('请选择快递名称', '#a2675a', 'warning');
         return
       }
-      if (this.data.expressWeightIndex === 0){
+      if (this.data.expressWeightIndex === 0) {
         this.showToast('请选择快递体积', '#a2675a', 'warning');
         return
       }
-      if (this.data.deliveryAddressIndex === 0){
+      if (this.data.deliveryAddressIndex === 0) {
         this.showToast('请选择取件地址', '#a2675a', 'warning');
         return
       }
-      if (this.data.floorNumberIndex === 0){
+      if (this.data.floorNumberIndex === 0) {
         this.showToast('请选择收货楼号', '#a2675a', 'warning');
         return
       }
-      if (this.data.deliveryGoalAddress === ''){
+      if (this.data.deliveryGoalAddress === '') {
         this.showToast('请填写收货地址', '#a2675a', 'warning');
         return
       }
-      if (this.data.deliveryUserName === ''){
+      if (this.data.deliveryUserName === '') {
         this.showToast('请填写收件人', '#a2675a', 'warning');
         return
       }
-      if (this.data.deliveryCode === ''){
+      if (this.data.deliveryCode === '') {
         this.showToast('请填写取货码', '#a2675a', 'warning');
         return
       }
@@ -231,7 +261,7 @@
           'Cookie': appInstance.globalData.authenticatedCode
         },
         success: res => {
-          if (res.statusCode===200) {
+          if (res.statusCode === 200) {
             this.showToast(res.data.message, '#5ac777', 'yes');
             setTimeout(() => {
               wx.reLaunch({
@@ -250,36 +280,6 @@
 
         }
       });
-    },
-    expressNamePickerChange(e) {
-      this.setData({
-        expressNameIndex: e.detail.value
-      })
-    },
-    deliveryAddressPickerChange(e) {
-      this.setData({
-        deliveryAddressIndex: e.detail.value
-      })
-    },
-    floorPickerChange(e) {
-      this.setData({
-        floorNumberIndex: e.detail.value
-      })
-    },
-    expressWeightPickerChange(e) {
-      this.setData({
-        expressWeightIndex: e.detail.value
-      })
-    },
-    onChangeNumber(e) {
-      this.setData({
-        deliveryReward: '￥' + e.detail.number
-      })
-    },
-    agreeCheckBox(e) {
-      this.setData({
-        isAgree: e.detail.value !== 'agree'
-      })
     },
     onLoad: function (options) {
       // 页面创建时执行
@@ -405,6 +405,7 @@
   .forget-space {
     height: ~'5rpx';
   }
+
   .forget-space1 {
     height: ~'25rpx';
   }
