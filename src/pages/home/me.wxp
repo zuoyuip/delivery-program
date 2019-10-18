@@ -65,9 +65,6 @@
     <image src="../../images/zhuanye.png"></image>
     <image src="../../images/xuehao.png"></image>
     <image src="../../images/wenti.png"></image>
-    <image src="../../images/boy.png"></image>
-    <image src="../../images/girl.png"></image>
-    <image src="../../images/dog.png"></image>
     <image src="../../images/refresh.png"></image>
     <image src="../../images/image_200x200.png"></image>
   </view>
@@ -81,7 +78,7 @@
       userPhone: '',
       isLogin: false,
       desc: '',
-      heardImage: '../../images/dog.png',
+      heardImage: 'http://www.zuoyu.top/images/dog.png',
       $toast: {
         text: '',
         show: false,
@@ -200,7 +197,7 @@
         let userInfoSex = appInstance.globalData.userInfo.userInfoSex;
         that.setData({
           desc: '您已通过认证',
-          heardImage: userInfoSex === '男' ? '../../images/boy.png' : '../../images/girl.png'
+          heardImage: userInfoSex === '男' ? 'http://www.zuoyu.top/images/boy.png' : 'http://www.zuoyu.top/images/girl.png'
         });
       }
     },
