@@ -1,599 +1,598 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-  <wxc-loading
-      is-show="{{$loading.isShow}}"
-      image="../../../../images/image_200x200.png"
-      slip="../../../../images/refresh.png"
-  ></wxc-loading>
-  <wxc-toast
-      icon="{{ $toast.icon }}"
-      icon-color="{{ $toast.color }}"
-      is-show="{{$toast.show}}"
-      text="{{ $toast.text }}"
-  ></wxc-toast>
-  <wxc-dialog bindcancel="noLoginOnCancel" bindconfirm="noLoginOnConfirm" cancel-text="取消"
-              class="noLogin-dialog"
-              confirm-text="现在登录" content="您还未登录" title="提示"></wxc-dialog>
-  <wxc-dialog bindcancel="acceptOnCancel" bindconfirm="acceptOnConfirm" cancel-text="取消"
-              class="accept-dialog"
-              confirm-text="接受" content="确定接受该订单" title="提示"></wxc-dialog>
+    <wxc-loading
+            is-show="{{$loading.isShow}}"
+            image="../../../../images/image_200x200.png"
+            slip="../../../../images/refresh.png"
+    ></wxc-loading>
+    <wxc-toast
+            icon="{{ $toast.icon }}"
+            icon-color="{{ $toast.color }}"
+            is-show="{{$toast.show}}"
+            text="{{ $toast.text }}"
+    ></wxc-toast>
+    <wxc-dialog bindcancel="noLoginOnCancel" bindconfirm="noLoginOnConfirm" cancel-text="取消"
+                class="noLogin-dialog"
+                confirm-text="现在登录" content="您还未登录" title="提示"></wxc-dialog>
+    <wxc-dialog bindcancel="acceptOnCancel" bindconfirm="acceptOnConfirm" cancel-text="取消"
+                class="accept-dialog"
+                confirm-text="接受" content="确定接受该订单" title="提示"></wxc-dialog>
+    <view class="table">
+        <view class="tr1 head">
+            <text class="th deliveryAddress">取件地址</text>
+            <text class="th deliveryGoalFloor">送达地点</text>
+            <text class="th deliveryUserSex">限制</text>
+            <text class="th deliveryReward">赏金</text>
+        </view>
+        <view class="space"></view>
 
-  <view class="table">
-    <view class="tr1 head">
-      <text class="th deliveryAddress">取件地址</text>
-      <text class="th deliveryGoalFloor">送达地点</text>
-      <text class="th deliveryUserSex">限制</text>
-      <text class="th deliveryReward">赏金</text>
+        <view wx:if="{{ expressList.length > 0 }}">
+            <view class="list-wrap">
+                <view bindtap="chooseExpress" class="tr" id="{{ index }}"
+                      wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
+                      wx:key="deliveryId">
+                    <text class="td deliveryAddress">{{ express.deliveryAddress }}</text>
+                    <text class="td deliveryGoalFloor">{{ express.deliveryGoalFloor }}</text>
+                    <text class="td deliveryUserSex">{{ express.deliveryUserSex }}</text>
+                    <text class="td deliveryReward">{{ express.deliveryReward }}</text>
+                </view>
+            </view>
+            <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
+        </view>
+
+        <view wx:else>
+            <wxc-abnor
+                    bind:abnortap="selectExpress"
+                    type="{{ requestType }}"></wxc-abnor>
+        </view>
     </view>
-    <view class="space"></view>
-
-    <view wx:if="{{ expressList.length > 0 }}">
-      <view bindtap="chooseExpress" class="tr" id="{{ index }}"
-            wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
-            wx:key="deliveryId">
-        <text class="td deliveryAddress">{{ express.deliveryAddress }}</text>
-        <text class="td deliveryGoalFloor">{{ express.deliveryGoalFloor }}</text>
-        <text class="td deliveryUserSex">{{ express.deliveryUserSex }}</text>
-        <text class="td deliveryReward">{{ express.deliveryReward }}</text>
-      </view>
-      <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
+    <view bindtap="toExpressEnter" class="add_button">
+        <text decode="true">&nbsp;&nbsp;</text>
+        <wxc-icon color="#949494" size="30" type="add"></wxc-icon>
+        <text decode="true">&nbsp;发布&nbsp;</text>
     </view>
 
-    <view wx:else>
-      <wxc-abnor
-          bind:abnortap="selectExpress"
-          type="{{ requestType }}"></wxc-abnor>
-    </view>
-  </view>
-
-  <view bindtap="toExpressEnter" class="add_button">
-    <text decode="true">&nbsp;&nbsp;</text>
-    <wxc-icon color="#949494" size="30" type="add"></wxc-icon>
-    <text decode="true">&nbsp;发布&nbsp;</text>
-  </view>
-  <wxc-mask content-align="bl" status="{{ maskStatus }}">
-    <view class="popup__content">
-      <view class="input-wrap">
-        <wxc-panel border="{{ false }}" class="panel">
-          <view class='recommend'>
-          <text class='recommend-title'>快递详情</text>
-          </view>
-        </wxc-panel>
-<!--        <wxc-panel border="{{ false }}" class="panel">-->
-<!--          <wxc-cc>-->
-<!--            <text class="title-style">唯一标识</text>-->
-<!--            <text class="picker-message">{{ expressList[expressIndex].deliveryOrderCode }}</text>-->
-<!--          </wxc-cc>-->
-<!--        </wxc-panel>-->
-        <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">快递名称</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryName }}</text>
-          </wxc-cc>
-        </wxc-panel>
-        <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">性别限制</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>
-          </wxc-cc>
-        </wxc-panel>
-        <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">快递地址</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryAddress }}</text>
-          </wxc-cc>
-        </wxc-panel>
-        <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">送达地址</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryGoalAddress }}</text>
-          </wxc-cc>
-        </wxc-panel>
-        <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">快递重量</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryWeight }}</text>
-          </wxc-cc>
-        </wxc-panel>
-        <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">报酬金额</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryReward }}</text>
-          </wxc-cc>
-        </wxc-panel>
-        <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">发布时间</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryDate }}</text>
-          </wxc-cc>
-        </wxc-panel>
-        <wxc-panel border="{{ false }}" class="panel">
-          <wxc-cc>
-            <text class="title-style">备注信息</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
-          </wxc-cc>
-        </wxc-panel>
-        <view class="space1"></view>
-        <button bindtap="acceptExpress" class="sure_button"
+    <wxc-popup class="J_Popup" animation-mode="bottom" align="bottom">
+        <view class="popup__content">
+            <view class="input-wrap">
+                <wxc-panel border="{{ false }}" class="panel">
+                    <view class='recommend'>
+                        <text class='recommend-title'>快递详情</text>
+                    </view>
+                </wxc-panel>
+                <!--        <wxc-panel border="{{ false }}" class="panel">-->
+                <!--          <wxc-cc>-->
+                <!--            <text class="title-style">唯一标识</text>-->
+                <!--            <text class="picker-message">{{ expressList[expressIndex].deliveryOrderCode }}</text>-->
+                <!--          </wxc-cc>-->
+                <!--        </wxc-panel>-->
+                <wxc-panel border="{{ false }}" class="panel">
+                    <wxc-cc>
+                        <text class="title-style">快递名称</text>
+                        <text class="picker-message">{{ expressList[expressIndex].deliveryName }}</text>
+                    </wxc-cc>
+                </wxc-panel>
+                <wxc-panel border="{{ false }}" class="panel">
+                    <wxc-cc>
+                        <text class="title-style">性别限制</text>
+                        <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>
+                    </wxc-cc>
+                </wxc-panel>
+                <wxc-panel border="{{ false }}" class="panel">
+                    <wxc-cc>
+                        <text class="title-style">快递地址</text>
+                        <text class="picker-message">{{ expressList[expressIndex].deliveryAddress }}</text>
+                    </wxc-cc>
+                </wxc-panel>
+                <wxc-panel border="{{ false }}" class="panel">
+                    <wxc-cc>
+                        <text class="title-style">送达地址</text>
+                        <text class="picker-message">{{ expressList[expressIndex].deliveryGoalAddress }}</text>
+                    </wxc-cc>
+                </wxc-panel>
+                <wxc-panel border="{{ false }}" class="panel">
+                    <wxc-cc>
+                        <text class="title-style">快递重量</text>
+                        <text class="picker-message">{{ expressList[expressIndex].deliveryWeight }}</text>
+                    </wxc-cc>
+                </wxc-panel>
+                <wxc-panel border="{{ false }}" class="panel">
+                    <wxc-cc>
+                        <text class="title-style">报酬金额</text>
+                        <text class="picker-message">{{ expressList[expressIndex].deliveryReward }}</text>
+                    </wxc-cc>
+                </wxc-panel>
+                <wxc-panel border="{{ false }}" class="panel">
+                    <wxc-cc>
+                        <text class="title-style">发布时间</text>
+                        <text class="picker-message">{{ expressList[expressIndex].deliveryDate }}</text>
+                    </wxc-cc>
+                </wxc-panel>
+                <wxc-panel border="{{ false }}" class="panel">
+                    <wxc-cc>
+                        <text class="title-style">备注信息</text>
+                        <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
+                    </wxc-cc>
+                </wxc-panel>
+                <view class="space1"></view>
+                <button bindtap="acceptExpress" class="sure_button"
                         id="{{ expressIndex }}" type="{{ 'primary' }}">接受
                 </button>
-      </view>
-    </view>
-  </wxc-mask>
+            </view>
+        </view>
+    </wxc-popup>
 </template>
 
 <script>
-  const appInstance = getApp();
-  export default {
-    data: {
-      expressList: [],
-      expressIndex: 0,
-      requestType: '',
-      maskStatus: 'hide',
-      $toast: {
-        text: '',
-        show: false,
-        color: '',
-        icon: ''
-      },
-      $loading: {
-        isShow: false
-      }
-    },
-    showToast(text, color, icon) {
-      this.setData({
-        $toast: {
-          text: text,
-          color: color,
-          icon: icon,
-          show: true
-        }
-      });
-      setTimeout(() => {
-        this.setData({
-          $toast: {
-            show: false
-          }
-        })
-      }, 1500)
-    },
-    chooseExpress(e) {
-      this.setData({
-        expressIndex: e.currentTarget.id
-      });
-      this.showMask()
-    },
-    showMask() {
-      this.setData({
-        maskStatus: 'show'
-      })
-    },
-    selectExpress() {
-      const that = this;
-      this.setData({
-        $loading: {
-          isShow: true
-        }
-      });
-      wx.request({
-        url: 'http://zuoyu.top:8080/delivery/delivery',
-        method: 'GET',
-        success: res => {
-          if (res.statusCode === 200) {
-            const expressList = res.data;
-            that.setData({
-              expressList: expressList.reverse(),
-              requestType: 'ORDER'
-            });
-            return
-          }
-          if (res.statusCode === 204) {
-            that.setData({
-              expressList: [],
-              requestType: 'ORDER'
-            });
-            return;
-          }
-          that.setData({
-            requestType: 'SHOP'
-          })
-        },
-        fail: error => {
-          that.setData({
-            requestType: 'REQUEST_ERROR'
-          })
-        },
-        complete: () => {
-          this.setData({
+    const appInstance = getApp();
+    export default {
+        data: {
+            expressList: [],
+            expressIndex: 0,
+            requestType: '',
+            $toast: {
+                text: '',
+                show: false,
+                color: '',
+                icon: ''
+            },
             $loading: {
-              isShow: false
+                isShow: false
             }
-          })
-        }
-      });
-    },
-    toExpressEnter() {
-      const user = appInstance.globalData.user;
-      const userString = JSON.stringify(user);
-      if (userString === '{}') {
-        this.showDialog('.noLogin-dialog');
-        return;
-      }
-      const review = user.userIsByReview;
-      if (!review) {
-        this.showToast('请先通过审核', '#c70009', 'no');
-        return
-      }
-      wx.navigateTo({
-        url: '../express/expressEnter'
-      })
-    },
-    verifyUser() {
-      wx.getStorage({
-        key: 'authenticatedCode',
-        success: res => {
-          appInstance.globalData.authenticatedCode = res.data;
-          wx.request({
-            url: 'http://zuoyu.top:8080/delivery/user/authentication',
-            method: 'GET',
-            header: {
-              'Cookie': appInstance.globalData.authenticatedCode
-            },
-            success: res => {
-              new Promise((resolve) => {
-                appInstance.globalData.user = res.data.principal;
-                resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
-              }).then(() => {
-                this.selectUserInfo()
-              });
+        },
+        showToast(text, color, icon) {
+            this.setData({
+                $toast: {
+                    text: text,
+                    color: color,
+                    icon: icon,
+                    show: true
+                }
+            });
+            setTimeout(() => {
+                this.setData({
+                    $toast: {
+                        show: false
+                    }
+                })
+            }, 1500)
+        },
+        chooseExpress(e) {
+            this.setData({
+                expressIndex: e.currentTarget.id
+            });
+            this.showPopup()
+        },
+        showPopup() {
+            let popupComponent = this.selectComponent('.J_Popup');
+            popupComponent && popupComponent.show();
+        },
+        hidePopup() {
+            let popupComponent = this.selectComponent('.J_Popup');
+            popupComponent && popupComponent.hide();
+        },
+        selectExpress() {
+            const that = this;
+            this.setData({
+                $loading: {
+                    isShow: true
+                }
+            });
+            wx.request({
+                url: 'http://zuoyu.top:8080/delivery/delivery',
+                method: 'GET',
+                success: res => {
+                    if (res.statusCode === 200) {
+                        const expressList = res.data;
+                        that.setData({
+                            expressList: expressList.reverse(),
+                            requestType: 'ORDER'
+                        });
+                        return
+                    }
+                    if (res.statusCode === 204) {
+                        that.setData({
+                            expressList: [],
+                            requestType: 'ORDER'
+                        });
+                        return;
+                    }
+                    that.setData({
+                        requestType: 'SHOP'
+                    })
+                },
+                fail: error => {
+                    that.setData({
+                        requestType: 'REQUEST_ERROR'
+                    })
+                },
+                complete: () => {
+                    this.setData({
+                        $loading: {
+                            isShow: false
+                        }
+                    })
+                }
+            });
+        },
+        toExpressEnter() {
+            const user = appInstance.globalData.user;
+            const userString = JSON.stringify(user);
+            if (userString === '{}') {
+                this.showDialog('.noLogin-dialog');
+                return;
+            }
+            const review = user.userIsByReview;
+            if (!review) {
+                this.showToast('请先通过审核', '#c70009', 'no');
+                return
+            }
+            wx.navigateTo({
+                url: '../express/expressEnter'
+            })
+        },
+        verifyUser() {
+            wx.getStorage({
+                key: 'authenticatedCode',
+                success: res => {
+                    appInstance.globalData.authenticatedCode = res.data;
+                    wx.request({
+                        url: 'http://zuoyu.top:8080/delivery/user/authentication',
+                        method: 'GET',
+                        header: {
+                            'Cookie': appInstance.globalData.authenticatedCode
+                        },
+                        success: res => {
+                            new Promise((resolve) => {
+                                appInstance.globalData.user = res.data.principal;
+                                resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
+                            }).then(() => {
+                                this.selectUserInfo()
+                            });
 
-            },
-            fail: error => {
-            },
-            complete: () => {
+                        },
+                        fail: error => {
+                        },
+                        complete: () => {
+                        }
+                    });
+                }
+            });
+        },
+        acceptExpress(e) {
+            const id = e.currentTarget.id;
+            const express = this.data.expressList[id];
+            const user = appInstance.globalData.user;
+            const userString = JSON.stringify(user);
+            if (userString === '{}') {
+                this.showDialog('.noLogin-dialog');
+                return;
             }
-          });
+            const review = user.userIsByReview;
+            if (!review) {
+                this.showToast('请先通过审核', '#c70009', 'no');
+                return
+            }
+            if (express.deliveryUserId === user.userId) {
+                this.showToast('这是您自己发布的包裹', '#c70009', 'no');
+                return;
+            }
+            if (express.deliveryUserSex !== '不限') {
+                if (!express.deliveryUserSex.endsWith(appInstance.globalData.userInfo.userInfoSex)) {
+                    this.showToast('您的性别不符合包裹性别要求', '#c70009', 'no');
+                    return;
+                }
+            }
+            this.showDialog('.accept-dialog');
+        },
+        showDialog(dialog) {
+            let dialogComponent = this.selectComponent(dialog);
+            dialogComponent && dialogComponent.show();
+        },
+        hideDialog(dialog) {
+            let dialogComponent = this.selectComponent(dialog);
+            dialogComponent && dialogComponent.hide();
+        },
+        noLoginOnConfirm() {
+            wx.navigateTo({
+                url: '../user/login'
+            });
+            this.hideDialog('.noLogin-dialog')
+        },
+        noLoginOnCancel() {
+            this.hideDialog('.noLogin-dialog')
+        },
+        acceptOnConfirm() {
+            const deliveryId = this.data.expressList[this.data.expressIndex].deliveryId;
+            if (deliveryId.length === 0) {
+                this.showToast('小程序出错，请刷新重试', '#c70009', 'no')
+            }
+            wx.request({
+                url: 'http://zuoyu.top:8080/delivery/delivery/transaction/' + deliveryId,
+                method: 'PUT',
+                header: {
+                    'Cookie': appInstance.globalData.authenticatedCode
+                },
+                success: res => {
+                    if (res.statusCode === 200) {
+                        this.showToast(res.data.message, '#5ac777', 'yes');
+                        return
+                    }
+                    this.showToast(res.data.message, '#c70009', 'no');
+                },
+                fail: error => {
+                    this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
+                },
+                complete: () => {
+                    this.hidePopup();
+                    this.selectExpress()
+                }
+            });
+            this.hideDialog('.accept-dialog')
+        },
+        acceptOnCancel() {
+            this.hideDialog('.accept-dialog')
+        },
+        selectUserInfo() {
+            const user = appInstance.globalData.user;
+            const userString = JSON.stringify(user);
+            if (userString === '{}') {
+                return;
+            }
+            if (user.userInfoId === null || user.userInfoId.trim().length === 0) {
+                return;
+            }
+            wx.request({
+                url: 'http://zuoyu.top:8080/delivery/user/userInfo/' + user.userInfoId,
+                method: 'GET',
+                header: {
+                    'Cookie': appInstance.globalData.authenticatedCode
+                },
+                success: res => {
+                    appInstance.globalData.userInfo = res.data
+                },
+                fail: error => {
+                    setTimeout(() => {
+                        this.showToast('账户详情请求失败，可能是网络原因', '#c70009', 'no');
+                    }, 1000);
+                },
+                complete: () => {
+                }
+            });
+        },
+        onLoad: function (options) {
+            // 页面创建时执行
+            this.selectExpress();
+        },
+        onShow: function () {
+            // this.selectExpress()
+            // 页面出现在前台时执行
+        },
+        onReady: function () {
+            this.verifyUser();
+            // 页面首次渲染完毕时执行
+        },
+        onHide: function () {
+            // 页面从前台变为后台时执行
+        },
+        onUnload: function () {
+            // 页面销毁时执行
+        },
+        onPullDownRefresh: function () {
+            // 触发下拉刷新时执行
+            this.selectExpress()
+        },
+        onReachBottom: function () {
+            // 页面触底时执行
+        },
+        onShareAppMessage: function () {
+            // 页面被用户分享时执行
+        },
+        onPageScroll: function () {
+            // 页面滚动时执行
+        },
+        onResize: function () {
+            // 页面尺寸变化时执行
+        },
+        onTabItemTap(item) {
+            // tab 点击时执行
+            this.selectExpress()
+        },
+        uuid() {
+            const s = [];
+            const hexDigits = "0123456789abcdefghijklmnopqrstuvwxyz";
+            for (let i = 0; i < 36; i++) {
+                s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+            }
+            s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+            s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+            s[8] = s[13] = s[18] = s[23] = "-";
+            return s.join("");
+        },
+        config: {
+            // 导航栏标题文字内容
+            navigationBarTitleText: '主页',
+            // 是否开启当前页面下拉刷新。
+            enablePullDownRefresh: false,
+            // 设置为 true 则页面整体不能上下滚动
+            disableScroll: false,
+            // 禁止页面右滑手势返回
+            disableSwipeBack: false,
+            usingComponents: {
+                'wxc-panel': '@minui/wxc-panel',
+                'wxc-cc': '@minui/wxc-cc',
+                'wxc-loadmore': '@minui/wxc-loadmore',
+                'wxc-abnor': '@minui/wxc-abnor',
+                'wxc-icon': '@minui/wxc-icon',
+                'wxc-dialog': '@minui/wxc-dialog',
+                'wxc-toast': '@minui/wxc-toast',
+                'wxc-loading': '@minui/wxc-loading',
+                'wxc-popup': '@minui/wxc-popup'
+            }
         }
-      });
-    },
-    acceptExpress(e) {
-      const id = e.currentTarget.id;
-      const express = this.data.expressList[id];
-      const user = appInstance.globalData.user;
-      const userString = JSON.stringify(user);
-      if (userString === '{}') {
-        this.showDialog('.noLogin-dialog');
-        return;
-      }
-      const review = user.userIsByReview;
-      if (!review) {
-        this.showToast('请先通过审核', '#c70009', 'no');
-        return
-      }
-      if (express.deliveryUserId === user.userId) {
-        this.showToast('这是您自己发布的包裹', '#c70009', 'no');
-        return;
-      }
-      if (express.deliveryUserSex !== '不限') {
-        if (!express.deliveryUserSex.endsWith(appInstance.globalData.userInfo.userInfoSex)) {
-          this.showToast('您的性别不符合包裹性别要求', '#c70009', 'no');
-          return;
-        }
-      }
-      this.showDialog('.accept-dialog');
-    },
-    showDialog(dialog) {
-      let dialogComponent = this.selectComponent(dialog);
-      dialogComponent && dialogComponent.show();
-    },
-    hideDialog(dialog) {
-      let dialogComponent = this.selectComponent(dialog);
-      dialogComponent && dialogComponent.hide();
-    },
-    noLoginOnConfirm() {
-      wx.navigateTo({
-        url: '../user/login'
-      });
-      this.hideDialog('.noLogin-dialog')
-    },
-    noLoginOnCancel() {
-      this.hideDialog('.noLogin-dialog')
-    },
-    acceptOnConfirm() {
-      const deliveryId = this.data.expressList[this.data.expressIndex].deliveryId;
-      if (deliveryId.length === 0) {
-        this.showToast('小程序出错，请刷新重试', '#c70009', 'no')
-      }
-      wx.request({
-        url: 'http://zuoyu.top:8080/delivery/delivery/transaction/' + deliveryId,
-        method: 'PUT',
-        header: {
-          'Cookie': appInstance.globalData.authenticatedCode
-        },
-        success: res => {
-          if (res.statusCode === 200) {
-            this.showToast(res.data.message, '#5ac777', 'yes');
-            return
-          }
-          this.showToast(res.data.message, '#c70009', 'no');
-        },
-        fail: error => {
-          this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
-        },
-        complete: () => {
-          this.setData({
-            maskStatus: 'hide'
-          });
-          this.selectExpress()
-        }
-      });
-      this.hideDialog('.accept-dialog')
-    },
-    acceptOnCancel() {
-      this.hideDialog('.accept-dialog')
-    },
-    selectUserInfo() {
-      const user = appInstance.globalData.user;
-      const userString = JSON.stringify(user);
-      if (userString === '{}') {
-        return;
-      }
-      if (user.userInfoId === null || user.userInfoId.trim().length === 0) {
-        return;
-      }
-      wx.request({
-        url: 'http://zuoyu.top:8080/delivery/user/userInfo/' + user.userInfoId,
-        method: 'GET',
-        header: {
-          'Cookie': appInstance.globalData.authenticatedCode
-        },
-        success: res => {
-          appInstance.globalData.userInfo = res.data
-        },
-        fail: error => {
-          setTimeout(() => {
-            this.showToast('账户详情请求失败，可能是网络原因', '#c70009', 'no');
-          }, 1000);
-        },
-        complete: () => {
-        }
-      });
-    },
-    onLoad: function (options) {
-      // 页面创建时执行
-      this.selectExpress();
-    },
-    onShow: function () {
-      // this.selectExpress()
-      // 页面出现在前台时执行
-    },
-    onReady: function () {
-      this.verifyUser();
-      // 页面首次渲染完毕时执行
-    },
-    onHide: function () {
-      // 页面从前台变为后台时执行
-    },
-    onUnload: function () {
-      // 页面销毁时执行
-    },
-    onPullDownRefresh: function () {
-      // 触发下拉刷新时执行
-      this.selectExpress()
-    },
-    onReachBottom: function () {
-      // 页面触底时执行
-    },
-    onShareAppMessage: function () {
-      // 页面被用户分享时执行
-    },
-    onPageScroll: function () {
-      // 页面滚动时执行
-    },
-    onResize: function () {
-      // 页面尺寸变化时执行
-    },
-    onTabItemTap(item) {
-      // tab 点击时执行
-      this.selectExpress()
-    },
-    uuid() {
-      const s = [];
-      const hexDigits = "0123456789abcdefghijklmnopqrstuvwxyz";
-      for (let i = 0; i < 36; i++) {
-        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
-      }
-      s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
-      s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
-      s[8] = s[13] = s[18] = s[23] = "-";
-      return s.join("");
-    },
-    config: {
-      // 导航栏标题文字内容
-      navigationBarTitleText: '主页',
-      // 是否开启当前页面下拉刷新。
-      enablePullDownRefresh: false,
-      // 设置为 true 则页面整体不能上下滚动
-      disableScroll: false,
-      // 禁止页面右滑手势返回
-      disableSwipeBack: false,
-      usingComponents: {
-        'wxc-panel': '@minui/wxc-panel',
-        'wxc-cc': '@minui/wxc-cc',
-        'wxc-loadmore': '@minui/wxc-loadmore',
-        'wxc-abnor': '@minui/wxc-abnor',
-        'wxc-icon': '@minui/wxc-icon',
-        'wxc-mask': '@minui/wxc-mask',
-        'wxc-dialog': '@minui/wxc-dialog',
-        'wxc-toast': '@minui/wxc-toast',
-        'wxc-loading': '@minui/wxc-loading'
-      }
     }
-  }
 </script>
 
 <style lang="less">
-  .list-wrap {
-    width: 100%;
-    /*background: #efefef;*/
-    background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
-  }
-  .table {
-       border: ~'1rpx' solid #dadada;
-       border-bottom: 0;
-       width: 100%;
-       margin-bottom: ~'6rpx'
-     }
+    .list-wrap {
+        width: 100%;
+        /*background: #efefef;*/
+        background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
+        padding-bottom: 55%;
+    }
 
-  .head {
-    position: fixed;
-    top: 0;
-  }
+    .table {
+        border: ~'1rpx' solid #dadada;
+        border-bottom: 0;
+        width: 100%;
+        margin-bottom: ~'6rpx'
+    }
 
-  .tr1 {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 0px 7px 24px -17px #333333;
-  }
-  .tr {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
+    .head {
+        position: fixed;
+        top: 0;
+    }
 
-  .td {
-    height: ~'66rpx';
-    line-height: ~'66rpx';
-    border-bottom: ~'1rpx' solid #dadada;
-    border-right: ~'1rpx' solid #dadada;
-    text-align: center;
-    width: 100%;
-    font-size: ~'30rpx';
-    color: #888888;
-  }
+    .tr1 {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: ~'0rpx' ~'7rpx' ~'24rpx' ~'-17rpx' #333333;
+    }
+
+    .tr {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: ~'0rpx' ~'7rpx' ~'24rpx' ~'-17rpx' #333333;
+        border-radius: ~'30rpx';
+        /*background-color: #ffffff;*/
+    }
+
+    .td {
+        height: ~'66rpx';
+        line-height: ~'66rpx';
+        text-align: center;
+        width: 100%;
+        font-size: ~'30rpx';
+        color: #888888;
+        margin-top: 5%;
+    }
 
 
-  .th {
-    font-weight: 500;
-    background-color: #ffffff;
-    font-size: ~'36rpx';
-    color: #666666;
-    height: ~'66rpx';
-    line-height: ~'66rpx';
+    .th {
+        font-weight: 500;
+        background-color: #ffffff;
+        font-size: ~'36rpx';
+        color: #666666;
+        height: ~'66rpx';
+        line-height: ~'66rpx';
+        /*border-bottom: ~'1rpx' solid #dadada;*/
+        /*border-right: ~'1rpx' solid #dadada;*/
+        text-align: center;
+        width: 100%;
+    }
 
-    /*border-bottom: ~'1rpx' solid #dadada;*/
-    /*border-right: ~'1rpx' solid #dadada;*/
-    text-align: center;
-    width: 100%;
-  }
+    .deliveryAddress {
+        width: ~'1200rpx';
+    }
 
-  .deliveryAddress {
-    width: ~'1200rpx';
-  }
+    .deliveryGoalFloor {
+        width: ~'1000rpx';
+    }
 
-  .deliveryGoalFloor {
-    width: ~'1000rpx';
-  }
+    .space {
+        height: ~'66rpx';
+    }
 
-  .space {
-    height: ~'66rpx';
-  }
-  .space1 {
-    height: ~'27rpx';
-  }
+    .space1 {
+        height: ~'27rpx';
+    }
 
-  .add_button {
-    position: fixed;
-    width: ~'150rpx';
-    height: ~'60rpx';
-    line-height: ~'60rpx';
-    bottom: ~'64rpx';
-    right: ~'299rpx';
-    font-size: ~'35rpx';
-    /*vertical-align: center;*/
-    color: #949494;
-    background-color: #FFFFFF;
-    border-radius: ~'30rpx';
-    border-style: outset;
-    /*box-shadow:0px 3px 8px #949494;*/
-  }
+    .add_button {
+        position: fixed;
+        width: ~'150rpx';
+        height: ~'60rpx';
+        line-height: ~'60rpx';
+        bottom: ~'64rpx';
+        right: ~'299rpx';
+        font-size: ~'35rpx';
+        /*vertical-align: center;*/
+        color: #949494;
+        background-color: #FFFFFF;
+        border-radius: ~'30rpx';
+        border-style: outset;
+        /*box-shadow:0px 3px 8px #949494;*/
+    }
 
-  .popup__content {
-    width: ~'800rpx';
-    height: ~'900rpx';
-    line-height: ~'450rpx';
-    background: #ffffff;
-    text-align: center;
-  }
+    .popup__content {
+        width: ~'800rpx';
+        height: ~'930rpx';
+        line-height: ~'465rpx';
+        background: #ffffff;
+        text-align: center;
+    }
 
-  .input-wrap {
-    position: relative;
-    margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
-  }
+    .input-wrap {
+        position: relative;
+        margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+    }
 
-  .panel {
-    min-width: ~'163rpx';
-    line-height: ~'40rpx';
-    height: ~'40rpx';
-    display: flex;
-    align-items: center;
-    padding: ~'20rpx' ~'30rpx' ~'26rpx' ~'30rpx';
-    font-size: ~'28rpx';
-    color: #333;
-    border: 0 solid #f0f0f0;
-    border-bottom-width: ~'1rpx';
-  }
+    .panel {
+        min-width: ~'163rpx';
+        line-height: ~'44rpx';
+        height: ~'44rpx';
+        display: flex;
+        align-items: center;
+        padding: ~'20rpx' ~'30rpx' ~'26rpx' ~'30rpx';
+        font-size: ~'28rpx';
+        color: #333;
+        border: 0 solid #f0f0f0;
+        border-bottom-width: ~'1rpx';
+    }
 
-  .title-style {
-    flex: 1;
-    height: ~'40rpx';
-    min-height: ~'40px';
-    line-height: ~'40rpx';
-  }
+    .title-style {
+        flex: 1;
+        height: ~'40rpx';
+        min-height: ~'40px';
+        line-height: ~'40rpx';
+    }
 
-  .picker-message {
-    margin-left: ~'80rpx';
-    color: #959595;
-  }
+    .picker-message {
+        margin-left: ~'80rpx';
+        color: #959595;
+    }
 
-  .sure_button {
-    border-radius: ~'26rpx';
-    width: ~'500rpx';
-    height: ~'60rpx';
-    font-size: ~'30rpx';
-    line-height: ~'60rpx';
-    margin-left: 15%;
-  }
+    .sure_button {
+        border-radius: ~'26rpx';
+        width: ~'500rpx';
+        height: ~'60rpx';
+        font-size: ~'30rpx';
+        line-height: ~'60rpx';
+        margin-left: 15%;
+    }
 
-  .mask-demo_content {
-    width: ~'350rpx';
-    padding: ~'20rpx';
-    background: #FFF;
-    color: #000;
-  }
-  /*.recommend {*/
-  /*  text-align: center;*/
-  /*  height: ~'50rpx';*/
-  /*  margin-top: ~'10rpx';*/
-  /*}*/
+    .mask-demo_content {
+        width: ~'350rpx';
+        padding: ~'20rpx';
+        background: #FFF;
+        color: #000;
+    }
 
-  .recommend-title {
-    display: table;
-    width: 100%;
-    line-height: ~'35rpx';
-    white-space: nowrap;
-    border-spacing: 2.5rem 0;
-    font-size: ~'28rpx';
-    color: black;
-    margin-left: -40.5%;
-    font-weight: bold;
-  }
+    /*.recommend {*/
+    /*  text-align: center;*/
+    /*  height: ~'50rpx';*/
+    /*  margin-top: ~'10rpx';*/
+    /*}*/
 
-  /*.recommend-title::before, .recommend-title::after {*/
-  /*  display: table-cell;*/
-  /*  content: "";*/
-  /*  width: 50%;*/
-  /*  background: linear-gradient(#eee, #eee) repeat-x center;*/
-  /*  background-size: 0.1rem 0.1rem;*/
-  /*}*/
+    .recommend-title {
+        display: table;
+        width: 100%;
+        line-height: ~'35rpx';
+        white-space: nowrap;
+        border-spacing: 2.5rem 0;
+        font-size: ~'28rpx';
+        color: black;
+        margin-left: -40.5%;
+        font-weight: bold;
+    }
 </style>

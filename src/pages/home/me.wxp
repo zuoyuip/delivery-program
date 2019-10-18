@@ -6,8 +6,8 @@
       text="{{ $toast.text }}"
   ></wxc-toast>
   <wxc-panel bind:click="jump" border="{{false}}" class="content">
-    <wxc-cc class="cc">
-      <wxc-avatar class="avatar" mode="aspectFit" src="{{ heardImage }}">
+    <wxc-cc  class="cc">
+      <wxc-avatar  class="avatar" src="{{ heardImage }}">
       </wxc-avatar>
       <wxc-avatar class="cc__text">{{ userPhone }}</wxc-avatar>
       <wxc-icon color="#959595" size="26" type="arrow-right"></wxc-icon>

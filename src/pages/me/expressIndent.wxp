@@ -47,7 +47,7 @@
           type="{{ requestType }}"></wxc-abnor>
     </view>
   </view>
-  <wxc-mask content-align="bl" status="{{ maskStatus }}">
+  <wxc-popup class="J_Popup" animation-mode="bottom" align="bottom">
     <view class="popup__content">
       <view class="input-wrap">
         <wxc-panel border="{{ false }}" class="panel">
@@ -116,7 +116,7 @@
         <view class="space"></view>
       </view>
     </view>
-  </wxc-mask>
+  </wxc-popup>
 </template>
 
 <script>
@@ -127,7 +127,6 @@
       expressIndex: 0,
       requestType: '',
       isLoading: false,
-      maskStatus: 'hide',
       $toast: {
         text: '',
         show: false,
@@ -158,12 +157,15 @@
       this.setData({
         expressIndex: e.currentTarget.id
       });
-      this.showMask()
+      this.showPopup()
     },
-    showMask() {
-      this.setData({
-        maskStatus: 'show'
-      })
+    showPopup() {
+      let popupComponent = this.selectComponent('.J_Popup');
+      popupComponent && popupComponent.show();
+    },
+    hidePopup() {
+      let popupComponent = this.selectComponent('.J_Popup');
+      popupComponent && popupComponent.hide();
     },
     selectExpress() {
       const that = this;
@@ -282,7 +284,7 @@
         'wxc-panel': '@minui/wxc-panel',
         'wxc-cc': '@minui/wxc-cc',
         'wxc-loadmore': '@minui/wxc-loadmore',
-        'wxc-mask': '@minui/wxc-mask',
+        'wxc-popup': '@minui/wxc-popup',
         'wxc-abnor': '@minui/wxc-abnor',
         'wxc-elip': '@minui/wxc-elip',
         'wxc-toast': '@minui/wxc-toast'
