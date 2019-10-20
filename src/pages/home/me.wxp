@@ -67,6 +67,10 @@
     <image src="../../images/wenti.png"></image>
     <image src="../../images/refresh.png"></image>
     <image src="../../images/image_200x200.png"></image>
+    <image src="../../images/sign-guanfang.png"></image>
+    <image src="../../images/sign-buxian.png"></image>
+    <image src="../../images/sign-nan.png"></image>
+    <image src="../../images/sign-nv.png"></image>
   </view>
 </template>
 

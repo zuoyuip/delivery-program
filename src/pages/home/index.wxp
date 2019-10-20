@@ -16,34 +16,37 @@
     <wxc-dialog bindcancel="acceptOnCancel" bindconfirm="acceptOnConfirm" cancel-text="取消"
                 class="accept-dialog"
                 confirm-text="接受" content="确定接受该订单" title="提示"></wxc-dialog>
+    <view class="space"></view>
     <view class="table">
+        <view class="list-wrap">
         <view class="tr1 head">
             <text class="th deliveryAddress">取件地址</text>
             <text class="th deliveryGoalFloor">送达地点</text>
-            <text class="th deliveryUserSex">限制</text>
+            <text class="th deliveryUserSex">领取人</text>
             <text class="th deliveryReward">赏金</text>
         </view>
-        <view class="space"></view>
 
         <view wx:if="{{ expressList.length > 0 }}">
-            <view class="list-wrap">
+
                 <view bindtap="chooseExpress" class="tr" id="{{ index }}"
                       wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
                       wx:key="deliveryId">
+                    <wxc-cc class="demo">
+                        <image class="demo__pic" src="{{ sign }}" mode="aspectFit"></image>
+                    </wxc-cc>
                     <text class="td deliveryAddress">{{ express.deliveryAddress }}</text>
                     <text class="td deliveryGoalFloor">{{ express.deliveryGoalFloor }}</text>
                     <text class="td deliveryUserSex">{{ express.deliveryUserSex }}</text>
                     <text class="td deliveryReward">{{ express.deliveryReward }}</text>
                 </view>
-            </view>
             <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
         </view>
-
         <view wx:else>
             <wxc-abnor
                     bind:abnortap="selectExpress"
                     type="{{ requestType }}"></wxc-abnor>
         </view>
+    </view>
     </view>
     <view bindtap="toExpressEnter" class="add_button">
         <text decode="true">&nbsp;&nbsp;</text>
@@ -59,12 +62,6 @@
                         <text class='recommend-title'>快递详情</text>
                     </view>
                 </wxc-panel>
-                <!--        <wxc-panel border="{{ false }}" class="panel">-->
-                <!--          <wxc-cc>-->
-                <!--            <text class="title-style">唯一标识</text>-->
-                <!--            <text class="picker-message">{{ expressList[expressIndex].deliveryOrderCode }}</text>-->
-                <!--          </wxc-cc>-->
-                <!--        </wxc-panel>-->
                 <wxc-panel border="{{ false }}" class="panel">
                     <wxc-cc>
                         <text class="title-style">快递名称</text>
@@ -73,7 +70,7 @@
                 </wxc-panel>
                 <wxc-panel border="{{ false }}" class="panel">
                     <wxc-cc>
-                        <text class="title-style">性别限制</text>
+                        <text class="title-style" decode="true">领 &nbsp;取 &nbsp;人</text>
                         <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>
                     </wxc-cc>
                 </wxc-panel>
@@ -129,6 +126,7 @@
             expressList: [],
             expressIndex: 0,
             requestType: '',
+            sign:'',
             $toast: {
                 text: '',
                 show: false,
@@ -221,6 +219,7 @@
                 this.showDialog('.noLogin-dialog');
                 return;
             }
+
             const review = user.userIsByReview;
             if (!review) {
                 this.showToast('请先通过审核', '#c70009', 'no');
@@ -426,20 +425,14 @@
                 'wxc-dialog': '@minui/wxc-dialog',
                 'wxc-toast': '@minui/wxc-toast',
                 'wxc-loading': '@minui/wxc-loading',
-                'wxc-popup': '@minui/wxc-popup'
+                'wxc-popup': '@minui/wxc-popup',
+                'wxc-avatar': '@minui/wxc-avatar'
             }
         }
     }
 </script>
 
 <style lang="less">
-    .list-wrap {
-        width: 100%;
-        /*background: #efefef;*/
-        background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
-        padding-bottom: 55%;
-    }
-
     .table {
         border: ~'1rpx' solid #dadada;
         border-bottom: 0;
@@ -463,22 +456,20 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        box-shadow: ~'0rpx' ~'7rpx' ~'24rpx' ~'-17rpx' #333333;
-        border-radius: ~'30rpx';
+        /*box-shadow: ~'0rpx' ~'7rpx' ~'24rpx' ~'-17rpx' #333333;*/
         /*background-color: #ffffff;*/
+        border-bottom: ~'1rpx' solid #dadada;
     }
 
     .td {
-        height: ~'66rpx';
-        line-height: ~'66rpx';
+        height: ~'86rpx';
+        line-height: ~'86rpx';
         text-align: center;
         width: 100%;
         font-size: ~'30rpx';
         color: #888888;
-        margin-top: 5%;
+        /*margin-top: 2%;*/
     }
-
-
     .th {
         font-weight: 500;
         background-color: #ffffff;
@@ -594,5 +585,16 @@
         color: black;
         margin-left: -40.5%;
         font-weight: bold;
+    }
+    /*.demo {*/
+    /*    display: block;*/
+    /*    width: 20%;*/
+    /*    height: ~'40rpx';*/
+    /*}*/
+    .demo__pic {
+        position: fixed;
+        left:~'45rpx';
+        width: ~'30rpx';
+        height: ~'30rpx';
     }
 </style>

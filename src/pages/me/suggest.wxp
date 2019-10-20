@@ -9,7 +9,7 @@
         <view class="weui-textarea">
             <label>
                 <textarea bindinput="handleContentInput" value="{{ content }}" class="textarea" maxlength="500"
-                          placeholder="请输入您的建议"
+                          placeholder="请输入您的建议或者举报信息"
                           placeholder-style="color:#b3b3b3;font-size:36rpx;"></textarea>
             </label>
         </view>

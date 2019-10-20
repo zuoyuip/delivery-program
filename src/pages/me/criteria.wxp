@@ -393,7 +393,7 @@
   }
 
   .picker-message {
-    margin-left: ~'433rpx';
+    margin-left: ~'390rpx';
     color: #959595;
     padding-bottom: ~'10rpx';
   }

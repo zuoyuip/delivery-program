@@ -75,7 +75,7 @@
         </wxc-panel>
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
-            <text class="title-style">性别限制</text>
+            <text class="title-style" decode="true">领 &nbsp;取 &nbsp;人</text>
             <text class="picker-message">{{ expressList[expressIndex].deliveryUserSex }}</text>
           </wxc-cc>
         </wxc-panel>

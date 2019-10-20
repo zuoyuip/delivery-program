@@ -311,7 +311,7 @@
         config: {
             // window:{
             // 导航栏标题文字内容
-            navigationBarTitleText: '用户协议',
+            navigationBarTitleText: '隐私政策',
             // 是否开启当前页面下拉刷新。
             enablePullDownRefresh: false,
             // 设置为 true 则页面整体不能上下滚动。
