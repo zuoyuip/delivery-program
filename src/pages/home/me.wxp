@@ -82,7 +82,7 @@
       userPhone: '',
       isLogin: false,
       desc: '',
-      heardImage: 'http://www.zuoyu.top/images/dog.png',
+      heardImage: 'http://zuoyu.top/images/dog.png',
       $toast: {
         text: '',
         show: false,
@@ -201,7 +201,7 @@
         let userInfoSex = appInstance.globalData.userInfo.userInfoSex;
         that.setData({
           desc: '您已通过认证',
-          heardImage: userInfoSex === '男' ? 'http://www.zuoyu.top/images/boy.png' : 'http://www.zuoyu.top/images/girl.png'
+          heardImage: userInfoSex === '男' ? 'http://zuoyu.top/images/boy.png' : 'http://zuoyu.top/images/girl.png'
         });
       }
     },
