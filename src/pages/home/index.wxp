@@ -18,14 +18,16 @@
               confirm-text="接受" content="确定接受该订单" title="提示"></wxc-dialog>
   <view class="space"></view>
   <view class="table">
-    <view class="list-wrap">
       <view class="tr1 head">
-        <text class="th deliveryAddress">取件地址</text>
+        <wxc-cc><image class="imageSize" src="../../images/address.png"></image></wxc-cc>
+        <wxc-avatar class="th deliveryAddress">取件地址</wxc-avatar>
+        <wxc-cc><image class="imageSize1" src="../../images/floor.png"></image></wxc-cc>
         <text class="th deliveryGoalFloor">送达地点</text>
+        <wxc-cc><image class="imageSize2" src="../../images/people.png"></image></wxc-cc>
         <text class="th deliveryUserSex">领取人</text>
+        <wxc-cc><image class="imageSize3" src="../../images/money.png"></image></wxc-cc>
         <text class="th deliveryReward">赏金</text>
       </view>
-
       <view wx:if="{{ expressList.length > 0 }}">
 
         <view bindtap="chooseExpress" class="tr" id="{{ index }}"
@@ -48,7 +50,6 @@
             type="{{ requestType }}"></wxc-abnor>
       </view>
     </view>
-  </view>
   <view bindtap="toExpressEnter" class="add_button">
     <text decode="true">&nbsp;&nbsp;</text>
     <wxc-icon color="#949494" size="30" type="add"></wxc-icon>
@@ -129,6 +130,7 @@
       expressList: [],
       expressIndex: 0,
       requestType: '',
+      img:'../../images/address.png',
       $toast: {
         text: '',
         show: false,
@@ -469,8 +471,7 @@
     text-align: center;
     width: 100%;
     font-size: ~'30rpx';
-    color: #888888;
-    /*margin-top: 2%;*/
+    color: #000000;
   }
 
   .th {
@@ -500,7 +501,30 @@
   .space1 {
     height: ~'27rpx';
   }
-
+  .imageSize{
+    width:~'30rpx';
+    height:~'30rpx';
+    position: relative;
+    left:4%;
+  }
+  .imageSize1{
+    width:~'30rpx';
+    height:~'30rpx';
+    position: relative;
+    left:33%;
+  }
+  .imageSize2{
+    width:~'30rpx';
+    height:~'30rpx';
+    position: relative;
+    left:59%;
+  }
+  .imageSize3{
+    width:~'30rpx';
+    height:~'30rpx';
+    position: relative;
+    left:81%;
+  }
   .add_button {
     position: fixed;
     width: ~'150rpx';
