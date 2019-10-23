@@ -154,7 +154,7 @@
             show: false
           }
         })
-      }, 1500)
+      }, 1000)
     },
     chooseExpress(e) {
       this.setData({
@@ -279,7 +279,7 @@
       }
       if (express.deliveryUserSex !== '不限') {
         if (!express.deliveryUserSex.endsWith(appInstance.globalData.userInfo.userInfoSex)) {
-          this.showToast('您的性别不符合包裹性别要求', '#c70009', 'no');
+          this.showToast('您的性别不符合要求', '#c70009', 'no');
           return;
         }
       }
@@ -433,7 +433,6 @@
     }
   }
 </script>
-
 <style lang="less">
   .table {
     border: ~'1rpx' solid #dadada;
@@ -452,6 +451,7 @@
     display: flex;
     justify-content: space-between;
     box-shadow: ~'0rpx' ~'7rpx' ~'24rpx' ~'-17rpx' #333333;
+    border-bottom: 0
   }
 
   .tr {
@@ -475,8 +475,8 @@
 
   .th {
     font-weight: 500;
-    background-color: #ffffff;
-    font-size: ~'36rpx';
+    background-color: #f7f7f7;
+    font-size: ~'32rpx';
     color: #666666;
     height: ~'66rpx';
     line-height: ~'66rpx';
@@ -485,7 +485,6 @@
     text-align: center;
     width: 100%;
   }
-
   .deliveryAddress {
     width: ~'1200rpx';
   }

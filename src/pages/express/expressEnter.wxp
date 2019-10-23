@@ -146,7 +146,7 @@
           contentCount: 0,
           content: ''
         })
-      }, 1500)
+      }, 1000)
     },
     expressNamePickerChange: function expressNamePickerChange(e) {
       this.setData({
@@ -213,19 +213,19 @@
         this.showToast('请输入正确的手机号', '#a2675a', 'warning');
         return
       }
-      if (this.data.expressNameIndex === 0) {
+      if (this.data.expressNameIndex === 0 || this.data.expressNameIndex === '0') {
         this.showToast('请选择快递名称', '#a2675a', 'warning');
         return
       }
-      if (this.data.expressWeightIndex === 0) {
+      if (this.data.expressWeightIndex === 0 || this.data.expressWeightIndex === '0') {
         this.showToast('请选择快递重量', '#a2675a', 'warning');
         return
       }
-      if (this.data.deliveryAddressIndex === 0) {
+      if (this.data.deliveryAddressIndex === 0 || this.data.deliveryAddressIndex === '0') {
         this.showToast('请选择取件地址', '#a2675a', 'warning');
         return
       }
-      if (this.data.floorNumberIndex === 0) {
+      if (this.data.floorNumberIndex === 0 || this.data.floorNumberIndex === '0') {
         this.showToast('请选择收货楼号', '#a2675a', 'warning');
         return
       }

@@ -40,9 +40,15 @@
       <wxc-list
           bind:click="toAbout"
           class="item"
-          mode="none"
+          mode="normal"
           src="../../../../images/wenti.png"
           title="常见问题"></wxc-list>
+      <wxc-list
+              class="item"
+              mode="none"
+              src="../../../../images/kkff.png"
+              title="联系客服"><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button></wxc-list>
+
       <view class="space"></view>
       <wxc-list
           bind:click="toSuggest"
@@ -71,6 +77,11 @@
     <image src="../../images/sign-buxian.png"></image>
     <image src="../../images/sign-nan.png"></image>
     <image src="../../images/sign-nv.png"></image>
+    <image src="../../images/kkff.png"></image>
+    <image src="../../images/address.png"></image>
+    <image src="../../images/floor.png"></image>
+    <image src="../../images/money.png"></image>
+    <image src="../../images/people.png"></image>
   </view>
 </template>
 
@@ -105,7 +116,7 @@
             show: false
           }
         })
-      }, 1500)
+      }, 1000)
     },
     // 页面跳转
     toExpressIndent() {
@@ -311,7 +322,12 @@
     padding-bottom: 55%;
     margin-top: ~'30rpx';
   }
-
+  .contact-btn {
+    display: inline-block;
+    /*position: absolute;*/
+    background: salmon;
+    opacity: 0;
+  }
   .list-item {
     background: #fff;
     color: #959595;

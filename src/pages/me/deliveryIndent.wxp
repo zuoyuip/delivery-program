@@ -343,22 +343,6 @@
     background: #ffffff;
     text-align: center;
   }
-
-  /*.add_button {*/
-  /*  position: fixed;*/
-  /*  width: ~'150rpx';*/
-  /*  height: ~'60rpx';*/
-  /*  line-height: ~'60rpx';*/
-  /*  bottom: ~'64rpx';*/
-  /*  right: ~'299rpx';*/
-  /*  font-size: ~'35rpx';*/
-  /*  !*vertical-align: center;*!*/
-  /*  color: #949494;*/
-  /*  background-color: #FFFFFF;*/
-  /*  border-radius: ~'30rpx';*/
-  /*  border-style: outset;*/
-  /*  !*box-shadow:0px 3px 8px #949494;*!*/
-  /*}*/
   .picker-message {
     margin-left: ~'80rpx';
     color: #959595;

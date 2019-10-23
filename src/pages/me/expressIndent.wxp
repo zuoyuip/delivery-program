@@ -151,7 +151,7 @@
           contentCount: 0,
           content: ''
         })
-      }, 1500)
+      }, 1000)
     },
     chooseExpress(e) {
       this.setData({

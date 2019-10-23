@@ -83,7 +83,7 @@
           contentCount: 0,
           content: ''
         })
-      }, 1500)
+      }, 1000)
     },
     userPhoneInput(e) {
       this.setData({

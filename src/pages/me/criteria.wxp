@@ -121,7 +121,7 @@
             show: false
           },
         })
-      }, 1500)
+      }, 1000)
     },
     userCollegePickerChange(e) {
       this.setData({

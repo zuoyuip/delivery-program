@@ -60,7 +60,7 @@
           contentCount: 0,
           content: ''
         })
-      }, 1500)
+      }, 1000)
     },
     forgetUser() {
       wx.navigateTo({
