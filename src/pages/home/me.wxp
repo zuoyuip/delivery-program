@@ -29,14 +29,14 @@
           bind:click="toDeliveryIndent"
           class="item"
           src="../../../../images/jieshou.png"
-          title="我的接受">
+          title="我的接单">
       </wxc-list>
       <wxc-list
           bind:click="toCriteria" class="item"
           desc="{{ desc }}"
           dot="{{ desc !== '您已通过认证' }}"
           src="../../../../images/xinxi.png"
-          title="完善信息"></wxc-list>
+          title="信息审核"></wxc-list>
       <wxc-list
           bind:click="toAbout"
           class="item"

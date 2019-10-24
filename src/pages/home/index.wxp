@@ -180,7 +180,7 @@
         }
       });
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/delivery',
+        url: 'https://www.tkparcel.com/delivery/delivery',
         method: 'GET',
         success: res => {
           if (res.statusCode === 200) {
@@ -239,7 +239,7 @@
         success: res => {
           appInstance.globalData.authenticatedCode = res.data;
           wx.request({
-            url: 'http://zuoyu.top:8080/delivery/user/authentication',
+            url: 'https://www.tkparcel.com/delivery/user/authentication',
             method: 'GET',
             header: {
               'Cookie': appInstance.globalData.authenticatedCode
@@ -280,8 +280,8 @@
         return;
       }
       if (express.deliveryUserSex !== '不限') {
-        if (!express.deliveryUserSex.endsWith(appInstance.globalData.userInfo.userInfoSex)) {
-          this.showToast('您的性别不符合要求', '#c70009', 'no');
+        if (!express.deliveryUserSex.startsWith(appInstance.globalData.userInfo.userInfoSex)) {
+          this.showToast('您的不符合要求', '#c70009', 'no');
           return;
         }
       }
@@ -310,7 +310,7 @@
         this.showToast('小程序出错，请刷新重试', '#c70009', 'no')
       }
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/delivery/transaction/' + deliveryId,
+        url: 'https://www.tkparcel.com/delivery/delivery/transaction/' + deliveryId,
         method: 'PUT',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
@@ -345,7 +345,7 @@
         return;
       }
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/user/userInfo/' + user.userInfoId,
+        url: 'https://www.tkparcel.com/delivery/user/userInfo/' + user.userInfoId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode

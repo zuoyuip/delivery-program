@@ -111,7 +111,7 @@
         return
       }
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/user/sendVerificationCode/forget/'
+        url: 'https://www.tkparcel.com/delivery/user/sendVerificationCode/forget/'
             + this.data.userPhone,
         method: 'GET',
         header: {
@@ -158,7 +158,7 @@
         return
       }
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/user/forgetUser/',
+        url: 'https://www.tkparcel.com/delivery/user/forgetUser/',
         method: 'POST',
         data: {
           userPhone: this.data.userPhone.trim(),

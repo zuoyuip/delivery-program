@@ -84,7 +84,7 @@
     },
     login() {
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/login',
+        url: 'https://www.tkparcel.com/delivery/login',
         method: 'POST',
         data: {
           userName: this.data.userName,
@@ -132,7 +132,7 @@
     },
     verifyUser(authenticatedCode) {
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/user/authentication',
+        url: 'https://www.tkparcel.com/delivery/user/authentication',
         method: 'GET',
         header: {
           'Cookie': authenticatedCode
@@ -156,7 +156,7 @@
         return;
       }
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/user/userInfo/' + user.userInfoId,
+        url: 'https://www.tkparcel.com/delivery/user/userInfo/' + user.userInfoId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode

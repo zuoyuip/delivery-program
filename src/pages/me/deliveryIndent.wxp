@@ -138,7 +138,7 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/me/deliveryWorker/'
+        url: 'https://www.tkparcel.com/delivery/me/deliveryWorker/'
                 + appInstance.globalData.user.userId,
         method: 'GET',
         header: {

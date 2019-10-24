@@ -60,7 +60,7 @@
                 return
             }
             wx.request({
-                url: 'http://zuoyu.top:8080/delivery/me/suggest',
+                url: 'https://www.tkparcel.com/delivery/me/suggest',
                 method: 'POST',
                 data: {
                     suggestContent: this.data.content

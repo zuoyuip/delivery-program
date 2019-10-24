@@ -173,7 +173,7 @@
         isLoading: true
       });
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
+        url: 'https://www.tkparcel.com/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
@@ -211,7 +211,7 @@
     },
     cancelExpress(e){
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/delivery/' + e.currentTarget.id,
+        url: 'https://www.tkparcel.com/delivery/delivery/' + e.currentTarget.id,
         method: 'DELETE',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode

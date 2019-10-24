@@ -88,7 +88,7 @@
         return
       }
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/user/sendVerificationCode/modify/'
+        url: 'https://www.tkparcel.com/delivery/user/sendVerificationCode/modify/'
                 + this.data.changePhone,
         method: 'GET',
         header: {
@@ -126,7 +126,7 @@
     },
     changeCount() {
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/user/modifyUser',
+        url: 'https://www.tkparcel.com/delivery/user/modifyUser',
         method: 'POST',
         data: {
           newUserPhone: this.data.changePhone,
@@ -175,7 +175,7 @@
     },
     logout() {
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/logout',
+        url: 'https://www.tkparcel.com/delivery/logout',
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode

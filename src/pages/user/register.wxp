@@ -118,7 +118,7 @@
         return
       }
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/user/sendVerificationCode/register/'
+        url: 'https://www.tkparcel.com/delivery/user/sendVerificationCode/register/'
             + this.data.userPhone,
         method: 'GET',
         header: {
@@ -165,7 +165,7 @@
         return
       }
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/user',
+        url: 'https://www.tkparcel.com/delivery/user',
         method: 'POST',
         data: {
           userPhone: this.data.userPhone,

@@ -260,7 +260,7 @@
           return
       }
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/delivery',
+        url: 'https://www.tkparcel.com/delivery/delivery',
         method: 'POST',
         data: {
           deliverySexImageUrl: deliverySexImageUrl,

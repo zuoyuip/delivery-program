@@ -210,7 +210,7 @@
         }
       });
       wx.uploadFile({
-        url: 'http://zuoyu.top:8080/delivery/me/submitCriteria', //仅为示例，非真实的接口地址
+        url: 'https://www.tkparcel.com/delivery/me/submitCriteria', //仅为示例，非真实的接口地址
         filePath: this.data.image,
         name: 'file',
         formData: {
@@ -231,7 +231,7 @@
               }, 1000);
               new Promise((resolve) => {
                 wx.request({
-                  url: 'http://zuoyu.top:8080/delivery/user/authentication',
+                  url: 'https://www.tkparcel.com/delivery/user/authentication',
                   method: 'GET',
                   header: {
                     'Cookie': appInstance.globalData.authenticatedCode
@@ -272,7 +272,7 @@
     },
     selectReview() {
       wx.request({
-        url: 'http://zuoyu.top:8080/delivery/me/review/' + appInstance.globalData.user.reviewId,
+        url: 'https://www.tkparcel.com/delivery/me/review/' + appInstance.globalData.user.reviewId,
         method: 'GET',
         header: {
           'Cookie': appInstance.globalData.authenticatedCode
