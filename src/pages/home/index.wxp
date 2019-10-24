@@ -20,13 +20,13 @@
   <view class="table">
       <view class="tr1 head">
         <wxc-cc><image class="imageSize" src="../../images/address.png"></image></wxc-cc>
-        <wxc-avatar class="th deliveryAddress">取件地址</wxc-avatar>
+        <text class="th deliveryAddress" decode="true">&nbsp;&nbsp;取件地址</text>
         <wxc-cc><image class="imageSize1" src="../../images/floor.png"></image></wxc-cc>
-        <text class="th deliveryGoalFloor">送达地点</text>
+        <text class="th deliveryGoalFloor" decode="true">&nbsp;&nbsp;送达地点</text>
         <wxc-cc><image class="imageSize2" src="../../images/people.png"></image></wxc-cc>
-        <text class="th deliveryUserSex">领取人</text>
+        <text class="th deliveryUserSex" decode="true">&nbsp;&nbsp;领取人</text>
         <wxc-cc><image class="imageSize3" src="../../images/money.png"></image></wxc-cc>
-        <text class="th deliveryReward">赏金</text>
+        <text class="th deliveryReward" decode="true">&nbsp;&nbsp;赏金</text>
       </view>
       <view wx:if="{{ expressList.length > 0 }}">
 
@@ -504,26 +504,26 @@
   .imageSize{
     width:~'30rpx';
     height:~'30rpx';
-    position: relative;
+    position: fixed;
     left:4%;
   }
   .imageSize1{
     width:~'30rpx';
     height:~'30rpx';
-    position: relative;
-    left:33%;
+    position: fixed;
+    left:34%;
   }
   .imageSize2{
     width:~'30rpx';
     height:~'30rpx';
-    position: relative;
-    left:59%;
+    position: fixed;
+    left:60%;
   }
   .imageSize3{
     width:~'30rpx';
     height:~'30rpx';
-    position: relative;
-    left:81%;
+    position: fixed;
+    left:82%;
   }
   .add_button {
     position: fixed;
