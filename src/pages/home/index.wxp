@@ -619,7 +619,7 @@
   /*    height: ~'40rpx';*/
   /*}*/
   .demo__pic {
-    position: fixed;
+    position: absolute;
     left: ~'45rpx';
     width: ~'30rpx';
     height: ~'30rpx';
