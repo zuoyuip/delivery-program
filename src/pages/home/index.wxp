@@ -1,14 +1,14 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   <wxc-loading
-      image="../../../../images/image_200x200.png"
-      is-show="{{$loading.isShow}}"
-      slip="../../../../images/refresh.png"
+          image="../../../../images/image_200x200.png"
+          is-show="{{$loading.isShow}}"
+          slip="../../../../images/refresh.png"
   ></wxc-loading>
   <wxc-toast
-      icon="{{ $toast.icon }}"
-      icon-color="{{ $toast.color }}"
-      is-show="{{$toast.show}}"
-      text="{{ $toast.text }}"
+          icon="{{ $toast.icon }}"
+          icon-color="{{ $toast.color }}"
+          is-show="{{$toast.show}}"
+          text="{{ $toast.text }}"
   ></wxc-toast>
   <wxc-dialog bindcancel="noLoginOnCancel" bindconfirm="noLoginOnConfirm" cancel-text="取消"
               class="noLogin-dialog"
@@ -18,38 +18,38 @@
               confirm-text="接受" content="确定接受该订单" title="提示"></wxc-dialog>
   <view class="space"></view>
   <view class="table">
-      <view class="tr1 head">
-        <wxc-cc><image class="imageSize" src="../../images/address.png"></image></wxc-cc>
-        <text class="th deliveryAddress" decode="true">&nbsp;&nbsp;取件地址</text>
-        <wxc-cc><image class="imageSize1" src="../../images/floor.png"></image></wxc-cc>
-        <text class="th deliveryGoalFloor" decode="true">&nbsp;&nbsp;送达地点</text>
-        <wxc-cc><image class="imageSize2" src="../../images/people.png"></image></wxc-cc>
-        <text class="th deliveryUserSex" decode="true">&nbsp;&nbsp;领取人</text>
-        <wxc-cc><image class="imageSize3" src="../../images/money.png"></image></wxc-cc>
-        <text class="th deliveryReward" decode="true">&nbsp;&nbsp;赏金</text>
-      </view>
-      <view wx:if="{{ expressList.length > 0 }}">
-
-        <view bindtap="chooseExpress" class="tr" id="{{ index }}"
-              wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
-              wx:key="deliveryId">
-          <wxc-cc class="demo">
-            <image class="demo__pic" mode="aspectFit"
-                   src="{{ express.deliverySexImageUrl }}"></image>
-          </wxc-cc>
-          <text class="td deliveryAddress">{{ express.deliveryAddress }}</text>
-          <text class="td deliveryGoalFloor">{{ express.deliveryGoalFloor }}</text>
-          <text class="td deliveryUserSex">{{ express.deliveryUserSex }}</text>
-          <text class="td deliveryReward">{{ express.deliveryReward }}</text>
-        </view>
-        <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
-      </view>
-      <view wx:else>
-        <wxc-abnor
-            bind:abnortap="selectExpress"
-            type="{{ requestType }}"></wxc-abnor>
-      </view>
+    <view class="tr1 head">
+      <wxc-cc><image class="imageSize" src="../../images/address.png"></image></wxc-cc>
+      <text class="th deliveryAddress" decode="true">&nbsp;&nbsp;取件地址</text>
+      <wxc-cc><image class="imageSize1" src="../../images/floor.png"></image></wxc-cc>
+      <text class="th deliveryGoalFloor" decode="true">&nbsp;&nbsp;送达地点</text>
+      <wxc-cc><image class="imageSize2" src="../../images/people.png"></image></wxc-cc>
+      <text class="th deliveryUserSex" decode="true">&nbsp;&nbsp;领取人</text>
+      <wxc-cc><image class="imageSize3" src="../../images/money.png"></image></wxc-cc>
+      <text class="th deliveryReward" decode="true">&nbsp;&nbsp;赏金</text>
     </view>
+    <view wx:if="{{ expressList.length > 0 }}">
+
+      <view bindtap="chooseExpress" class="tr" id="{{ index }}"
+            wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
+            wx:key="deliveryId">
+        <wxc-cc class="demo">
+          <image class="demo__pic" mode="aspectFit"
+                 src="{{ express.deliverySexImageUrl }}"></image>
+        </wxc-cc>
+        <text class="td deliveryAddress">{{ express.deliveryAddress }}</text>
+        <text class="td deliveryGoalFloor">{{ express.deliveryGoalFloor }}</text>
+        <text class="td deliveryUserSex">{{ express.deliveryUserSex }}</text>
+        <text class="td deliveryReward">{{ express.deliveryReward }}</text>
+      </view>
+      <wxc-loadmore is-end="{{ true }}"></wxc-loadmore>
+    </view>
+    <view wx:else>
+      <wxc-abnor
+              bind:abnortap="selectExpress"
+              type="{{ requestType }}"></wxc-abnor>
+    </view>
+  </view>
   <view bindtap="toExpressEnter" class="add_button">
     <text decode="true">&nbsp;&nbsp;</text>
     <wxc-icon color="#949494" size="30" type="add"></wxc-icon>
