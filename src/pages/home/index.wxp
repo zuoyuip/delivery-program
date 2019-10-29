@@ -247,7 +247,7 @@
             },
             success: res => {
               new Promise((resolve) => {
-                appInstance.globalData.user = res.data.principal;
+                appInstance.globalData.user = res.data;
                 resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
               }).then(() => {
                 this.selectUserInfo()

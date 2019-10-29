@@ -258,7 +258,7 @@
                   'Authorization': appInstance.globalData.authorization
                 },
                 success: res => {
-                  appInstance.globalData.user = res.data.principal;
+                  appInstance.globalData.user = res.data;
                 },
                 fail: error => {
                 },
