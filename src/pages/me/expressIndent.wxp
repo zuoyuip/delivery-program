@@ -32,7 +32,7 @@
             <text class="message1">{{ express.deliveryReward }}</text>
           </view>
           <view class="content">包裹状态:
-            <text class="message">{{ express.deliveryStatus ? '已完成' : '未完成' }}</text>
+            <text class="message">{{ express.deliveryStatus ? (express.deliveryDeliveryUserId ? '已完成' : '已取消') : '未完成' }}</text>
           </view>
           <view class="divLine"></view>
           <view class="content" style="color: #259b24;padding: 1%;margin-left:40%">查看详情</view>
