@@ -37,11 +37,11 @@
     </view>
     <view wx:else>
       <wxc-abnor
-              bind:abnortap="onRetry"
-              type="{{ requestType }}"></wxc-abnor>
+          bind:abnortap="onRetry"
+          type="{{ requestType }}"></wxc-abnor>
     </view>
   </view>
-  <wxc-popup class="J_Popup" animation-mode="bottom" align="bottom">
+  <wxc-popup align="bottom" animation-mode="bottom" class="J_Popup">
     <view class="popup__content">
       <view class="input-wrap">
         <wxc-panel border="{{ false }}" class="panel">
@@ -58,7 +58,10 @@
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
             <text class="title-style" decode="true">手&nbsp;&nbsp;机&nbsp;&nbsp;号</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryUserPhone }}</text>
+            <text bindtap="callPhone" class="picker-message"
+                  id="{{ expressList[expressIndex].deliveryUserPhone }}">{{
+              expressList[expressIndex].deliveryUserPhone }}
+            </text>
           </wxc-cc>
         </wxc-panel>
         <wxc-panel border="{{ false }}" class="panel">
@@ -70,7 +73,10 @@
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
             <text class="title-style">送达地址</text>
-            <text class="picker-message"  decode="true">{{ expressList[expressIndex].deliveryGoalFloor }} &nbsp; {{ expressList[expressIndex].deliveryGoalAddress }}</text>
+            <text class="picker-message" decode="true">{{
+              expressList[expressIndex].deliveryGoalFloor }} &nbsp; {{
+              expressList[expressIndex].deliveryGoalAddress }}
+            </text>
           </wxc-cc>
         </wxc-panel>
         <wxc-panel border="{{ false }}" class="panel">
@@ -100,8 +106,10 @@
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
             <text class="title-style">备注信息</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryRemark === null ? '（无）' :
-              expressList[expressIndex].deliveryRemark }}</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryRemark === null ?
+              '（无）' :
+              expressList[expressIndex].deliveryRemark }}
+            </text>
           </wxc-cc>
         </wxc-panel>
         <view class="space"></view>
@@ -140,7 +148,7 @@
       });
       wx.request({
         url: 'https://www.tkparcel.com/delivery/me/deliveryWorker/'
-                + appInstance.globalData.user.userId,
+            + appInstance.globalData.user.userId,
         method: 'GET',
         header: {
           'Authorization': appInstance.globalData.authorization
@@ -175,6 +183,11 @@
             isLoading: false
           });
         }
+      });
+    },
+    callPhone(e) {
+      wx.makePhoneCall({
+        phoneNumber: e.currentTarget.id
       });
     },
     onLoad: function (options) {
@@ -216,7 +229,7 @@
     },
     config: {
       // 导航栏标题文字内容
-      navigationBarTitleText: '我接受的',
+      navigationBarTitleText: '我的接单',
       // 是否开启当前页面下拉刷新。
       enablePullDownRefresh: false,
       // 设置为 true 则页面整体不能上下滚动。
@@ -316,6 +329,7 @@
     color: #888888;
     text-align: left;
   }
+
   .message3 {
     margin-left: 35%;
     font-weight: lighter;
@@ -344,6 +358,7 @@
     background: #ffffff;
     text-align: center;
   }
+
   .picker-message {
     margin-left: ~'80rpx';
     color: #959595;
@@ -366,6 +381,7 @@
     border: 0 solid #f0f0f0;
     border-bottom-width: ~'1rpx';
   }
+
   .recommend-title {
     display: table;
     width: 100%;
