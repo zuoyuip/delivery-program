@@ -1,9 +1,9 @@
 <template>
   <wxc-toast
-          icon="{{ $toast.icon }}"
-          icon-color="{{ $toast.color }}"
-          is-show="{{$toast.show}}"
-          text="{{ $toast.text }}"
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}"
   ></wxc-toast>
   <view class="input-wrap">
     <wxc-panel border="{{ false }}" class="panel">
@@ -104,7 +104,7 @@
   const appInstance = getApp();
   export default {
     data: {
-      isClicked:false,
+      isClicked: false,
       deliveryGoalAddress: '',
       deliveryUserName: '',
       deliveryUserPhone: '',
@@ -260,10 +260,12 @@
           this.showToast('请选择领取人', '#a2675a', 'warning');
           return
       }
-      if(this.data.isClicked){
+      if (this.data.isClicked) {
         return;
       }
-      this.data.isClicked==true;
+      this.setData({
+        isClicked: true
+      });
       wx.request({
         url: 'https://www.tkparcel.com/delivery/delivery',
         method: 'POST',
@@ -283,7 +285,7 @@
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded',
-          'Cookie': appInstance.globalData.authenticatedCode
+          'Authorization': appInstance.globalData.authorization
         },
         success: res => {
           if (res.statusCode === 200) {

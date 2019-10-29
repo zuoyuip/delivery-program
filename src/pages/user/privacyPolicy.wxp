@@ -19,7 +19,7 @@
             <view class="space"></view>
             1、我们如何收集和使用你的个人信息
             <view class="space"></view>
-            2、我们如同使用Cookie和同类技术
+            2、我们如同使用Authorization和同类技术
             <view class="space"></view>
             3、我们如何共享、转让、公开披露你的个人信息
             <view class="space"></view>
@@ -99,16 +99,16 @@
             <view class="space"></view>
             (10)法律法规规定的其他情形。
             <view class="space"></view>
-            <view class="yangShi">二、我们如何使用Cookie和同类技术</view>
+            <view class="yangShi">二、我们如何使用Authorization和同类技术</view>
             <view class="space"></view>
-            (一) Cookie
+            (一) Authorization
             <view class="space"></view>
-            使用Cookie能帮助你实现你的联机体验的个性化，你可以接受或拒绝Cookie，大多数Web浏览器会自动接受Cookie，但你通常可根据自己的需要来修改浏览器的设置以拒绝Cookie为了让你在访问顺便取代领时能得到更好的服务，顺便取代领有时会使用Cookie。Cookie不会跟踪个人信息。
-            当你注册顺便取代领时，顺便取代领亦会使用Cookie在这种情况下，顺便取代领会收集并存储有用信息，当你再次访问顺便取代领时，我们可辨认你的身份。来自顺便取代领的Cookie只能被顺便取代领读取。如果你的浏览器被设置为拒绝Cookie，你仍然能够访问顺便取代领的大多数网页。
+            使用Authorization能帮助你实现你的联机体验的个性化，你可以接受或拒绝Authorization，大多数Web浏览器会自动接受Authorization，但你通常可根据自己的需要来修改浏览器的设置以拒绝Authorization为了让你在访问顺便取代领时能得到更好的服务，顺便取代领有时会使用Authorization。Authorization不会跟踪个人信息。
+            当你注册顺便取代领时，顺便取代领亦会使用Authorization在这种情况下，顺便取代领会收集并存储有用信息，当你再次访问顺便取代领时，我们可辨认你的身份。来自顺便取代领的Authorization只能被顺便取代领读取。如果你的浏览器被设置为拒绝Authorization，你仍然能够访问顺便取代领的大多数网页。
             <view class="space"></view>
             (二)网站信标和像素标签
             <view class="space"></view>
-            除Cookie外，我们还会在网站上使用网站信标和像素标签等其他同类技术。例如，我们向你发送的电子邮件可能含有链接至我们网站内容的点击URL.如果你点击该链接，我们则会跟踪此次点击，帮助我们了解你的产品或服务偏好并改善客户服务。网站信标通常是一种嵌入到网站或电子邮件中的透明图像。借助于电子邮件中的像素标签，我们能够获知电子邮件是否被打开。如果你不希望自己的活动以这种方式被追踪，则可以随时从我们的寄信名单中退订。
+            除Authorization外，我们还会在网站上使用网站信标和像素标签等其他同类技术。例如，我们向你发送的电子邮件可能含有链接至我们网站内容的点击URL.如果你点击该链接，我们则会跟踪此次点击，帮助我们了解你的产品或服务偏好并改善客户服务。网站信标通常是一种嵌入到网站或电子邮件中的透明图像。借助于电子邮件中的像素标签，我们能够获知电子邮件是否被打开。如果你不希望自己的活动以这种方式被追踪，则可以随时从我们的寄信名单中退订。
             <view class="space"></view>
             (三)Do Not Track(请勿追踪)
             <view class="space"></view>

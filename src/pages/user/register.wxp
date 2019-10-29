@@ -1,11 +1,11 @@
 <template>
   <view class="space1"></view>
   <wxc-toast
-          icon="{{ $toast.icon }}"
-          icon-color="{{ $toast.color }}"
-          is-show="{{$toast.show}}"
-          text="{{ $toast.text }}">
-  </wxc-toast>
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}">
+      </wxc-toast>
   <view class="space"></view>
   <view class="input-wrap">
     <wxc-input bind:input="userPhoneInput" mode="wrapped" placeholder="输入您的手机号码" right="{{true}}"
@@ -42,8 +42,8 @@
     <radio-group bindchange="agreement">
       <checkbox class="agree-text" value="receive"></checkbox>
       <text style="font-size: 10px;color: #888888" bindtap="toUserAgreement">我已阅读并同意<text style="font-size: 10px;color: #fd8000" >《用户协议》</text></text>
-      <text style="font-size: 10px;color: #888888">和</text>
-      <text style="font-size: 10px;color: #fd8000" bindtap="toPrivacyPolicy">《隐私政策》</text>
+        <text style="font-size: 10px;color: #888888">和</text>
+        <text style="font-size: 10px;color: #fd8000" bindtap="toPrivacyPolicy">《隐私政策》</text>
     </radio-group>
   </view>
   <view class="forget-space"></view>
@@ -119,11 +119,8 @@
       }
       wx.request({
         url: 'https://www.tkparcel.com/delivery/user/sendVerificationCode/register/'
-                + this.data.userPhone,
+            + this.data.userPhone,
         method: 'GET',
-        header: {
-          'Cookie': appInstance.globalData.cookie
-        },
         success: res => {
           if (res.statusCode === 200) {
             this.showToast(res.data.message, '#5ac777', 'yes');
@@ -135,9 +132,6 @@
           this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
         },
         complete: result => {
-          if (appInstance.globalData.cookie === '') {
-            appInstance.globalData.cookie = result.cookies[0]
-          }
         }
       });
       const _this = this;
@@ -174,7 +168,6 @@
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded',
-          'Cookie': appInstance.globalData.cookie
         },
         success: res => {
           if (res.statusCode === 200) {
@@ -192,9 +185,6 @@
           this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
         },
         complete: result => {
-          if (appInstance.globalData.cookie === '') {
-            appInstance.globalData.cookie = result.cookies[0]
-          }
         }
       });
     },
@@ -208,11 +198,11 @@
         url: '../user/userAgreement'
       })
     },
-    toPrivacyPolicy() {
-      wx.navigateTo({
-        url: '../user/privacyPolicy'
-      })
-    },
+      toPrivacyPolicy() {
+          wx.navigateTo({
+              url: '../user/privacyPolicy'
+          })
+      },
     onLoad: function (options) {
       // 页面创建时执行
 

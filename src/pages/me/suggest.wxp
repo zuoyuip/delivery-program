@@ -67,7 +67,7 @@
                 },
                 header: {
                     'content-type': 'application/x-www-form-urlencoded',
-                    'Cookie': appInstance.globalData.authenticatedCode
+                    'Authorization': appInstance.globalData.authorization
                 },
                 success: res => {
                     if (res.statusCode===200) {

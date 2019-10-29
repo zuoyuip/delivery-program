@@ -222,7 +222,7 @@
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded',
-          'Cookie': appInstance.globalData.authenticatedCode
+          'Authorization': appInstance.globalData.authorization
         },
         success: res => {
             if (res.statusCode === 200) {
@@ -234,7 +234,7 @@
                   url: 'https://www.tkparcel.com/delivery/user/authentication',
                   method: 'GET',
                   header: {
-                    'Cookie': appInstance.globalData.authenticatedCode
+                    'Authorization': appInstance.globalData.authorization
                   },
                   success: res => {
                     appInstance.globalData.user = res.data.principal;
@@ -275,7 +275,7 @@
         url: 'https://www.tkparcel.com/delivery/me/review/' + appInstance.globalData.user.reviewId,
         method: 'GET',
         header: {
-          'Cookie': appInstance.globalData.authenticatedCode
+          'Authorization': appInstance.globalData.authorization
         },
         success: res => {
           this.setData({

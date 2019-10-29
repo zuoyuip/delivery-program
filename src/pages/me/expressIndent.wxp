@@ -106,7 +106,8 @@
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
             <text class="title-style">备注信息</text>
-            <text class="picker-message">{{ expressList[expressIndex].deliveryRemark }}</text>
+            <text class="picker-message">{{ expressList[expressIndex].deliveryRemark === null ? '（无）' :
+              expressList[expressIndex].deliveryRemark }}</text>
           </wxc-cc>
         </wxc-panel>
         <button bindtap="cancelExpress" class="sure_button" id="{{ expressList[expressIndex].deliveryId }}"
@@ -176,7 +177,7 @@
         url: 'https://www.tkparcel.com/delivery/me/deliveryUser/' + appInstance.globalData.user.userId,
         method: 'GET',
         header: {
-          'Cookie': appInstance.globalData.authenticatedCode
+          'Authorization': appInstance.globalData.authorization
         },
         success: res => {
           if (res.statusCode === 200) {
@@ -214,7 +215,7 @@
         url: 'https://www.tkparcel.com/delivery/delivery/' + e.currentTarget.id,
         method: 'DELETE',
         header: {
-          'Cookie': appInstance.globalData.authenticatedCode
+          'Authorization': appInstance.globalData.authorization
         },
         success: res => {
           if (res.statusCode === 200) {

@@ -82,8 +82,7 @@
     globalData: {
       user: {},
       userInfo: {},
-      authenticatedCode: '',
-      cookie: ''
+      authorization: ''
     },
     onLaunch(options) {
 

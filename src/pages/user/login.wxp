@@ -1,10 +1,10 @@
 <template>
   <view class="space"></view>
   <wxc-toast
-          icon="{{ $toast.icon }}"
-          icon-color="{{ $toast.color }}"
-          is-show="{{$toast.show}}"
-          text="{{ $toast.text }}"
+      icon="{{ $toast.icon }}"
+      icon-color="{{ $toast.color }}"
+      is-show="{{$toast.show}}"
+      text="{{ $toast.text }}"
   ></wxc-toast>
   <view class="space1"></view>
   <view class="input-wrap">
@@ -25,7 +25,8 @@
   <view class="forget-space"></view>
   <view class="forget-space"></view>
   <wxc-cc>
-    <wxc-button bind:click="login" btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;background-color: #1aad19;"
+    <wxc-button bind:click="login"
+                btnStyle="width: 500rpx;border-radius: 26rpx;color: #ffffff;background-color: #1aad19;"
                 size="normal" type="selection" value="登录"></wxc-button>
   </wxc-cc>
 </template>
@@ -84,7 +85,7 @@
     },
     login() {
       wx.request({
-        url: 'https://www.tkparcel.com/delivery/login',
+        url: 'https://www.tkparcel.com/delivery/user/login',
         method: 'POST',
         data: {
           userName: this.data.userName,
@@ -94,20 +95,14 @@
           'content-type': 'application/x-www-form-urlencoded'
         },
         success: res => {
-          if (res.data.status === 200) {
-            const rememberMe = res.cookies[0];
-            const sessionId = res.cookies[1];
-            const rememberMeIndex = rememberMe.indexOf(';');
-            const sessionIdIndex = sessionId.indexOf(';');
-            const rememberMeCookie = rememberMe.slice(0, rememberMeIndex);
-            const sessionIdCookie = sessionId.slice(0, sessionIdIndex);
-            const authenticatedCode = rememberMeCookie + '; ' + sessionIdCookie;
+          if (res.statusCode === 200) {
+            const authorization = res.header.Authorization;
             wx.setStorage({
-              key: 'authenticatedCode',
-              data: authenticatedCode,
+              key: 'authorization',
+              data: authorization,
               success: res => {
-                appInstance.globalData.authenticatedCode = authenticatedCode;
-                this.verifyUser(authenticatedCode);
+                appInstance.globalData.authorization = authorization;
+                this.verifyUser(authorization);
                 this.showToast('登录成功，正在跳转...', '#5ac777', 'yes');
                 setTimeout(() => {
                   wx.reLaunch({
@@ -130,12 +125,12 @@
         }
       });
     },
-    verifyUser(authenticatedCode) {
+    verifyUser(authorization) {
       wx.request({
         url: 'https://www.tkparcel.com/delivery/user/authentication',
         method: 'GET',
         header: {
-          'Cookie': authenticatedCode
+          'Authorization': authorization
         },
         success: function success(res) {
           appInstance.globalData.user = res.data.principal;
@@ -159,7 +154,7 @@
         url: 'https://www.tkparcel.com/delivery/user/userInfo/' + user.userInfoId,
         method: 'GET',
         header: {
-          'Cookie': appInstance.globalData.authenticatedCode
+          'Authorization': appInstance.globalData.authorization
         },
         success: res => {
           appInstance.globalData.userInfo = res.data
@@ -233,6 +228,7 @@
   .space {
     height: ~'150rpx';
   }
+
   .space1 {
     height: ~'100rpx';
   }
@@ -258,6 +254,7 @@
     font-size: smaller;
     text-decoration: #888888 underline;
   }
+
   .avatar {
     display: block;
     width: ~'500rpx';

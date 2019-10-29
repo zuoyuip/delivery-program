@@ -114,9 +114,6 @@
         url: 'https://www.tkparcel.com/delivery/user/sendVerificationCode/forget/'
             + this.data.userPhone,
         method: 'GET',
-        header: {
-          'Cookie': appInstance.globalData.cookie
-        },
         success: res => {
           if (res.statusCode === 200) {
             this.showToast(res.data.message, '#5ac777', 'yes');
@@ -128,9 +125,6 @@
           this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
         },
         complete: result => {
-          if (appInstance.globalData.cookie === '') {
-            appInstance.globalData.cookie = result.cookies[0]
-          }
         }
       });
       const _this = this;
@@ -166,8 +160,7 @@
           passWord: this.data.repeatPassword.trim()
         },
         header: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'Cookie': appInstance.globalData.cookie
+          'content-type': 'application/x-www-form-urlencoded'
         },
         success: res => {
           if (res.statusCode === 200) {
@@ -185,9 +178,6 @@
           this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
         },
         complete: result => {
-          if (appInstance.globalData.cookie === '') {
-            appInstance.globalData.cookie = result.cookies[0]
-          }
         }
       });
     },

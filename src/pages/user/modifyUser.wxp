@@ -92,7 +92,7 @@
                 + this.data.changePhone,
         method: 'GET',
         header: {
-          'Cookie': appInstance.globalData.authenticatedCode
+          'Authorization': appInstance.globalData.authorization
         },
         success: res => {
           if (res.statusCode === 200) {
@@ -135,7 +135,7 @@
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded',
-          'Cookie': appInstance.globalData.authenticatedCode
+          'Authorization': appInstance.globalData.authorization
         },
         success: res => {
           if (res.statusCode === 200) {
@@ -175,16 +175,16 @@
     },
     logout() {
       wx.request({
-        url: 'https://www.tkparcel.com/delivery/logout',
+        url: 'https://www.tkparcel.com/delivery/user/logout',
         method: 'GET',
         header: {
-          'Cookie': appInstance.globalData.authenticatedCode
+          'Authorization': appInstance.globalData.authorization
         },
         success: res => {
           wx.clearStorage({
             success: res => {
               this.showToast('注销成功，正在跳转...', '#5ac777', 'yes');
-              appInstance.globalData.authenticatedCode = '';
+              appInstance.globalData.authorization = '';
               appInstance.globalData.user = {};
               setTimeout(() => {
                 wx.reLaunch({
