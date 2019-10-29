@@ -4,13 +4,17 @@
             <view class="yangShi">1.Q：什么是顺便取?</view>
             <view class="space"></view>
             A：顺便取，顾名思义就是你在去取快递的途中，在小程序里看到有其他同学发布了快递信息，你可以顺便很随意的帮他
-            带回来，领两个的话早餐最起码是有保障的。This is Tkparcel ! Yeah!
+            带回来，领2个的话早餐最起码是有保障的。
             <view class="space"></view>
-            <view class="yangShi">2.Q：在快递点发现包裹已损坏怎么办?</view>
+            <view class="yangShi">2.Q：我怎么付款?</view>
+            <view class="space"></view>
+            A：包裹送达后，扫描对方的收款二维码进行收付款。
+            <view class="space"></view>
+            <view class="yangShi">3.Q：在快递点发现包裹已损坏怎么办?</view>
             <view class="space"></view>
             A：联系发布者，告知情况。
             <view class="space"></view>
-            <view class="yangShi">3.Q：关于领取人</view>
+            <view class="yangShi">4.Q：关于领取人</view>
             <view class="space"></view>
             A：领取人包括，官方团队、男同学、女同学、不限等四种选择，你可以选择一种作为你的快递领取人，下面逐一介绍：
             <view class="space"></view>
@@ -22,15 +26,11 @@
             <view class="space"></view>
             ④不限：快递包裹不限领取人性别。
             <view class="space"></view>
-            <view class="yangShi">4.Q：我怎么付款?</view>
-            <view class="space"></view>
-            A：包裹送达后，扫描对方的收款二维码进行收付款。
-            <view class="space"></view>
-            <view class="yangShi">3.Q：快递送不送到宿舍?</view>
+            <view class="yangShi">5.Q：快递送不送到宿舍?</view>
             <view class="space"></view>
             A：如需送到宿舍需另外备注，是否增加赏金自行协商。
             <view class="space"></view>
-            <view class="yangShi">5.Q：怎么保证我发布的代取物品的安全?</view>
+            <view class="yangShi">6.Q：怎么保证我发布的代取物品的安全?</view>
             <view class="space"></view>
             A：①如果您选择不限制取件人，顺便取的用户均是通过校园卡
             认证的本校学生，可通过学号电话等信息直接追踪到个人。
@@ -39,7 +39,7 @@
             <view class="space"></view>
             ③情节严重者，信息提交保卫处。
             <view class="space"></view>
-            <view class="yangShi">6.Q：快递重量如何让划分？</view>
+            <view class="yangShi">7.Q：快递重量如何让划分？</view>
             <view class="space"></view>
             <view>A:</view>
             <view>①小件：一般是0.5kg以下，比如鞋子、袜子、洗护用品、小电子产
@@ -48,21 +48,21 @@
              大的物品。</view>
             <view>③大件：一般是1.5kg以上，比如自行车、桌子等较大较重的物品。</view>
             <view class="space"></view>
-            <view class="yangShi"> 7.Q：如果发生交易纠纷怎么办?</view>
+            <view class="yangShi"> 8.Q：如果发生交易纠纷怎么办?</view>
             <view class="space"></view>
             A：可在小程序内通过反馈建议进行提交举报，顺便取官方
             团队介入审核。若未选择限制官方团队接单而发生快递丢失
             情况，顺便取团队不承担赔偿责任。
             <view class="space"></view>
-            <view class="yangShi">8.Q：交易完成对方不付款怎么办?</view>
+            <view class="yangShi">9.Q：交易完成对方不付款怎么办?</view>
             <view class="space"></view>
             A：可在小程序内通过反馈建议进行举报，严重者进行封号处理。
             <view class="space"></view>
-            <view class="yangShi">9.Q：订单没人接单会怎么样?</view>
+            <view class="yangShi">10.Q：订单没人接单会怎么样?</view>
             <view class="space"></view>
              A：每晚0点，前一天所有订单自动过期，第二天需重新发布。
             <view class="space"></view>
-            <view class="yangShi">10.Q：如何联系官方团队?</view>
+            <view class="yangShi">11.Q：如何联系官方团队?</view>
             <view class="space"></view>
             A：点击小程序内“联系我们”或者“反馈建议”可以和我们取得联系，你也可以发送邮件至
             wordpressp1@163.com

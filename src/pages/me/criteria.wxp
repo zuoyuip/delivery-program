@@ -45,9 +45,12 @@
     </wxc-panel>
     <wxc-input bind:input="userInfoSubjectInput" placeholder="请输入所学专业" right="{{true}}" title="专业"
                type="text" value="{{ userInfoSubject }}"></wxc-input>
-    <wxc-input bind:input="userInfoStudentNumberInput" placeholder="请输入您的学号" right="{{true}}"
+    <wxc-input bind:input="userInfoStudentNumberInput" placeholder="请输入你的学号" right="{{true}}"
                title="学号" type="number"
                value="{{ userInfoStudentNumber }}"></wxc-input>
+    <wxc-input bind:input="userInfoClassInput" placeholder="请输入你的班级" right="{{true}}"
+               title="班级" type="text"
+               value="{{ userInfoClass }}"></wxc-input>
   </view>
 
   <view class="space"></view>
@@ -92,6 +95,7 @@
       isMan: true,
       userInfoSubject: '',
       userInfoStudentNumber: '',
+      userInfoClass:'',
       $toast: {
         text: '',
         show: false,
@@ -149,6 +153,11 @@
         userInfoStudentNumber: e.detail.value
       })
     },
+    userInfoClassInput(e) {
+      this.setData({
+        userInfoClass: e.detail.value
+      })
+    },
     chooseImage(e) {
       wx.chooseImage({
         count: 1,
@@ -202,6 +211,10 @@
         this.showToast('请输入学号', '#c70009', 'no');
         return
       }
+      if (this.data.userInfoClass === '') {
+        this.showToast('请输入班级', '#c70009', 'no');
+        return
+      }
       this.setData({
         $toast: {
           text: '正在上传信息，请稍候',
@@ -225,7 +238,8 @@
           'userInfoSex': this.data.userInfoSex,
           'userInfoCollege': this.data.userCollegeList[this.data.userCollegeIndex],
           'userInfoSubject': this.data.userInfoSubject,
-          'userInfoStudentNumber': this.data.userInfoStudentNumber
+          'userInfoStudentNumber': this.data.userInfoStudentNumber,
+          'userInfoClass': this.data.userInfoClass
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded',

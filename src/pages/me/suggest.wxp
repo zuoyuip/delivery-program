@@ -18,6 +18,12 @@
         <wxc-button bind:click="submitSuggest"
                     btnStyle="background-color:#1aad19; width: 500rpx;border-radius: 26rpx;color: #ffffff;margin-left:10%"
                     size="normal" type="selection" value="提交"></wxc-button>
+        <view class="space"></view>
+        <view class="space"></view>
+        <view class="space"></view>
+        <view class="space"></view>
+        <text class="font">联系开发者：zuoyuip@foxmail.com</text>
+        <view class="space"></view>
     </view>
 
 </template>
@@ -172,7 +178,12 @@
         font-size: ~'36rpx';
         padding-left: ~'10rpx';
     }
-
+    .font{
+        color:#888888;
+        text-align: center;
+        font-size: ~'24rpx';
+        margin-left: 20%;
+    }
     .weui-textarea {
         border: #d2d2d2 solid thin;
         width: ~'636rpx';

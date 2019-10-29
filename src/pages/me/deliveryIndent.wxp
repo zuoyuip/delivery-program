@@ -26,7 +26,7 @@
             <text class="message">{{ express.deliveryAddress }}</text>
           </view>
           <view class="content">送达地址:
-            <text class="message">{{ express.deliveryGoalFloor }}</text>
+            <text class="message4">{{ express.deliveryGoalFloor }}</text>
           </view>
           <view class="divLine"></view>
           <view class="content" style="color: #259b24;padding: 1%;margin-left:40%">查看详情</view>
@@ -58,7 +58,7 @@
         <wxc-panel border="{{ false }}" class="panel">
           <wxc-cc>
             <text class="title-style" decode="true">手&nbsp;&nbsp;机&nbsp;&nbsp;号</text>
-            <text bindtap="callPhone" class="picker-message"
+            <text bindtap="callPhone" class="picker-message1"
                   id="{{ expressList[expressIndex].deliveryUserPhone }}">{{
               expressList[expressIndex].deliveryUserPhone }}
             </text>
@@ -317,7 +317,7 @@
     margin-left: 40%;
     font-weight: lighter;
     font-size: smaller;
-    color: #888888;
+    color: #4d4d4d;
     text-align: left;
   }
 
@@ -326,7 +326,7 @@
     margin-left: 40%;
     font-weight: lighter;
     font-size: ~'30rpx';
-    color: #888888;
+    color: #4d4d4d;
     text-align: left;
   }
 
@@ -334,14 +334,20 @@
     margin-left: 35%;
     font-weight: lighter;
     font-size: ~'30rpx';
-    color: #888888;
+    color: #4d4d4d;
     text-align: left;
   }
-
+  .message4 {
+    margin-left: 40%;
+    font-weight: bolder;
+    font-size: smaller;
+    color: #4d4d4d;
+    text-align: left;
+  }
   //时间行style
   .message2 {
     font-size: ~'25rpx';
-    color: #454648;
+    color: #4d4d4d;
   }
 
   .title-style {
@@ -362,6 +368,11 @@
   .picker-message {
     margin-left: ~'80rpx';
     color: #959595;
+  }
+  .picker-message1 {
+    margin-left: ~'80rpx';
+    color: #31b0d5;
+    text-decoration: underline #31b0d5;
   }
 
   .input-wrap {
