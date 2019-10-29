@@ -127,6 +127,7 @@
   const appInstance = getApp();
   export default {
     data: {
+      isClicked: false,
       expressList: [],
       expressIndex: 0,
       requestType: '',
@@ -309,6 +310,12 @@
       if (deliveryId.length === 0) {
         this.showToast('小程序出错，请刷新重试', '#c70009', 'no')
       }
+      if (this.data.isClicked) {
+        return;
+      }
+      this.setData({
+        isClicked: true
+      });
       wx.request({
         url: 'https://www.tkparcel.com/delivery/delivery/transaction/' + deliveryId,
         method: 'PUT',
@@ -326,6 +333,9 @@
           this.showToast('请求失败，可能是网络原因', '#c70009', 'no');
         },
         complete: () => {
+          this.setData({
+            isClicked: false
+          });
           this.hidePopup();
           this.selectExpress()
         }

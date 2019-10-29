@@ -35,6 +35,7 @@
   const appInstance = getApp();
   export default {
     data: {
+      isClicked: false,
       userName: '',
       passWord: '',
       $toast: {
@@ -84,6 +85,12 @@
       });
     },
     login() {
+      if (this.data.isClicked) {
+        return;
+      }
+      this.setData({
+        isClicked: true
+      });
       wx.request({
         url: 'https://www.tkparcel.com/delivery/user/login',
         method: 'POST',
@@ -110,9 +117,6 @@
                   });
                 }, 1000);
               },
-              fail: error => {
-                this.showToast('小程序出错，请联系管理员', '#c70009', 'no');
-              }
             });
             return;
           }
@@ -122,6 +126,9 @@
           this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
         },
         complete: () => {
+          this.setData({
+            isClicked: false
+          })
         }
       });
     },

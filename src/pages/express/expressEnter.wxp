@@ -304,7 +304,9 @@
 
         },
         complete: () => {
-
+          this.setData({
+            isClicked: false
+          })
         }
       });
     },

@@ -59,6 +59,7 @@
   const appInstance = getApp();
   export default {
     data: {
+      isClicked: false,
       userPhone: '',
       verificationCode: '',
       repeatPassword: '',
@@ -158,6 +159,12 @@
         this.showToast('密码设置不一致', '#c70009', 'no');
         return
       }
+      if (this.data.isClicked) {
+        return;
+      }
+      this.setData({
+        isClicked: true
+      });
       wx.request({
         url: 'https://www.tkparcel.com/delivery/user',
         method: 'POST',
@@ -185,6 +192,9 @@
           this.showToast('请求失败，可能是网络原因', '#a2675a', 'warning');
         },
         complete: result => {
+          this.setData({
+            isClicked: false
+          })
         }
       });
     },

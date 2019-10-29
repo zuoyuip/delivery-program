@@ -46,8 +46,8 @@
     <wxc-input bind:input="userInfoSubjectInput" placeholder="请输入所学专业" right="{{true}}" title="专业"
                type="text" value="{{ userInfoSubject }}"></wxc-input>
     <wxc-input bind:input="userInfoStudentNumberInput" placeholder="请输入您的学号" right="{{true}}"
-               title="学号" value="{{ userInfoStudentNumber }}"
-               type="number"></wxc-input>
+               title="学号" type="number"
+               value="{{ userInfoStudentNumber }}"></wxc-input>
   </view>
 
   <view class="space"></view>
@@ -83,6 +83,7 @@
   const appInstance = getApp();
   export default {
     data: {
+      isClicked: false,
       image: '',
       userCollegeList: data.userCollegeList,
       userCollegeIndex: 0,
@@ -181,23 +182,23 @@
       })
     },
     submitUserInfo() {
-      if (this.data.image === ''){
+      if (this.data.image === '') {
         this.showToast('请选择上传的照片', '#c70009', 'no');
         return
       }
-      if (this.data.userCollegeIndex === 0){
+      if (this.data.userCollegeIndex === 0) {
         this.showToast('请选择学院', '#c70009', 'no');
         return
       }
-      if (this.data.userInfoName === ''){
+      if (this.data.userInfoName === '') {
         this.showToast('请输入姓名', '#c70009', 'no');
         return
       }
-      if (this.data.userInfoSubject === ''){
+      if (this.data.userInfoSubject === '') {
         this.showToast('请输入专业', '#c70009', 'no');
         return
       }
-      if (this.data.userInfoStudentNumber === ''){
+      if (this.data.userInfoStudentNumber === '') {
         this.showToast('请输入学号', '#c70009', 'no');
         return
       }
@@ -208,6 +209,12 @@
           icon: 'more',
           show: true
         }
+      });
+      if (this.data.isClicked) {
+        return;
+      }
+      this.setData({
+        isClicked: true
       });
       wx.uploadFile({
         url: 'https://www.tkparcel.com/delivery/me/submitCriteria', //仅为示例，非真实的接口地址
@@ -225,36 +232,36 @@
           'Authorization': appInstance.globalData.authorization
         },
         success: res => {
-            if (res.statusCode === 200) {
-              setTimeout(() => {
+          if (res.statusCode === 200) {
+            setTimeout(() => {
               this.showToast('信息上传成功', '#5ac777', 'yes');
-              }, 1000);
-              new Promise((resolve) => {
-                wx.request({
-                  url: 'https://www.tkparcel.com/delivery/user/authentication',
-                  method: 'GET',
-                  header: {
-                    'Authorization': appInstance.globalData.authorization
-                  },
-                  success: res => {
-                    appInstance.globalData.user = res.data.principal;
-                  },
-                  fail: error => {
-                  },
-                  complete: () => {
-                  }
-                });
-                resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
-              }).then(() => {
-                setTimeout(() => {
-                  wx.reLaunch({
-                    url: '../home/me'
-                  })
-                }, 1000);
+            }, 1000);
+            new Promise((resolve) => {
+              wx.request({
+                url: 'https://www.tkparcel.com/delivery/user/authentication',
+                method: 'GET',
+                header: {
+                  'Authorization': appInstance.globalData.authorization
+                },
+                success: res => {
+                  appInstance.globalData.user = res.data.principal;
+                },
+                fail: error => {
+                },
+                complete: () => {
+                }
               });
-              return
-            }
-            this.showToast('服务器出错，请联系管理员', '#c70009', 'no');
+              resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
+            }).then(() => {
+              setTimeout(() => {
+                wx.reLaunch({
+                  url: '../home/me'
+                })
+              }, 1000);
+            });
+            return
+          }
+          this.showToast('服务器出错，请联系管理员', '#c70009', 'no');
         },
         fail: error => {
           setTimeout(() => {
@@ -263,6 +270,7 @@
         },
         complete: () => {
           this.setData({
+            isClicked: false,
             $toast: {
               show: false
             },
@@ -403,6 +411,7 @@
     color: #959595;
     padding-bottom: ~'16rpx';
   }
+
   .btn-style {
     margin-left: ~'220rpx';
   }

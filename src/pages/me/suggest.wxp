@@ -26,6 +26,7 @@
     const appInstance = getApp();
     export default {
         data: {
+            isClicked: false,
             $toast: {
                 text: '',
                 show: false,
@@ -59,6 +60,12 @@
                 this.showToast('请输入内容', '#a2675a', 'warning');
                 return
             }
+            if (this.data.isClicked) {
+                return;
+            }
+            this.setData({
+                isClicked: true
+            });
             wx.request({
                 url: 'https://www.tkparcel.com/delivery/me/suggest',
                 method: 'POST',
@@ -86,7 +93,9 @@
 
                 },
                 complete: () => {
-
+                    this.setData({
+                        isClicked: false
+                    })
                 }
             })
         },
