@@ -15,7 +15,7 @@
 
   <view class="input-wrap">
     <wxc-input bind:input="repeatPasswordInput" mode="wrapped" password="true"
-               placeholder="输入您要重新设定的密码" right="{{true}}"
+               placeholder="输入您要设定的密码" right="{{true}}"
                title="密码" type="number" value="{{repeatPassword}}"></wxc-input>
   </view>
 
