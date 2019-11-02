@@ -6,8 +6,8 @@
       text="{{ $toast.text }}"
   ></wxc-toast>
   <wxc-panel bind:click="jump" border="{{false}}" class="content">
-    <wxc-cc  class="cc">
-      <wxc-avatar  class="avatar" src="{{ heardImage }}">
+    <wxc-cc class="cc">
+      <wxc-avatar class="avatar" src="{{ heardImage }}">
       </wxc-avatar>
       <wxc-avatar class="cc__text">{{ userPhone }}</wxc-avatar>
       <wxc-icon color="#959595" size="26" type="arrow-right"></wxc-icon>
@@ -44,10 +44,23 @@
           src="../../../../images/wenti.png"
           title="常见问题"></wxc-list>
       <wxc-list
-              class="item"
-              mode="none"
-              src="../../../../images/kkff.png"
-              title="联系客服"><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button><contact-button class="contact-btn"></contact-button></wxc-list>
+          class="item"
+          mode="none"
+          src="../../../../images/kkff.png"
+          title="联系客服">
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+        <contact-button class="contact-btn"></contact-button>
+      </wxc-list>
 
       <view class="space"></view>
       <wxc-list
@@ -212,7 +225,10 @@
         let userInfoSex = appInstance.globalData.userInfo.userInfoSex;
         that.setData({
           desc: '您已通过认证',
-          heardImage: userInfoSex === '官方团队' ? 'http://39.107.244.193/images/god.jpg' : (userInfoSex === '男' ? 'http://39.107.244.193/images/boy.png' : 'http://39.107.244.193/images/girl.png')
+          heardImage: userInfoSex === '官方团队' ? 'http://39.107.244.193/images/god.jpg' : (userInfoSex
+          === '男' ? 'http://39.107.244.193/images/boy.png'
+              : (userInfoSex === '女' ? 'http://39.107.244.193/images/girl.png'
+                  : 'http://zuoyu.top/images/dog.png'))
         });
       }
     },
@@ -232,9 +248,9 @@
         return
       }
       if (userString === undefined) {
-          wx.reLaunch({
-            url: '../home/index'
-          });
+        wx.reLaunch({
+          url: '../home/index'
+        });
         return
       }
       this.loadingUser(user);
@@ -322,12 +338,14 @@
     padding-bottom: 55%;
     margin-top: ~'30rpx';
   }
+
   .contact-btn {
     display: inline-block;
     /*position: absolute;*/
     background: salmon;
     opacity: 0;
   }
+
   .list-item {
     background: #fff;
     color: #959595;
