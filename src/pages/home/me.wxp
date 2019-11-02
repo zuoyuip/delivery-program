@@ -106,7 +106,7 @@
       userPhone: '',
       isLogin: false,
       desc: '',
-      heardImage: 'http://zuoyu.top/images/dog.png',
+      heardImage: 'http://39.107.244.193/images/dog.png',
       $toast: {
         text: '',
         show: false,
