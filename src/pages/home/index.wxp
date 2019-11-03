@@ -255,13 +255,16 @@
               'Authorization': appInstance.globalData.authorization
             },
             success: res => {
-              new Promise((resolve) => {
-                appInstance.globalData.user = res.data;
-                resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
-              }).then(() => {
-                this.selectUserInfo()
-              });
-
+              if (res.statusCode === 200) {
+                new Promise((resolve) => {
+                  appInstance.globalData.user = res.data;
+                  resolve();// 在浏览器里，Promise没写resolve，'then'是不会输出的，这里为了方便演示人为添加执行
+                }).then(() => {
+                  this.selectUserInfo()
+                });
+                return
+              }
+              this.showToast(res.data.message, '#c70009', 'no');
             },
             fail: error => {
             },
