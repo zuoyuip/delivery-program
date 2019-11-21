@@ -1,0 +1,113 @@
+<template>
+    <wxc-panel border="{{false}}" >
+        <view class="content">
+            <view class="yangShi">《举报及处罚条例》</view>
+            <view class="space"></view>
+            遇以下情况可举报用户：
+            <view class="space"></view>
+            1、快递被接单者领走但未被送达
+            <view class="space"></view>
+            2、快递被接单者损坏
+            <view class="space"></view>
+            3、接单者送达后未收到酬劳
+            <view class="space"></view>
+            4、接单者送达后收到的酬劳少于接单前商定的酬劳
+            <view class="space"></view>
+            5、发布信息填写小件，实则是大件。
+            <view class="space"></view>
+            6、其他损害用户利益的行为。
+            <view class="space"></view>
+            <view class="yangShi">我们将视情况给予违规用户处罚，严重者进行封号处理并将信息上交至保卫处！</view>
+            <view class="space"></view>
+        </view>
+    </wxc-panel>
+</template>
+
+<script>
+
+    export default {
+        data: {
+
+        },
+        toUserAgreement() {
+            wx.navigateTo({
+                url: '../user/userAgreement'
+            })
+        },
+        toPrivacyPolicy() {
+            wx.navigateTo({
+                url: '../user/privacyPolicy'
+            })
+        },
+        onLoad: function (options) {
+            // 页面创建时执行
+
+        },
+        onShow: function () {
+
+
+            // 页面出现在前台时执行
+        },
+        onReady: function () {
+            // 页面首次渲染完毕时执行
+        },
+        onHide: function () {
+            // 页面从前台变为后台时执行
+        },
+        onUnload: function () {
+            // 页面销毁时执行
+        },
+        onPullDownRefresh: function () {
+            // 触发下拉刷新时执行
+        },
+        onReachBottom: function () {
+            // 页面触底时执行
+        },
+        onShareAppMessage: function () {
+            // 页面被用户分享时执行
+        },
+        onPageScroll: function () {
+            // 页面滚动时执行
+        },
+        onResize: function () {
+            // 页面尺寸变化时执行
+        },
+        onTabItemTap(item) {
+            // tab 点击时执行
+            console.log(item.index);
+            console.log(item.pagePath);
+            console.log(item.text)
+        },
+        config: {
+            // window:{
+            // 导航栏标题文字内容
+            navigationBarTitleText: '常见问题',
+            // 是否开启当前页面下拉刷新。
+            enablePullDownRefresh: false,
+            // 设置为 true 则页面整体不能上下滚动。
+            disableScroll: false,
+            // 禁止页面右滑手势返回
+            disableSwipeBack: false,
+            // }
+            usingComponents: {
+                'wxc-panel': '@minui/wxc-panel'
+            }
+        }
+    }
+</script>
+
+<style lang="less">
+    .content {
+        padding: ~'30rpx';
+        font-size: ~'28rpx';
+        color:#747474;
+        width:90%;
+        margin-left:2.5%;
+    }
+    .yangShi {
+        font-weight: bold;
+    }
+    .space{
+        height: ~'28rpx';
+    }
+</style>

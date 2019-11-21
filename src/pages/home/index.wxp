@@ -39,6 +39,7 @@
     <view wx:if="{{ expressList.length > 0 }}">
 
       <view bindtap="chooseExpress" class="tr" id="{{ index }}"
+            hover-class="btnhover"
             wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
             wx:key="deliveryId">
         <wxc-cc class="demo">
@@ -289,13 +290,13 @@
         return
       }
       if (express.deliveryUserId === user.userId) {
-        this.showToast('这是您自己发布的包裹', '#c70009', 'no');
+        this.showToast('这是你自己发布的包裹', '#c70009', 'no');
         return;
       }
       if (appInstance.globalData.userInfo.userInfoSex !== '官方团队') {
         if (express.deliveryUserSex !== '不限') {
           if (!express.deliveryUserSex.startsWith(appInstance.globalData.userInfo.userInfoSex)) {
-            this.showToast('您的不符合要求', '#c70009', 'no');
+            this.showToast('你不符合领取人要求', '#c70009', 'no');
             return;
           }
         }
@@ -642,7 +643,9 @@
     margin-left: -40.5%;
     font-weight: bold;
   }
-
+  .btnhover {
+    background-color: #EFEFEF;
+  }
   /*.demo {*/
   /*    display: block;*/
   /*    width: 20%;*/
@@ -653,5 +656,6 @@
     left: ~'45rpx';
     width: ~'30rpx';
     height: ~'30rpx';
+    z-index: -1;
   }
 </style>

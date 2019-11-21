@@ -5,88 +5,149 @@
       is-show="{{$toast.show}}"
       text="{{ $toast.text }}"
   ></wxc-toast>
-  <view class="input-wrap">
-    <wxc-panel border="{{ false }}" class="panel">
-      <wxc-cc>
-        <text class="title-style">快递名称：</text>
-        <picker bindchange="expressNamePickerChange" range="{{ expressNameList }}"
-                value="{{ expressNameIndex }}">
-          <view class="picker-message">
-            {{ expressNameList[expressNameIndex] }}
-          </view>
-        </picker>
-      </wxc-cc>
-    </wxc-panel>
-    <wxc-panel border="{{ false }}" class="panel">
-      <wxc-cc>
-        <text class="title-style">快递重量：</text>
-        <picker bindchange="expressWeightPickerChange" range="{{ expressWeightList }}"
-                value="{{ expressWeightIndex }}">
-          <view class="picker-message">
-            {{ expressWeightList[expressWeightIndex] }}
-          </view>
-        </picker>
-      </wxc-cc>
-    </wxc-panel>
-    <wxc-panel border="{{ false }}" class="panel">
-      <wxc-cc>
-        <text class="title-style">取件地址：</text>
+  <view class="upStyle">
+    <view>
+      <text class="upText">填写具体信息</text>
+    </view>
+    <view>
+      <text class="upText1">离发布不到一分钟</text>
+    </view>
+  </view>
+  <!--    发布信息白色背景-->
+    <view class="bgc">
+  <view class="flex-row" style="display: flex;flex-direction: row;justify-content:space-around;">
+    <view class="flex-view-item">
+      <view class="forget-space1"></view>
+        <view class="title-style1">快递名称</view>
+      <picker bindchange="expressNamePickerChange" range="{{ expressNameList }}"
+              value="{{ expressNameIndex }}">
+        <view class="picker-message1">
+          {{ expressNameList[expressNameIndex] }}
+        </view>
+      </picker>
+    </view>
+    <view class="flex-view-item">
+      <view class="forget-space1"></view>
+        <view class="title-style2">取件地址</view>
         <picker bindchange="deliveryAddressPickerChange" range="{{ deliveryAddressList }}"
                 value="{{ deliveryAddressIndex }}">
-          <view class="picker-message">
+          <view class="picker-message2">
             {{ deliveryAddressList[deliveryAddressIndex] }}
           </view>
         </picker>
-      </wxc-cc>
-    </wxc-panel>
-    <wxc-panel border="{{ false }}" class="panel">
+    </view>
+    <view class="flex-view-item">
+      <view class="forget-space1"></view>
+      <view class="title-style3">快递大小</view>
+      <picker bindchange="expressWeightPickerChange" range="{{ expressWeightList }}"
+              value="{{ expressWeightIndex }}">
+        <view class="picker-message3">
+          {{ expressWeightList[expressWeightIndex] }}
+        </view>
+      </picker>
+    </view>
+    <view class="flex-view-item">
+      <view class="forget-space1"></view>
+      <view class="title-style4">收货楼宇</view>
+      <picker bindchange="floorPickerChange" range="{{ floorNumberList }}"
+              value="{{ floorNumberIndex }}">
+        <view class="picker-message4">
+          {{ floorNumberList[floorNumberIndex] }}
+        </view>
+      </picker>
+    </view>
+  </view>
+      <view class="divLine2"></view>
+      <view class="forget-space1"></view>
+  <view class="flex-row" style="display: flex;flex-direction: row;">
+    <view class="flex-view-item">
+      <view class="text2">收货地址</view>
+        <input bindinput="deliveryGoalAddressInput" placeholder="具体位置" maxlength="8" style="margin-top: -10px;color: #333333;margin-left: 25px"
+               type="text" value="{{ deliveryGoalAddress }}"/>
+    </view>
+    <view class="flex-view-item">
+      <view style="width: 1px;height: 35px; background: #259b24;"></view>
+    </view>
+    <view class="flex-view-item">
+      <view class="text3">收货人</view>
+        <input bindinput="deliveryUserNameInput" placeholder="快递上的名字" maxlength="6" style="margin-top: -10px;color: #333333;margin-left: 10px"
+                  type="text" value="{{ deliveryUserName }}"/>
+    </view>
+  </view>
+      <view class="divLine2"></view>
+      <view class="forget-space1"></view>
+      <view class="flex-row" style="display: flex;flex-direction: row;">
+        <view class="flex-view-item">
+          <view class="text2">联系方式</view>
+          <input bindinput="deliveryUserPhoneInput" placeholder="仅接单人可见" maxlength="11" style="margin-top: -10px;color: #333333;margin-left: 25px"
+                 type="number" value="{{ deliveryUserPhone }}"/>
+        </view>
+        <view class="flex-view-item">
+          <view style="width: 1px;height: 35px; background: #259b24;"></view>
+        </view>
+        <view class="flex-view-item">
+          <view class="text3">取件码</view>
+          <input bindinput="deliveryCodeInput" placeholder="仅接单人可见" maxlength="8" style="margin-top: -10px;color: #333333;margin-left: 10px"
+                 type="number" value="{{ deliveryCode }}"/>
+        </view>
+      </view>
+      <view class="divLine2"></view>
+      <view class="forget-space1"></view>
+      <view class="flex-row" style="display: flex;flex-direction: row;">
+        <view class="flex-view-item">
+          <view class="forget-space1"></view>
+          <wxc-cc>
+            <text class="title-style6">酬金：</text>
+
+            <wxc-counter bind:changenumber="onChangeNumber" class="counter-message" color="#959595"
+                         max="{{99}}"
+                         min="2" number="2" ></wxc-counter>
+          </wxc-cc>
+        </view>
+        <view class="flex-view-item">
+          <view style="width: 1px;height: 35px; background: #259b24;margin-left: 9px"></view>
+        </view>
+        <view class="flex-view-item">
+          <view class="forget-space1"></view>
+          <wxc-cc>
+          <text class="title-style5">领取人：</text>
+          <picker bindchange="checkboxChange" range="{{ sexList }}"
+                  value="{{ sexIndex }}">
+            <view class="picker-message5">
+              {{ sexList[sexIndex] }}
+            </view>
+          </picker>
+          </wxc-cc>
+        </view>
+      </view>
+      <view class="divLine2"></view>
+      <view class="forget-space1"></view>
+
+
+
+  <view class="flex-row" style="display: flex;flex-direction: row;">
+    <view class="flex-view-item">
       <wxc-cc>
-        <text class="title-style">收货楼号：</text>
-        <picker bindchange="floorPickerChange" range="{{ floorNumberList }}"
-                value="{{ floorNumberIndex }}">
-          <view class="picker-message">
-            {{ floorNumberList[floorNumberIndex] }}
-          </view>
-        </picker>
+        <wxc-input bind:input="deliverySuggestInput" maxlength="20" placeholder="送达时间、注意事项等问题" style="margin-left: 15px"
+                   right="{{true}}" title="备注："
+                   type="text"></wxc-input>
       </wxc-cc>
-    </wxc-panel>
-    <wxc-input bind:input="deliveryGoalAddressInput" placeholder="具体位置" right="{{true}}"
-               title="收货地址：" type="text" value="{{ deliveryGoalAddress }}"></wxc-input>
-    <wxc-input bind:input="deliveryUserNameInput" placeholder="快递上的名字" right="{{true}}" title="收件人："
-               type="text" value="{{ deliveryUserName }}"></wxc-input>
-    <wxc-input bind:input="deliveryUserPhoneInput" maxlength="11" placeholder="放心填写，仅接单人可见"
-               right="{{true}}" title="联系方式：" type="number"
-               value="{{ deliveryUserPhone }}"></wxc-input>
-    <wxc-input bind:input="deliveryCodeInput" placeholder="仅接单人可见" right="{{true}}"
-               title="取货码：" type="text" value="{{ deliveryCode }}"></wxc-input>
-    <wxc-panel border="{{ false }}" class="panel">
-      <wxc-cc>
-        <text class="title-style" decode="true">酬&nbsp;&nbsp;&nbsp;&nbsp;金：</text>
-        <wxc-counter bind:changenumber="onChangeNumber" class="counter-message" color="#959595"
-                     max="{{100}}"
-                     min="2" number="2"></wxc-counter>
-      </wxc-cc>
-    </wxc-panel>
-    <wxc-panel border="{{ false }}" class="panel">
-      <wxc-cc>
-        <text class="title-style">领取人：</text>
-        <picker bindchange="checkboxChange" range="{{ sexList }}"
-                value="{{ sexIndex }}">
-          <view class="picker-message">
-            {{ sexList[sexIndex] }}
-          </view>
-        </picker>
-      </wxc-cc>
-    </wxc-panel>
-    <wxc-input bind:input="deliverySuggestInput" maxlength="20" placeholder="送达时间、注意事项等问题"
-               right="{{true}}" title="备注："
-               type="text"></wxc-input>
-    <view class="forget-space"></view>
-    <wxc-panel border="{{ false }}" class="agree">
+
+    </view>
+  </view>
+    </view>
+    <view class="forget-space1"></view>
+    <view>
+      <textarea auto-focus selection-start selection-end cousor maxlength="49" placeholder-style="color:#000000;" placeholder="取件短信粘贴处，信息对比(此处不影响发布)" show-confirm-bar="{{false}}" style="border:1px;border-radius: 10px; background-color: #ffffff;width: 90%; margin-left: 5%;height: 80px;resize:none;box-shadow: 0px 7px 24px -17px #333333;text-align: center; color: #000000; font-weight: bold; position: fixed;top: 385px;"></textarea>
+    </view>
+  <!--    付款上方空格-->
+  <view class="forget-space1"></view>
+  <view>
       <radio-group bindchange="agreeCheckBox">
         <checkbox class="agree-text" value="agree">我同意货到后支付佣金</checkbox>
       </radio-group>
-    </wxc-panel>
+  </view>
+  <!--    发布上方空格-->
     <view class="forget-space1"></view>
     <wxc-cc>
       <button bindtap="submitExpress" class="sure_button"
@@ -94,13 +155,11 @@
               type="{{ 'primary' }}"> 发布
       </button>
     </wxc-cc>
+<!--    发布下方空格-->
     <view class="forget-space"></view>
-  </view>
 </template>
-
 <script>
   import data from '../../common/data.json'
-
   const appInstance = getApp();
   export default {
     data: {
@@ -232,6 +291,9 @@
       }
       let deliverySexImageUrl;
       switch (this.data.sexIndex) {
+        case '0':
+          deliverySexImageUrl = '../../images/sign-buxian.png';
+          break;
         case '1':
           deliverySexImageUrl = '../../images/sign-guanfang.png';
           break;
@@ -241,13 +303,18 @@
         case '3':
           deliverySexImageUrl = '../../images/sign-nv.png';
           break;
-        case '4':
-          deliverySexImageUrl = '../../images/sign-buxian.png';
-          break;
         default:
           this.showToast('请选择领取人', '#a2675a', 'warning');
           return
       }
+      this.setData({
+        $toast: {
+          text: '正在发布，请稍候',
+          color: '#c6c8bd',
+          icon: 'more',
+          show: true
+        }
+      });
       if (this.data.isClicked) {
         return;
       }
@@ -354,12 +421,60 @@
 </script>
 
 <style lang="less">
-
-  .input-wrap {
-    position: relative;
-    margin: ~'20rpx' ~'10rpx' 0 ~'10rpx';
+  .upStyle{
+    background-color: #259b24;
+    width:100%;
+    height:350px;
   }
-
+  .upText{
+    font-size: 38px;
+    color: #ffffff;
+    font-weight: bolder;
+    margin-left: 8%;
+    position: fixed;
+    top:45px;
+  }
+  .upText1{
+    font-size: 22px;
+    color: #ffffff;
+    margin-left: 8%;
+    position: fixed;
+    top:90px;
+  }
+  .bgc {
+    background-color: #ffffff;
+    border-radius: ~'30rpx';
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    box-shadow: 0px 7px 24px -17px #333333;
+    position: fixed;
+    top:150px;
+  }
+  .divLine {
+    background-color: #dadada;
+    width: ~'560rpx';
+    /*height: 1px;*/
+    margin-left: ~'60rpx';
+    margin-top: ~'-16rpx';
+    height: ~'0.01rpx';
+  }
+  .divLine1 {
+    background-color: #dadada;
+    width: ~'520rpx';
+    /*height: 1px;*/
+    margin-left: ~'102rpx';
+    margin-top: ~'2rpx';
+    height: ~'0.01rpx';
+  }
+  .divLine2 {
+    background-color: #259b24;
+    width: 600px;
+    /*height: 1px;*/
+    margin-top: 8px;
+    margin-left: 40px;
+    height: 0.01px;
+  }
   .panel {
     min-width: ~'163rpx';
     line-height: ~'44rpx';
@@ -372,24 +487,88 @@
     border: 0 solid #f0f0f0;
     border-bottom-width: ~'1rpx';
   }
-
-  .title-style {
-    flex: 1;
-    height: ~'44rpx';
-    min-height: ~'44rpx';
-    line-height: ~'44rpx';
-  }
-
-  .picker-message {
-    margin-left: ~'433rpx';
+  .title-style1 {
+    font-weight: bolder;
     color: #959595;
-    padding-bottom: ~'10rpx';
+    font-size: 18px;
+    min-height: 44px;
+  }
+  .title-style2 {
+    font-size: 18px;
+    font-weight: bolder;
+    color: #959595;
+    min-height: 44px;
+  }
+  .title-style3 {
+    font-size: 18px;
+    font-weight: bolder;
+    color: #959595;
+    min-height: 44px;
+  }
+  .title-style4 {
+    font-size: 18px;
+    font-weight: bolder;
+    color: #959595;
+    min-height: 44px;
+  }
+  .title-style5 {
+    font-weight: bolder;
+    color: #333333;
+    min-height: 44px;
+    margin-left: 20px;
+    margin-top: -25px;
+  }
+  .title-style6 {
+    font-weight: bolder;
+    color: #333333;
+    min-height: 44px;
+    margin-left: 50px;
+    margin-top: -25px;
+  }
+  .text2{
+    font-size: 18px;
+    font-weight: bolder;
+    color: #959595;
+    min-height: 44px;
+    margin-left: 50px;
+  }
+  .text3{
+    font-size: 18px;
+    font-weight: bolder;
+    color: #959595;
+    min-height: 44px;
+    margin-left: 20px;
+  }
+  .picker-message1 {
+    margin-top: -15px;
+    color: #333333;
+    /*padding-bottom: ~'10rpx';*/
+  }
+  .picker-message2 {
+    margin-top: -15px;
+    color: #333333;
+    /*padding-bottom: ~'10rpx';*/
+  }
+  .picker-message3 {
+    margin-top: -15px;
+    color: #333333;
+    /*padding-bottom: ~'10rpx';*/
+  }
+  .picker-message4{
+     margin-top: -15px;
+     color: #333333;
+     /*padding-bottom: ~'10rpx';*/
+   }
+  .picker-message5{
+    margin-top: -34px;
+    color: #333333;
+    /*padding-bottom: ~'10rpx';*/
   }
 
   .counter-message {
-    margin-left: ~'370rpx';
+    margin-left: ~'30rpx';
     color: #959595;
-    padding-bottom: ~'16rpx';
+    margin-top: -50px;
   }
 
   .agree {
@@ -403,9 +582,11 @@
   }
 
   .agree-text {
-    margin-left: ~'170rpx';
     font-size: ~'28rpx';
     size: ~'28rpx';
+    position: fixed;
+    top:850px;
+    left:200px;
   }
 
   .forget-space {
@@ -422,6 +603,16 @@
     height: ~'60rpx';
     font-size: ~'30rpx';
     line-height: ~'60rpx';
-    margin-left: 15%;
+    position: fixed;
+    top:910px;
+    left:120px;
+  }
+  .yangshi{
+    width: 80%;
+    border-radius: 27px;
+    border-color: #333333;
+  }
+  page{
+    background-color:#efefef;
   }
 </style>

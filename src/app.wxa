@@ -35,7 +35,9 @@
         //用户协议
         'pages/user/userAgreement',
         //隐私政策
-        'pages/user/privacyPolicy'
+        'pages/user/privacyPolicy',
+        //惩罚条例
+        'pages/user/pulished'
       ],
       // 界面风格
       window: {

@@ -11,7 +11,7 @@
       <text class="time">审核未通过，审核日期：{{ review.reviewDate }}</text>
     </wxc-cc>
     <wxc-panel margin="{{false}}" title="未通过原因：">
-      <view class="content">{{ review.reviewMessage }}。请按照要求重新填写您的信息
+      <view class="content">{{ review.reviewMessage }}。
       </view>
     </wxc-panel>
     <view class="space"></view>
@@ -55,7 +55,7 @@
 
   <view class="space"></view>
 
-  <wxc-panel title="请上传您的校园卡正面照：">
+  <wxc-panel title="上传校园卡正面照或学生证信息页/教师请上传相应证件">
     <wxc-cc>
       <view wx:if="{{ image === ''}}">
         <image bindtap="chooseImage" class="addStyle" src="../../images/add.png"></image>

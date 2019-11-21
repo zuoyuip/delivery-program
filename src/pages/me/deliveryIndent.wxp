@@ -1,5 +1,4 @@
 <template xmlns:wx="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-  <view class="list-wrap">
     <view wx:if="{{ expressList.length > 0 }}">
       <view wx:for="{{ expressList }}" wx:for-index="index" wx:for-item="express"
             wx:key="deliveryId">
@@ -40,7 +39,6 @@
           bind:abnortap="onRetry"
           type="{{ requestType }}"></wxc-abnor>
     </view>
-  </view>
   <wxc-popup align="bottom" animation-mode="bottom" class="J_Popup">
     <view class="popup__content">
       <view class="input-wrap">
@@ -263,14 +261,6 @@
     margin-left: 8%;
   }
 
-  //大背景style
-  .list-wrap {
-    width: 100%;
-    /*background: #efefef;*/
-    background-image: linear-gradient(180deg, #EFEFEF, #ffffff);
-    padding-bottom: 55%;
-  }
-
   //内容标题行style
   .content {
     margin-top: ~'2rpx';
@@ -403,5 +393,8 @@
     color: black;
     margin-left: -40.5%;
     font-weight: bold;
+  }
+  page{
+    background-color:#efefef;
   }
 </style>
